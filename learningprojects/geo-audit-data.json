@@ -1,0 +1,112 @@
+{
+    "url": "https://www.baraband.se",
+    "brand_name": "BaraBand.se",
+    "date": "2026-02-24",
+    "geo_score": 39,
+    "scores": {
+        "ai_citability": 41,
+        "brand_authority": 28,
+        "content_eeat": 40,
+        "technical": 61,
+        "schema": 38,
+        "platform_optimization": 25
+    },
+    "platforms": {
+        "Google AI Overviews": 28,
+        "ChatGPT": 22,
+        "Perplexity": 18,
+        "Bing Copilot": 30
+    },
+    "executive_summary": "BaraBand.se is a well-built Shopify e-commerce store selling premium European watch straps (Hirsch, Fluco, Colareb) to the Swedish market. The site scored 39/100 on the GEO audit, placing it in the Needs Attention tier. While the technical foundation is solid (SSR, HTTPS, Shopify CDN, mobile-first Dawn theme), the site is nearly invisible to AI search platforms due to critical gaps: zero customer reviews, no FAQ page, no llms.txt, no author attribution on blog content, and minimal brand authority signals outside its own domain. The gap between product quality and AI visibility is wide but closeable \u2014 implementing reviews, FAQ content with schema, and an llms.txt file could lift the score to 55-60 within 90 days.",
+    "findings": [
+        {
+            "severity": "critical",
+            "title": "No Customer Reviews Anywhere",
+            "description": "Zero review infrastructure on the entire site. No Trustpilot, no on-site reviews, no aggregateRating schema. All four AI platforms deprioritize e-commerce sites without review data. ChatGPT Shopping, Google AIO, and Bing Copilot all require star ratings as primary trust signals."
+        },
+        {
+            "severity": "critical",
+            "title": "No FAQ Page",
+            "description": "Both /pages/faq and /pages/vanliga-fragor return 404. FAQs are the most reliably AI-cited content format. Queries like 'hur mater jag klockarmband?' and 'vilket armband passar Seiko 5?' are answered by AI systems from FAQ content."
+        },
+        {
+            "severity": "critical",
+            "title": "No AggregateRating Schema on Products",
+            "description": "Product pages use ProductGroup JSON-LD with variant-level Offers but are missing aggregateRating entirely. This blocks star ratings in Google SERPs, Google Shopping rich results, and ChatGPT Shopping eligibility."
+        },
+        {
+            "severity": "high",
+            "title": "500+ City Link Spam on Om Oss Page",
+            "description": "The contact/about page contains 500+ Swedish city/municipality links \u2014 a legacy local SEO tactic that confuses AI crawlers and dilutes entity understanding of the brand."
+        },
+        {
+            "severity": "high",
+            "title": "No llms.txt File",
+            "description": "Returns 404. The emerging standard for signaling to AI crawlers what content is authoritative, what language the site operates in, and what sections to prioritize. 30-minute fix with high impact."
+        },
+        {
+            "severity": "high",
+            "title": "No Author Attribution on Blog Content",
+            "description": "All 6 blog posts attributed to 'Jacob .' with no bio, credentials, or role title. Perplexity and Google E-E-A-T require named authors with expertise signals. Anonymous content receives minimal citation consideration."
+        },
+        {
+            "severity": "high",
+            "title": "No BreadcrumbList Schema on Product/Collection Pages",
+            "description": "Collection pages have zero JSON-LD. Product pages lack BreadcrumbList. No breadcrumb path display in Google SERPs and reduced structured data coverage for AI indexing."
+        },
+        {
+            "severity": "medium",
+            "title": "Blog Severely Underdeveloped",
+            "description": "6 posts over 4 years (2021-2024), all under 200 words, no H2/H3 headers, no external citations. Zero citation potential for Perplexity or Google AIO."
+        },
+        {
+            "severity": "medium",
+            "title": "No Microsoft Merchant Center / Bing Webmaster Tools",
+            "description": "Bing Copilot Shopping requires a Microsoft Merchant Center feed. Bing Webmaster Tools submission improves crawl priority and Copilot citation eligibility."
+        },
+        {
+            "severity": "medium",
+            "title": "Organization Schema Missing Key Fields",
+            "description": "Current Organization schema has only name, url, logo, and one sameAs (Instagram). Missing description, contactPoint, areaServed, and additional social profiles."
+        },
+        {
+            "severity": "medium",
+            "title": "No GTINs on Products",
+            "description": "Microsoft and Google Merchant Center require GTINs for Shopping integration. Hirsch and Fluco products have manufacturer GTINs available from distributors."
+        }
+    ],
+    "quick_wins": [
+        "Install Judge.me (free) and configure review email requests for all past orders",
+        "Create llms.txt file and deploy to https://www.baraband.se/llms.txt",
+        "Submit sitemap to Bing Webmaster Tools (20 minutes)",
+        "Remove 500+ city link spam from /pages/om-oss \u2014 replace with clean brand narrative",
+        "Add author bio page for Jacob with watch expertise credentials",
+        "Add Swedish company registration number (Org.nr) to footer",
+        "Add og:locale meta tag (sv_SE) to theme.liquid"
+    ],
+    "medium_term": [
+        "Create /pages/faq with 15-20 Q&A pairs + FAQPage JSON-LD schema",
+        "Add BreadcrumbList JSON-LD to product.liquid and collection.liquid templates",
+        "Enhance Organization schema with description, areaServed, contactPoint, full sameAs",
+        "Publish material comparison guide (leather/rubber/nylon/mesh) \u2014 1,000 words, named author",
+        "Register Trustpilot profile and begin collecting verified reviews",
+        "Install Microsoft Channel app on Shopify and submit Bing Merchant feed",
+        "Reformat Storleksguide as Q&A with H2 headings + add HowTo JSON-LD"
+    ],
+    "strategic": [
+        "Build organic Reddit presence in r/watchstraps, r/Watches \u2014 brand mentions are 3x stronger than backlinks for AI citation",
+        "Reach out to Swedish watch YouTube creators for review coverage \u2014 persistent AI training data",
+        "Secure one editorial mention in Swedish watch or lifestyle press \u2014 Perplexity citation trigger",
+        "Develop watch compatibility database ('which strap fits Seiko SKX013') \u2014 long-tail AI query capture",
+        "Create Apple Watch strap compatibility hub page \u2014 high AIO frequency for accessory queries",
+        "Create Hirsch, Fluco, and Colareb brand heritage pages \u2014 leverage existing ChatGPT brand knowledge"
+    ],
+    "crawler_access": {
+        "GPTBot": {"platform": "ChatGPT", "status": "Allowed", "recommendation": "Keep allowed \u2014 falls under User-agent: * with no block"},
+        "ClaudeBot": {"platform": "Claude", "status": "Allowed", "recommendation": "Keep allowed \u2014 add explicit Allow rule"},
+        "PerplexityBot": {"platform": "Perplexity", "status": "Allowed", "recommendation": "Keep allowed \u2014 add explicit Allow rule"},
+        "Google-Extended": {"platform": "Gemini / AIO", "status": "Allowed", "recommendation": "Keep allowed \u2014 add explicit Allow rule"},
+        "Nutch": {"platform": "Apache Nutch", "status": "Blocked", "recommendation": "Acceptable \u2014 low value crawler"},
+        "llms.txt": {"platform": "All AI platforms", "status": "Missing (404)", "recommendation": "Create immediately \u2014 high-impact quick win"}
+    }
+}

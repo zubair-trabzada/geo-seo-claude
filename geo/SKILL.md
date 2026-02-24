@@ -35,6 +35,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 | `/geo content <url>` | Content quality and E-E-A-T assessment |
 | `/geo report <url>` | Generate client-ready GEO deliverable |
 | `/geo report-pdf <url>` | Generate professional PDF report with charts and scores |
+| `/geo competitors <url> [competitors...]` | Compare target vs competitors across 8 GEO dimensions |
 | `/geo quick <url>` | 60-second GEO visibility snapshot |
 
 ---
@@ -112,7 +113,7 @@ Adjust recommendations based on detected type. Local businesses need LocalBusine
 
 ---
 
-## Sub-Skills (10 Specialized Components)
+## Sub-Skills (11 Specialized Components)
 
 | # | Skill | Directory | Purpose |
 |---|-------|-----------|---------|
@@ -126,10 +127,11 @@ Adjust recommendations based on detected type. Local businesses need LocalBusine
 | 8 | geo-technical | `skills/geo-technical/` | Technical SEO foundations |
 | 9 | geo-content | `skills/geo-content/` | Content quality and E-E-A-T |
 | 10 | geo-report | `skills/geo-report/` | Client-ready deliverable generation |
+| 11 | geo-competitors | `skills/geo-competitors/` | Competitor benchmarking across 8 GEO dimensions |
 
 ---
 
-## Subagents (5 Parallel Workers)
+## Subagents (6 Parallel Workers)
 
 | Agent | File | Skills Used |
 |-------|------|-------------|
@@ -138,6 +140,7 @@ Adjust recommendations based on detected type. Local businesses need LocalBusine
 | geo-technical | `agents/geo-technical.md` | geo-technical |
 | geo-content | `agents/geo-content.md` | geo-content |
 | geo-schema | `agents/geo-schema.md` | geo-schema |
+| geo-competitor-analysis | `agents/geo-competitor-analysis.md` | geo-competitors |
 
 ---
 
@@ -159,6 +162,7 @@ All commands generate structured output:
 | `/geo content` | `GEO-CONTENT-ANALYSIS.md` |
 | `/geo report` | `GEO-CLIENT-REPORT.md` (presentation-ready) |
 | `/geo report-pdf` | `GEO-REPORT.pdf` (professional PDF with charts) |
+| `/geo competitors` | `GEO-COMPETITOR-ANALYSIS.md` |
 | `/geo quick` | Inline summary (no file) |
 
 ---
@@ -186,6 +190,32 @@ The `/geo report-pdf <url>` command generates a professional, branded PDF report
 2. Then run `/geo report-pdf <url>` to generate the PDF
 3. The tool will compile audit data into JSON, then generate the PDF
 4. Output: `GEO-REPORT.pdf` in the current directory
+
+---
+
+## Competitor Analysis
+
+### `/geo competitors <target_url> <competitor1> [competitor2] ...`
+
+**Phase 1: Scanning**
+1. Validate target and competitor URLs (max 5 competitors)
+2. Run lightweight scan of each site: homepage, robots.txt, llms.txt, up to 5 pages
+3. Score citability, check brand signals, detect schema types
+
+**Phase 2: Scoring & Comparison**
+1. Score all 8 dimensions (0-100) for every site
+2. Calculate weighted GEO score per site
+3. Rank all sites and classify competitive position per dimension
+
+**Phase 3: Report Generation**
+1. Build comparison matrix, gap analysis, and opportunity map
+2. Generate prioritized action plan from gaps
+3. Output `GEO-COMPETITOR-ANALYSIS.md`
+
+**Use the Python script when available:**
+```bash
+python3 ~/.claude/skills/geo/scripts/competitor_analyzer.py <target> <comp1> [comp2] ...
+```
 
 ---
 

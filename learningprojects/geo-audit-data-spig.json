@@ -1,0 +1,117 @@
+{
+    "url": "https://www.spig-gmab.com",
+    "brand_name": "SPIG-GMAB",
+    "date": "2026-02-24",
+    "geo_score": 39,
+    "scores": {
+        "ai_citability": 42,
+        "brand_authority": 58,
+        "content_eeat": 29,
+        "technical": 42,
+        "schema": 32,
+        "platform_optimization": 22
+    },
+    "platforms": {
+        "Google AI Overviews": 18,
+        "ChatGPT": 25,
+        "Perplexity": 20,
+        "Bing Copilot": 25
+    },
+    "executive_summary": "SPIG-GMAB is a nearly 90-year-old industrial company (founded 1936) with real global operations across 50+ countries, verified ESWET trade membership, and a notable M&A history (Babcock & Wilcox, AUCTUS Capital Partners). However, the website scored 39/100 on the GEO audit, placing it firmly in the Needs Attention tier. The most severe issues are: (1) zero hreflang implementation across an 8-language site, (2) Lorem ipsum placeholder text on the SPIG brand page, (3) all content authored by a web agency email rather than engineers, and (4) product pages with under 200 words and no technical specifications. The gap between the company's real-world industrial authority and its digital content is the single largest opportunity \u2014 fixing hreflang, author attribution, and building technical content could lift the score to 60+ within 90 days.",
+    "findings": [
+        {
+            "severity": "critical",
+            "title": "No Hreflang Tags on 8-Language Site",
+            "description": "Zero hreflang tags across the entire site despite serving content in 8 languages (EN, IT, ES, PT, ZH, AR, SV, DE). No x-default declaration. No lang attribute on HTML elements. Google treats language variants as potential duplicate content. This is the single most damaging technical SEO issue."
+        },
+        {
+            "severity": "critical",
+            "title": "Lorem Ipsum on SPIG Brand Page",
+            "description": "The /spig/ brand page contains Lorem ipsum placeholder text visible to AI crawlers and users, severely damaging credibility."
+        },
+        {
+            "severity": "critical",
+            "title": "Author Attribution is a Web Agency Email",
+            "description": "All blog posts and their schema markup attribute content to multimedia@studiokey.it. The Person schema shows this email as the author name with a generic Gravatar. Zero E-E-A-T value."
+        },
+        {
+            "severity": "high",
+            "title": "Zero Technical/Educational Content",
+            "description": "No content answers industry questions. Product pages under 200 words. Blog has ~10 posts total (many translations of same articles). No comparison tables, FAQ sections, specifications, or performance data."
+        },
+        {
+            "severity": "high",
+            "title": "No Service or Product Schema",
+            "description": "Core service pages (/wet-cooling-towers/, /dry-cooling-systems/) have zero Service or Product schema. Only generic WebPage + Organization + BreadcrumbList boilerplate."
+        },
+        {
+            "severity": "high",
+            "title": "No LocalBusiness Schema Despite Multiple Offices",
+            "description": "Confirmed offices in Italy (Paruzzaro), Sweden (Goteborg), and China have no LocalBusiness schema. Phone numbers and addresses exist on contact page but are not structured."
+        },
+        {
+            "severity": "high",
+            "title": "Case Studies Are Stubs",
+            "description": "The cooling tower installation case study has no client name, no quantified outcomes, no performance data, no photographs. For B2B, detailed case studies are the most important AI-citable content."
+        },
+        {
+            "severity": "high",
+            "title": "No llms.txt File",
+            "description": "No structured guidance for AI crawlers about site content, company identity, or citation preferences."
+        },
+        {
+            "severity": "medium",
+            "title": "No Canonical Tags Detected",
+            "description": "Canonical tags not found on tested pages. Critical gap with 8 language versions increasing duplicate content risk."
+        },
+        {
+            "severity": "medium",
+            "title": "Astra Theme Hooks in Sitemap",
+            "description": "Sitemap includes internal Astra theme hook URLs that waste crawl budget and expose theme architecture."
+        },
+        {
+            "severity": "medium",
+            "title": "No Wikipedia/Wikidata Entity",
+            "description": "Despite 90-year history, M&A paper trail (SEC filings, Power Magazine), and ESWET membership, no Wikipedia article exists. Wikipedia is one of the most heavily weighted sources in LLM training data."
+        },
+        {
+            "severity": "medium",
+            "title": "No YouTube Presence",
+            "description": "No installation timelapses, technical explainers, or factory tours. YouTube transcripts feed directly into AI training data."
+        }
+    ],
+    "quick_wins": [
+        "Remove Lorem ipsum from /spig/ brand page \u2014 replace with 90-year company history",
+        "Implement hreflang tags across all 8 language versions + x-default declaration",
+        "Add <html lang=\"...\"> attribute to every page template + dir=\"rtl\" for Arabic",
+        "Fix author attribution \u2014 replace web agency email with named SPIG engineers",
+        "Create llms.txt file with company facts, product lines, and key page URLs",
+        "Exclude astra-advanced-hook from sitemap and set to noindex",
+        "Register Bing Webmaster Tools and submit sitemap"
+    ],
+    "medium_term": [
+        "Add Service schema to all product/service pages across 8 languages",
+        "Enhance Organization schema with contactPoint, location, sameAs, description, foundingDate",
+        "Add LocalBusiness schema for Italy and Sweden offices",
+        "Expand product pages to 1,000+ words with technical specifications and performance data",
+        "Add FAQ sections with FAQPage schema to product pages (minimum 5 Q&As per page)",
+        "Verify and fix canonical tags on all pages via AIOSEO",
+        "Enable Open Graph and Twitter Card meta tags in AIOSEO"
+    ],
+    "strategic": [
+        "Create 10-15 pillar technical articles answering core industry questions (wet vs dry cooling towers, maintenance best practices, cooling tower water treatment)",
+        "Rebuild case studies as 1,500-2,500 word project narratives with quantified outcomes",
+        "Pursue Wikipedia article for SPIG \u2014 highest-impact single action for LLM training data",
+        "Launch YouTube channel with cooling tower installation timelapses and technical explainers",
+        "Publish technical white papers on cooling tower efficiency and water conservation",
+        "Pursue feature articles in Power Magazine and CTI publications (not just press releases)",
+        "Build LinkedIn thought leadership content program with 2+ posts per month"
+    ],
+    "crawler_access": {
+        "GPTBot": {"platform": "ChatGPT", "status": "Allowed", "recommendation": "Keep allowed \u2014 falls under User-agent: *"},
+        "ClaudeBot": {"platform": "Claude", "status": "Allowed", "recommendation": "Keep allowed \u2014 consider adding explicit Allow rule"},
+        "PerplexityBot": {"platform": "Perplexity", "status": "Allowed", "recommendation": "Keep allowed \u2014 consider adding explicit Allow rule"},
+        "Google-Extended": {"platform": "Gemini / AIO", "status": "Allowed", "recommendation": "Keep allowed \u2014 consider adding explicit Allow rule"},
+        "llms.txt": {"platform": "All AI platforms", "status": "Missing", "recommendation": "Create immediately \u2014 high-impact quick win"}
+    }
+}
