@@ -1,11 +1,7 @@
 ---
 name: geo-competitors
 description: >
-  GEO competitor analysis and benchmarking. Compares a target website against
-  up to 5 competitors across 8 AI-visibility dimensions: citability, brand
-  authority, content depth, crawler access, schema coverage, llms.txt, technical
-  GEO, and content freshness. Produces a weighted comparison matrix, gap analysis,
-  opportunity map, and prioritized action plan. Use when user says "competitors",
+  GEO competitor analysis and benchmarking. Compares a target website against up to 5 competitors across 8 AI-visibility dimensions: citability, brand authority, content depth, crawler access, schema coverage, llms.txt, technical GEO, and content freshness. Produces a weighted comparison matrix, gap analysis, opportunity map, and prioritized action plan. Use when user says "competitors",
   "compare", "benchmark", "vs", "competitive analysis", or provides multiple URLs.
 allowed-tools:
   - Read
