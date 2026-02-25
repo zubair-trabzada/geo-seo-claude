@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Competitor Analyzer — Compare a target site against competitors across GEO dimensions.
+Competitor Analyzer - Compare a target site against competitors across GEO dimensions.
 
 Performs lightweight scans of target and competitor sites, scores each across
 8 GEO-relevant dimensions, and produces a comparison matrix with gap analysis.
@@ -616,7 +616,7 @@ def _get_actions_for_dimension(dimension: str, gap: dict) -> list:
     """Return recommended actions for a given dimension gap."""
     actions_map = {
         "ai_citability": [
-            "Restructure content with answer-first patterns (definition → detail → evidence)",
+            "Restructure content with answer-first patterns (definition > detail > evidence)",
             "Aim for 134-167 word passages per content block",
             "Add specific statistics, percentages, and named sources",
             "Use question-based headings that match AI search queries",
@@ -634,7 +634,7 @@ def _get_actions_for_dimension(dimension: str, gap: dict) -> list:
             "Add FAQ sections to increase content depth",
         ],
         "crawler_access": [
-            "Review robots.txt — allow key AI crawlers (GPTBot, ClaudeBot, PerplexityBot)",
+            "Review robots.txt - allow key AI crawlers (GPTBot, ClaudeBot, PerplexityBot)",
             "Remove overly broad Disallow rules for AI bots",
             "Test crawler access from each major AI bot user-agent",
         ],
