@@ -108,10 +108,16 @@ async function getAdminStats() {
     where: { isRead: false },
     orderBy: { createdAt: 'desc' },
     take: 5,
-    include: { client: { select: { name: true } } },
   })
 
-  return { clients: clientsWithStats, avgScore, recentAudits, unreadAlerts, recentAlerts }
+  // Build a clientId → name lookup from already-fetched clients
+  const clientNameMap = new Map(clients.map((c) => [c.id, c.name]))
+  const recentAlertsWithClient = recentAlerts.map((a) => ({
+    ...a,
+    clientName: clientNameMap.get(a.clientId) ?? 'Unknown client',
+  }))
+
+  return { clients: clientsWithStats, avgScore, recentAudits, unreadAlerts, recentAlerts: recentAlertsWithClient }
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
@@ -297,7 +303,7 @@ export default async function AdminDashboardPage() {
               <div key={alert.id} className="flex items-start gap-3 px-5 py-3.5">
                 <AlertTriangle size={15} className="text-amber-400 shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-slate-200 text-sm font-medium">{alert.client.name}</p>
+                  <p className="text-slate-200 text-sm font-medium">{alert.clientName}</p>
                   <p className="text-slate-400 text-xs mt-0.5">{alert.message}</p>
                 </div>
                 <span className="text-slate-500 text-xs shrink-0">
