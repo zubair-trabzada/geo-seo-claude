@@ -1,3 +1,9 @@
+# Node
+node_modules/
+.next/
+*.db
+*.db-journal
+
 # Python
 __pycache__/
 *.py[cod]

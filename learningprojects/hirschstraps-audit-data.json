@@ -1,0 +1,132 @@
+{
+    "url": "https://www.hirschstraps.com",
+    "brand_name": "HirschStraps",
+    "date": "2026-02-25",
+    "geo_score": 34,
+    "scores": {
+        "ai_citability": 40,
+        "brand_authority": 10,
+        "content_eeat": 25,
+        "technical": 70,
+        "schema": 50,
+        "platform_optimization": 15
+    },
+    "platforms": {
+        "Google AI Overviews": 32,
+        "ChatGPT": 28,
+        "Perplexity": 30,
+        "Gemini": 33,
+        "Bing Copilot": 38
+    },
+    "executive_summary": "HirschStraps.com is an official Hirsch watch strap retailer operating on Shopify with solid technical foundations but critical GEO visibility gaps. The site scores 34/100, placing it in the Critical tier, meaning AI search engines have almost nothing to cite or recommend from this domain. The homepage contains an empty H1 tag, no long-form content, and broken sameAs schema, while all 50 discovered pages are thin product listings averaging 340 words with zero customer reviews. Without educational content, brand mentions, or social proof, AI models like ChatGPT and Perplexity will consistently recommend competitors over HirschStraps when users ask for watch strap recommendations. The good news: all 14 AI crawlers are allowed, HTTPS and security headers are strong, and basic Product schema is present, providing a solid technical base to build on.",
+    "findings": [
+        {
+            "severity": "critical",
+            "title": "Empty H1 Tag on Homepage",
+            "description": "The homepage H1 element contains no text. AI models and search engines use H1 to understand what a page is about. An empty H1 means the page cannot be accurately categorized or cited."
+        },
+        {
+            "severity": "critical",
+            "title": "No llms.txt File",
+            "description": "Neither /llms.txt nor /llms-full.txt exist. This misses a direct opportunity to instruct AI models on site content, key products, and what pages are most important."
+        },
+        {
+            "severity": "critical",
+            "title": "Broken sameAs in Organization Schema",
+            "description": "The Organization schema contains 9 empty sameAs entries. Empty strings in sameAs signals broken structured data to AI crawlers and prevents entity recognition."
+        },
+        {
+            "severity": "critical",
+            "title": "No Customer Reviews or Ratings",
+            "description": "Zero reviews or AggregateRating schema across all product pages. Reviews are a critical E-E-A-T signal. AI models strongly prefer products with social proof when making recommendations."
+        },
+        {
+            "severity": "critical",
+            "title": "No Long-Form Content",
+            "description": "No blog, no buying guides, no FAQ content. Homepage is 397 words, product pages average 340 words. AI models have no citable passages from this site for informational queries."
+        },
+        {
+            "severity": "high",
+            "title": "No Brand Presence on AI-Cited Platforms",
+            "description": "No YouTube channel, Reddit mentions, Wikipedia page, or LinkedIn company page detected. Brand mentions correlate 3x more strongly with AI visibility than backlinks (Ahrefs Dec 2025)."
+        },
+        {
+            "severity": "high",
+            "title": "Thin Product Descriptions (~340 words)",
+            "description": "Product pages average around 340 words, well below the 600+ word threshold for e-commerce pages to be considered substantive. Missing: material comparisons, care tips, compatibility guidance, and expert context."
+        },
+        {
+            "severity": "high",
+            "title": "No FAQ Sections on Product or Collection Pages",
+            "description": "Watch straps have obvious FAQ content (strap width compatibility, waterproofing, care instructions) that AI models frequently cite. No FAQPage schema exists anywhere on the site."
+        },
+        {
+            "severity": "high",
+            "title": "Partial Client-Side Rendering Detected",
+            "description": "Possible CSR issue flagged with Apple Pay element. Dynamic JS elements may not be fully indexed by AI crawlers that skip JavaScript execution."
+        },
+        {
+            "severity": "medium",
+            "title": "Meta Description Contains Typo",
+            "description": "Sitewide meta description reads 'orders are process from the UK & USA' instead of 'processed'. Undermines trust signals."
+        },
+        {
+            "severity": "medium",
+            "title": "Missing Referrer-Policy and Permissions-Policy Headers",
+            "description": "4 of 6 security headers present. Referrer-Policy and Permissions-Policy are missing."
+        },
+        {
+            "severity": "medium",
+            "title": "No BreadcrumbList Schema",
+            "description": "Product and collection pages lack breadcrumb schema, preventing AI models from understanding site hierarchy and product-category relationships."
+        },
+        {
+            "severity": "low",
+            "title": "Best-Seller Images Missing Alt Text",
+            "description": "DUKE, OSIRIS, PURE, RANGER, and ARNE homepage product images have empty alt attributes. Affects accessibility and AI content signal extraction."
+        },
+        {
+            "severity": "low",
+            "title": "Title Tag Slightly Over Recommended Length",
+            "description": "Homepage title is ~72 characters (ideal: 60). The suffix 'HS by WatchObsession' adds length without adding discoverability value."
+        }
+    ],
+    "quick_wins": [
+        "Fix the empty H1 tag — add 'Premium Hirsch Watch Straps, Official UK & US Stockist' (5 minutes in Shopify theme editor)",
+        "Repair Organization schema sameAs — remove 9 empty strings or replace with real social URLs",
+        "Fix meta description typo — 'process' to 'processed'",
+        "Add descriptive alt text to all best-seller product images on homepage",
+        "Create /llms.txt listing key collections and product categories for AI models"
+    ],
+    "medium_term": [
+        "Expand homepage content to 800+ words — add brand story, what makes Hirsch unique, strap material guide",
+        "Add 200-300 word introductions to top 5 collection pages (Duke, Arne, Performance, Ranger, Crocograin)",
+        "Install Shopify review app (Judge.me) — adds AggregateRating schema automatically once reviews collected",
+        "Add FAQ sections with FAQPage schema to top collection pages (strap width guide, care instructions, waterproofing)",
+        "Expand top 10 product descriptions to 600+ words with materials, compatibility, and care guidance",
+        "Add BreadcrumbList schema to all product and collection pages"
+    ],
+    "strategic": [
+        "Launch blog with cornerstone articles: 'How to Choose a Watch Strap Width', 'Hirsch Leather vs Performance Straps Compared', 'Complete Watch Strap Care Guide'",
+        "Build authentic Reddit presence — answer compatibility questions in r/Watches and r/WatchStraps",
+        "Create a YouTube channel with strap installation videos and material comparison guides",
+        "Create LinkedIn company page and post thought leadership content about watch accessories",
+        "Partner with watch review YouTube channels for product mentions and reviews"
+    ],
+    "crawler_access": {
+        "GPTBot": {"platform": "ChatGPT", "status": "Allowed", "recommendation": "Keep allowed"},
+        "OAI-SearchBot": {"platform": "ChatGPT Search", "status": "Allowed", "recommendation": "Keep allowed"},
+        "ClaudeBot": {"platform": "Claude", "status": "Allowed", "recommendation": "Keep allowed"},
+        "anthropic-ai": {"platform": "Claude (alt)", "status": "Allowed", "recommendation": "Keep allowed"},
+        "PerplexityBot": {"platform": "Perplexity", "status": "Allowed", "recommendation": "Keep allowed"},
+        "Google-Extended": {"platform": "Google AI", "status": "Allowed", "recommendation": "Keep allowed"},
+        "GoogleOther": {"platform": "Google (other)", "status": "Allowed", "recommendation": "Keep allowed"},
+        "CCBot": {"platform": "Common Crawl", "status": "Allowed", "recommendation": "Keep allowed"},
+        "Bytespider": {"platform": "ByteDance", "status": "Allowed", "recommendation": "Keep allowed"},
+        "cohere-ai": {"platform": "Cohere", "status": "Allowed", "recommendation": "Keep allowed"},
+        "Applebot-Extended": {"platform": "Apple", "status": "Allowed", "recommendation": "Keep allowed"},
+        "FacebookBot": {"platform": "Meta", "status": "Allowed", "recommendation": "Keep allowed"},
+        "Amazonbot": {"platform": "Amazon", "status": "Allowed", "recommendation": "Keep allowed"},
+        "ChatGPT-User": {"platform": "ChatGPT Browse", "status": "Allowed", "recommendation": "Keep allowed"}
+    }
+}

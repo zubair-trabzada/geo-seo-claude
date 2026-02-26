@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS custom properties ─────────────────────────────────────────────────── */
+:root {
+  /* Brand color tokens */
+  --color-bg:          #020617;   /* slate-950 */
+  --color-surface:     #0f172a;   /* slate-900 */
+  --color-elevated:    #1e293b;   /* slate-800 */
+  --color-border:      #334155;   /* slate-700 */
+  --color-border-soft: #1e293b;   /* slate-800 */
+
+  /* Text tokens */
+  --color-text-primary:   #f1f5f9;  /* slate-100 */
+  --color-text-secondary: #94a3b8;  /* slate-400 */
+  --color-text-muted:     #64748b;  /* slate-500 */
+
+  /* Accent tokens */
+  --color-primary:  #6366f1;  /* indigo-500 */
+  --color-success:  #10b981;  /* emerald-500 */
+  --color-warning:  #f59e0b;  /* amber-500 */
+  --color-danger:   #ef4444;  /* red-500 */
+
+  /* Score colour stops */
+  --color-score-high:   #10b981;
+  --color-score-medium: #f59e0b;
+  --color-score-low:    #ef4444;
+}
+
+/* ── Global resets & base ──────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-inter, 'Inter'), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ── Focus ring ────────────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;  /* slate-600 */
+}
+
+/* ── Table defaults ────────────────────────────────────────────────────────── */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* ── Utility layer additions ───────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Score badge colours */
+  .score-high   { color: var(--color-score-high);   }
+  .score-medium { color: var(--color-score-medium); }
+  .score-low    { color: var(--color-score-low);    }
+
+  /* Surface glass effect */
+  .glass {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* ── Component layer additions ─────────────────────────────────────────────── */
+@layer components {
+  /* Reusable card surface */
+  .card {
+    @apply bg-slate-900 border border-slate-800 rounded-xl;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700
+           disabled:bg-indigo-800 disabled:cursor-not-allowed
+           text-white font-semibold rounded-xl px-4 py-2 text-sm
+           transition-all duration-150;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-slate-800 hover:bg-slate-700 active:bg-slate-600
+           text-slate-200 font-medium rounded-xl px-4 py-2 text-sm
+           border border-slate-700 transition-all duration-150;
+  }
+
+  /* Input field */
+  .input {
+    @apply w-full bg-slate-800 border border-slate-700
+           rounded-xl px-4 py-2.5 text-white placeholder-slate-500 text-sm
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+           transition-all;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium;
+  }
+
+  .badge-success { @apply badge bg-emerald-900/50 text-emerald-400 border border-emerald-800/50; }
+  .badge-warning { @apply badge bg-amber-900/50  text-amber-400  border border-amber-800/50;  }
+  .badge-danger  { @apply badge bg-red-900/50    text-red-400    border border-red-800/50;    }
+  .badge-info    { @apply badge bg-indigo-900/50 text-indigo-400 border border-indigo-800/50; }
+  .badge-muted   { @apply badge bg-slate-800     text-slate-400  border border-slate-700;     }
+}

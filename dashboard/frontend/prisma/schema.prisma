@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id          String   @id @default(cuid())
+  name        String
+  websiteUrl  String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  users       User[]
+  audits      Audit[]
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   // "admin" | "client"
+  clientId     String?
+  client       Client?  @relation(fields: [clientId], references: [id])
+  createdAt    DateTime @default(now())
+}
+
+model Audit {
+  id              String           @id @default(cuid())
+  clientId        String
+  client          Client           @relation(fields: [clientId], references: [id])
+  timestamp       DateTime         @default(now())
+  isBaseline      Boolean          @default(false)
+  geoScore        Float
+  scores          String           // JSON: { citability, brand, content, technical, schema, platform }
+  rawData         String           // JSON: full audit output
+  competitors     String?          // JSON: competitor comparison snapshot
+  recommendations Recommendation[]
+}
+
+model Recommendation {
+  id          String  @id @default(cuid())
+  auditId     String
+  audit       Audit   @relation(fields: [auditId], references: [id])
+  clientId    String
+  category    String
+  priority    Int     // 1=critical, 2=important, 3=nice-to-have
+  title       String
+  description String
+  effort      String  // "low" | "medium" | "high"
+  impact      String  // "low" | "medium" | "high"
+  status      String  @default("pending") // "pending"|"in_progress"|"done"
+}
+
+model Alert {
+  id        String   @id @default(cuid())
+  clientId  String
+  type      String   // "score_drop" | "overdue_audit" | "milestone"
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

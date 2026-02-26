@@ -1,0 +1,2670 @@
+{
+  "target": {
+    "url": "https://www.baraband.se",
+    "domain": "www.baraband.se",
+    "scan": {
+      "url": "https://www.baraband.se",
+      "domain": "www.baraband.se",
+      "pages": [
+        {
+          "url": "https://www.baraband.se",
+          "status_code": 200,
+          "redirect_chain": [
+            {
+              "url": "https://www.baraband.se/",
+              "status": 301
+            }
+          ],
+          "headers": {
+            "Date": "Wed, 25 Feb 2026 20:58:17 GMT",
+            "Content-Type": "text/html; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Connection": "keep-alive",
+            "Content-Encoding": "gzip",
+            "set-cookie": "localization=SE; path=/; expires=Thu, 25 Feb 2027 20:58:17 GMT; SameSite=Lax, cart_currency=SEK; path=/; expires=Wed, 11 Mar 2026 20:58:17 GMT; SameSite=Lax, _shopify_essential=:AZyWmGwCAAEAVxgmJQ4_YVk66VjSAHgRsXsZD33G1gvqxLXMJ3XIS0wEf6AQcw5hLOqNn0_B7DVdxbHnUG8FInblW7NafYvoFfrGBoa1mi6rJfEIUReqtSboX_nGbdJiQ-GpuEtWSCuyu-hu7O6kABkF3yyK7dFOCTtBZiuFg3CTkLcl2TnbNPL9myuMFjrH69ZTwcRd4yvy8tcOYfl68P9mWqL6Lw6lAMX6Ii2Gl-MuNoK9tQz7V_FCaqIpCCOVl8CBYgw_yLP0e-KQEWobha42pPZAtHNsy89dMoCTO63e8ho-pi3Jl8oRDfC7TbiS89EmpE9Ai8-UdjcsrHaRWYC9KL2huhzv6inCm52A:; Max-Age=31536000; Path=/; HttpOnly; Secure; Priority=High; SameSite=Lax",
+            "link": "<https://cdn.shopify.com>; rel=\"preconnect\", <https://cdn.shopify.com>; rel=\"preconnect\"; crossorigin, <//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=600>; as=\"image\"; rel=\"preload\"; imagesrcset=\"//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=250 250w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=375 375w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500 500w\"; imagesizes=\"(min-width: 750px) 250px, 50vw\"",
+            "speculation-rules": "\"/cdn/shopifycloud/storefront/assets/storefront/storefronts.specrules-1ec91466.json\"",
+            "etag": "W/\"page_cache:60125020332:IndexController:d6a72c06244e7ea71dd74c5175212275\"",
+            "shopify-complexity-score": "4560",
+            "x-frame-options": "DENY",
+            "content-security-policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "strict-transport-security": "max-age=7889238",
+            "x-shopid": "60125020332",
+            "vary": "Accept, accept-encoding",
+            "content-language": "sv-SE",
+            "powered-by": "Shopify",
+            "server-timing": "processing;dur=460;desc=\"gc:3\", db;dur=166, db_async;dur=52.132, parse;dur=1, render;dur=161, asn;desc=\"3301\", edge;desc=\"CPH\", country;desc=\"SE\", theme;desc=\"189989781848\", pageType;desc=\"index\", servedBy;desc=\"9hmh\", requestID;desc=\"8db0e42b-79c5-4792-a47b-da546e8dd0d3-1772053097\", _y;desc=\"00000000-0000-0000-5000-000000000000\", _s;desc=\"00000000-0000-0000-5000-000000000000\", _cmp;desc=\"3.ampS_SE_t_f_3ujd7xx7Ss-ws*lfunMibQ\", compressionLevel;desc=\"5\", compressionTime;dur=9.866, cfRequestDuration;dur=532.999992",
+            "x-dc": "gcp-europe-west1,gcp-europe-west1,gcp-europe-west1",
+            "x-request-id": "8db0e42b-79c5-4792-a47b-da546e8dd0d3-1772053097",
+            "Alt-Svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=psE4S%2FJHYMu8V6L5l3fLiDzSA9YL2F7RhHhQL5VahrSxfPx1G5NFGF0tXCNQnHFoudM1d95t%2FkVK%2BKexjW7suhSyHKugGm5VMB%2Fto9g0JhW3DsOvSBVFSYNyFO9Y\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+            "NEL": "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+            "X-XSS-Protection": "1; mode=block",
+            "X-Content-Type-Options": "nosniff",
+            "X-Permitted-Cross-Domain-Policies": "none",
+            "X-Download-Options": "noopen",
+            "Server": "cloudflare",
+            "CF-RAY": "9d3a1eb29bdf1a87-CPH"
+          },
+          "meta_tags": {
+            "viewport": "width=device-width,initial-scale=1",
+            "description": "Handla snygga premium klockarmband fr\u00e5n Europa till vettigt pris. Noggrant utvalda i l\u00e4der, sailcloth, FKM gummi, hybrid, nylon, nato, marine nationale & mesh. Passar Apple Watch & klassiska klockor. Snabb leverans & fri frakt hos BaraBand.",
+            "og:site_name": "BaraBand.se",
+            "og:url": "https://baraband.se/",
+            "og:title": "Premium klockarmband fr\u00e5n Europa \u2013 Fri frakt | BaraBand",
+            "og:type": "website",
+            "og:description": "Handla snygga premium klockarmband fr\u00e5n Europa till vettigt pris. Noggrant utvalda i l\u00e4der, sailcloth, FKM gummi, hybrid, nylon, nato, marine nationale & mesh. Passar Apple Watch & klassiska klockor. Snabb leverans & fri frakt hos BaraBand.",
+            "og:image": "http://baraband.se/cdn/shop/files/Klockarmband_lader_a660eb72-a11d-447b-a00c-8eda8aa2dd2e.jpg?v=1768730611",
+            "og:image:secure_url": "https://baraband.se/cdn/shop/files/Klockarmband_lader_a660eb72-a11d-447b-a00c-8eda8aa2dd2e.jpg?v=1768730611",
+            "og:image:width": "828",
+            "og:image:height": "467",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Premium klockarmband fr\u00e5n Europa \u2013 Fri frakt | BaraBand",
+            "twitter:description": "Handla snygga premium klockarmband fr\u00e5n Europa till vettigt pris. Noggrant utvalda i l\u00e4der, sailcloth, FKM gummi, hybrid, nylon, nato, marine nationale & mesh. Passar Apple Watch & klassiska klockor. Snabb leverans & fri frakt hos BaraBand.",
+            "google-site-verification": "6TChb9XxneBy5Jb1XBHLtb_24whweEGF73fl08uhfOk",
+            "shopify-digital-wallet": "/60125020332/digital_wallets/dialog"
+          },
+          "title": "Premium klockarmband fr\u00e5n Europa \u2013 Fri frakt | BaraBand\n \u2013 BaraBand.se",
+          "description": "Handla snygga premium klockarmband fr\u00e5n Europa till vettigt pris. Noggrant utvalda i l\u00e4der, sailcloth, FKM gummi, hybrid, nylon, nato, marine nationale & mesh. Passar Apple Watch & klassiska klockor. Snabb leverans & fri frakt hos BaraBand.",
+          "canonical": "https://baraband.se/",
+          "h1_tags": [
+            ""
+          ],
+          "heading_structure": [
+            {
+              "level": 1,
+              "text": ""
+            },
+            {
+              "level": 2,
+              "text": "Artikeln har lagts till i varukorgen"
+            },
+            {
+              "level": 2,
+              "text": "HIRSCH"
+            },
+            {
+              "level": 2,
+              "text": "FLUCO"
+            },
+            {
+              "level": 2,
+              "text": "COLAREB"
+            },
+            {
+              "level": 2,
+              "text": "Apple|bandberra|Colareb|Fluco|Greisz|Hirsch"
+            },
+            {
+              "level": 2,
+              "text": "F\u00f6r\u00e4lska dig i din klocka p\u00e5 nytt"
+            },
+            {
+              "level": 2,
+              "text": "HIRSCH"
+            },
+            {
+              "level": 2,
+              "text": "Hirsch - B\u00e4sts\u00e4ljare"
+            },
+            {
+              "level": 2,
+              "text": "Fluco"
+            },
+            {
+              "level": 2,
+              "text": "Fluco - B\u00e4sts\u00e4ljare"
+            },
+            {
+              "level": 2,
+              "text": "F\u00f6rnya din klocka"
+            },
+            {
+              "level": 2,
+              "text": "Nylon"
+            },
+            {
+              "level": 2,
+              "text": "Duke"
+            },
+            {
+              "level": 2,
+              "text": "Osiris Nubuck"
+            },
+            {
+              "level": 2,
+              "text": "Arne"
+            },
+            {
+              "level": 2,
+              "text": "Pure"
+            },
+            {
+              "level": 2,
+              "text": "Rally"
+            },
+            {
+              "level": 2,
+              "text": "Colareb"
+            },
+            {
+              "level": 2,
+              "text": "Colareb - B\u00e4sts\u00e4ljare"
+            },
+            {
+              "level": 2,
+              "text": "Sailcloth"
+            },
+            {
+              "level": 2,
+              "text": "bandberra - B\u00e4sts\u00e4ljare"
+            },
+            {
+              "level": 2,
+              "text": "Byxshopen"
+            },
+            {
+              "level": 2,
+              "text": "Popul\u00e4ra klockor"
+            },
+            {
+              "level": 2,
+              "text": "Inneh\u00e5ll som kan d\u00f6ljas"
+            },
+            {
+              "level": 2,
+              "text": "Kan vi hj\u00e4lpa dig?"
+            },
+            {
+              "level": 2,
+              "text": "Kontaktformul\u00e4r"
+            },
+            {
+              "level": 2,
+              "text": "Information"
+            },
+            {
+              "level": 2,
+              "text": "NYHETSBREV"
+            },
+            {
+              "level": 3,
+              "text": "\u2013 med prisv\u00e4rda europeiska klockarmband"
+            },
+            {
+              "level": 3,
+              "text": "L\u00e4der"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth"
+            },
+            {
+              "level": 3,
+              "text": "FKM Gummi"
+            },
+            {
+              "level": 3,
+              "text": "Nylon"
+            },
+            {
+              "level": 3,
+              "text": "Hybrid"
+            },
+            {
+              "level": 3,
+              "text": "Mesh"
+            },
+            {
+              "level": 3,
+              "text": "Apple Watch"
+            },
+            {
+              "level": 3,
+              "text": "Accessoarer"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [svart] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [svart] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [beige] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [beige] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [svart+gr\u00e5] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [svart+gr\u00e5] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling"
+            },
+            {
+              "level": 3,
+              "text": "B\u00c4STS\u00c4LJARE"
+            },
+            {
+              "level": 3,
+              "text": "Bredd"
+            },
+            {
+              "level": 3,
+              "text": "F\u00e4rg"
+            },
+            {
+              "level": 3,
+              "text": "bandberra"
+            },
+            {
+              "level": 3,
+              "text": "Colareb \u2022 100% vegan"
+            },
+            {
+              "level": 3,
+              "text": "Fluco"
+            },
+            {
+              "level": 3,
+              "text": "GREISZ"
+            },
+            {
+              "level": 3,
+              "text": "HIRSCH"
+            },
+            {
+              "level": 3,
+              "text": "APPLE WATCH BAND"
+            },
+            {
+              "level": 3,
+              "text": "GUMMI FKM"
+            },
+            {
+              "level": 3,
+              "text": "HYBRID"
+            },
+            {
+              "level": 3,
+              "text": "KLOCKOR"
+            },
+            {
+              "level": 3,
+              "text": "L\u00c4DER"
+            },
+            {
+              "level": 3,
+              "text": "MARINE NATIONALE"
+            },
+            {
+              "level": 3,
+              "text": "MESH"
+            },
+            {
+              "level": 3,
+              "text": "NATO"
+            },
+            {
+              "level": 3,
+              "text": "SAILCLOTH FKM"
+            },
+            {
+              "level": 3,
+              "text": "SAMSUNG WATCH BAND"
+            },
+            {
+              "level": 3,
+              "text": "OUTLET"
+            },
+            {
+              "level": 3,
+              "text": "Klockarmband f\u00f6r alla stilar och klockor | BaraBand"
+            }
+          ],
+          "word_count": 590,
+          "text_content": "Premium klockarmband fr\u00e5n Europa \u2013 Fri frakt | BaraBand\n \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband fr\u00e5n Europa HIRSCH \u00d6STERRIKISKA BAND - 1765 UPPT\u00c4CK HIRSCH FLUCO TYSKA HANDGJORDA BAND - 1952 UPPT\u00c4CK FLUCO COLAREB 100% VEGAN - HANDGJORDA I ITALIEN UPPT\u00c4CK COLAREB Apple | bandberra | Colareb | Fluco | Greisz | Hirsch F\u00f6r\u00e4lska dig i din klocka p\u00e5 nytt \u2013 med prisv\u00e4rda europeiska klockarmband L\u00e4der Sailcloth FKM Gummi Nylon Hybrid Mesh Apple Watch Accessoarer HIRSCH Ge din klocka ett elegant lyft med hantverk fr\u00e5n \u00f6sterrikiska Hirsch som utstr\u00e5lar tidl\u00f6s elegans och kvalitet - fr\u00e5n 299kr UPPT\u00c4CK HIRSCH Hirsch - B\u00e4sts\u00e4ljare Duke Osiris Boston Arne Toronto Rally 1 / av 6 Fluco Flucos handgjorda klockarmband kombinerar tysk precision och tidl\u00f6s elegans f\u00f6r att lyfta din klocka - fr\u00e5n 549kr UPPT\u00c4CK FLUCO Fluco - B\u00e4sts\u00e4ljare Deauville Dublin Mountain Bear Nizza 1 / av 4 F\u00f6rnya din klocka Byt band p\u00e5 din klocka till Fluco Deauville \u2013 ett stilrent armband som passar lika bra till kontoret som till festigliga tillf\u00e4llen. 599kr K\u00d6P Nylon Uppdatera din klocka med ett snyggt Nato-band eller elastiska Marine Nationale - fr\u00e5n 229kr Nato Ribbed Duke Osiris Nubuck Arne Pure Rally Colareb Ge din klocka nytt liv med 100% veganska klockarmband fr\u00e5n italienska Colareb \u2013 stilrent, h\u00e5llbart och bekv\u00e4mt, exklusivt hos BaraBand - fr\u00e5n 549kr UPPT\u00c4CK COLAREB Colareb - B\u00e4sts\u00e4ljare Ecosuede Wooden Sustain Carta 1 / av 4 Sailcloth Uppgradera din klocka med popul\u00e4ra bandberra Sailcloth QR \u2013 ett slitstarkt, vattenavvisande och elegant band f\u00f6r alla \u00e4ventyr \u2022 Nu med valm\u00f6jlighet att h\u00e4mta bandberra i butik hos Byxshopen i Falun UPPT\u00c4CK bandberra bandberra - B\u00e4sts\u00e4ljare Sailcloth QR | bandberra [svart] snabbkoppling Sailcloth QR | bandberra [svart] snabbkoppling Ordinarie pris 499 kr Ordinarie pris F\u00f6rs\u00e4ljningspris 499 kr Sailcloth QR | bandberra [beige] snabbkoppling Sailcloth QR | bandberra [beige] snabbkoppling Ordinarie pris 499 kr Ordinarie pris F\u00f6rs\u00e4ljningspris 499 kr Sailcloth QR | bandberra [svart+gr\u00e5] snabbkoppling Sailcloth QR | bandberra [svart+gr\u00e5] snabbkoppling Ordinarie pris 499 kr Ordinarie pris F\u00f6rs\u00e4ljningspris 499 kr Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling Ordinarie pris 499 kr Ordinarie pris 495 kr F\u00f6rs\u00e4ljningspris 499 kr 1 / av 4 Visa alla Byxshopen Byxshopen i Falun \u00e4r erbjuder ett av Sveriges b\u00e4sta utbud av kl\u00e4der och accessoarer med oslagbar personlig service. Best\u00e4ll band fr\u00e5n bandberra p\u00e5 BaraBand och h\u00e4mta hos Byxshopen i Falun! (V\u00e4lj H\u00e4mtning i butik) BEST\u00c4LL bandberra Popul\u00e4ra klockor Premiumklockor och armband fr\u00e5n Greisz KLOCKOR & BAND Inneh\u00e5ll som kan d\u00f6ljas B\u00c4STS\u00c4LJARE ALLA B\u00c4STS\u00c4LJARE Bredd 12mm 14mm 16mm 18mm 19mm 20mm 21mm 22mm 23mm 24mm 26mm F\u00e4rg Bl\u00e5 Brun Gr\u00e5 Gr\u00f6n Gul Guld Orange Rosa Ros\u00e9guld R\u00f6d Silver Svart Vit bandberra Alla bandberra Colareb \u2022 100% vegan Colareb Fluco Fluco GREISZ ALLA GREISZ HIRSCH ALLA HIRSCH APPLE WATCH BAND ALLA APPLE WATCH BAND GUMMI FKM ALLA GUMMIARMBAND HYBRID ALLA HYBRID KLOCKOR ALLA KLOCKOR L\u00c4DER ALLA L\u00c4DERBAND MARINE NATIONALE ALLA MARINE NATIONALE MESH ALLA MESH NATO ALLA NATO SAILCLOTH FKM ALLA SAILCLOTH FKM SAMSUNG WATCH BAND ALLA SAMSUNG WATCH BAND OUTLET Outlet Klockarmband f\u00f6r alla stilar och klockor | BaraBand Noggrant utvalda klockarmband fr\u00e5n Europas fr\u00e4msta tillverkare. Hos BaraBand kombineras kvalitet, passform och rimligt pris \u2013 med snabb leverans inom Sverige. Utforska v\u00e5ra klockarmband \u2192 Kan vi hj\u00e4lpa dig? Kontakta oss via formul\u00e4ret nedan \u2013 oavsett om det g\u00e4ller armbandsstorlek eller en best\u00e4llning. Kontaktformul\u00e4r Namn E-postadress * Telefonnummer Kommentar Skicka N\u00e4r du g\u00f6r ett urval uppdateras sidan. \u00d6ppnas i ett nytt f\u00f6nster.",
+          "internal_links": [
+            {
+              "url": "https://www.baraband.se#MainContent",
+              "text": "G\u00e5 vidare till inneh\u00e5ll"
+            },
+            {
+              "url": "https://www.baraband.se/cart",
+              "text": "Visa varukorg"
+            },
+            {
+              "url": "https://www.baraband.se/collections/hirsch",
+              "text": "UPPT\u00c4CK HIRSCH"
+            },
+            {
+              "url": "https://www.baraband.se/collections/fluco",
+              "text": "UPPT\u00c4CK FLUCO"
+            },
+            {
+              "url": "https://www.baraband.se/collections/colareb",
+              "text": "UPPT\u00c4CK COLAREB"
+            },
+            {
+              "url": "https://www.baraband.se/collections/hirsch",
+              "text": "UPPT\u00c4CK HIRSCH"
+            },
+            {
+              "url": "https://www.baraband.se/collections/fluco",
+              "text": "UPPT\u00c4CK FLUCO"
+            },
+            {
+              "url": "https://www.baraband.se/products/lader-fluco-deauville-taupe-snabbkoppling",
+              "text": "K\u00d6P"
+            },
+            {
+              "url": "https://www.baraband.se/collections/nato",
+              "text": "Nato Ribbed"
+            },
+            {
+              "url": "https://www.baraband.se/collections/colareb",
+              "text": "UPPT\u00c4CK COLAREB"
+            },
+            {
+              "url": "https://www.baraband.se/collections/bandberra",
+              "text": "UPPT\u00c4CK bandberra"
+            },
+            {
+              "url": "https://www.baraband.se/products/bandberra-sailcloth-svart",
+              "text": "Sailcloth QR | bandberra [svart] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/products/bandberra-sailcloth-svart",
+              "text": "Sailcloth QR | bandberra [svart] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/products/sailcloth-bandberra-beige",
+              "text": "Sailcloth QR | bandberra [beige] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/products/sailcloth-bandberra-beige",
+              "text": "Sailcloth QR | bandberra [beige] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/products/klockarmband-sailcloth-bandberra-svart-gra",
+              "text": "Sailcloth QR | bandberra [svart+gr\u00e5] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/products/klockarmband-sailcloth-bandberra-svart-gra",
+              "text": "Sailcloth QR | bandberra [svart+gr\u00e5] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/products/sailcloth-bandberra-gron",
+              "text": "Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/products/sailcloth-bandberra-gron",
+              "text": "Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling"
+            },
+            {
+              "url": "https://www.baraband.se/collections/sailcloth-qr",
+              "text": "Visa alla"
+            },
+            {
+              "url": "https://www.baraband.se/collections/bandberra",
+              "text": "BEST\u00c4LL bandberra"
+            },
+            {
+              "url": "https://www.baraband.se/collections/greisz",
+              "text": "KLOCKOR & BAND"
+            },
+            {
+              "url": "https://www.baraband.se/collections/bastsaljare",
+              "text": "ALLA B\u00c4STS\u00c4LJARE"
+            },
+            {
+              "url": "https://www.baraband.se/collections/12mm",
+              "text": "12mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/14mm",
+              "text": "14mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/16mm",
+              "text": "16mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/18mm",
+              "text": "18mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/19mm",
+              "text": "19mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/20mm-2",
+              "text": "20mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/21mm",
+              "text": "21mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/22mm-1",
+              "text": "22mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/23mm",
+              "text": "23mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/24mm-1",
+              "text": "24mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/26mm",
+              "text": "26mm"
+            },
+            {
+              "url": "https://www.baraband.se/collections/bla",
+              "text": "Bl\u00e5"
+            },
+            {
+              "url": "https://www.baraband.se/collections/brun",
+              "text": "Brun"
+            },
+            {
+              "url": "https://www.baraband.se/collections/gra",
+              "text": "Gr\u00e5"
+            },
+            {
+              "url": "https://www.baraband.se/collections/gron",
+              "text": "Gr\u00f6n"
+            },
+            {
+              "url": "https://www.baraband.se/collections/gul",
+              "text": "Gul"
+            },
+            {
+              "url": "https://www.baraband.se/collections/guld",
+              "text": "Guld"
+            },
+            {
+              "url": "https://www.baraband.se/collections/orange",
+              "text": "Orange"
+            },
+            {
+              "url": "https://www.baraband.se/collections/rosa",
+              "text": "Rosa"
+            },
+            {
+              "url": "https://www.baraband.se/collections/roseguld",
+              "text": "Ros\u00e9guld"
+            },
+            {
+              "url": "https://www.baraband.se/collections/rod",
+              "text": "R\u00f6d"
+            },
+            {
+              "url": "https://www.baraband.se/collections/silver",
+              "text": "Silver"
+            },
+            {
+              "url": "https://www.baraband.se/collections/svart",
+              "text": "Svart"
+            },
+            {
+              "url": "https://www.baraband.se/collections/vit",
+              "text": "Vit"
+            },
+            {
+              "url": "https://www.baraband.se/collections/bandberra",
+              "text": "Alla bandberra"
+            },
+            {
+              "url": "https://www.baraband.se/collections/colareb",
+              "text": "Colareb"
+            },
+            {
+              "url": "https://www.baraband.se/collections/fluco",
+              "text": "Fluco"
+            },
+            {
+              "url": "https://www.baraband.se/collections/greisz",
+              "text": "ALLA GREISZ"
+            },
+            {
+              "url": "https://www.baraband.se/collections/hirsch",
+              "text": "ALLA HIRSCH"
+            },
+            {
+              "url": "https://www.baraband.se/collections/smartwatch-kommer-snart",
+              "text": "ALLA APPLE WATCH BAND"
+            },
+            {
+              "url": "https://www.baraband.se/collections/gummi",
+              "text": "ALLA GUMMIARMBAND"
+            },
+            {
+              "url": "https://www.baraband.se/collections/hybrid-sport",
+              "text": "ALLA HYBRID"
+            },
+            {
+              "url": "https://www.baraband.se/collections/klocka",
+              "text": "ALLA KLOCKOR"
+            },
+            {
+              "url": "https://www.baraband.se/collections/lader-1",
+              "text": "ALLA L\u00c4DERBAND"
+            },
+            {
+              "url": "https://www.baraband.se/collections/orange-med-vit-rand-1",
+              "text": "ALLA MARINE NATIONALE"
+            },
+            {
+              "url": "https://www.baraband.se/collections/mesh-quick",
+              "text": "ALLA MESH"
+            },
+            {
+              "url": "https://www.baraband.se/collections/nato",
+              "text": "ALLA NATO"
+            },
+            {
+              "url": "https://www.baraband.se/collections/hybrid",
+              "text": "ALLA SAILCLOTH FKM"
+            },
+            {
+              "url": "https://www.baraband.se/collections/samsung-watch",
+              "text": "ALLA SAMSUNG WATCH BAND"
+            },
+            {
+              "url": "https://www.baraband.se/collections/outlet",
+              "text": "Outlet"
+            }
+          ],
+          "external_links": [
+            {
+              "url": "https://baraband.se/collections/apple-watch-band",
+              "text": "Apple"
+            },
+            {
+              "url": "https://baraband.se/collections/bandberra",
+              "text": "bandberra"
+            },
+            {
+              "url": "https://baraband.se/collections/colareb",
+              "text": "Colareb"
+            },
+            {
+              "url": "https://baraband.se/collections/fluco",
+              "text": "Fluco"
+            },
+            {
+              "url": "https://baraband.se/collections/greisz",
+              "text": "Greisz"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch",
+              "text": "Hirsch"
+            },
+            {
+              "url": "https://baraband.se/collections/lader-2",
+              "text": "L\u00e4der"
+            },
+            {
+              "url": "https://baraband.se/collections/bandberra",
+              "text": "Sailcloth"
+            },
+            {
+              "url": "https://baraband.se/collections/fkm-1",
+              "text": "FKM Gummi"
+            },
+            {
+              "url": "https://baraband.se/collections/nylon?_pos=1&_psq=nylon&_ss=e&_v=1.0",
+              "text": "Nylon"
+            },
+            {
+              "url": "https://baraband.se/collections/hybrid?_pos=1&_psq=hybr&_ss=e&_v=1.0",
+              "text": "Hybrid"
+            },
+            {
+              "url": "https://baraband.se/collections/mesh-quick?_pos=1&_psq=mesh&_ss=e&_v=1.0",
+              "text": "Mesh"
+            },
+            {
+              "url": "https://baraband.se/collections/smartwatch-kommer-snart",
+              "text": "Apple Watch"
+            },
+            {
+              "url": "https://baraband.se/collections/accessoarer?_pos=1&_psq=access&_ss=e&_v=1.0",
+              "text": "Accessoarer"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-duke?_pos=1&_psq=duke&_ss=e&_v=1.0",
+              "text": "Duke"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-osiris?_pos=1&_psq=osiri&_ss=e&_v=1.0",
+              "text": "Osiris"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-boston?_pos=1&_psq=boston&_ss=e&_v=1.0",
+              "text": "Boston"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-arne?_pos=1&_psq=arne&_ss=e&_v=1.0",
+              "text": "Arne"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-toronto?_pos=1&_psq=toronto&_ss=e&_v=1.0",
+              "text": "Toronto"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-rally?_pos=1&_psq=rally&_ss=e&_v=1.0",
+              "text": "Rally"
+            },
+            {
+              "url": "https://baraband.se/collections/fluco-deauville?_pos=1&_psq=Deauville&_ss=e&_v=1.0",
+              "text": "Deauville"
+            },
+            {
+              "url": "https://baraband.se/collections/fluco-dublin?_pos=1&_psq=dublin&_ss=e&_v=1.0",
+              "text": "Dublin"
+            },
+            {
+              "url": "https://baraband.se/collections/fluco-mountain-bea?_pos=4&_psq=fluco&_ss=e&_v=1.0",
+              "text": "Mountain Bear"
+            },
+            {
+              "url": "https://baraband.se/collections/fluco-nizza?_pos=1&_psq=nizza&_ss=e&_v=1.0",
+              "text": "Nizza"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-duke?_pos=1&_psq=duke&_ss=e&_v=1.0",
+              "text": "Duke"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-osiris?_pos=1&_psq=osiri&_ss=e&_v=1.0",
+              "text": "Osiris Nubuck"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-arne?_pos=1&_psq=arne&_ss=e&_v=1.0",
+              "text": "Arne"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-pure?_pos=1&_psq=pure&_ss=e&_v=1.0",
+              "text": "Pure"
+            },
+            {
+              "url": "https://baraband.se/collections/hirsch-rally?_pos=1&_psq=rally&_ss=e&_v=1.0",
+              "text": "Rally"
+            },
+            {
+              "url": "https://baraband.se/collections/colareb-ecosuede?_pos=1&_psq=ecosue&_ss=e&_v=1.0",
+              "text": "Ecosuede"
+            },
+            {
+              "url": "https://baraband.se/collections/colareb-wooden?_pos=1&_psq=wood&_ss=e&_v=1.0",
+              "text": "Wooden"
+            },
+            {
+              "url": "https://baraband.se/collections/colareb-sustain?_pos=1&_psq=susta&_ss=e&_v=1.0",
+              "text": "Sustain"
+            },
+            {
+              "url": "https://baraband.se/collections/colareb-carta?_pos=1&_psq=carta&_ss=e&_v=1.0",
+              "text": "Carta"
+            },
+            {
+              "url": "https://byxshopen.se/",
+              "text": "Byxshopen"
+            },
+            {
+              "url": "https://byxshopen.se/",
+              "text": "Byxshopen"
+            },
+            {
+              "url": "https://baraband.se/pages/klockarmband",
+              "text": "Utforska v\u00e5ra klockarmband \u2192"
+            }
+          ],
+          "images": [
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Boston_herr_dam_klockarmband.jpg?v=1766944158&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "800",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Fluco_Dublin.jpg?v=1767210567&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "828",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Colareb_Ecosuede_klockarmband_lader_BaraBand_julklapp.jpg?v=1765746636&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "1065",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Lader_Klockarmband_BaraBand.jpg?v=1767298132&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Sailcloth_klockarmband.jpg?v=1767338297&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/FKM_Gummi.jpg?v=1767443768&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Nylon_Klockarmband_Hirsch.jpg?v=1767305451&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hybrid_Hirsch.jpg?v=1767356006&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Mesh_Klockarmband_788b64a4-9fab-4bff-a908-b1bb871ee02b.jpg?v=1767356839&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Apple_Watch_Strap_d85cf427-64cb-4c0b-8b8b-c72faf9fdfa3.jpg?v=1768198580&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Viklas_Deployant_silver.jpg?v=1767656912&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Rally_klockarmband_BaraBand.jpg?v=1765434941&width=3840",
+              "alt": "",
+              "width": "1280",
+              "height": "1280.0",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch-Duke-krokodil-svart-quick_release-BaraBand.se_8f3b5d81-67db-4371-b87f-51376f06f5a8.jpg?v=1766862078&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Osiris_Nubuck_gra_Klockarmband_BaraBand_a5b343a9-b08c-4c0c-bb3b-4aedc548f67d.jpg?v=1766874661&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Boston_Guldbrun_BaraBand.webp?v=1745220679&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Arne_Gron_Klockarmband_BaraBand_4ccc9619-9257-42c3-9549-d4613849cf80.webp?v=1766916777&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Toronto_Svart_Guld_Quick_release_Klockarmband_BaraBand_2c03f00d-bfa5-4492-b847-d7b7a84561a1.jpg?v=1766916547&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Rally_Svart_Klockarmband_BaraBand.jpg?v=1737289246&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Fluco_klockarmband_BaraBand.jpg?v=1765434694&width=3840",
+              "alt": "",
+              "width": "1280",
+              "height": "1280.0",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Fluco_Deauville_Taupe_Rolex_BaraBand_Klockarmband_Quick_release.jpg?v=1767022437&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Fluco_Dublin_klockarmband_tillverkat_i_Tyskland.webp?v=1762199329&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Fluco_Mountain_Bear_Klockarmband_8b69e78e-70c4-4910-b5be-85bb7eef2115.jpg?v=1752268801&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Fluco_Nizza_cognac_BaraBand_5013f1ce-0dc1-47ea-851b-b584f74e2f02.webp?v=1761991573&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Fluco_Deauville_Taupe_Rolex_BaraBand.jpg?v=1752354741&width=1500",
+              "alt": "",
+              "width": "1500",
+              "height": "1500",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Nato_Ribbef_klockarmband_SEIKO_BaraBand.jpg?v=1765434573&width=3840",
+              "alt": "",
+              "width": "1280",
+              "height": "1280.0",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Duke_brun.jpg?v=1767633485&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "1280",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Osiris_Nubuck_beige_d656e812-9023-4001-8d72-b0111fe4efcb.jpg?v=1767619836&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "1280",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Arne_rod.jpg?v=1767621846&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "1075",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Pure_bla.jpg?v=1767622386&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "1280",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Hirsch_Rally_guldbrun.jpg?v=1767633681&width=3840",
+              "alt": "",
+              "width": null,
+              "height": "1280",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Colareb_Klockarmband_BaraBand.jpg?v=1765434209&width=3840",
+              "alt": "",
+              "width": "1145",
+              "height": "1145.0",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Colareb_Ecosuede_klockarmband_lader_BaraBand_julklapp.jpg?v=1765746636&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Colareb-wooden-ljust-vegan-BaraBand.se.jpg?v=1734555174&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Colareb_Sustain.webp?v=1767046131&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Colareb_Carta_Orange_BaraBand.jpg?v=1745248666&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Bandberra.jpg?v=1739448472&width=3840",
+              "alt": "",
+              "width": "2049",
+              "height": "2049.0",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_8140.jpg?v=1733412447&width=533",
+              "alt": "Sailcloth QR | bandberra [svart] snabbkoppling",
+              "width": "1280",
+              "height": "1280",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Sailcloth_watch_strap_black_omega_speedmaster_20mm.jpg?v=1768065509&width=533",
+              "alt": "Sailcloth QR | bandberra [svart] snabbkoppling",
+              "width": "1512",
+              "height": "1512",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_8139.jpg?v=1733411497&width=533",
+              "alt": "Sailcloth QR | bandberra [beige] snabbkoppling",
+              "width": "1280",
+              "height": "1280",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Beige_Sailcloth_Watch_Strap_Omega_Speedmaster.webp?v=1768065377&width=533",
+              "alt": "Sailcloth QR | bandberra [beige] snabbkoppling",
+              "width": "800",
+              "height": "800",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/bandberra-svart-gra-klockarmband_jpg.webp?v=1768606128&width=533",
+              "alt": "bandberra svart+gr\u00e5 sailcloth klockarmband med snabbkoppling",
+              "width": "1280",
+              "height": "1280",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_2003.jpg?v=1768606128&width=533",
+              "alt": "Sailcloth QR | bandberra [svart+gr\u00e5] snabbkoppling",
+              "width": "571",
+              "height": "570",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_8142.jpg?v=1733412220&width=533",
+              "alt": "Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling",
+              "width": "1280",
+              "height": "1280",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Photoroom_20240504_225202.jpg?v=1768065456&width=533",
+              "alt": "Sailcloth QR | bandberra [gr\u00f6n] snabbkoppling",
+              "width": "829",
+              "height": "828",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Byxshopen_Falun.jpg?v=1765432799&width=3840",
+              "alt": "",
+              "width": "828",
+              "height": "652.0",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/Greisz_klocka_svensk.jpg?v=1765432314&width=3840",
+              "alt": "",
+              "width": "1280",
+              "height": "1280.0",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/GREISZ-1908-s1-klocka-svart-lader.jpg?v=1734556723&width=3200",
+              "alt": "",
+              "width": "3200",
+              "height": "3200",
+              "loading": "lazy"
+            }
+          ],
+          "structured_data": [
+            {
+              "@context": "http://schema.org",
+              "@type": "Organization",
+              "name": "BaraBand.se",
+              "logo": "https://baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500",
+              "sameAs": [
+                "",
+                "",
+                "",
+                "https://Instagram.com/BaraBand.se",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "url": "https://baraband.se"
+            },
+            {
+              "@context": "http://schema.org",
+              "@type": "WebSite",
+              "name": "BaraBand.se",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://baraband.se/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              },
+              "url": "https://baraband.se"
+            }
+          ],
+          "has_ssr_content": false,
+          "security_headers": {
+            "Strict-Transport-Security": "max-age=7889238",
+            "Content-Security-Policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff",
+            "Referrer-Policy": null,
+            "Permissions-Policy": null
+          },
+          "errors": [
+            "Possible client-side only rendering detected: #HeaderDrawer-klockarmband-smart-watch-band-band-till-apple-watch has minimal server-rendered content"
+          ]
+        },
+        {
+          "url": "https://baraband.se/products/bond",
+          "status_code": 200,
+          "redirect_chain": [],
+          "headers": {
+            "Date": "Wed, 25 Feb 2026 20:58:25 GMT",
+            "Content-Type": "text/html; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Connection": "keep-alive",
+            "Content-Encoding": "gzip",
+            "set-cookie": "localization=SE; path=/; expires=Thu, 25 Feb 2027 20:58:25 GMT; SameSite=Lax, cart_currency=SEK; path=/; expires=Wed, 11 Mar 2026 20:58:25 GMT; SameSite=Lax, _shopify_essential=:AZyWmIvPAAEAN5lIwih5IWdoAwK8Jp0n6pLSpEDmU4emywEl1xmLAZVizpR0Xrw_3oK71nQcKUnGDr0MXXuqfzRY0zgNvxCcDdnchuKiS8D5VbYLe6qmz76vGx3VtPQyXs0lLtO7Fto4S9m2aMIXb7rOjOFvG8KqVV0wp-sMdiOXGnECA8KkAXTGs--nFLYFJlOa11Vh9mIvmWwvPRKsSLCbzkzzSV2K2EYcmTq-y0TXRuaOxVzBQiLjYC4VoPTKhE0fauoOMxrN3SeXzgtzusmTKDibmM479Id5IjnNrIiUxtGxeYYsqTLyaZRoqHIryMPvoBL9170nIQgerozNwf6d7JmyCVWAcyVSO28Q:; Max-Age=31536000; Path=/; HttpOnly; Secure; Priority=High; SameSite=Lax",
+            "link": "<https://cdn.shopify.com>; rel=\"preconnect\", <https://cdn.shopify.com>; rel=\"preconnect\"; crossorigin, <//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=600>; as=\"image\"; rel=\"preload\"; imagesrcset=\"//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=250 250w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=375 375w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500 500w\"; imagesizes=\"(min-width: 750px) 250px, 50vw\"",
+            "speculation-rules": "\"/cdn/shopifycloud/storefront/assets/storefront/storefronts.specrules-1ec91466.json\"",
+            "etag": "W/\"page_cache:60125020332:ProductDetailsController:9f32489110eb09fcedcc8b965f5c5f41\"",
+            "shopify-complexity-score": "1790",
+            "x-frame-options": "DENY",
+            "content-security-policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=7889238",
+            "x-shopid": "60125020332",
+            "vary": "Accept, accept-encoding",
+            "content-language": "sv-SE",
+            "powered-by": "Shopify",
+            "server-timing": "processing;dur=182, db;dur=50, db_async;dur=2.775, render;dur=61, asn;desc=\"3301\", edge;desc=\"CPH\", country;desc=\"SE\", theme;desc=\"189989781848\", pageType;desc=\"product\", servedBy;desc=\"js9w\", requestID;desc=\"113a4a91-9a51-4d3c-8437-c017dfe6333f-1772053105\", _y;desc=\"00000000-0000-0000-5000-000000000000\", _s;desc=\"00000000-0000-0000-5000-000000000000\", _cmp;desc=\"3.ampS_SE_t_f_nbaS2viaRb-Y9cy25Hz1UA\", compressionLevel;desc=\"5\", compressionTime;dur=6.266, cfRequestDuration;dur=322.999954",
+            "x-dc": "gcp-europe-west1,gcp-europe-west1,gcp-europe-west1",
+            "x-request-id": "113a4a91-9a51-4d3c-8437-c017dfe6333f-1772053105",
+            "Alt-Svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=HJdE2wVDGKMYQKmwEAgzkMgt1fTXtZCdnZec9G5Yo2EKRTF8U6G3Y8ko1ErKPPyuitrBaARpk%2BKbTQyFcvvrQHxJh8rCtClpgFBG8DaDlLh8QSyEPL3MmcmYgOhi\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+            "NEL": "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+            "X-XSS-Protection": "1; mode=block",
+            "X-Content-Type-Options": "nosniff",
+            "X-Permitted-Cross-Domain-Policies": "none",
+            "X-Download-Options": "noopen",
+            "Server": "cloudflare",
+            "CF-RAY": "9d3a1ee5bf677060-CPH"
+          },
+          "meta_tags": {
+            "viewport": "width=device-width,initial-scale=1",
+            "description": "Svart med 2 gr\u00e5 r\u00e4nder. Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet o",
+            "og:site_name": "BaraBand.se",
+            "og:url": "https://baraband.se/products/bond",
+            "og:title": "Marine Nationale [svart+gr\u00e5]",
+            "og:type": "product",
+            "og:description": "Svart med 2 gr\u00e5 r\u00e4nder. Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet o",
+            "og:image": "http://baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783",
+            "og:image:secure_url": "https://baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783",
+            "og:image:width": "1280",
+            "og:image:height": "1280",
+            "og:price:amount": "249",
+            "og:price:currency": "SEK",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Marine Nationale [svart+gr\u00e5]",
+            "twitter:description": "Svart med 2 gr\u00e5 r\u00e4nder. Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet o",
+            "google-site-verification": "6TChb9XxneBy5Jb1XBHLtb_24whweEGF73fl08uhfOk",
+            "shopify-digital-wallet": "/60125020332/digital_wallets/dialog"
+          },
+          "title": "Marine Nationale [svart+gr\u00e5]\n \u2013 BaraBand.se",
+          "description": "Svart med 2 gr\u00e5 r\u00e4nder. Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet o",
+          "canonical": "https://baraband.se/products/bond",
+          "h1_tags": [
+            "Marine Nationale [svart+gr\u00e5]"
+          ],
+          "heading_structure": [
+            {
+              "level": 1,
+              "text": "Marine Nationale [svart+gr\u00e5]"
+            },
+            {
+              "level": 2,
+              "text": "Artikeln har lagts till i varukorgen"
+            },
+            {
+              "level": 2,
+              "text": "Marine Nationale [svart+gr\u00e5]"
+            },
+            {
+              "level": 2,
+              "text": "Information"
+            },
+            {
+              "level": 2,
+              "text": "NYHETSBREV"
+            }
+          ],
+          "word_count": 289,
+          "text_content": "Marine Nationale [svart+gr\u00e5]\n \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband fr\u00e5n Europa G\u00e5 vidare till produktinformation \u00d6ppna mediet 1 i modalf\u00f6nster \u00d6ppna mediet 2 i modalf\u00f6nster \u00d6ppna mediet 3 i modalf\u00f6nster 1 / av 3 BaraBand.se Marine Nationale [svart+gr\u00e5] Marine Nationale [svart+gr\u00e5] Ordinarie pris 249 kr Ordinarie pris F\u00f6rs\u00e4ljningspris 249 kr Rea Sluts\u00e5ld Skatter ing\u00e5r. Frakt ber\u00e4knas i kassan. Storlek 18mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 20mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 22mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 24mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig Kvantitet Kvantitet ( 0 i varukorg) Minska kvantitet f\u00f6r Marine Nationale [svart+gr\u00e5] \u00d6ka kvantitet f\u00f6r Marine Nationale [svart+gr\u00e5] L\u00e4gg i varukorgen Denna artikel \u00e4r ett \u00e5terkommande ink\u00f6p eller ett ink\u00f6p med uppskjuten betalning. Genom att forts\u00e4tta godk\u00e4nner jag avbest\u00e4llningspolicyn . Jag godk\u00e4nner ocks\u00e5 att ni debiterar min betalningsmetod vid de datum, med de priser och den frekvens som angivits p\u00e5 denna sida, tills min order \u00e4r distribuerad eller tills jag avbryter, om detta till\u00e5ts. Svart med 2 gr\u00e5 r\u00e4nder. Passar klockor med 18mm, 20mm, 22mm och 24mm. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen Tips! K\u00f6p till bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband. Dela Dela L\u00e4nk St\u00e4ng dela Kopiera l\u00e4nk Visa alla uppgifter N\u00e4r du g\u00f6r ett urval uppdateras sidan. \u00d6ppnas i ett nytt f\u00f6nster.",
+          "internal_links": [
+            {
+              "url": "https://baraband.se/products/bond#MainContent",
+              "text": "G\u00e5 vidare till inneh\u00e5ll"
+            },
+            {
+              "url": "https://baraband.se/cart",
+              "text": "Visa varukorg"
+            },
+            {
+              "url": "https://baraband.se/products/bond#ProductInfo-template--27349293597016__main",
+              "text": "G\u00e5 vidare till produktinformation"
+            },
+            {
+              "url": "https://baraband.se/products/bond",
+              "text": "Marine Nationale [svart+gr\u00e5]"
+            },
+            {
+              "url": "https://baraband.se/policies/shipping-policy",
+              "text": "Frakt"
+            },
+            {
+              "url": "https://baraband.se/collections/bandstiftsverktyg",
+              "text": "bandstiftsverktyg"
+            },
+            {
+              "url": "https://baraband.se/products/bond",
+              "text": "Visa alla uppgifter"
+            }
+          ],
+          "external_links": [],
+          "images": [
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_7846.jpg?v=1732766784&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_7841.webp?v=1732767164&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783&width=1445",
+              "alt": "Marine Nationale [svart+gr\u00e5]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_7846.jpg?v=1732766784&width=1445",
+              "alt": "Marine Nationale [svart+gr\u00e5]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_7841.webp?v=1732767164&width=1445",
+              "alt": "Marine Nationale [svart+gr\u00e5]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            }
+          ],
+          "structured_data": [
+            {
+              "@context": "http://schema.org",
+              "@type": "Organization",
+              "name": "BaraBand.se",
+              "logo": "https://baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500",
+              "sameAs": [
+                "",
+                "",
+                "",
+                "https://Instagram.com/BaraBand.se",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "url": "https://baraband.se"
+            },
+            {
+              "@context": "http://schema.org/",
+              "@id": "/products/bond#product",
+              "@type": "ProductGroup",
+              "brand": {
+                "@type": "Brand",
+                "name": "BaraBand.se"
+              },
+              "category": "Klockarmband",
+              "description": "Svart med 2 gr\u00e5 r\u00e4nder. Passar klockor med 18mm, 20mm, 22mm och 24mm.\n\u00a0\nOBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka!\n\n\nBredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband\n\n\nM\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett\n\n\nDu kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen\n\n\nTips! K\u00f6p till\u00a0bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband.",
+              "hasVariant": [
+                {
+                  "@id": "/products/bond?variant=40639418040492#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783&width=1920",
+                  "name": "Marine Nationale [svart+gr\u00e5] - 18mm",
+                  "offers": {
+                    "@id": "/products/bond?variant=40639418040492#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/bond?variant=40639418040492"
+                  },
+                  "sku": "203486BB18"
+                },
+                {
+                  "@id": "/products/bond?variant=40639418073260#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783&width=1920",
+                  "name": "Marine Nationale [svart+gr\u00e5] - 20mm",
+                  "offers": {
+                    "@id": "/products/bond?variant=40639418073260#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/OutOfStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/bond?variant=40639418073260"
+                  },
+                  "sku": "203486BB20"
+                },
+                {
+                  "@id": "/products/bond?variant=40639418106028#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783&width=1920",
+                  "name": "Marine Nationale [svart+gr\u00e5] - 22mm",
+                  "offers": {
+                    "@id": "/products/bond?variant=40639418106028#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/OutOfStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/bond?variant=40639418106028"
+                  },
+                  "sku": "203486BB22"
+                },
+                {
+                  "@id": "/products/bond?variant=40639418138796#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_7845.jpg?v=1732766783&width=1920",
+                  "name": "Marine Nationale [svart+gr\u00e5] - 24mm",
+                  "offers": {
+                    "@id": "/products/bond?variant=40639418138796#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/OutOfStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/bond?variant=40639418138796"
+                  },
+                  "sku": "203486BB24"
+                }
+              ],
+              "name": "Marine Nationale [svart+gr\u00e5]",
+              "productGroupID": "6999189422252",
+              "url": "https://baraband.se/products/bond"
+            }
+          ],
+          "has_ssr_content": false,
+          "security_headers": {
+            "Strict-Transport-Security": "max-age=7889238",
+            "Content-Security-Policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff",
+            "Referrer-Policy": null,
+            "Permissions-Policy": null
+          },
+          "errors": [
+            "Possible client-side only rendering detected: #HeaderDrawer-klockarmband-smart-watch-band-band-till-apple-watch has minimal server-rendered content"
+          ]
+        },
+        {
+          "url": "https://baraband.se/products/umea",
+          "status_code": 200,
+          "redirect_chain": [],
+          "headers": {
+            "Date": "Wed, 25 Feb 2026 20:58:27 GMT",
+            "Content-Type": "text/html; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Connection": "keep-alive",
+            "Content-Encoding": "gzip",
+            "set-cookie": "localization=SE; path=/; expires=Thu, 25 Feb 2027 20:58:27 GMT; SameSite=Lax, cart_currency=SEK; path=/; expires=Wed, 11 Mar 2026 20:58:27 GMT; SameSite=Lax, _shopify_essential=:AZyWmJKLAAEATVqGB_uc-vxBME41-pJrK07dafHaBDzWJXfI_UO1Z3FWYwjEmoTqjNvaGT3uGnLqOp8jN002O0DXox3T4i6Wp0AmqWxwt_12j3MboDPurJ55reqYC5XeLAkIY3q3onyiVsMpTb5jAXSzoIj4PZSpexImakFcIYST8C24aZrOSTP3hIuAw-20laa3Bqf8OCpvtGQwuK1ifEn4Z2xm0jHg71LTmRPoX8eKPuK4-syVEkjk9z_nHzzvhzfffksBcZ374BVT-riHNPYajNm6JmRSsyjSWtyJv7D-hPWJZTCO-ejgPWBVxB_CEqIqYqgCy6p_nLHwckgyY6dwut2xWo4QLvNU2toI:; Max-Age=31536000; Path=/; HttpOnly; Secure; Priority=High; SameSite=Lax",
+            "link": "<https://cdn.shopify.com>; rel=\"preconnect\", <https://cdn.shopify.com>; rel=\"preconnect\"; crossorigin, <//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=600>; as=\"image\"; rel=\"preload\"; imagesrcset=\"//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=250 250w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=375 375w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500 500w\"; imagesizes=\"(min-width: 750px) 250px, 50vw\"",
+            "speculation-rules": "\"/cdn/shopifycloud/storefront/assets/storefront/storefronts.specrules-1ec91466.json\"",
+            "etag": "W/\"page_cache:60125020332:ProductDetailsController:8086c007ce0776599b9bc15c0f5ffa30\"",
+            "shopify-complexity-score": "2440",
+            "x-frame-options": "DENY",
+            "content-security-policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=7889238",
+            "x-shopid": "60125020332",
+            "vary": "Accept, accept-encoding",
+            "content-language": "sv-SE",
+            "powered-by": "Shopify",
+            "server-timing": "processing;dur=248;desc=\"gc:7\", db;dur=93, db_async;dur=5.327, render;dur=67, asn;desc=\"3301\", edge;desc=\"CPH\", country;desc=\"SE\", theme;desc=\"189989781848\", pageType;desc=\"product\", servedBy;desc=\"gqqx\", requestID;desc=\"e94c7f8f-88ac-4e36-b309-67227c83fad3-1772053107\", _y;desc=\"00000000-0000-0000-5000-000000000000\", _s;desc=\"00000000-0000-0000-5000-000000000000\", _cmp;desc=\"3.ampS_SE_t_f_3e-H3y5aQ7K5*xfyFd1Rtw\", compressionLevel;desc=\"5\", compressionTime;dur=8.615, cfRequestDuration;dur=350.999832",
+            "x-dc": "gcp-europe-west1,gcp-europe-west1,gcp-europe-west1",
+            "x-request-id": "e94c7f8f-88ac-4e36-b309-67227c83fad3-1772053107",
+            "Alt-Svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=sWrdFZWlbkmRrQyz0GXp46qr4NZKE9Jbf%2B%2BLvabdtorJSj3LV9uD7d75id8zJTpNQySv65CfrJ%2BTVS2Zkzx1lnVxFn0RziX7uoCloeDqeo4a7%2F%2BK5QR3v5BuuBOC\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+            "NEL": "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+            "X-XSS-Protection": "1; mode=block",
+            "X-Content-Type-Options": "nosniff",
+            "X-Permitted-Cross-Domain-Policies": "none",
+            "X-Download-Options": "noopen",
+            "Server": "cloudflare",
+            "CF-RAY": "9d3a1ef06ca975f0-CPH"
+          },
+          "meta_tags": {
+            "viewport": "width=device-width,initial-scale=1",
+            "description": "Ett elastiskt armband som lyfter klockan.\u00a0Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta sv",
+            "og:site_name": "BaraBand.se",
+            "og:url": "https://baraband.se/products/umea",
+            "og:title": "Marine Nationale [gr\u00f6n+gul]",
+            "og:type": "product",
+            "og:description": "Ett elastiskt armband som lyfter klockan.\u00a0Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta sv",
+            "og:image": "http://baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446",
+            "og:image:secure_url": "https://baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446",
+            "og:image:width": "1280",
+            "og:image:height": "1280",
+            "og:price:amount": "249",
+            "og:price:currency": "SEK",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Marine Nationale [gr\u00f6n+gul]",
+            "twitter:description": "Ett elastiskt armband som lyfter klockan.\u00a0Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta sv",
+            "google-site-verification": "6TChb9XxneBy5Jb1XBHLtb_24whweEGF73fl08uhfOk",
+            "shopify-digital-wallet": "/60125020332/digital_wallets/dialog"
+          },
+          "title": "Marine Nationale [gr\u00f6n+gul]\n \u2013 BaraBand.se",
+          "description": "Ett elastiskt armband som lyfter klockan.\u00a0Passar klockor med 18mm, 20mm, 22mm och 24mm. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta sv",
+          "canonical": "https://baraband.se/products/umea",
+          "h1_tags": [
+            "Marine Nationale [gr\u00f6n+gul]"
+          ],
+          "heading_structure": [
+            {
+              "level": 1,
+              "text": "Marine Nationale [gr\u00f6n+gul]"
+            },
+            {
+              "level": 2,
+              "text": "Artikeln har lagts till i varukorgen"
+            },
+            {
+              "level": 2,
+              "text": "Marine Nationale [gr\u00f6n+gul]"
+            },
+            {
+              "level": 2,
+              "text": "Information"
+            },
+            {
+              "level": 2,
+              "text": "NYHETSBREV"
+            }
+          ],
+          "word_count": 288,
+          "text_content": "Marine Nationale [gr\u00f6n+gul]\n \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband fr\u00e5n Europa G\u00e5 vidare till produktinformation \u00d6ppna mediet 1 i modalf\u00f6nster \u00d6ppna mediet 2 i modalf\u00f6nster 1 / av 2 Parachute | BaraBand.se Marine Nationale [gr\u00f6n+gul] Marine Nationale [gr\u00f6n+gul] Ordinarie pris 249 kr Ordinarie pris F\u00f6rs\u00e4ljningspris 249 kr Rea Sluts\u00e5ld Skatter ing\u00e5r. Frakt ber\u00e4knas i kassan. Storlek 18mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 20mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 22mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 24mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig Kvantitet Kvantitet ( 0 i varukorg) Minska kvantitet f\u00f6r Marine Nationale [gr\u00f6n+gul] \u00d6ka kvantitet f\u00f6r Marine Nationale [gr\u00f6n+gul] L\u00e4gg i varukorgen Denna artikel \u00e4r ett \u00e5terkommande ink\u00f6p eller ett ink\u00f6p med uppskjuten betalning. Genom att forts\u00e4tta godk\u00e4nner jag avbest\u00e4llningspolicyn . Jag godk\u00e4nner ocks\u00e5 att ni debiterar min betalningsmetod vid de datum, med de priser och den frekvens som angivits p\u00e5 denna sida, tills min order \u00e4r distribuerad eller tills jag avbryter, om detta till\u00e5ts. Ett elastiskt armband som lyfter klockan .\u00a0Passar klockor med 18mm, 20mm, 22mm och 24mm. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen Tips! K\u00f6p till bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband. Dela Dela L\u00e4nk St\u00e4ng dela Kopiera l\u00e4nk Visa alla uppgifter N\u00e4r du g\u00f6r ett urval uppdateras sidan. \u00d6ppnas i ett nytt f\u00f6nster.",
+          "internal_links": [
+            {
+              "url": "https://baraband.se/products/umea#MainContent",
+              "text": "G\u00e5 vidare till inneh\u00e5ll"
+            },
+            {
+              "url": "https://baraband.se/cart",
+              "text": "Visa varukorg"
+            },
+            {
+              "url": "https://baraband.se/products/umea#ProductInfo-template--27349293597016__main",
+              "text": "G\u00e5 vidare till produktinformation"
+            },
+            {
+              "url": "https://baraband.se/products/umea",
+              "text": "Marine Nationale [gr\u00f6n+gul]"
+            },
+            {
+              "url": "https://baraband.se/policies/shipping-policy",
+              "text": "Frakt"
+            },
+            {
+              "url": "https://baraband.se/collections/bandstiftsverktyg",
+              "text": "bandstiftsverktyg"
+            },
+            {
+              "url": "https://baraband.se/products/umea",
+              "text": "Visa alla uppgifter"
+            }
+          ],
+          "external_links": [],
+          "images": [
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_6391.jpg?v=1727614469&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446&width=1445",
+              "alt": "Marine Nationale [gr\u00f6n+gul]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_6391.jpg?v=1727614469&width=1445",
+              "alt": "Marine Nationale [gr\u00f6n+gul]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            }
+          ],
+          "structured_data": [
+            {
+              "@context": "http://schema.org",
+              "@type": "Organization",
+              "name": "BaraBand.se",
+              "logo": "https://baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500",
+              "sameAs": [
+                "",
+                "",
+                "",
+                "https://Instagram.com/BaraBand.se",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "url": "https://baraband.se"
+            },
+            {
+              "@context": "http://schema.org/",
+              "@id": "/products/umea#product",
+              "@type": "ProductGroup",
+              "brand": {
+                "@type": "Brand",
+                "name": "Parachute | BaraBand.se"
+              },
+              "category": "Klockarmband",
+              "description": "Ett elastiskt armband som lyfter klockan.\u00a0Passar klockor med 18mm, 20mm, 22mm och 24mm.\n\u00a0\nOBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka!\n\n\nBredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband\n\n\nM\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett\n\n\nDu kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen\n\n\nTips! K\u00f6p till\u00a0bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband.",
+              "hasVariant": [
+                {
+                  "@id": "/products/umea?variant=40639557796012#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446&width=1920",
+                  "name": "Marine Nationale [gr\u00f6n+gul] - 18mm",
+                  "offers": {
+                    "@id": "/products/umea?variant=40639557796012#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/umea?variant=40639557796012"
+                  },
+                  "sku": "203578BB18"
+                },
+                {
+                  "@id": "/products/umea?variant=40639557828780#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446&width=1920",
+                  "name": "Marine Nationale [gr\u00f6n+gul] - 20mm",
+                  "offers": {
+                    "@id": "/products/umea?variant=40639557828780#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/OutOfStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/umea?variant=40639557828780"
+                  },
+                  "sku": "203578BB20"
+                },
+                {
+                  "@id": "/products/umea?variant=40639557861548#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446&width=1920",
+                  "name": "Marine Nationale [gr\u00f6n+gul] - 22mm",
+                  "offers": {
+                    "@id": "/products/umea?variant=40639557861548#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/umea?variant=40639557861548"
+                  },
+                  "sku": "203578BB22"
+                },
+                {
+                  "@id": "/products/umea?variant=40639557927084#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/files/IMG_6395.jpg?v=1727614446&width=1920",
+                  "name": "Marine Nationale [gr\u00f6n+gul] - 24mm",
+                  "offers": {
+                    "@id": "/products/umea?variant=40639557927084#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/umea?variant=40639557927084"
+                  },
+                  "sku": "203578BB24"
+                }
+              ],
+              "name": "Marine Nationale [gr\u00f6n+gul]",
+              "productGroupID": "6999292477612",
+              "url": "https://baraband.se/products/umea"
+            }
+          ],
+          "has_ssr_content": false,
+          "security_headers": {
+            "Strict-Transport-Security": "max-age=7889238",
+            "Content-Security-Policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff",
+            "Referrer-Policy": null,
+            "Permissions-Policy": null
+          },
+          "errors": [
+            "Possible client-side only rendering detected: #HeaderDrawer-klockarmband-smart-watch-band-band-till-apple-watch has minimal server-rendered content"
+          ]
+        },
+        {
+          "url": "https://baraband.se/products/svart",
+          "status_code": 200,
+          "redirect_chain": [],
+          "headers": {
+            "Date": "Wed, 25 Feb 2026 20:58:29 GMT",
+            "Content-Type": "text/html; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Connection": "keep-alive",
+            "Content-Encoding": "gzip",
+            "set-cookie": "localization=SE; path=/; expires=Thu, 25 Feb 2027 20:58:29 GMT; SameSite=Lax, cart_currency=SEK; path=/; expires=Wed, 11 Mar 2026 20:58:29 GMT; SameSite=Lax, _shopify_essential=:AZyWmJkpAAEAFF9S-AHSBSIXAfrWb-mZm2CzG0eQc-_T55U4wJCvpxX5k_Qi7j5c73Iu61bCzb9q1qe154mEp76bFowD2c1mkbj5e7YnQS5cIABv01QtxKmn2kDVSPZkK3gRdBDNCcbmxuHB1jATHEXvKhretSCaHvWL10ZMhptQX2uZZTpoVXsCe4yoAZQpys7vCJLcjh7pqfLjV-z7b590VysqcdsaxFLsNwHtLJJaO1shLQe0YV408qMohcYUQWHU7JpYrqT7e-yTUUo-6qu6nZsSGkXQ6xWFjb-hlgPzOj02R5NLhNEq7uGfcz_WxkoGUoYgeX_oeemBCUl2WJMFJyEmQZ8iqA3a:; Max-Age=31536000; Path=/; HttpOnly; Secure; Priority=High; SameSite=Lax",
+            "link": "<https://cdn.shopify.com>; rel=\"preconnect\", <https://cdn.shopify.com>; rel=\"preconnect\"; crossorigin, <//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=600>; as=\"image\"; rel=\"preload\"; imagesrcset=\"//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=250 250w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=375 375w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500 500w\"; imagesizes=\"(min-width: 750px) 250px, 50vw\"",
+            "speculation-rules": "\"/cdn/shopifycloud/storefront/assets/storefront/storefronts.specrules-1ec91466.json\"",
+            "etag": "W/\"page_cache:60125020332:ProductDetailsController:a7aa536ac5afa2fdbb066f75a59d99ce\"",
+            "shopify-complexity-score": "2120",
+            "x-frame-options": "DENY",
+            "content-security-policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=7889238",
+            "x-shopid": "60125020332",
+            "vary": "Accept, accept-encoding",
+            "content-language": "sv-SE",
+            "powered-by": "Shopify",
+            "server-timing": "processing;dur=216;desc=\"gc:1\", db;dur=48, db_async;dur=5.505, render;dur=57, asn;desc=\"3301\", edge;desc=\"CPH\", country;desc=\"SE\", theme;desc=\"189989781848\", pageType;desc=\"product\", servedBy;desc=\"tgq2\", requestID;desc=\"41ffa9aa-d939-4a6e-b283-b1424b42c015-1772053108\", _y;desc=\"00000000-0000-0000-5000-000000000000\", _s;desc=\"00000000-0000-0000-5000-000000000000\", _cmp;desc=\"3.ampS_SE_t_f_gJor3FwzQRK1qHzFq7WMpw\", compressionLevel;desc=\"5\", compressionTime;dur=6.305, cfRequestDuration;dur=298.000097",
+            "x-dc": "gcp-europe-west1,gcp-europe-west1,gcp-europe-west1",
+            "x-request-id": "41ffa9aa-d939-4a6e-b283-b1424b42c015-1772053108",
+            "Alt-Svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=%2BGg9bauXXrXj5og1J%2BKXC4oZ6xyIN0B%2FuutViNBlwZPZtFofgttu%2FJ4ilCF6%2FB%2FL%2FW2DHBQa3M2%2F2QISn2bvdEScwras9rHCHoU%2BKg1h63C8iO4mTxSVCewMc%2BTX\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+            "NEL": "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+            "X-XSS-Protection": "1; mode=block",
+            "X-Content-Type-Options": "nosniff",
+            "X-Permitted-Cross-Domain-Policies": "none",
+            "X-Download-Options": "noopen",
+            "Server": "cloudflare",
+            "CF-RAY": "9d3a1efb2fb59a01-CPH"
+          },
+          "meta_tags": {
+            "viewport": "width=device-width,initial-scale=1",
+            "description": "Ett svart stilrent elastiskt armband. Passar i alla sammanhang. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet",
+            "og:site_name": "BaraBand.se",
+            "og:url": "https://baraband.se/products/svart",
+            "og:title": "Marine Nationale [svart]",
+            "og:type": "product",
+            "og:description": "Ett svart stilrent elastiskt armband. Passar i alla sammanhang. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet",
+            "og:image": "http://baraband.se/cdn/shop/files/IMG_6394.jpg?v=1727614419",
+            "og:image:secure_url": "https://baraband.se/cdn/shop/files/IMG_6394.jpg?v=1727614419",
+            "og:image:width": "1280",
+            "og:image:height": "1280",
+            "og:price:amount": "249",
+            "og:price:currency": "SEK",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Marine Nationale [svart]",
+            "twitter:description": "Ett svart stilrent elastiskt armband. Passar i alla sammanhang. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet",
+            "google-site-verification": "6TChb9XxneBy5Jb1XBHLtb_24whweEGF73fl08uhfOk",
+            "shopify-digital-wallet": "/60125020332/digital_wallets/dialog"
+          },
+          "title": "Marine Nationale [svart]\n \u2013 BaraBand.se",
+          "description": "Ett svart stilrent elastiskt armband. Passar i alla sammanhang. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet",
+          "canonical": "https://baraband.se/products/svart",
+          "h1_tags": [
+            "Marine Nationale [svart]"
+          ],
+          "heading_structure": [
+            {
+              "level": 1,
+              "text": "Marine Nationale [svart]"
+            },
+            {
+              "level": 2,
+              "text": "Artikeln har lagts till i varukorgen"
+            },
+            {
+              "level": 2,
+              "text": "Marine Nationale [svart]"
+            },
+            {
+              "level": 2,
+              "text": "Information"
+            },
+            {
+              "level": 2,
+              "text": "NYHETSBREV"
+            }
+          ],
+          "word_count": 290,
+          "text_content": "Marine Nationale [svart]\n \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband fr\u00e5n Europa G\u00e5 vidare till produktinformation \u00d6ppna mediet 1 i modalf\u00f6nster \u00d6ppna mediet 2 i modalf\u00f6nster \u00d6ppna mediet 3 i modalf\u00f6nster \u00d6ppna mediet 4 i modalf\u00f6nster 1 / av 4 BaraBand.se Marine Nationale [svart] Marine Nationale [svart] Ordinarie pris 249 kr Ordinarie pris F\u00f6rs\u00e4ljningspris 249 kr Rea Sluts\u00e5ld Skatter ing\u00e5r. Frakt ber\u00e4knas i kassan. Storlek 18mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 20mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 22mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 24mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig Kvantitet Kvantitet ( 0 i varukorg) Minska kvantitet f\u00f6r Marine Nationale [svart] \u00d6ka kvantitet f\u00f6r Marine Nationale [svart] L\u00e4gg i varukorgen Denna artikel \u00e4r ett \u00e5terkommande ink\u00f6p eller ett ink\u00f6p med uppskjuten betalning. Genom att forts\u00e4tta godk\u00e4nner jag avbest\u00e4llningspolicyn . Jag godk\u00e4nner ocks\u00e5 att ni debiterar min betalningsmetod vid de datum, med de priser och den frekvens som angivits p\u00e5 denna sida, tills min order \u00e4r distribuerad eller tills jag avbryter, om detta till\u00e5ts. Ett svart stilrent elastiskt armband. Passar i alla sammanhang. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen Tips! K\u00f6p till bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband. Dela Dela L\u00e4nk St\u00e4ng dela Kopiera l\u00e4nk Visa alla uppgifter N\u00e4r du g\u00f6r ett urval uppdateras sidan. \u00d6ppnas i ett nytt f\u00f6nster.",
+          "internal_links": [
+            {
+              "url": "https://baraband.se/products/svart#MainContent",
+              "text": "G\u00e5 vidare till inneh\u00e5ll"
+            },
+            {
+              "url": "https://baraband.se/cart",
+              "text": "Visa varukorg"
+            },
+            {
+              "url": "https://baraband.se/products/svart#ProductInfo-template--27349293597016__main",
+              "text": "G\u00e5 vidare till produktinformation"
+            },
+            {
+              "url": "https://baraband.se/products/svart",
+              "text": "Marine Nationale [svart]"
+            },
+            {
+              "url": "https://baraband.se/policies/shipping-policy",
+              "text": "Frakt"
+            },
+            {
+              "url": "https://baraband.se/collections/bandstiftsverktyg",
+              "text": "bandstiftsverktyg"
+            },
+            {
+              "url": "https://baraband.se/products/svart",
+              "text": "Visa alla uppgifter"
+            }
+          ],
+          "external_links": [],
+          "images": [
+            {
+              "src": "//baraband.se/cdn/shop/products/parachute_21_Svart.jpg?v=1645553036&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_6394.jpg?v=1727614419&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/products/parachute_32_Svart.jpg?v=1637528365&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/products/Svart.jpg?v=1645553036&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/products/parachute_21_Svart.jpg?v=1645553036&width=1445",
+              "alt": "Marine Nationale [svart]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/files/IMG_6394.jpg?v=1727614419&width=1445",
+              "alt": "Marine Nationale [svart]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/products/parachute_32_Svart.jpg?v=1637528365&width=1445",
+              "alt": "Marine Nationale [svart]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            },
+            {
+              "src": "//baraband.se/cdn/shop/products/Svart.jpg?v=1645553036&width=1445",
+              "alt": "Marine Nationale [svart]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            }
+          ],
+          "structured_data": [
+            {
+              "@context": "http://schema.org",
+              "@type": "Organization",
+              "name": "BaraBand.se",
+              "logo": "https://baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500",
+              "sameAs": [
+                "",
+                "",
+                "",
+                "https://Instagram.com/BaraBand.se",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "url": "https://baraband.se"
+            },
+            {
+              "@context": "http://schema.org/",
+              "@id": "/products/svart#product",
+              "@type": "ProductGroup",
+              "brand": {
+                "@type": "Brand",
+                "name": "BaraBand.se"
+              },
+              "category": "Klockarmband",
+              "description": "Ett svart stilrent elastiskt armband. Passar i alla sammanhang.\nOBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka!\n\n\nBredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband\n\n\nM\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett\n\n\nDu kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen\n\n\nTips! K\u00f6p till\u00a0bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband.",
+              "hasVariant": [
+                {
+                  "@id": "/products/svart?variant=40639470338220#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/products/parachute_21_Svart.jpg?v=1645553036&width=1920",
+                  "name": "Marine Nationale [svart] - 18mm",
+                  "offers": {
+                    "@id": "/products/svart?variant=40639470338220#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/svart?variant=40639470338220"
+                  },
+                  "sku": "203462BB18"
+                },
+                {
+                  "@id": "/products/svart?variant=40639470403756#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/products/parachute_21_Svart.jpg?v=1645553036&width=1920",
+                  "name": "Marine Nationale [svart] - 20mm",
+                  "offers": {
+                    "@id": "/products/svart?variant=40639470403756#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/svart?variant=40639470403756"
+                  },
+                  "sku": "203462BB20"
+                },
+                {
+                  "@id": "/products/svart?variant=40639470469292#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/products/parachute_21_Svart.jpg?v=1645553036&width=1920",
+                  "name": "Marine Nationale [svart] - 22mm",
+                  "offers": {
+                    "@id": "/products/svart?variant=40639470469292#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/svart?variant=40639470469292"
+                  },
+                  "sku": "203462BB22"
+                },
+                {
+                  "@id": "/products/svart?variant=40639470534828#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/products/parachute_21_Svart.jpg?v=1645553036&width=1920",
+                  "name": "Marine Nationale [svart] - 24mm",
+                  "offers": {
+                    "@id": "/products/svart?variant=40639470534828#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/OutOfStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/svart?variant=40639470534828"
+                  },
+                  "sku": "203462BB24"
+                }
+              ],
+              "name": "Marine Nationale [svart]",
+              "productGroupID": "6996632141996",
+              "url": "https://baraband.se/products/svart"
+            }
+          ],
+          "has_ssr_content": false,
+          "security_headers": {
+            "Strict-Transport-Security": "max-age=7889238",
+            "Content-Security-Policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff",
+            "Referrer-Policy": null,
+            "Permissions-Policy": null
+          },
+          "errors": [
+            "Possible client-side only rendering detected: #HeaderDrawer-klockarmband-smart-watch-band-band-till-apple-watch has minimal server-rendered content"
+          ]
+        },
+        {
+          "url": "https://baraband.se/products/orange-med-vit-rand",
+          "status_code": 200,
+          "redirect_chain": [],
+          "headers": {
+            "Date": "Wed, 25 Feb 2026 20:58:30 GMT",
+            "Content-Type": "text/html; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Connection": "keep-alive",
+            "Content-Encoding": "gzip",
+            "set-cookie": "localization=SE; path=/; expires=Thu, 25 Feb 2027 20:58:30 GMT; SameSite=Lax, cart_currency=SEK; path=/; expires=Wed, 11 Mar 2026 20:58:30 GMT; SameSite=Lax, _shopify_essential=:AZyWmJ_MAAEANKOiicRWLAHC3D1E5ZnRmf14OKGJycUyfhHBgImKPW2I3H_qPFk3186kfzK-CyDdMkxEOBXW9rGlFtrrPbnIbc4SbjktPZoVRcjq8ehWog_X_9nX6xbkvGavBm9h5uxRlAugFFGkbjZkMj6aiWwPApCLt6-MerFjLsF7VTEoP1Nj3TkklkuaDZFW-hCt6gYlMll_O3d4TbsjGxCitbRjVQENt97m5ga-CYSwPhb_YDrIVR1pcQ7PUhQfrMimZpVXwcEfhlSMvViU92nVnH7zeLMBecy47125rnPR0kpZQpxKAPVx9_yJbCHqG9J_94kakaLZLK8n5JHmOxI9VuAA4tnoPA:; Max-Age=31536000; Path=/; HttpOnly; Secure; Priority=High; SameSite=Lax",
+            "link": "<https://cdn.shopify.com>; rel=\"preconnect\", <https://cdn.shopify.com>; rel=\"preconnect\"; crossorigin, <//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=600>; as=\"image\"; rel=\"preload\"; imagesrcset=\"//baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=250 250w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=375 375w, //baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500 500w\"; imagesizes=\"(min-width: 750px) 250px, 50vw\"",
+            "speculation-rules": "\"/cdn/shopifycloud/storefront/assets/storefront/storefronts.specrules-1ec91466.json\"",
+            "etag": "W/\"page_cache:60125020332:ProductDetailsController:729a389c71b4382d970fe39c96518dea\"",
+            "shopify-complexity-score": "1480",
+            "x-frame-options": "DENY",
+            "content-security-policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "access-control-allow-origin": "*",
+            "strict-transport-security": "max-age=7889238",
+            "x-shopid": "60125020332",
+            "vary": "Accept, accept-encoding",
+            "content-language": "sv-SE",
+            "powered-by": "Shopify",
+            "server-timing": "processing;dur=152;desc=\"gc:9\", db;dur=41, db_async;dur=2.851, render;dur=53, asn;desc=\"3301\", edge;desc=\"CPH\", country;desc=\"SE\", theme;desc=\"189989781848\", pageType;desc=\"product\", servedBy;desc=\"78q9\", requestID;desc=\"c64c824d-1d1d-467c-ab0e-8f36d914e3c6-1772053110\", _y;desc=\"00000000-0000-0000-5000-000000000000\", _s;desc=\"00000000-0000-0000-5000-000000000000\", _cmp;desc=\"3.ampS_SE_t_f_gpFGwa*pQbWA*AVh8lY7aQ\", compressionLevel;desc=\"5\", compressionTime;dur=6.493, cfRequestDuration;dur=233.999729",
+            "x-dc": "gcp-europe-west1,gcp-europe-west1,gcp-europe-west1",
+            "x-request-id": "c64c824d-1d1d-467c-ab0e-8f36d914e3c6-1772053110",
+            "Alt-Svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=Q9pkwAVWRP1M0KgFxRyPhUJ4iJfqRnoUsykyuyJS4qPcjKTkhxXJaCyFtVv5ULZ6y04mg0NQ4OYuw0cbsPaTHRe4d9%2BtTMATOmFjN9GrrPN3Lpq5o0dVqJDGHPQ3\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+            "NEL": "{\"success_fraction\":0.01,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+            "X-XSS-Protection": "1; mode=block",
+            "X-Content-Type-Options": "nosniff",
+            "X-Permitted-Cross-Domain-Policies": "none",
+            "X-Download-Options": "noopen",
+            "Server": "cloudflare",
+            "CF-RAY": "9d3a1f05cce390dc-CPH"
+          },
+          "meta_tags": {
+            "viewport": "width=device-width,initial-scale=1",
+            "description": "Ett perfekt klockarmband f\u00f6r dig som lever ett aktivt liv och vill sticka ut ur m\u00e4ngden. Bandet \u00e4r elastiskt. Armbanden finns i olika storlekar och passar klockor med armband i storlekarna 20mm och 22mm. M\u00e4t ditt nuvarande band innan du best\u00e4ller. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passa",
+            "og:site_name": "BaraBand.se",
+            "og:url": "https://baraband.se/products/orange-med-vit-rand",
+            "og:title": "Marine Nationale [orange]",
+            "og:type": "product",
+            "og:description": "Ett perfekt klockarmband f\u00f6r dig som lever ett aktivt liv och vill sticka ut ur m\u00e4ngden. Bandet \u00e4r elastiskt. Armbanden finns i olika storlekar och passar klockor med armband i storlekarna 20mm och 22mm. M\u00e4t ditt nuvarande band innan du best\u00e4ller. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passa",
+            "og:image": "http://baraband.se/cdn/shop/products/parachute_14_Orange.jpg?v=1636664399",
+            "og:image:secure_url": "https://baraband.se/cdn/shop/products/parachute_14_Orange.jpg?v=1636664399",
+            "og:image:width": "1000",
+            "og:image:height": "1000",
+            "og:price:amount": "249",
+            "og:price:currency": "SEK",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Marine Nationale [orange]",
+            "twitter:description": "Ett perfekt klockarmband f\u00f6r dig som lever ett aktivt liv och vill sticka ut ur m\u00e4ngden. Bandet \u00e4r elastiskt. Armbanden finns i olika storlekar och passar klockor med armband i storlekarna 20mm och 22mm. M\u00e4t ditt nuvarande band innan du best\u00e4ller. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passa",
+            "google-site-verification": "6TChb9XxneBy5Jb1XBHLtb_24whweEGF73fl08uhfOk",
+            "shopify-digital-wallet": "/60125020332/digital_wallets/dialog"
+          },
+          "title": "Marine Nationale [orange]\n \u2013 BaraBand.se",
+          "description": "Ett perfekt klockarmband f\u00f6r dig som lever ett aktivt liv och vill sticka ut ur m\u00e4ngden. Bandet \u00e4r elastiskt. Armbanden finns i olika storlekar och passar klockor med armband i storlekarna 20mm och 22mm. M\u00e4t ditt nuvarande band innan du best\u00e4ller. \u00a0 OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passa",
+          "canonical": "https://baraband.se/products/orange-med-vit-rand",
+          "h1_tags": [
+            "Marine Nationale [orange]"
+          ],
+          "heading_structure": [
+            {
+              "level": 1,
+              "text": "Marine Nationale [orange]"
+            },
+            {
+              "level": 2,
+              "text": "Artikeln har lagts till i varukorgen"
+            },
+            {
+              "level": 2,
+              "text": "Marine Nationale [orange]"
+            },
+            {
+              "level": 2,
+              "text": "Information"
+            },
+            {
+              "level": 2,
+              "text": "NYHETSBREV"
+            }
+          ],
+          "word_count": 293,
+          "text_content": "Marine Nationale [orange]\n \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband fr\u00e5n Europa G\u00e5 vidare till produktinformation \u00d6ppna mediet 1 i modalf\u00f6nster 1 / av 1 BaraBand.se Marine Nationale [orange] Marine Nationale [orange] Ordinarie pris 249 kr Ordinarie pris F\u00f6rs\u00e4ljningspris 249 kr Rea Sluts\u00e5ld Skatter ing\u00e5r. Frakt ber\u00e4knas i kassan. Storlek 20mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig 22mm Varianten \u00e4r sluts\u00e5ld eller inte tillg\u00e4nglig Kvantitet Kvantitet ( 0 i varukorg) Minska kvantitet f\u00f6r Marine Nationale [orange] \u00d6ka kvantitet f\u00f6r Marine Nationale [orange] L\u00e4gg i varukorgen Denna artikel \u00e4r ett \u00e5terkommande ink\u00f6p eller ett ink\u00f6p med uppskjuten betalning. Genom att forts\u00e4tta godk\u00e4nner jag avbest\u00e4llningspolicyn . Jag godk\u00e4nner ocks\u00e5 att ni debiterar min betalningsmetod vid de datum, med de priser och den frekvens som angivits p\u00e5 denna sida, tills min order \u00e4r distribuerad eller tills jag avbryter, om detta till\u00e5ts. Ett perfekt klockarmband f\u00f6r dig som lever ett aktivt liv och vill sticka ut ur m\u00e4ngden. Bandet \u00e4r elastiskt. Armbanden finns i olika storlekar och passar klockor med armband i storlekarna 20mm och 22mm. M\u00e4t ditt nuvarande band innan du best\u00e4ller. OBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka! Bredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband M\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett Du kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen Tips! K\u00f6p till bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband. Dela Dela L\u00e4nk St\u00e4ng dela Kopiera l\u00e4nk Visa alla uppgifter N\u00e4r du g\u00f6r ett urval uppdateras sidan. \u00d6ppnas i ett nytt f\u00f6nster.",
+          "internal_links": [
+            {
+              "url": "https://baraband.se/products/orange-med-vit-rand#MainContent",
+              "text": "G\u00e5 vidare till inneh\u00e5ll"
+            },
+            {
+              "url": "https://baraband.se/cart",
+              "text": "Visa varukorg"
+            },
+            {
+              "url": "https://baraband.se/products/orange-med-vit-rand#ProductInfo-template--27349293597016__main",
+              "text": "G\u00e5 vidare till produktinformation"
+            },
+            {
+              "url": "https://baraband.se/products/orange-med-vit-rand",
+              "text": "Marine Nationale [orange]"
+            },
+            {
+              "url": "https://baraband.se/policies/shipping-policy",
+              "text": "Frakt"
+            },
+            {
+              "url": "https://baraband.se/collections/bandstiftsverktyg",
+              "text": "bandstiftsverktyg"
+            },
+            {
+              "url": "https://baraband.se/products/orange-med-vit-rand",
+              "text": "Visa alla uppgifter"
+            }
+          ],
+          "external_links": [],
+          "images": [
+            {
+              "src": "//baraband.se/cdn/shop/products/parachute_14_Orange.jpg?v=1636664399&width=1946",
+              "alt": "",
+              "width": "1946",
+              "height": "1946",
+              "loading": null
+            },
+            {
+              "src": "//baraband.se/cdn/shop/products/parachute_14_Orange.jpg?v=1636664399&width=1445",
+              "alt": "Marine Nationale [orange]",
+              "width": "1100",
+              "height": "1100",
+              "loading": "lazy"
+            }
+          ],
+          "structured_data": [
+            {
+              "@context": "http://schema.org",
+              "@type": "Organization",
+              "name": "BaraBand.se",
+              "logo": "https://baraband.se/cdn/shop/files/BaraBand.se_Klockrena_klockarmband_Rod_0a7e9f50-f6b1-466c-8a7a-def355cce0e7.jpg?v=1641719492&width=500",
+              "sameAs": [
+                "",
+                "",
+                "",
+                "https://Instagram.com/BaraBand.se",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              "url": "https://baraband.se"
+            },
+            {
+              "@context": "http://schema.org/",
+              "@id": "/products/orange-med-vit-rand#product",
+              "@type": "ProductGroup",
+              "brand": {
+                "@type": "Brand",
+                "name": "BaraBand.se"
+              },
+              "category": "Klockarmband",
+              "description": "Ett perfekt klockarmband f\u00f6r dig som lever ett aktivt liv och vill sticka ut ur m\u00e4ngden. Bandet \u00e4r elastiskt. Armbanden finns i olika storlekar och passar klockor med armband i storlekarna 20mm och 22mm. M\u00e4t ditt nuvarande band innan du best\u00e4ller.\n\u00a0\nOBS! Innan du best\u00e4ller bandet b\u00f6r du veta vilken bredd i mm som passar din klocka!\n\n\nBredd i mm kan st\u00e5 p\u00e5 baksidan av ditt nuvarande klockarmband\n\n\nM\u00e4t avst\u00e5ndet mellan sk\u00e4nklarna (bandf\u00e4stena) p\u00e5 klockans boett\n\n\nDu kan \u00e4ven hitta svaret p\u00e5 internet om du vet modellbeteckningen\n\n\nTips! K\u00f6p till\u00a0bandstiftsverktyg f\u00f6r hj\u00e4lp vid p\u00e5- och avmontering. Pris 49kr (ordinarie pris 79kr, rabatten dras av i kassan) i samband med k\u00f6p av klockarmband.",
+              "hasVariant": [
+                {
+                  "@id": "/products/orange-med-vit-rand?variant=40639369543852#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/products/parachute_14_Orange.jpg?v=1636664399&width=1920",
+                  "name": "Marine Nationale [orange] - 20mm",
+                  "offers": {
+                    "@id": "/products/orange-med-vit-rand?variant=40639369543852#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/orange-med-vit-rand?variant=40639369543852"
+                  },
+                  "sku": "203530BB20"
+                },
+                {
+                  "@id": "/products/orange-med-vit-rand?variant=40639369576620#variant",
+                  "@type": "Product",
+                  "image": "https://baraband.se/cdn/shop/products/parachute_14_Orange.jpg?v=1636664399&width=1920",
+                  "name": "Marine Nationale [orange] - 22mm",
+                  "offers": {
+                    "@id": "/products/orange-med-vit-rand?variant=40639369576620#offer",
+                    "@type": "Offer",
+                    "availability": "http://schema.org/InStock",
+                    "price": "249.00",
+                    "priceCurrency": "SEK",
+                    "url": "https://baraband.se/products/orange-med-vit-rand?variant=40639369576620"
+                  },
+                  "sku": "203530BB22"
+                }
+              ],
+              "name": "Marine Nationale [orange]",
+              "productGroupID": "6999228842156",
+              "url": "https://baraband.se/products/orange-med-vit-rand"
+            }
+          ],
+          "has_ssr_content": false,
+          "security_headers": {
+            "Strict-Transport-Security": "max-age=7889238",
+            "Content-Security-Policy": "block-all-mixed-content; frame-ancestors 'none'; upgrade-insecure-requests;",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff",
+            "Referrer-Policy": null,
+            "Permissions-Policy": null
+          },
+          "errors": [
+            "Possible client-side only rendering detected: #HeaderDrawer-klockarmband-smart-watch-band-band-till-apple-watch has minimal server-rendered content"
+          ]
+        }
+      ],
+      "robots": {
+        "url": "https://www.baraband.se/robots.txt",
+        "exists": true,
+        "content": "# we use Shopify as our ecommerce platform\n\n#  \u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513\n#  \u2503  Robots & Agent policy                                               \u2503\n#  \u2523\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u252b\n#  \u2503  Checkouts are for humans.                                           \u2503\n#  \u2503  * Automated scraping, \u201cbuy-for-me\u201d agents, or any end-to-end flow   \u2503\n#  \u2503    that completes payment without a final human review step is not   \u2503\n#  \u2503    permitted.                                                        \u2503\n#  \u2503  * Legitimate integrators must use the official Checkout Kit:        \u2503\n#  \u2503      https://www.shopify.com/checkout-kit                            \u2503\n#  \u2503                                                                      \u2503\n#  \u2503  Terms of Service: https://www.shopify.com/legal/terms               \u2503\n#  \u2503  Contact: bots@shopify.com                                           \u2503\n#  \u2517\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u251b\n\nUser-agent: *\nDisallow: /a/downloads/-/*\nDisallow: /admin\nDisallow: /cart\nDisallow: /orders\nDisallow: /checkouts/\nDisallow: /checkout\nDisallow: /60125020332/checkouts\nDisallow: /60125020332/orders\nDisallow: /carts\nDisallow: /account\nDisallow: /collections/*sort_by*\nDisallow: /*/collections/*sort_by*\nDisallow: /collections/*+*\nDisallow: /collections/*%2B*\nDisallow: /collections/*%2b*\nDisallow: /*/collections/*+*\nDisallow: /*/collections/*%2B*\nDisallow: /*/collections/*%2b*\nDisallow: */collections/*filter*&*filter*\nDisallow: /blogs/*+*\nDisallow: /blogs/*%2B*\nDisallow: /blogs/*%2b*\nDisallow: /*/blogs/*+*\nDisallow: /*/blogs/*%2B*\nDisallow: /*/blogs/*%2b*\nDisallow: /*?*oseid=*\nDisallow: /*preview_theme_id*\nDisallow: /*preview_script_id*\nDisallow: /policies/\nDisallow: /*/policies/\nDisallow: /*/*?*ls=*&ls=*\nDisallow: /*/*?*ls%3D*%3Fls%3D*\nDisallow: /*/*?*ls%3d*%3fls%3d*\nDisallow: /search\nDisallow: /sf_private_access_tokens\nDisallow: /apple-app-site-association\nDisallow: /.well-known/shopify/monorail\nDisallow: /cdn/wpm/*.js\nDisallow: /recommendations/products\nDisallow: /*/recommendations/products\nDisallow: /products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nSitemap: https://baraband.se/sitemap.xml\n\n# Google adsbot ignores robots.txt unless specifically named!\nUser-agent: adsbot-google\nDisallow: /checkouts/\nDisallow: /checkout\nDisallow: /carts\nDisallow: /orders\nDisallow: /60125020332/checkouts\nDisallow: /60125020332/orders\nDisallow: /*?*oseid=*\nDisallow: /*preview_theme_id*\nDisallow: /*preview_script_id*\nDisallow: /cdn/wpm/*.js\nDisallow: /products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /sf_private_access_tokens\n\nUser-agent: Nutch\nDisallow: /\n\nUser-agent: AhrefsBot\nCrawl-delay: 10\nDisallow: /a/downloads/-/*\nDisallow: /admin\nDisallow: /cart\nDisallow: /orders\nDisallow: /checkouts/\nDisallow: /checkout\nDisallow: /60125020332/checkouts\nDisallow: /60125020332/orders\nDisallow: /carts\nDisallow: /account\nDisallow: /collections/*sort_by*\nDisallow: /*/collections/*sort_by*\nDisallow: /collections/*+*\nDisallow: /collections/*%2B*\nDisallow: /collections/*%2b*\nDisallow: /*/collections/*+*\nDisallow: /*/collections/*%2B*\nDisallow: /*/collections/*%2b*\nDisallow: */collections/*filter*&*filter*\nDisallow: /blogs/*+*\nDisallow: /blogs/*%2B*\nDisallow: /blogs/*%2b*\nDisallow: /*/blogs/*+*\nDisallow: /*/blogs/*%2B*\nDisallow: /*/blogs/*%2b*\nDisallow: /*?*oseid=*\nDisallow: /*preview_theme_id*\nDisallow: /*preview_script_id*\nDisallow: /policies/\nDisallow: /*/policies/\nDisallow: /*/*?*ls=*&ls=*\nDisallow: /*/*?*ls%3D*%3Fls%3D*\nDisallow: /*/*?*ls%3d*%3fls%3d*\nDisallow: /search\nDisallow: /sf_private_access_tokens\nDisallow: /apple-app-site-association\nDisallow: /.well-known/shopify/monorail\nDisallow: /cdn/wpm/*.js\nDisallow: /recommendations/products\nDisallow: /*/recommendations/products\nDisallow: /products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nSitemap: https://baraband.se/sitemap.xml\n\nUser-agent: AhrefsSiteAudit\nCrawl-delay: 10\nDisallow: /a/downloads/-/*\nDisallow: /admin\nDisallow: /cart\nDisallow: /orders\nDisallow: /checkouts/\nDisallow: /checkout\nDisallow: /60125020332/checkouts\nDisallow: /60125020332/orders\nDisallow: /carts\nDisallow: /account\nDisallow: /collections/*sort_by*\nDisallow: /*/collections/*sort_by*\nDisallow: /collections/*+*\nDisallow: /collections/*%2B*\nDisallow: /collections/*%2b*\nDisallow: /*/collections/*+*\nDisallow: /*/collections/*%2B*\nDisallow: /*/collections/*%2b*\nDisallow: */collections/*filter*&*filter*\nDisallow: /blogs/*+*\nDisallow: /blogs/*%2B*\nDisallow: /blogs/*%2b*\nDisallow: /*/blogs/*+*\nDisallow: /*/blogs/*%2B*\nDisallow: /*/blogs/*%2b*\nDisallow: /*?*oseid=*\nDisallow: /*preview_theme_id*\nDisallow: /*preview_script_id*\nDisallow: /policies/\nDisallow: /*/policies/\nDisallow: /*/*?*ls=*&ls=*\nDisallow: /*/*?*ls%3D*%3Fls%3D*\nDisallow: /*/*?*ls%3d*%3fls%3d*\nDisallow: /search\nDisallow: /sf_private_access_tokens\nDisallow: /apple-app-site-association\nDisallow: /.well-known/shopify/monorail\nDisallow: /cdn/wpm/*.js\nDisallow: /recommendations/products\nDisallow: /*/recommendations/products\nDisallow: /products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nDisallow: /*/collections/*/products/*-[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-remote\nSitemap: https://baraband.se/sitemap.xml\n\nUser-agent: MJ12bot\nCrawl-delay: 10\n\nUser-agent: Pinterest\nCrawl-delay: 1\n",
+        "ai_crawler_status": {
+          "GPTBot": "ALLOWED_BY_DEFAULT",
+          "OAI-SearchBot": "ALLOWED_BY_DEFAULT",
+          "ChatGPT-User": "ALLOWED_BY_DEFAULT",
+          "ClaudeBot": "ALLOWED_BY_DEFAULT",
+          "anthropic-ai": "ALLOWED_BY_DEFAULT",
+          "PerplexityBot": "ALLOWED_BY_DEFAULT",
+          "CCBot": "ALLOWED_BY_DEFAULT",
+          "Bytespider": "ALLOWED_BY_DEFAULT",
+          "cohere-ai": "ALLOWED_BY_DEFAULT",
+          "Google-Extended": "ALLOWED_BY_DEFAULT",
+          "GoogleOther": "ALLOWED_BY_DEFAULT",
+          "Applebot-Extended": "ALLOWED_BY_DEFAULT",
+          "FacebookBot": "ALLOWED_BY_DEFAULT",
+          "Amazonbot": "ALLOWED_BY_DEFAULT"
+        },
+        "sitemaps": [
+          "https://baraband.se/sitemap.xml",
+          "https://baraband.se/sitemap.xml",
+          "https://baraband.se/sitemap.xml"
+        ],
+        "errors": []
+      },
+      "llms_txt": {
+        "llms_txt": {
+          "url": "https://www.baraband.se/llms.txt",
+          "exists": false,
+          "content": ""
+        },
+        "llms_full_txt": {
+          "url": "https://www.baraband.se/llms-full.txt",
+          "exists": false,
+          "content": ""
+        },
+        "errors": []
+      },
+      "citability_scores": [
+        {
+          "heading": "Premium klockarmband fr\u00e5n Europa \u2013 Fri frakt | BaraBand\n \u2013 BaraBand.se",
+          "word_count": 590,
+          "total_score": 48,
+          "grade": "D",
+          "label": "Low Citability",
+          "breakdown": {
+            "answer_block_quality": 21,
+            "self_containment": 15,
+            "structural_readability": 6,
+            "statistical_density": 6,
+            "uniqueness_signals": 0
+          },
+          "preview": "Premium klockarmband fr\u00e5n Europa \u2013 Fri frakt | BaraBand \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg..."
+        },
+        {
+          "heading": "Marine Nationale [svart+gr\u00e5]\n \u2013 BaraBand.se",
+          "word_count": 289,
+          "total_score": 34,
+          "grade": "F",
+          "label": "Poor Citability",
+          "breakdown": {
+            "answer_block_quality": 5,
+            "self_containment": 17,
+            "structural_readability": 12,
+            "statistical_density": 0,
+            "uniqueness_signals": 0
+          },
+          "preview": "Marine Nationale [svart+gr\u00e5] \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband..."
+        },
+        {
+          "heading": "Marine Nationale [gr\u00f6n+gul]\n \u2013 BaraBand.se",
+          "word_count": 288,
+          "total_score": 34,
+          "grade": "F",
+          "label": "Poor Citability",
+          "breakdown": {
+            "answer_block_quality": 5,
+            "self_containment": 17,
+            "structural_readability": 12,
+            "statistical_density": 0,
+            "uniqueness_signals": 0
+          },
+          "preview": "Marine Nationale [gr\u00f6n+gul] \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband..."
+        },
+        {
+          "heading": "Marine Nationale [svart]\n \u2013 BaraBand.se",
+          "word_count": 290,
+          "total_score": 34,
+          "grade": "F",
+          "label": "Poor Citability",
+          "breakdown": {
+            "answer_block_quality": 5,
+            "self_containment": 17,
+            "structural_readability": 12,
+            "statistical_density": 0,
+            "uniqueness_signals": 0
+          },
+          "preview": "Marine Nationale [svart] \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband..."
+        },
+        {
+          "heading": "Marine Nationale [orange]\n \u2013 BaraBand.se",
+          "word_count": 293,
+          "total_score": 34,
+          "grade": "F",
+          "label": "Poor Citability",
+          "breakdown": {
+            "answer_block_quality": 5,
+            "self_containment": 17,
+            "structural_readability": 12,
+            "statistical_density": 0,
+            "uniqueness_signals": 0
+          },
+          "preview": "Marine Nationale [orange] \u2013 BaraBand.se G\u00e5 vidare till inneh\u00e5ll \u2714\ufe0fPostNord \u2714\ufe0f60 dagars \u00f6ppet k\u00f6p \u2714\ufe0fFri frakt>350kr Artikeln har lagts till i varukorgen Visa varukorg G\u00e5 till kassan Forts\u00e4tt shoppa Premiumklockarmband..."
+        }
+      ],
+      "brand": {
+        "name": "baraband",
+        "youtube": {
+          "platform": "YouTube",
+          "correlation": 0.737,
+          "weight": "25%",
+          "has_channel": false,
+          "mentioned_in_videos": false,
+          "search_url": "https://www.youtube.com/results?search_query=baraband",
+          "recommendations": [
+            "Create a YouTube channel if none exists",
+            "Publish educational/tutorial content related to your niche",
+            "Encourage customers to create review/demo videos",
+            "Optimize video titles and descriptions with brand name",
+            "Add timestamps and chapters to improve AI parseability",
+            "Include transcripts (YouTube auto-generates, but review for accuracy)"
+          ],
+          "check_instructions": [
+            "Search YouTube for 'baraband' and check:",
+            "1. Does the brand have an official YouTube channel?",
+            "2. Are there videos FROM the brand (tutorials, demos, thought leadership)?",
+            "3. Are there videos ABOUT the brand from other creators?",
+            "4. What's the view count on brand-related videos?",
+            "5. Are there positive reviews or demonstrations?"
+          ]
+        },
+        "reddit": {
+          "platform": "Reddit",
+          "correlation": "High",
+          "weight": "25%",
+          "has_subreddit": false,
+          "mentioned_in_discussions": false,
+          "search_url": "https://www.reddit.com/search/?q=baraband",
+          "recommendations": [
+            "Monitor relevant subreddits for brand mentions",
+            "Participate authentically in industry discussions (no spam)",
+            "Create an official Reddit account for customer support",
+            "Share valuable content (not just self-promotion)",
+            "Respond to questions about your product/service category",
+            "Reddit authenticity matters \u2014 don't use marketing speak"
+          ],
+          "check_instructions": [
+            "Search Reddit for 'baraband' and check:",
+            "1. Does the brand have its own subreddit (r/brandname)?",
+            "2. Is the brand discussed in relevant industry subreddits?",
+            "3. What's the sentiment (positive, negative, neutral)?",
+            "4. Are there recommendation threads mentioning the brand?",
+            "5. Does the brand have an official Reddit presence?",
+            "6. Are mentions recent (within last 6 months)?"
+          ]
+        },
+        "wikipedia": {
+          "platform": "Wikipedia",
+          "correlation": "High",
+          "weight": "20%",
+          "has_wikipedia_page": false,
+          "has_wikidata_entry": false,
+          "cited_in_articles": false,
+          "search_url": "https://en.wikipedia.org/wiki/Special:Search?search=baraband",
+          "wikidata_url": "https://www.wikidata.org/w/index.php?search=baraband",
+          "recommendations": [
+            "If eligible, create a Wikipedia article (requires notability criteria)",
+            "Ensure Wikidata entry exists with complete structured data",
+            "Add sameAs links in schema markup pointing to Wikipedia/Wikidata",
+            "Get cited in existing Wikipedia articles as a source",
+            "Build notability through press coverage and independent reviews",
+            "Note: Wikipedia has strict notability guidelines \u2014 PR coverage helps establish this"
+          ]
+        },
+        "linkedin": {
+          "platform": "LinkedIn",
+          "correlation": "Moderate",
+          "weight": "15%",
+          "has_company_page": false,
+          "employee_thought_leadership": false,
+          "search_url": "https://www.linkedin.com/search/results/companies/?keywords=baraband",
+          "recommendations": [
+            "Create/optimize LinkedIn company page",
+            "Post regular thought leadership content",
+            "Encourage employees to share company content",
+            "Publish long-form LinkedIn articles",
+            "Engage with industry discussions and comments",
+            "Add company LinkedIn URL to schema sameAs property"
+          ],
+          "check_instructions": [
+            "Search LinkedIn for 'baraband' and check:",
+            "1. Does the company have a LinkedIn page?",
+            "2. How many followers?",
+            "3. Is the page active with recent posts?",
+            "4. Do employees post thought leadership content?",
+            "5. Are there LinkedIn articles about the brand?",
+            "6. Is there engagement on posts (likes, comments, shares)?"
+          ]
+        }
+      },
+      "schema_types": [
+        "WebSite",
+        "ProductGroup",
+        "Organization"
+      ],
+      "total_word_count": 1750,
+      "pages_over_1000_words": 0,
+      "most_recent_date": null,
+      "errors": []
+    }
+  },
+  "competitors": [
+    {
+      "url": "https://www.hirschstripes.com",
+      "domain": "www.hirschstripes.com",
+      "scan": {
+        "url": "https://www.hirschstripes.com",
+        "domain": "www.hirschstripes.com",
+        "pages": [
+          {
+            "url": "https://www.hirschstripes.com",
+            "status_code": null,
+            "redirect_chain": [],
+            "headers": {},
+            "meta_tags": {},
+            "title": null,
+            "description": null,
+            "canonical": null,
+            "h1_tags": [],
+            "heading_structure": [],
+            "word_count": 0,
+            "text_content": "",
+            "internal_links": [],
+            "external_links": [],
+            "images": [],
+            "structured_data": [],
+            "has_ssr_content": true,
+            "security_headers": {},
+            "errors": [
+              "Connection error: HTTPSConnectionPool(host='www.hirschstripes.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.hirschstripes.com', port=443): Failed to resolve 'www.hirschstripes.com' ([Errno 11001] getaddrinfo failed)\"))"
+            ]
+          }
+        ],
+        "robots": {
+          "url": "https://www.hirschstripes.com/robots.txt",
+          "exists": false,
+          "content": "",
+          "ai_crawler_status": {},
+          "sitemaps": [],
+          "errors": [
+            "Error fetching robots.txt: HTTPSConnectionPool(host='www.hirschstripes.com', port=443): Max retries exceeded with url: /robots.txt (Caused by NameResolutionError(\"HTTPSConnection(host='www.hirschstripes.com', port=443): Failed to resolve 'www.hirschstripes.com' ([Errno 11001] getaddrinfo failed)\"))"
+          ]
+        },
+        "llms_txt": {
+          "llms_txt": {
+            "url": "https://www.hirschstripes.com/llms.txt",
+            "exists": false,
+            "content": ""
+          },
+          "llms_full_txt": {
+            "url": "https://www.hirschstripes.com/llms-full.txt",
+            "exists": false,
+            "content": ""
+          },
+          "errors": [
+            "Error checking https://www.hirschstripes.com/llms.txt: HTTPSConnectionPool(host='www.hirschstripes.com', port=443): Max retries exceeded with url: /llms.txt (Caused by NameResolutionError(\"HTTPSConnection(host='www.hirschstripes.com', port=443): Failed to resolve 'www.hirschstripes.com' ([Errno 11001] getaddrinfo failed)\"))",
+            "Error checking https://www.hirschstripes.com/llms-full.txt: HTTPSConnectionPool(host='www.hirschstripes.com', port=443): Max retries exceeded with url: /llms-full.txt (Caused by NameResolutionError(\"HTTPSConnection(host='www.hirschstripes.com', port=443): Failed to resolve 'www.hirschstripes.com' ([Errno 11001] getaddrinfo failed)\"))"
+          ]
+        },
+        "citability_scores": [],
+        "brand": {
+          "name": "hirschstripes",
+          "youtube": {
+            "platform": "YouTube",
+            "correlation": 0.737,
+            "weight": "25%",
+            "has_channel": false,
+            "mentioned_in_videos": false,
+            "search_url": "https://www.youtube.com/results?search_query=hirschstripes",
+            "recommendations": [
+              "Create a YouTube channel if none exists",
+              "Publish educational/tutorial content related to your niche",
+              "Encourage customers to create review/demo videos",
+              "Optimize video titles and descriptions with brand name",
+              "Add timestamps and chapters to improve AI parseability",
+              "Include transcripts (YouTube auto-generates, but review for accuracy)"
+            ],
+            "check_instructions": [
+              "Search YouTube for 'hirschstripes' and check:",
+              "1. Does the brand have an official YouTube channel?",
+              "2. Are there videos FROM the brand (tutorials, demos, thought leadership)?",
+              "3. Are there videos ABOUT the brand from other creators?",
+              "4. What's the view count on brand-related videos?",
+              "5. Are there positive reviews or demonstrations?"
+            ]
+          },
+          "reddit": {
+            "platform": "Reddit",
+            "correlation": "High",
+            "weight": "25%",
+            "has_subreddit": false,
+            "mentioned_in_discussions": false,
+            "search_url": "https://www.reddit.com/search/?q=hirschstripes",
+            "recommendations": [
+              "Monitor relevant subreddits for brand mentions",
+              "Participate authentically in industry discussions (no spam)",
+              "Create an official Reddit account for customer support",
+              "Share valuable content (not just self-promotion)",
+              "Respond to questions about your product/service category",
+              "Reddit authenticity matters \u2014 don't use marketing speak"
+            ],
+            "check_instructions": [
+              "Search Reddit for 'hirschstripes' and check:",
+              "1. Does the brand have its own subreddit (r/brandname)?",
+              "2. Is the brand discussed in relevant industry subreddits?",
+              "3. What's the sentiment (positive, negative, neutral)?",
+              "4. Are there recommendation threads mentioning the brand?",
+              "5. Does the brand have an official Reddit presence?",
+              "6. Are mentions recent (within last 6 months)?"
+            ]
+          },
+          "wikipedia": {
+            "platform": "Wikipedia",
+            "correlation": "High",
+            "weight": "20%",
+            "has_wikipedia_page": false,
+            "has_wikidata_entry": false,
+            "cited_in_articles": false,
+            "search_url": "https://en.wikipedia.org/wiki/Special:Search?search=hirschstripes",
+            "wikidata_url": "https://www.wikidata.org/w/index.php?search=hirschstripes",
+            "recommendations": [
+              "If eligible, create a Wikipedia article (requires notability criteria)",
+              "Ensure Wikidata entry exists with complete structured data",
+              "Add sameAs links in schema markup pointing to Wikipedia/Wikidata",
+              "Get cited in existing Wikipedia articles as a source",
+              "Build notability through press coverage and independent reviews",
+              "Note: Wikipedia has strict notability guidelines \u2014 PR coverage helps establish this"
+            ]
+          },
+          "linkedin": {
+            "platform": "LinkedIn",
+            "correlation": "Moderate",
+            "weight": "15%",
+            "has_company_page": false,
+            "employee_thought_leadership": false,
+            "search_url": "https://www.linkedin.com/search/results/companies/?keywords=hirschstripes",
+            "recommendations": [
+              "Create/optimize LinkedIn company page",
+              "Post regular thought leadership content",
+              "Encourage employees to share company content",
+              "Publish long-form LinkedIn articles",
+              "Engage with industry discussions and comments",
+              "Add company LinkedIn URL to schema sameAs property"
+            ],
+            "check_instructions": [
+              "Search LinkedIn for 'hirschstripes' and check:",
+              "1. Does the company have a LinkedIn page?",
+              "2. How many followers?",
+              "3. Is the page active with recent posts?",
+              "4. Do employees post thought leadership content?",
+              "5. Are there LinkedIn articles about the brand?",
+              "6. Is there engagement on posts (likes, comments, shares)?"
+            ]
+          }
+        },
+        "schema_types": [],
+        "total_word_count": 0,
+        "pages_over_1000_words": 0,
+        "most_recent_date": null,
+        "errors": []
+      }
+    }
+  ],
+  "comparison": {
+    "matrix": {
+      "target": {
+        "url": "https://www.baraband.se",
+        "domain": "www.baraband.se",
+        "scores": {
+          "dimensions": {
+            "ai_citability": 36,
+            "brand_authority": 0,
+            "content_depth": 10,
+            "crawler_access": 100,
+            "schema_coverage": 60,
+            "llms_txt": 0,
+            "technical_geo": 65,
+            "content_freshness": 20
+          },
+          "weighted_total": 34.0
+        }
+      },
+      "competitors": [
+        {
+          "url": "https://www.hirschstripes.com",
+          "domain": "www.hirschstripes.com",
+          "scores": {
+            "dimensions": {
+              "ai_citability": 0,
+              "brand_authority": 0,
+              "content_depth": 0,
+              "crawler_access": 50,
+              "schema_coverage": 0,
+              "llms_txt": 0,
+              "technical_geo": 50,
+              "content_freshness": 20
+            },
+            "weighted_total": 11.0
+          }
+        }
+      ]
+    },
+    "gaps": [],
+    "opportunities": [
+      {
+        "dimension": "ai_citability",
+        "weight": 0.25,
+        "target_score": 36,
+        "competitor_avg": 0.0,
+        "competitor_best": 0,
+        "diff_from_avg": 36.0,
+        "diff_from_best": 36,
+        "position": "Leading"
+      },
+      {
+        "dimension": "schema_coverage",
+        "weight": 0.1,
+        "target_score": 60,
+        "competitor_avg": 0.0,
+        "competitor_best": 0,
+        "diff_from_avg": 60.0,
+        "diff_from_best": 60,
+        "position": "Leading"
+      },
+      {
+        "dimension": "crawler_access",
+        "weight": 0.1,
+        "target_score": 100,
+        "competitor_avg": 50.0,
+        "competitor_best": 50,
+        "diff_from_avg": 50.0,
+        "diff_from_best": 50,
+        "position": "Leading"
+      },
+      {
+        "dimension": "content_depth",
+        "weight": 0.15,
+        "target_score": 10,
+        "competitor_avg": 0.0,
+        "competitor_best": 0,
+        "diff_from_avg": 10.0,
+        "diff_from_best": 10,
+        "position": "Parity"
+      },
+      {
+        "dimension": "technical_geo",
+        "weight": 0.1,
+        "target_score": 65,
+        "competitor_avg": 50.0,
+        "competitor_best": 50,
+        "diff_from_avg": 15.0,
+        "diff_from_best": 15,
+        "position": "Parity"
+      },
+      {
+        "dimension": "brand_authority",
+        "weight": 0.2,
+        "target_score": 0,
+        "competitor_avg": 0.0,
+        "competitor_best": 0,
+        "diff_from_avg": 0.0,
+        "diff_from_best": 0,
+        "position": "Parity"
+      },
+      {
+        "dimension": "llms_txt",
+        "weight": 0.05,
+        "target_score": 0,
+        "competitor_avg": 0.0,
+        "competitor_best": 0,
+        "diff_from_avg": 0.0,
+        "diff_from_best": 0,
+        "position": "Parity"
+      },
+      {
+        "dimension": "content_freshness",
+        "weight": 0.05,
+        "target_score": 20,
+        "competitor_avg": 20.0,
+        "competitor_best": 20,
+        "diff_from_avg": 0.0,
+        "diff_from_best": 0,
+        "position": "Parity"
+      }
+    ],
+    "rankings": [
+      {
+        "url": "https://www.baraband.se",
+        "domain": "www.baraband.se",
+        "score": 34.0,
+        "is_target": true,
+        "rank": 1
+      },
+      {
+        "url": "https://www.hirschstripes.com",
+        "domain": "www.hirschstripes.com",
+        "score": 11.0,
+        "is_target": false,
+        "rank": 2
+      }
+    ]
+  },
+  "action_plan": [],
+  "errors": []
+}
