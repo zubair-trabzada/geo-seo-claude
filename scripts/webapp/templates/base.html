@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="it" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}GEO-SEO CRM{% endblock %}</title>
+
+  <!-- Bootstrap 5 dark -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.9.12" defer></script>
+
+  <style>
+    :root {
+      --geo-navy:   #1a1a2e;
+      --geo-blue:   #0f3460;
+      --geo-accent: #e94560;
+      --geo-good:     #00b894;
+      --geo-moderate: #0984e3;
+      --geo-poor:     #fdcb6e;
+      --geo-critical: #d63031;
+    }
+    body { background: #0d1117; font-size: .92rem; }
+
+    /* Navbar */
+    .navbar { background: var(--geo-navy) !important; border-bottom: 2px solid var(--geo-blue); }
+    .navbar-brand { font-weight: 700; letter-spacing: .05em; color: #fff !important; }
+    .navbar-brand span { color: var(--geo-accent); }
+
+    /* KPI cards */
+    .kpi-card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 1.2rem 1.5rem; }
+    .kpi-value { font-size: 1.9rem; font-weight: 700; line-height: 1; }
+    .kpi-label { font-size: .78rem; color: #8b949e; margin-top: .3rem; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* Score bar */
+    .score-bar-wrap { display: flex; align-items: center; gap: .6rem; min-width: 160px; }
+    .score-bar { height: 8px; border-radius: 4px; background: #30363d; flex: 1; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 4px; transition: width .4s ease; }
+    .score-num { font-size: .8rem; font-weight: 600; white-space: nowrap; min-width: 44px; }
+    .tier-good     .score-bar-fill { background: var(--geo-good); }
+    .tier-good     .score-num      { color: var(--geo-good); }
+    .tier-moderate .score-bar-fill { background: var(--geo-moderate); }
+    .tier-moderate .score-num      { color: var(--geo-moderate); }
+    .tier-poor     .score-bar-fill { background: var(--geo-poor); }
+    .tier-poor     .score-num      { color: var(--geo-poor); }
+    .tier-critical .score-bar-fill { background: var(--geo-critical); }
+    .tier-critical .score-num      { color: var(--geo-critical); }
+
+    /* Score circle (detail page) */
+    .score-circle { width: 110px; height: 110px; border-radius: 50%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; border: 4px solid; font-weight: 700; }
+    .score-circle .big { font-size: 2rem; line-height: 1; }
+    .score-circle .sub { font-size: .7rem; color: #8b949e; }
+    .score-circle.tier-good     { border-color: var(--geo-good);     color: var(--geo-good); }
+    .score-circle.tier-moderate { border-color: var(--geo-moderate); color: var(--geo-moderate); }
+    .score-circle.tier-poor     { border-color: var(--geo-poor);     color: var(--geo-poor); }
+    .score-circle.tier-critical { border-color: var(--geo-critical); color: var(--geo-critical); }
+
+    /* Table */
+    .table { --bs-table-bg: transparent; }
+    .table thead th { background: #161b22; color: #8b949e; font-size: .78rem;
+      text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid #30363d; }
+    .table tbody tr { border-bottom: 1px solid #21262d; }
+    .table tbody tr:hover { background: #1c2128; cursor: pointer; }
+
+    /* Notes */
+    .note-item { background: #161b22; border: 1px solid #30363d; border-radius: 8px;
+      padding: .8rem 1rem; margin-bottom: .6rem; }
+    .note-date { font-size: .74rem; color: #8b949e; }
+    .note-text { font-size: .88rem; margin: .2rem 0 0; }
+
+    /* Misc */
+    .file-link { font-size: .82rem; font-family: monospace; color: #58a6ff; }
+    .badge { font-size: .75rem; }
+    a { text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark mb-4">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand" href="/">GEO<span>-SEO</span> CRM</a>
+    <span class="text-secondary" style="font-size:.8rem;">
+      <i class="bi bi-clock me-1"></i>{{ now }}
+    </span>
+  </div>
+</nav>
+
+<div class="container-fluid px-4">
+  {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

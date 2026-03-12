@@ -1,0 +1,8 @@
+{% for note in p.notes | reverse %}
+<div class="note-item">
+  <div class="note-date"><i class="bi bi-clock me-1"></i>{{ note.date[:10] }}</div>
+  <div class="note-text">{{ note.text }}</div>
+</div>
+{% else %}
+<p class="text-secondary" style="font-size:.85rem">Nessuna nota ancora.</p>
+{% endfor %}
