@@ -1,0 +1,31 @@
+{
+  "_comment": "Demo prospects database — shows the /geo prospect system in action",
+  "_storage": "In production this lives at ~/.geo-prospects/prospects.json",
+  "prospects": [
+    {
+      "id": "PRO-001",
+      "company": "Electron Srl",
+      "domain": "electron-srl.com",
+      "contact_email": "info@electron-srl.com",
+      "contact_name": "",
+      "industry": "Educational Equipment Manufacturing",
+      "country": "Italy",
+      "status": "qualified",
+      "geo_score": 32,
+      "audit_date": "2026-03-12",
+      "audit_file": "examples/electron-srl.com-quick-audit.md",
+      "proposal_file": null,
+      "monthly_value": 9500,
+      "contract_start": null,
+      "contract_months": 12,
+      "notes": [
+        {
+          "date": "2026-03-12",
+          "text": "Initial GEO quick scan. Score 32/100 - Critical tier. Strong sales opportunity: 30+ years expertise, 70+ countries, zero AI optimization. Recommended: Premium package €9,500/month."
+        }
+      ],
+      "created_at": "2026-03-12",
+      "updated_at": "2026-03-12"
+    }
+  ]
+}
