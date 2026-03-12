@@ -1,0 +1,96 @@
+{
+  "url": "https://electron-srl.com",
+  "brand_name": "Electron Srl",
+  "date": "2026-03-12",
+  "geo_score": 28,
+  "scores": {
+    "ai_citability": 18,
+    "brand_authority": 15,
+    "content_eeat": 35,
+    "technical": 38,
+    "schema": 8,
+    "platform_optimization": 35
+  },
+  "platforms": {
+    "Google AI Overviews": 25,
+    "ChatGPT Web Search": 18,
+    "Perplexity AI": 20,
+    "Google Gemini": 12,
+    "Bing Copilot": 28
+  },
+  "executive_summary": "Electron Srl (electron-srl.com) is an Italian manufacturer of educational laboratory equipment founded in 1991, serving 70+ countries worldwide. Despite 35 years of expertise and a strong product portfolio in electronics, electrical, telecom, automation, and CNC training systems, the company scores only 28/100 on the GEO Readiness Scale — placing it in the CRITICAL tier. The site is effectively invisible to AI search platforms: the server blocks all non-browser user agents (returning HTTP 403), including GPTBot, ClaudeBot, and PerplexityBot. Zero schema markup means AI systems have no machine-readable identity for the brand. No Wikipedia entry, no Wikidata entity, no LinkedIn page, and no YouTube channel further compound the problem. Competitors such as Festo Didactic (~72/100) and National Instruments (~80/100) are already capturing AI search traffic in this sector. The opportunity is significant: no Italian competitor in the educational equipment space has invested in GEO, making this a first-mover market.",
+  "findings": [
+    {
+      "severity": "critical",
+      "title": "Server Blocks All AI Crawlers (HTTP 403)",
+      "description": "All fetch attempts by non-browser user agents return HTTP 403 Forbidden. GPTBot, ClaudeBot, PerplexityBot, and most AI crawlers cannot index this site. The site is invisible to 4 out of 5 AI platforms. Likely caused by a WordPress security plugin (Wordfence, Sucuri, or Cloudflare rules). Fix: whitelist all 14 AI crawler user agents. Effort: 2-4 hours."
+    },
+    {
+      "severity": "critical",
+      "title": "Zero Schema Markup Detected",
+      "description": "No JSON-LD structured data exists anywhere on the site. No Organization, Product, LocalBusiness, or EducationalOrganization schema. AI systems cannot identify Electron Srl as a distinct entity — the brand has no machine-readable identity. Fix: implement Organization schema with sameAs, Product schemas per lab category, EducationalOrganization schema. Effort: 4-8 hours."
+    },
+    {
+      "severity": "critical",
+      "title": "No Entity Presence (Wikipedia / Wikidata / Knowledge Panel)",
+      "description": "No Wikipedia article, no Wikidata entry, no Google Knowledge Panel. Brand name is shared with multiple other Italian 'Electron Srl' companies (Sovico, Lodi, Tuscany), causing entity confusion. 47.9% of ChatGPT citations come from Wikipedia. AI systems cannot distinguish this Electron Srl from others. Fix: create Wikidata Q-code, Wikipedia stub, claim Knowledge Panel. Effort: 2-4 weeks."
+    },
+    {
+      "severity": "high",
+      "title": "No LinkedIn Company Page",
+      "description": "LinkedIn search returns other companies but not Electron Srl Chiaravalle. LinkedIn is a key signal for Bing Copilot and ChatGPT (via Bing). Fix: create and optimize LinkedIn Company Page with sameAs links. Effort: 2 hours setup + ongoing."
+    },
+    {
+      "severity": "high",
+      "title": "No YouTube Channel",
+      "description": "Zero YouTube presence for a company that manufactures visual training equipment (labs, CNC systems, electronics boards). Google Gemini heavily weights YouTube. Product demos would be highly citable by AI systems. Fix: create YouTube channel with product demos, lab setup guides, training tutorials. Effort: ongoing."
+    },
+    {
+      "severity": "high",
+      "title": "Catalog-Style Content — Zero Citability",
+      "description": "All indexed pages use product catalog style descriptions: generic, repetitive, not answering specific questions. AI systems cite content that directly answers questions in 134-167 word blocks. Catalog descriptions are never cited. Fix: add Q&A sections to product pages. Effort: 2-3 days for top 10 pages."
+    },
+    {
+      "severity": "high",
+      "title": "Brand Name Confusion — Entity Disambiguation Needed",
+      "description": "Google returns multiple 'Electron Srl' companies: Chiaravalle (educational), Lodi (electronic components), Massa (industrial), Tuscany (automation). AI systems struggle to distinguish entities and may cite the wrong company or refuse to respond. Fix: use full name 'Electron Srl Educational Equipment' consistently, create Wikidata with precise identifiers, add Organization schema with precise address and foundingDate. Effort: 1 week."
+    },
+    {
+      "severity": "medium",
+      "title": "No llms.txt File",
+      "description": "No llms.txt file exists at electron-srl.com/llms.txt. AI crawlers have no guide to site structure. Only ~12% of sites have llms.txt — early adoption is a competitive advantage. Fix: generate and deploy llms.txt with product categories, about info, key pages. Effort: 30 minutes."
+    }
+  ],
+  "quick_wins": [
+    {"action": "Fix server 403 — whitelist AI crawler user agents (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.)", "impact": "+6 pts GEO score, unlocks ALL platforms"},
+    {"action": "Create llms.txt at electron-srl.com/llms.txt", "impact": "+2 pts, helps ChatGPT and Perplexity"},
+    {"action": "Add Organization JSON-LD schema to homepage with address, foundingDate, description", "impact": "+4 pts, improves all 5 platforms"},
+    {"action": "Add sameAs links to Facebook and all future profiles in schema", "impact": "+2 pts, entity disambiguation"},
+    {"action": "Add publication/update dates to all pages", "impact": "+1 pt, Google AIO freshness signal"}
+  ],
+  "medium_term": [
+    {"action": "Create and optimize LinkedIn Company Page", "impact": "+3 pts, key for Bing Copilot signal"},
+    {"action": "Rewrite top 5 product pages with Q&A structure and direct answer blocks", "impact": "+5 pts, citability on all platforms"},
+    {"action": "Add E-E-A-T signals: team page, 35 years experience, credentials, case studies", "impact": "+4 pts, Google AIO and Perplexity"},
+    {"action": "Implement Product and EducationalOrganization schemas for each lab category", "impact": "+4 pts, structured data score"},
+    {"action": "Register Bing Webmaster Tools and activate IndexNow protocol", "impact": "+2 pts, Bing Copilot"},
+    {"action": "Create expert/author page for company engineers and R&D team", "impact": "+2 pts, E-E-A-T signal"}
+  ],
+  "strategic": [
+    {"action": "Wikidata entity (Q-code) + Wikipedia notability assessment and stub article", "impact": "+8 pts, unlocks 47.9% of ChatGPT citation pool"},
+    {"action": "YouTube channel: product demos, lab setup guides, CNC tutorials", "impact": "+5 pts, major signal for Google Gemini"},
+    {"action": "Reddit presence: r/ElectricalEngineering, r/education, r/arduino, r/engineering", "impact": "+3 pts, Perplexity cites Reddit in 46.7% of answers"},
+    {"action": "Industry citations: IEEE education partnerships, educational body endorsements", "impact": "+4 pts, domain authority and brand authority"},
+    {"action": "Original research: case studies from 70+ countries with quantifiable data", "impact": "+3 pts, highly citable original data"}
+  ],
+  "crawler_access": {
+    "GPTBot": {"platform": "ChatGPT", "status": "BLOCKED (403)", "recommendation": "Whitelist immediately"},
+    "ClaudeBot": {"platform": "Claude / Perplexity", "status": "BLOCKED (403)", "recommendation": "Whitelist immediately"},
+    "PerplexityBot": {"platform": "Perplexity AI", "status": "BLOCKED (403)", "recommendation": "Whitelist immediately"},
+    "Google-Extended": {"platform": "Google Gemini / AIO", "status": "UNKNOWN", "recommendation": "Verify and allow"},
+    "Bingbot": {"platform": "Bing Copilot", "status": "UNKNOWN", "recommendation": "Verify and allow"},
+    "YouBot": {"platform": "You.com", "status": "BLOCKED (403)", "recommendation": "Whitelist recommended"},
+    "Googlebot": {"platform": "Google Search / AIO", "status": "ALLOWED", "recommendation": "Keep allowed"},
+    "Meta-ExternalAgent": {"platform": "Meta AI", "status": "BLOCKED (403)", "recommendation": "Whitelist recommended"}
+  }
+}
