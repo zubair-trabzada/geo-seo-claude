@@ -19,7 +19,7 @@
 |--------|-------|
 | GEO services market | $850M+ (projected $7.3B by 2031) |
 | AI-referred traffic growth | +527% year-over-year |
-| AI traffic converts vs organic | 4.4x higher |
+| AI traffic conversion rate vs organic | 4.4x higher |
 | Gartner: search traffic drop by 2028 | -50% |
 | Brand mentions vs backlinks for AI | 3x stronger correlation |
 | Marketers investing in GEO | Only 23% |
