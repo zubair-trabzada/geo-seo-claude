@@ -216,7 +216,7 @@ MIT License
 
 ## Contributing
 
-Contributions welcome! Please read the contribution guidelines in `docs/CONTRIBUTING.md` before submitting a PR.
+Contributions welcome!
 
 ---
 
