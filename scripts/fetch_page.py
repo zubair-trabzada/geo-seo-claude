@@ -115,7 +115,21 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
                 if level == 1:
                     result["h1_tags"].append(text)
 
-        # Text content
+        # Structured data (JSON-LD) — extract before decompose() mutates the tree
+        for script in soup.find_all("script", type="application/ld+json"):
+            try:
+                data = json.loads(script.string)
+                result["structured_data"].append(data)
+            except (json.JSONDecodeError, TypeError):
+                result["errors"].append("Invalid JSON-LD detected")
+
+        # SSR check — extract before decompose() removes relevant elements
+        noscript_tags = soup.find_all("noscript")
+        js_app_roots = soup.find_all(
+            id=re.compile(r"(app|root|__next|__nuxt)", re.I)
+        )
+
+        # Text content — decompose non-content elements (destructive)
         for element in soup.find_all(["script", "style", "nav", "footer", "header"]):
             element.decompose()
         text = soup.get_text(separator=" ", strip=True)
@@ -144,22 +158,6 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
                 "loading": img.get("loading"),
             }
             result["images"].append(img_data)
-
-        # Structured data (JSON-LD)
-        for script in BeautifulSoup(response.text, "lxml").find_all(
-            "script", type="application/ld+json"
-        ):
-            try:
-                data = json.loads(script.string)
-                result["structured_data"].append(data)
-            except (json.JSONDecodeError, TypeError):
-                result["errors"].append("Invalid JSON-LD detected")
-
-        # SSR check — look for signs of client-side only rendering
-        noscript_tags = BeautifulSoup(response.text, "lxml").find_all("noscript")
-        js_app_roots = BeautifulSoup(response.text, "lxml").find_all(
-            id=re.compile(r"(app|root|__next|__nuxt)", re.I)
-        )
 
         if js_app_roots:
             # Check if the app root has meaningful content
