@@ -44,7 +44,7 @@ try:
     from reportlab.graphics.charts.piecharts import Pie
     from reportlab.graphics import renderPDF
 except ImportError:
-    print("ERROR: ReportLab is required. Run: pip install reportlab")
+    print("ERROR: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
 
