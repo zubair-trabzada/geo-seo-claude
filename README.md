@@ -31,14 +31,14 @@
 ### One-Command Install (macOS/Linux)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/zubair-trabzada/geo-seo-claude/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/kivilaid/geo-seo/main/install.sh | bash
 ```
 
 ### Manual Install
 
 ```bash
-git clone https://github.com/zubair-trabzada/geo-seo-claude.git
-cd geo-seo-claude
+git clone https://github.com/kivilaid/geo-seo.git
+cd geo-seo
 ./install.sh
 ```
 
@@ -48,11 +48,11 @@ Requires [Git for Windows](https://git-scm.com/downloads) which includes Git Bas
 
 ```bash
 # Option 1: One-command install (run from Git Bash, not PowerShell/CMD)
-curl -fsSL https://raw.githubusercontent.com/zubair-trabzada/geo-seo-claude/main/install-win.sh | bash
+curl -fsSL https://raw.githubusercontent.com/kivilaid/geo-seo/main/install-win.sh | bash
 
 # Option 2: Manual install
-git clone https://github.com/zubair-trabzada/geo-seo-claude.git
-cd geo-seo-claude
+git clone https://github.com/kivilaid/geo-seo.git
+cd geo-seo
 ./install-win.sh
 ```
 
@@ -91,7 +91,7 @@ Open Claude Code and use these commands:
 ## Architecture
 
 ```
-geo-seo-claude/
+geo-seo/
 ├── geo/                          # Main skill orchestrator
 │   └── SKILL.md                  # Primary skill file with commands & routing
 ├── skills/                       # 13 specialized sub-skills
