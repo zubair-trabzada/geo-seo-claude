@@ -21,6 +21,8 @@ This skill generates a professional, visually polished PDF report from GEO audit
 
 ## How to Generate a PDF Report
 
+In the steps below, `<DOMAIN-SLUG>` means the audited domain with `www.` stripped, dots replaced by hyphens, and uppercased to match the rest of the filename (e.g. `example.co.uk` → `EXAMPLE-CO-UK`). Suffixing the report filename with the slug keeps reports for multiple clients distinguishable in the same directory and visually consistent with the rest of the filename.
+
 ### Step 1: Collect Audit Data
 
 After running a full `/geo-audit`, collect all scores, findings, and recommendations into a JSON structure. The JSON data must follow this schema:
@@ -89,7 +91,7 @@ EOF
 Run the PDF generation script:
 
 ```bash
-python3 ~/.claude/skills/geo/scripts/generate_pdf_report.py /tmp/geo-audit-data.json GEO-REPORT-[brand].pdf
+python3 ~/.claude/skills/geo/scripts/generate_pdf_report.py /tmp/geo-audit-data.json GEO-REPORT-<DOMAIN-SLUG>.pdf
 ```
 
 The script will produce a professional PDF report with:
@@ -132,7 +134,7 @@ When the user runs this skill, follow this exact sequence:
 
 6. **Run the PDF generator**:
    ```bash
-   python3 ~/.claude/skills/geo/scripts/generate_pdf_report.py /tmp/geo-audit-data.json "GEO-REPORT-[brand_name].pdf"
+   python3 ~/.claude/skills/geo/scripts/generate_pdf_report.py /tmp/geo-audit-data.json "GEO-REPORT-<DOMAIN-SLUG>.pdf"
    ```
 
 7. **Report success** — Tell the user the PDF was generated, its location, and file size.

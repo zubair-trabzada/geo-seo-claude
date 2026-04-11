@@ -392,7 +392,7 @@ Be conservative with estimates. State assumptions clearly. Never guarantee speci
 
 ## Output
 
-Generate **GEO-CLIENT-REPORT.md** using the complete template above, filled with actual audit data. The report should be:
+Generate **`GEO-CLIENT-REPORT-<DOMAIN-SLUG>.md`** using the complete template above, filled with actual audit data — where `<DOMAIN-SLUG>` is the audited domain with `www.` stripped, dots replaced by hyphens, and uppercased to match the rest of the filename (e.g. `example.co.uk` → `EXAMPLE-CO-UK`, so the file becomes `GEO-CLIENT-REPORT-EXAMPLE-CO-UK.md`). This keeps reports for multiple clients distinguishable in the same directory and visually consistent with the rest of the filename. The report should be:
 - 40-80 pages equivalent in detail (3,000-6,000 words)
 - Ready to send to a client without editing
 - Self-contained (no references to other report files — all relevant data is included)
