@@ -60,10 +60,20 @@ cd geo-seo-claude
 
 ### Requirements
 
-- Python 3.8+
+- Python 3.8+ (on Debian/Ubuntu also `python3-venv`)
 - Claude Code CLI
 - Git
+- Optional: [`uv`](https://docs.astral.sh/uv/) — if present, the installer uses it for a faster dependency install
 - Optional: Playwright (for screenshots)
+
+### Isolated install
+
+Python dependencies are installed into a dedicated virtual environment at
+`~/.claude/skills/geo/.venv/`. Your system Python is **not** touched, and
+uninstalling the skill removes the venv together with the rest of the files.
+
+Skill and agent files reference that venv directly, so the tool works
+regardless of what `python3` resolves to on your `PATH`.
 
 ---
 
