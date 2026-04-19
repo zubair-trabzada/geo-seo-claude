@@ -265,6 +265,21 @@ Disallow: /
 3. If critical content requires JS rendering, flag this as a potential issue.
 4. Check for Server-Side Rendering (SSR) or Static Site Generation (SSG) as mitigations.
 
+### Step 6: Parse Content Signals
+
+Using the already-fetched robots.txt from Step 1, scan for `Content-Signal:` directives (IETF draft `draft-romm-aipref-contentsignals`).
+
+1. Scan every line for a line starting with `Content-Signal:` (case-insensitive).
+2. If found:
+   - Parse all key=value pairs (split on `,` then on `=`).
+   - Validate keys against the known set: `ai-train`, `search`, `ai-personalization`, `ai-retrieval`.
+   - Validate values: only `yes` and `no` are valid.
+   - Flag any unknown keys or invalid values as a warning — the spec is still an IETF draft.
+   - Record the result as **Pass** and surface parsed values with plain-English meaning.
+3. If absent: record as **Recommendation** — the site has not declared AI usage preferences.
+
+No additional HTTP request is needed. robots.txt is already fetched in Step 1.
+
 ---
 
 ## Output Format
@@ -327,6 +342,23 @@ Generate a file called `GEO-CRAWLER-ACCESS.md`:
 - **JavaScript Rendering:** [Assessment]
 - **llms.txt:** [Present/Absent]
 - **Sitemap Accessibility:** [Assessment]
+
+### Content Signals (IETF Draft)
+
+**Status:** Present / Absent
+
+<!-- If present: -->
+| Signal Key | Value | Meaning |
+|---|---|---|
+| ai-train | no | Opted out of AI model training |
+| search | yes | Permits use in AI-powered search results |
+
+<!-- If absent: -->
+**Recommendation:** Add a `Content-Signal:` directive to robots.txt to declare AI usage preferences explicitly. Example:
+
+`Content-Signal: ai-train=no, search=yes, ai-retrieval=yes`
+
+See https://contentsignals.org/ for the full specification.
 ```
 
 ---

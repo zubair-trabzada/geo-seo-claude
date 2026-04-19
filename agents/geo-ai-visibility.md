@@ -78,6 +78,8 @@ Calculate **Crawler Access Score**:
 - Deduct 10 points if no sitemap is referenced.
 - Floor at 0.
 
+**Content Signals (non-scoring):** Using the already-fetched robots.txt, scan for a `Content-Signal:` directive (IETF draft `draft-romm-aipref-contentsignals`). If found, parse key=value pairs and record the declared preferences. Valid keys: `ai-train`, `search`, `ai-personalization`, `ai-retrieval`. Valid values: `yes`, `no`. If absent, note as a recommendation. This check does not affect the Crawler Access Score — it is a non-scored flag.
+
 ### Step 4: llms.txt Analysis
 
 Check for the presence of `/llms.txt` at the domain root.
@@ -207,6 +209,8 @@ Citation-unlikely areas needing improvement:
 **Issues Found:**
 - [Issue 1]
 - [Issue 2]
+
+**Content Signals:** [Present — list parsed key=value pairs with plain-English meaning] / [Absent — Recommendation: add `Content-Signal:` directive to robots.txt. See https://contentsignals.org/]
 
 ### llms.txt Status
 
