@@ -57,6 +57,11 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
         "errors": [],
     }
 
+    parsed_url = urlparse(url)
+    if parsed_url.scheme not in ("http", "https"):
+        result["errors"].append(f"Unsupported URL scheme: {parsed_url.scheme!r}. Only http and https are allowed.")
+        return result
+
     try:
         response = requests.get(
             url,
