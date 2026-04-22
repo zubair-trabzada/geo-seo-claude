@@ -20,7 +20,7 @@ This skill aggregates outputs from all GEO audit skills into a single, professio
    - `geo-schema` -> GEO-SCHEMA-REPORT.md
    - `geo-technical` -> GEO-TECHNICAL-AUDIT.md
    - `geo-content` -> GEO-CONTENT-ANALYSIS.md
-   - (Optional) `geo-llms-txt` -> llms.txt assessment
+   - (Optional) `geo-llmstxt` -> llms.txt assessment
    - (Optional) `geo-brand-mentions` -> brand authority data
 2. Collect all scores and findings
 3. Calculate the composite GEO Readiness Score
