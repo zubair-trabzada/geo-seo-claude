@@ -917,7 +917,12 @@ if __name__ == "__main__":
         output_file = sys.argv[2] if len(sys.argv) > 2 else "GEO-REPORT.pdf"
 
         if input_path == "-":
-            data = json.loads(sys.stdin.read())
+            MAX_STDIN_BYTES = 10_000_000
+            raw = sys.stdin.buffer.read(MAX_STDIN_BYTES + 1)
+            if len(raw) > MAX_STDIN_BYTES:
+                print("ERROR: stdin input exceeds 10 MB limit", file=sys.stderr)
+                sys.exit(1)
+            data = json.loads(raw)
         else:
             with open(input_path) as f:
                 data = json.load(f)
