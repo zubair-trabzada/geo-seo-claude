@@ -1,0 +1,380 @@
+{
+  "templates": [
+    {
+      "type": "VideoObject",
+      "description": "Video content pages with thumbnails, duration, and playback URLs. Enables video rich results in Google Search.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "[Video Title]",
+        "description": "[Video Description]",
+        "thumbnailUrl": "[Thumbnail Image URL]",
+        "uploadDate": "[YYYY-MM-DD]",
+        "duration": "[ISO 8601 Duration, e.g. PT1H30M]",
+        "contentUrl": "[Direct Video File URL]",
+        "embedUrl": "[Embed Player URL]",
+        "publisher": {
+          "@type": "Organization",
+          "name": "[Publisher Name]",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "[Logo URL]"
+          }
+        }
+      }
+    },
+    {
+      "type": "BroadcastEvent",
+      "description": "Live streaming content for LIVE badge in Google Search results. Requires VideoObject and isLiveBroadcast flag.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "[Live Stream Title]",
+        "description": "[Live Stream Description]",
+        "thumbnailUrl": "[Thumbnail Image URL]",
+        "uploadDate": "[YYYY-MM-DD]",
+        "contentUrl": "[Stream URL]",
+        "embedUrl": "[Embed Player URL]",
+        "publication": {
+          "@type": "BroadcastEvent",
+          "isLiveBroadcast": true,
+          "startDate": "[YYYY-MM-DDTHH:MM:SSZ]",
+          "endDate": "[YYYY-MM-DDTHH:MM:SSZ]"
+        }
+      }
+    },
+    {
+      "type": "Clip",
+      "description": "Key moments or chapters within a video. Enables key moments rich results with timestamp links.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "[Video Title]",
+        "description": "[Video Description]",
+        "thumbnailUrl": "[Thumbnail Image URL]",
+        "uploadDate": "[YYYY-MM-DD]",
+        "contentUrl": "[Direct Video File URL]",
+        "hasPart": [
+          {
+            "@type": "Clip",
+            "name": "[Clip Title]",
+            "startOffset": 0,
+            "endOffset": 120,
+            "url": "[Video URL with timestamp, e.g. ?t=0]"
+          },
+          {
+            "@type": "Clip",
+            "name": "[Next Clip Title]",
+            "startOffset": 120,
+            "endOffset": 300,
+            "url": "[Video URL with timestamp, e.g. ?t=120]"
+          }
+        ]
+      }
+    },
+    {
+      "type": "SeekToAction",
+      "description": "Enable seek functionality in video rich results. Allows users to jump to specific timestamps from search.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "[Video Title]",
+        "description": "[Video Description]",
+        "thumbnailUrl": "[Thumbnail Image URL]",
+        "uploadDate": "[YYYY-MM-DD]",
+        "contentUrl": "[Direct Video File URL]",
+        "potentialAction": {
+          "@type": "SeekToAction",
+          "target": "[Video URL]?t={seek_to_second_number}",
+          "startOffset-input": "required name=seek_to_second_number"
+        }
+      }
+    },
+    {
+      "type": "SoftwareSourceCode",
+      "description": "Open source and code repository pages. Describes programming language, platform, and repository location.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "[Repository Name]",
+        "description": "[Repository Description]",
+        "codeRepository": "[Repository URL, e.g. https://github.com/org/repo]",
+        "programmingLanguage": "[Language, e.g. Python]",
+        "runtimePlatform": "[Platform, e.g. Node.js]",
+        "author": {
+          "@type": "Person",
+          "name": "[Author Name]"
+        },
+        "license": "[License URL, e.g. https://opensource.org/licenses/MIT]",
+        "dateCreated": "[YYYY-MM-DD]",
+        "dateModified": "[YYYY-MM-DD]"
+      }
+    },
+    {
+      "type": "ProductGroup",
+      "description": "E-commerce product variants grouped by attributes like size, color. Enables variant-aware rich results with variesBy and hasVariant properties.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "ProductGroup",
+        "name": "[Product Name]",
+        "description": "[Product group description]",
+        "productGroupID": "[product-group-id]",
+        "variesBy": ["https://schema.org/size", "https://schema.org/color"],
+        "hasVariant": [
+          {
+            "@type": "Product",
+            "name": "[Variant - Red, Large]",
+            "sku": "[SKU-001]",
+            "color": "[Red]",
+            "size": "[Large]",
+            "offers": {
+              "@type": "Offer",
+              "price": "[29.99]",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "ProfilePage",
+      "description": "Author, creator, or team member profile pages. Enhances E-E-A-T signals with mainEntity Person markup and sameAs links.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "[Author Name]",
+          "url": "[Profile URL]",
+          "description": "[Author bio and expertise summary]",
+          "sameAs": [
+            "[Twitter URL]",
+            "[LinkedIn URL]"
+          ]
+        }
+      }
+    },
+    {
+      "type": "Certification",
+      "description": "Product certifications (Energy Star, safety, organic, etc.). Replaced EnergyConsumptionDetails in April 2025.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "[Product Name]",
+        "hasCertification": {
+          "@type": "Certification",
+          "certificationIdentification": "[Certification Name, e.g. Energy Star]",
+          "issuedBy": {
+            "@type": "Organization",
+            "name": "[Issuing Organization, e.g. EPA]"
+          }
+        }
+      }
+    },
+    {
+      "type": "OfferShippingDetails",
+      "description": "Shipping and delivery information for e-commerce products. Includes shipping rate, handling time, and transit time.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "[Product Name]",
+        "offers": {
+          "@type": "Offer",
+          "price": "[Price]",
+          "priceCurrency": "USD",
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "[0]",
+              "currency": "USD"
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 1,
+                "unitCode": "DAY"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 1,
+                "maxValue": 5,
+                "unitCode": "DAY"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "BlogPosting",
+      "description": "Blog articles with author attribution, dates, and images. Core type for content-heavy sites and E-E-A-T signals.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[Article Headline — max 110 chars]",
+        "description": "[Article summary/excerpt]",
+        "image": "[Featured Image URL]",
+        "datePublished": "[YYYY-MM-DD]",
+        "dateModified": "[YYYY-MM-DD]",
+        "author": {
+          "@type": "Person",
+          "name": "[Author Name]",
+          "url": "[Author Profile URL]"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "[Publisher Name]",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "[Logo URL]"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "[Canonical URL of Page]"
+        },
+        "wordCount": "[Word Count as Integer]",
+        "articleSection": "[Category]"
+      }
+    },
+    {
+      "type": "Article",
+      "description": "News and general articles. Use instead of BlogPosting for news sites, magazines, and journalistic content.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "[Article Headline — max 110 chars]",
+        "description": "[Article summary]",
+        "image": ["[Image URL 1]", "[Image URL 2]"],
+        "datePublished": "[YYYY-MM-DDTHH:MM:SSZ]",
+        "dateModified": "[YYYY-MM-DDTHH:MM:SSZ]",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "[Author Name]",
+            "url": "[Author Profile URL]"
+          }
+        ],
+        "publisher": {
+          "@type": "Organization",
+          "name": "[Publisher Name]",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "[Logo URL]"
+          }
+        }
+      }
+    },
+    {
+      "type": "Organization",
+      "description": "Company or brand identity with logo, contact, and social profiles. Essential for knowledge panel and brand SERP.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "[Organization Name]",
+        "url": "[Website URL]",
+        "logo": "[Logo URL]",
+        "description": "[Organization description]",
+        "foundingDate": "[YYYY]",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "[+1-xxx-xxx-xxxx]",
+          "contactType": "customer service",
+          "availableLanguage": ["English"]
+        },
+        "sameAs": [
+          "[Facebook URL]",
+          "[Twitter URL]",
+          "[LinkedIn URL]",
+          "[Instagram URL]"
+        ]
+      }
+    },
+    {
+      "type": "LocalBusiness",
+      "description": "Physical business with address, hours, and geo coordinates. Critical for local SEO and Google Business Profile.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "[Business Name]",
+        "description": "[Business description]",
+        "url": "[Website URL]",
+        "telephone": "[+1-xxx-xxx-xxxx]",
+        "email": "[email@example.com]",
+        "image": "[Business Image URL]",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "[Street Address]",
+          "addressLocality": "[City]",
+          "addressRegion": "[State/Province]",
+          "postalCode": "[Zip/Postal Code]",
+          "addressCountry": "[Country Code, e.g. US]"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "[Latitude]",
+          "longitude": "[Longitude]"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ],
+        "priceRange": "[$$ or price range description]"
+      }
+    },
+    {
+      "type": "BreadcrumbList",
+      "description": "Navigation breadcrumbs showing page hierarchy. Enhances SERP display with breadcrumb trail instead of raw URL.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "[Homepage URL]"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "[Category Name]",
+            "item": "[Category URL]"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "[Current Page Name]",
+            "item": "[Current Page URL]"
+          }
+        ]
+      }
+    },
+    {
+      "type": "WebSite",
+      "description": "Site-level markup with SearchAction for sitelinks search box in Google. Place on homepage only.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "[Site Name]",
+        "url": "[Homepage URL]",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "[Search URL]?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    }
+  ]
+}
