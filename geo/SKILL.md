@@ -8,7 +8,10 @@ description: >
   optimization, schema markup, technical SEO, content quality (E-E-A-T), and
   client-ready GEO report generation. Use when user says "geo", "seo", "audit",
   "AI search", "AI visibility", "optimize", "citability", "llms.txt", "schema",
-  "brand mentions", "GEO report", or any URL for analysis.
+  "brand mentions", "GEO report", or any URL for analysis. The fork extension
+  also adds 4 closure-loop skills: "matrix" (intent angle planning),
+  "pipeline" (5-stage AI citation pipeline), "distribute" (tiered multi-platform
+  distribution), and "compete" (cross-engine competitor gap analysis).
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
@@ -40,6 +43,10 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 | `/geo proposal <domain>` | Auto-generate client proposal from audit data |
 | `/geo compare <domain>` | Monthly delta report: show score improvements to client |
 | `/geo update` | Pull latest GEO skill updates from upstream |
+| `/geo matrix <core-topic>` | (fork+) Build 4-quadrant intent matrix and 12-week schedule |
+| `/geo pipeline <url>` | (fork+) Run 5-stage AI citation pipeline + 6-engine preferred-answer verify |
+| `/geo distribute <topic>` | (fork+) Generate tiered 14-day multi-platform distribution plan |
+| `/geo compete <domain> <c1,c2,...>` | (fork+) Cross-engine competitor citation gap matrix |
 
 ---
 
@@ -116,7 +123,7 @@ Adjust recommendations based on detected type. Local businesses need LocalBusine
 
 ---
 
-## Sub-Skills (14 Specialized Components)
+## Sub-Skills (19 Specialized Components)
 
 | # | Skill | Directory | Purpose |
 |---|-------|-----------|---------|
@@ -130,10 +137,15 @@ Adjust recommendations based on detected type. Local businesses need LocalBusine
 | 8 | geo-technical | `skills/geo-technical/` | Technical SEO foundations |
 | 9 | geo-content | `skills/geo-content/` | Content quality and E-E-A-T |
 | 10 | geo-report | `skills/geo-report/` | Client-ready deliverable generation |
-| 11 | geo-prospect | `skills/geo-prospect/` | CRM-lite prospect and client pipeline management |
-| 12 | geo-proposal | `skills/geo-proposal/` | Auto-generate client proposals from audit data |
-| 13 | geo-compare | `skills/geo-compare/` | Monthly delta tracking and progress reports |
-| 14 | geo-update | `skills/geo-update/` | Pull latest updates from upstream repository |
+| 11 | geo-report-pdf | `skills/geo-report-pdf/` | Professional PDF report with charts |
+| 12 | geo-prospect | `skills/geo-prospect/` | CRM-lite prospect and client pipeline management |
+| 13 | geo-proposal | `skills/geo-proposal/` | Auto-generate client proposals from audit data |
+| 14 | geo-compare | `skills/geo-compare/` | Monthly delta tracking and progress reports |
+| 15 | geo-update | `skills/geo-update/` | Pull latest updates from upstream repository |
+| 16 | geo-intent-matrix | `skills/geo-intent-matrix/` | (fork+) 4-quadrant intent angle matrix + 12-week schedule |
+| 17 | geo-citation-pipeline | `skills/geo-citation-pipeline/` | (fork+) 5-stage AI citation pipeline + 6-engine preferred-answer verify |
+| 18 | geo-distribution-plan | `skills/geo-distribution-plan/` | (fork+) Tier 1/2/3 platform distribution plan with 14-day cadence |
+| 19 | geo-competitor-citation | `skills/geo-competitor-citation/` | (fork+) Cross-engine competitor citation gap matrix |
 
 ---
 
@@ -171,6 +183,10 @@ All commands generate structured output:
 | `/geo prospect` | Updates `~/.geo-prospects/prospects.json` |
 | `/geo proposal` | `~/.geo-prospects/proposals/<domain>-proposal-<date>.md` |
 | `/geo compare` | `~/.geo-prospects/reports/<domain>-monthly-<YYYY-MM>.md` |
+| `/geo matrix` | `~/.geo-prospects/matrices/<domain>-<topic>-<YYYY-MM-DD>.md` |
+| `/geo pipeline` | `~/.geo-prospects/pipelines/<domain>-<slug>-<YYYY-MM-DD>.md` |
+| `/geo distribute` | `~/.geo-prospects/distribution/<domain>-<topic-slug>-<YYYY-MM-DD>.md` |
+| `/geo compete` | `~/.geo-prospects/competitor/<my-domain>-<YYYY-MM-DD>.md` |
 
 ---
 
@@ -207,6 +223,47 @@ The `/geo report-pdf <url>` command generates a professional, branded PDF report
 - **Rate limiting:** 1-second delay between requests, max 5 concurrent
 - **Robots.txt:** Always respect, always check
 - **Duplicate detection:** Skip pages with >80% content similarity
+
+---
+
+## Fork Extension: The GEO 4-Step Closure Loop
+
+The fork adds 4 skills that wire the existing audit/optimization skills into a
+closed 4-step GEO workflow. The loop runs:
+
+```
+   Step 1: Angles                Step 2: Publish                Step 3: Guide                  Step 4: Measure
+   ┌─────────────────────┐  ┌──────────────────────────┐  ┌───────────────────────────┐  ┌──────────────────────────┐
+   │ geo-intent-matrix   │→ │ geo-content (existing) + │→ │ geo-citation-pipeline +   │→ │ geo-competitor-citation  │
+   │ 4-quadrant intent   │  │ geo-distribution-plan    │  │ geo-platform-optimizer,   │  │ → feeds back into matrix │
+   │ + 12-week schedule  │  │ (14-day cadence)         │  │ geo-schema, geo-llmstxt   │  │ for next-quarter angles  │
+   └─────────────────────┘  └──────────────────────────┘  └───────────────────────────┘  └──────────────────────────┘
+```
+
+**Typical fork-extension run:**
+
+```
+# Step 1: Plan the topic
+/geo matrix "vector databases"
+
+# Step 2: For each P0 piece from the matrix — produce content (existing skill)
+/geo content https://mysite.com/blog/vector-databases-overview
+
+# Step 3: Run the citation pipeline before distribution
+/geo pipeline https://mysite.com/blog/vector-databases-overview
+
+# Step 4: Distribute (only if pipeline returns PIPELINE_READY)
+/geo distribute "vector databases"
+
+# Step 5: 14 days later — verify preferred-answer pickup
+/geo pipeline https://mysite.com/blog/vector-databases-overview --verify
+
+# Step 6: 30 days later — measure against competitors
+/geo compete mysite.com pinecone.io,weaviate.io,qdrant.io
+```
+
+The 4 fork skills share data via `~/.geo-prospects/` (matrices/, pipelines/,
+distribution/, competitor/). See each skill's SKILL.md for full I/O contracts.
 
 ---
 

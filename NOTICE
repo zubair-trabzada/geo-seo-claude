@@ -1,0 +1,32 @@
+geo-seo-claude-plus
+===================
+
+This product is a downstream fork of geo-seo-claude.
+
+Original work
+-------------
+Copyright (c) 2026 Zubair Trabzada
+Source: https://github.com/zubair-trabzada/geo-seo-claude
+Licensed under the MIT License (see LICENSE).
+
+Fork additions
+--------------
+Copyright (c) 2026 Dan Su
+Source: https://github.com/stanleydansu/geo-seo-claude-plus
+Distributed under the same MIT License (see LICENSE).
+
+Fork additions consist of the following new files and do not modify any
+upstream source file (the upstream LICENSE is preserved verbatim):
+
+  skills/geo-intent-matrix/SKILL.md
+  skills/geo-citation-pipeline/SKILL.md
+  skills/geo-distribution-plan/SKILL.md
+  skills/geo-competitor-citation/SKILL.md
+  FORK_CHANGELOG.md
+  NOTICE
+
+The orchestrator file geo/SKILL.md and README.md are modified by appending
+new rows to existing tables and adding clearly marked fork-extension
+sections. No upstream behavior is changed.
+
+See FORK_CHANGELOG.md for the complete list of changes.

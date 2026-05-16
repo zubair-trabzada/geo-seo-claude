@@ -13,6 +13,23 @@
 
 ---
 
+## About This Fork
+
+This project (`geo-seo-claude-plus`) is a downstream fork of [zubair-trabzada/geo-seo-claude](https://github.com/zubair-trabzada/geo-seo-claude) extended with 4 additional skills that close the 4-step GEO workflow loop (angles → publish → guide → measure).
+
+| New Skill | Command | Purpose |
+| --- | --- | --- |
+| `geo-intent-matrix` | `/geo matrix <core-topic>` | Build a 4-quadrant intent matrix (Definitional / Comparative / Procedural / Causal) + a 12-week rolling editorial schedule |
+| `geo-citation-pipeline` | `/geo pipeline <url>` | Run the 5-stage AI citation pipeline (crawlers → internal-link wiring → AI-training authority backlinks → on-page compliance → rapid indexing) + 6-engine preferred-answer verification |
+| `geo-distribution-plan` | `/geo distribute <topic>` | Generate an authority-tiered multi-platform distribution plan with 14-day cadence, per-platform rewrite briefs, and 7/14/30-day reclaim checklist |
+| `geo-competitor-citation` | `/geo compete <my-domain> <competitor1,competitor2,...>` | Run a cross-engine competitor citation gap matrix (3-D: brand × engine × intent) with verdict per quadrant and top-3 remediation plan |
+
+All upstream skills, agents, scripts, schemas, and commands remain **unchanged**. The fork only adds new files and appends new rows to the orchestrator's routing tables. See [FORK_CHANGELOG.md](FORK_CHANGELOG.md) for the full diff and [NOTICE](NOTICE) for attribution.
+
+Original work © 2026 Zubair Trabzada, MIT-licensed (see [LICENSE](LICENSE)).
+
+---
+
 ## Why GEO Matters (2026)
 
 | Metric | Value |
