@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$title$</title>
+  $for(css)$<link rel="stylesheet" href="$css$">
+  $endfor$
+</head>
+<body>
+
+<!-- COVER SECTION -->
+<div id="cover-section">
+  <p class="cover-eyebrow">Generative Engine Optimization Audit</p>
+  <h1>$if(brand_name)$$brand_name$$else$GEO Audit Report$endif$</h1>
+  <p class="cover-domain">$if(domain)$$domain$$else$alexamediasolutions.com$endif$</p>
+
+  <div class="geo-score-badge">
+    <span class="score-number">$if(geo_score)$$geo_score$$else$40$endif$</span>
+    <span class="score-denom">/100</span>
+    <span class="score-label">$if(score_label)$$score_label$$else$Poor$endif$</span>
+  </div>
+
+  <div class="cover-meta-grid">
+    <div class="cover-meta-item">
+      <span class="label">Audit Date</span>
+      <span class="value">$if(date)$$date$$else$May 3, 2026$endif$</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">Business Type</span>
+      <span class="value">$if(business_type)$$business_type$$else$Digital Marketing Agency$endif$</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">Locations</span>
+      <span class="value">$if(locations)$$locations$$else$Raleigh · Miami · Denver · Omaha$endif$</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="label">Platform</span>
+      <span class="value">$if(platform)$$platform$$else$WordPress + AIOSEO$endif$</span>
+    </div>
+  </div>
+</div>
+
+<!-- REPORT BODY -->
+<div id="content">
+$body$
+</div>
+
+<script>
+// Color-code table cells containing score values (e.g. "40/100", "58/100")
+// and apply severity classes to finding sections
+(function() {
+  function scoreColor(n) {
+    if (n >= 80) return 'excellent';
+    if (n >= 65) return 'good';
+    if (n >= 50) return 'fair';
+    if (n >= 35) return 'poor';
+    return 'critical';
+  }
+
+  // Color-code table cells with "XX/100" patterns
+  document.querySelectorAll('td').forEach(function(td) {
+    var m = td.textContent.match(/^(\d{1,3})\/100$$/);
+    if (m) {
+      var score = parseInt(m[1]);
+      td.classList.add('score-' + scoreColor(score));
+      // Also style the row
+      var tr = td.parentElement;
+      tr.classList.add('score-' + scoreColor(score));
+    }
+  });
+
+  // Style finding sections by detecting severity keywords in h3 headings
+  document.querySelectorAll('h3').forEach(function(h3) {
+    var text = h3.textContent.toLowerCase();
+    var severity = null;
+    if (text.indexOf('critical') !== -1) severity = 'critical';
+    else if (text.indexOf('high priority') !== -1 || (text.indexOf('high') !== -1 && text.indexOf('priority') === -1 && text.indexOf('priority') === -1)) severity = 'high';
+    else if (text.indexOf('medium') !== -1) severity = 'medium';
+    else if (text.indexOf('low') !== -1) severity = 'low';
+
+    if (severity) {
+      // Wrap following paragraphs/lists until next heading
+      var sibling = h3.nextElementSibling;
+      while (sibling && !['H1','H2','H3','H4'].includes(sibling.tagName)) {
+        sibling.classList.add('finding-' + severity);
+        sibling = sibling.nextElementSibling;
+      }
+    }
+  });
+
+  // Add section-break class to major h2s that should start on new page
+  var breakBefore = [
+    'high priority',
+    'medium priority',
+    'generated schema',
+    '90-day roadmap',
+    'component score'
+  ];
+  document.querySelectorAll('h2').forEach(function(h2) {
+    var text = h2.textContent.toLowerCase();
+    breakBefore.forEach(function(kw) {
+      if (text.indexOf(kw) !== -1) h2.classList.add('section-break');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -24,6 +24,7 @@ You are a technical SEO specialist. Your job is to analyze a target URL for tech
   - X-Robots-Tag header (can override meta robots)
   - Server header (technology identification)
   - Content-Encoding (compression: gzip, br)
+  - `Link:` headers — capture all values for RFC 8288 service discovery analysis (Step 10)
 
 ### Step 2: Robots.txt and XML Sitemap
 
@@ -186,7 +187,26 @@ This is the most important check for GEO. AI crawlers (GPTBot, ClaudeBot, Perple
 - **Structured data errors**: Note any JSON-LD syntax issues visible in the source (malformed JSON, missing required fields).
 - **Resource hints**: Check for `<link rel="preconnect">`, `<link rel="dns-prefetch">`, `<link rel="preload">` for performance optimization.
 
-### Step 10: Calculate Technical Score
+### Step 10: Agent-Readiness Signals (non-scoring)
+
+These checks do not affect the Technical Score. They surface emerging AI agent compatibility signals.
+
+**RFC 8288 Link Headers (Service Discovery):**
+Using the `Link:` headers captured in Step 1 (no extra request needed):
+1. Parse all `<url>; rel="relation-type"` pairs.
+2. Identify high-value rel types: `api-catalog` (RFC 9609), `describedby`, `service-doc`, `mcp-server-card`.
+3. If headers are present: document what was found.
+4. If absent: check whether the site is API-first (API docs in nav, `/api/` or `/developers/` paths, OpenAPI in sitemap). Surface a recommendation only if API-first signals are present. Omit entirely for standard business sites.
+
+**Markdown Content Negotiation:**
+Send a GET request to the homepage with the header `Accept: text/markdown` (one additional HTTP request):
+1. If the response `Content-Type` is `text/markdown` (or `text/markdown; charset=utf-8`): pass — note as a leading-edge capability.
+2. If the response is standard HTML: forward-looking recommendation — note that Cloudflare Workers/Pages sites can enable this with a one-line config change.
+3. If the request errors or returns non-200: skip and note the error. Do not penalize.
+
+Surface both findings in the output under "Agent-Readiness Signals." Neither affects any existing score.
+
+### Step 11: Calculate Technical Score
 
 Compute the **Technical Score (0-100)** using these category weights:
 
@@ -283,6 +303,26 @@ Note: This is a static HTML analysis. Validate with PageSpeed Insights or CrUX d
 **Target URL:** `[URL]`
 **Assessment:** [Clean/Minor Issues/Problematic]
 [Key findings]
+
+### Agent-Readiness Signals (non-scoring)
+
+#### RFC 8288 Link Headers (Service Discovery)
+
+**Status:** Present / Absent / Not Applicable
+
+<!-- If present: list parsed relation types, URLs, and meaning -->
+<!-- If absent on API-first site: surface recommendation with example -->
+<!-- If absent on standard business site: omit this section -->
+
+#### Markdown Content Negotiation
+
+**Status:** Supported / Not Supported
+**Test:** GET [url] with `Accept: text/markdown`
+**Response Content-Type:** [value]
+
+<!-- If supported: note as leading-edge capability -->
+<!-- If not supported: forward-looking recommendation, Cloudflare-specific context -->
+<!-- If request errored: note the error, skip recommendation -->
 
 ### Priority Actions
 

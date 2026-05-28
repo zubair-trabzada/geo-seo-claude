@@ -1,164 +1,120 @@
 ---
 name: geo-report-pdf
-description: Generate a professional PDF report from GEO audit data using ReportLab. Creates a polished, client-ready PDF with score gauges, bar charts, platform readiness visualizations, color-coded tables, and prioritized action plans.
-version: 1.0.0
+description: Generate a professional PDF report from a GEO audit using pandoc + Chrome headless. Converts GEO-AUDIT-REPORT.md into a styled, client-ready PDF with a cover page, color-coded score tables, severity-tagged findings, and a 90-day roadmap.
+version: 2.0.0
 author: geo-seo-claude
 tags: [geo, pdf, report, client-deliverable, professional]
-allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
+allowed-tools: Read, Grep, Glob, Bash, Write
 ---
 
-# GEO PDF Report Generator
-
-## Purpose
-
-This skill generates a professional, visually polished PDF report from GEO audit data. The PDF includes score gauges, bar charts, platform readiness visualizations, color-coded tables, and a prioritized action plan — ready to deliver directly to clients.
+# GEO PDF Report Generator (pandoc pipeline)
 
 ## Prerequisites
 
-- **ReportLab** must be installed: `pip install reportlab`
-- The PDF generation script is located at: `~/.claude/skills/geo/scripts/generate_pdf_report.py`
-- Run a full GEO audit first (using `/geo-audit`) to have data to include in the report
+- **pandoc** — `brew install pandoc`
+- **Google Chrome** — must be installed at `/Applications/Google Chrome.app/`
 
-## How to Generate a PDF Report
+No Python dependencies. No ReportLab. No JSON data wrangling.
 
-### Step 1: Collect Audit Data
+## How It Works
 
-After running a full `/geo-audit`, collect all scores, findings, and recommendations into a JSON structure. The JSON data must follow this schema:
+1. Read `GEO-AUDIT-REPORT.md` in the current directory (created by `/geo audit`)
+2. Extract cover metadata from the report (brand name, domain, GEO score, date, locations)
+3. Run `pandoc` with the bundled CSS + HTML template to produce a self-contained `GEO-REPORT.html`
+4. Run Chrome headless to print the HTML to `GEO-REPORT.pdf`
 
-```json
-{
-    "url": "https://example.com",
-    "brand_name": "Example Company",
-    "date": "2026-02-18",
-    "geo_score": 65,
-    "scores": {
-        "ai_citability": 62,
-        "brand_authority": 78,
-        "content_eeat": 74,
-        "technical": 72,
-        "schema": 45,
-        "platform_optimization": 59
-    },
-    "platforms": {
-        "Google AI Overviews": 68,
-        "ChatGPT": 62,
-        "Perplexity": 55,
-        "Gemini": 60,
-        "Bing Copilot": 50
-    },
-    "executive_summary": "A 4-6 sentence summary of the audit findings...",
-    "findings": [
-        {
-            "severity": "critical",
-            "title": "Finding Title",
-            "description": "Description of the finding and its impact."
-        }
-    ],
-    "quick_wins": [
-        "Action item 1",
-        "Action item 2"
-    ],
-    "medium_term": [
-        "Action item 1",
-        "Action item 2"
-    ],
-    "strategic": [
-        "Action item 1",
-        "Action item 2"
-    ],
-    "crawler_access": {
-        "GPTBot": {"platform": "ChatGPT", "status": "Allowed", "recommendation": "Keep allowed"},
-        "ClaudeBot": {"platform": "Claude", "status": "Blocked", "recommendation": "Unblock for visibility"}
-    }
-}
-```
+The pandoc template (`~/.claude/skills/geo/templates/geo-report-template.html`) injects:
+- A full-bleed dark navy cover section with the GEO score badge
+- Per-section cover metadata (date, business type, locations, platform)
+- JavaScript that runs inside Chrome before printing to color-code score cells and severity-tag finding sections
 
-### Step 2: Write JSON Data to a Temp File
+## Workflow
 
-Write the collected audit data to a temporary JSON file:
+### Step 1: Check for audit report
+
+Look for `GEO-AUDIT-REPORT.md` in the current directory. If absent, tell the user to run `/geo audit <url>` first.
+
+### Step 2: Extract cover metadata from the report
+
+Read the top of `GEO-AUDIT-REPORT.md` and extract:
+
+| Field | Where to find it |
+|---|---|
+| `brand_name` | First H1 title (after "GEO Audit Report:") |
+| `domain` | Second bold line (e.g. `**Domain:** alexamediasolutions.com`) |
+| `geo_score` | Line matching `## Overall GEO Score: XX / 100` |
+| `score_label` | Word after the score on that same line (e.g. "Poor", "Fair", "Good") |
+| `date` | `**Audit Date:**` line |
+| `business_type` | `**Business Type:**` line |
+| `locations` | `**Locations:**` line |
+| `platform` | `**CMS:**` line |
+
+### Step 3: Run pandoc
 
 ```bash
-# Write audit data to temp file
-cat > /tmp/geo-audit-data.json << 'EOF'
-{ ... audit JSON data ... }
-EOF
+pandoc GEO-AUDIT-REPORT.md \
+  --to html5 \
+  --standalone \
+  --embed-resources \
+  --template ~/.claude/skills/geo/templates/geo-report-template.html \
+  --css ~/.claude/skills/geo/templates/geo-report-style.css \
+  --metadata title="GEO Audit Report — <brand_name>" \
+  --metadata brand_name="<brand_name>" \
+  --metadata domain="<domain>" \
+  --metadata geo_score="<geo_score>" \
+  --metadata score_label="<score_label>" \
+  --metadata date="<date>" \
+  --metadata business_type="<business_type>" \
+  --metadata locations="<locations>" \
+  --metadata platform="<platform>" \
+  -o GEO-REPORT.html
 ```
 
-### Step 3: Generate the PDF
+Replace `<field>` placeholders with values extracted in Step 2. If a field is not found in the report, omit that `--metadata` flag — the template has sensible defaults.
 
-Run the PDF generation script:
+### Step 4: Run Chrome headless
 
 ```bash
-python3 ~/.claude/skills/geo/scripts/generate_pdf_report.py /tmp/geo-audit-data.json GEO-REPORT-[brand].pdf
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new \
+  --disable-gpu \
+  --no-sandbox \
+  --print-to-pdf="$(pwd)/GEO-REPORT.pdf" \
+  --print-to-pdf-no-header \
+  --no-pdf-header-footer \
+  --virtual-time-budget=5000 \
+  "file://$(pwd)/GEO-REPORT.html"
 ```
 
-The script will produce a professional PDF report with:
-- **Cover Page** — Brand name, URL, date, overall GEO score with visual gauge
-- **Executive Summary** — Key findings and top recommendations
-- **Score Breakdown** — Table and bar chart of all 6 scoring categories
-- **AI Platform Readiness** — Visual horizontal bar chart per platform with scores
-- **AI Crawler Access** — Color-coded table (green=allowed, red=blocked)
-- **Key Findings** — Severity-coded findings list (critical/high/medium/low)
-- **Prioritized Action Plan** — Quick wins, medium-term, and strategic initiatives
-- **Appendix** — Methodology, data sources, and glossary
+### Step 5: Report completion
 
-### Step 4: Return the PDF Path
+Tell the user:
+- `GEO-REPORT.pdf` was generated in the current directory
+- File size
+- Optionally: `open GEO-REPORT.pdf` to preview it
 
-After generation, tell the user where the PDF was saved and its file size.
+## What the PDF Contains
 
-## Complete Workflow Example
+- **Cover page** — Dark navy gradient, brand name, domain, GEO score badge (colored by score), audit date, business type, locations, CMS platform
+- **Score tables** — Cells containing `XX/100` are color-coded: ≥80 green, ≥65 blue, ≥50 amber, ≥35 orange, <35 red
+- **Finding sections** — `h3` headings containing "Critical / High / Medium / Low" get severity-colored left-border callout blocks (red / orange / yellow / green)
+- **Section page breaks** — Major sections (High Priority, 90-Day Roadmap, Component Score Summary, Generated Schema) break to new pages automatically
+- **Code blocks** — JSON schema templates render with dark theme monospace styling
+- **Page footer** — Brand name · GEO Audit · date + page numbers (via CSS `@page`)
 
-When the user runs this skill, follow this exact sequence:
+## Customizing the Report
 
-1. **Check for existing audit data** — Look for recent GEO audit reports in the current directory:
-   - `GEO-CLIENT-REPORT.md`
-   - `GEO-AUDIT-REPORT.md`
-   - Or any `GEO-*.md` files from a recent audit
+- **Colors / typography** — Edit `~/.claude/skills/geo/templates/geo-report-style.css`
+- **Cover layout** — Edit `~/.claude/skills/geo/templates/geo-report-template.html`
+- **Score thresholds for color-coding** — Edit the `scoreColor()` function in the template's `<script>` block
+- **Which sections get page breaks** — Edit the `breakBefore` array in the template's `<script>` block
 
-2. **If no audit data exists** — Tell the user to run `/geo-audit <url>` first, then come back for the PDF.
+## Troubleshooting
 
-3. **If audit data exists** — Parse the markdown report to extract:
-   - Overall GEO score
-   - Category scores (citability, brand authority, content/E-E-A-T, technical, schema, platform)
-   - Platform readiness scores (Google AIO, ChatGPT, Perplexity, Gemini, Bing Copilot)
-   - AI crawler access status
-   - Key findings with severity levels
-   - Quick wins, medium-term, and strategic action items
-   - Executive summary
-
-4. **Build the JSON** — Structure all data into the JSON schema shown above.
-
-5. **Write JSON to temp file** — Save to `/tmp/geo-audit-data.json`
-
-6. **Run the PDF generator**:
-   ```bash
-   python3 ~/.claude/skills/geo/scripts/generate_pdf_report.py /tmp/geo-audit-data.json "GEO-REPORT-[brand_name].pdf"
-   ```
-
-7. **Report success** — Tell the user the PDF was generated, its location, and file size.
-
-## If the User Provides a URL
-
-If the user runs `/geo-report-pdf https://example.com` with a URL:
-1. First run a full audit: invoke the `geo-audit` skill for that URL
-2. Then collect all the audit data from the generated report files
-3. Generate the PDF as described above
-
-## Parsing Markdown Audit Data
-
-When extracting data from existing GEO markdown reports, look for these patterns:
-
-- **GEO Score**: Look for "GEO Score: XX/100" or "Overall: XX/100" or "GEO Readiness Score: XX"
-- **Category Scores**: Look for score tables with columns like "Component | Score | Weight"
-- **Platform Scores**: Look for tables with "Google AI Overviews", "ChatGPT", "Perplexity", etc.
-- **Crawler Status**: Look for tables with "Allowed" or "Blocked" status for crawlers like GPTBot, ClaudeBot
-- **Findings**: Look for sections titled "Key Findings", "Critical Issues", "Recommendations"
-- **Action Items**: Look for sections titled "Quick Wins", "Action Plan", "Recommendations"
-
-## Notes
-
-- If ReportLab is not installed, run: `pip install reportlab`
-- The PDF is designed for US Letter size (8.5" x 11")
-- Color palette: Navy primary (#1a1a2e), Blue accent (#0f3460), Coral highlight (#e94560), Green success (#00b894)
-- Each page has a header line, page numbers, "Confidential" watermark, and generation date
-- Score gauges use traffic-light colors: green (80+), blue (60-79), yellow (40-59), red (below 40)
+| Problem | Fix |
+|---|---|
+| `pandoc: command not found` | `brew install pandoc` |
+| Chrome not found | Check path: `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome` |
+| PDF is blank / empty | Increase `--virtual-time-budget` to 8000 |
+| Cover metadata missing | Check GEO-AUDIT-REPORT.md has the standard header format |
+| Fonts not loading | PDF is rendered offline; system fonts are used as fallback — this is expected |

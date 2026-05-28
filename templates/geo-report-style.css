@@ -1,0 +1,419 @@
+/* =====================================================
+   GEO Audit Report — Professional PDF Stylesheet
+   Rendered via pandoc → Chrome headless
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ---- Page layout ---- */
+@page {
+  size: A4;
+  margin: 18mm 18mm 22mm 18mm;
+}
+
+@page :first {
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --navy:    #0f1f3d;
+  --blue:    #1a3a6b;
+  --accent:  #e8472a;
+  --teal:    #0891b2;
+  --success: #059669;
+  --warning: #d97706;
+  --danger:  #dc2626;
+  --info:    #2563eb;
+  --text:    #1e293b;
+  --muted:   #64748b;
+  --light:   #f8fafc;
+  --border:  #e2e8f0;
+  --white:   #ffffff;
+  --critical-bg: #fef2f2;
+  --critical-border: #dc2626;
+  --high-bg: #fff7ed;
+  --high-border: #ea580c;
+  --medium-bg: #fefce8;
+  --medium-border: #ca8a04;
+  --low-bg: #f0fdf4;
+  --low-border: #16a34a;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--white);
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Cover section (first H1) ---- */
+#cover-section {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e4d8c 100%);
+  color: var(--white);
+  padding: 52px 48px 44px;
+  margin: 0;
+  page-break-after: always;
+  position: relative;
+  min-height: 240px;
+}
+
+#cover-section .cover-eyebrow {
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin: 0 0 10px;
+}
+
+#cover-section h1 {
+  font-size: 26pt;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--white);
+  border: none;
+  padding: 0;
+  background: none;
+  letter-spacing: -0.5px;
+}
+
+#cover-section .cover-domain {
+  font-size: 11pt;
+  color: rgba(255,255,255,0.7);
+  margin: 0 0 32px;
+  font-weight: 400;
+}
+
+.cover-meta-grid {
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+
+.cover-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cover-meta-item .label {
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.cover-meta-item .value {
+  font-size: 10pt;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Score badge on cover */
+.geo-score-badge {
+  position: absolute;
+  top: 44px;
+  right: 48px;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.1);
+  border: 3px solid rgba(255,255,255,0.25);
+}
+
+.geo-score-badge .score-number {
+  font-size: 30pt;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--white);
+}
+
+.geo-score-badge .score-denom {
+  font-size: 9pt;
+  color: rgba(255,255,255,0.6);
+  line-height: 1;
+}
+
+.geo-score-badge .score-label {
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ---- Content area ---- */
+#content {
+  padding: 0;
+}
+
+/* ---- Headings ---- */
+h1 {
+  font-size: 18pt;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 28px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2.5px solid var(--navy);
+  page-break-after: avoid;
+  letter-spacing: -0.3px;
+}
+
+h2 {
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--navy);
+  margin: 28px 0 14px;
+  padding: 9px 14px 8px;
+  border-radius: 4px;
+  page-break-after: avoid;
+  letter-spacing: -0.1px;
+}
+
+h3 {
+  font-size: 10.5pt;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 22px 0 10px;
+  padding-left: 10px;
+  border-left: 3px solid var(--teal);
+  page-break-after: avoid;
+}
+
+h4 {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 16px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  page-break-after: avoid;
+}
+
+/* ---- Score overview block (after main h1) ---- */
+blockquote {
+  background: var(--light);
+  border-left: 4px solid var(--teal);
+  margin: 16px 0;
+  padding: 14px 18px;
+  border-radius: 0 6px 6px 0;
+  font-style: normal;
+  color: var(--text);
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/* ---- Tables ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 20px;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+
+thead tr {
+  background: var(--navy);
+  color: var(--white);
+}
+
+thead th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 8pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(odd) {
+  background: var(--white);
+}
+
+tbody tr:nth-child(even) {
+  background: var(--light);
+}
+
+tbody tr:hover {
+  background: #eef2ff;
+}
+
+td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+/* Score color coding applied by JS */
+td.score-excellent { color: var(--success); font-weight: 600; }
+td.score-good      { color: #0369a1;        font-weight: 600; }
+td.score-fair      { color: var(--warning); font-weight: 600; }
+td.score-poor      { color: #ea580c;        font-weight: 600; }
+td.score-critical  { color: var(--danger);  font-weight: 600; }
+
+tr.score-excellent td:first-child { border-left: 3px solid var(--success); }
+tr.score-good      td:first-child { border-left: 3px solid #0369a1; }
+tr.score-fair      td:first-child { border-left: 3px solid var(--warning); }
+tr.score-poor      td:first-child { border-left: 3px solid #ea580c; }
+tr.score-critical  td:first-child { border-left: 3px solid var(--danger); }
+
+/* Last row (total) styling */
+tbody tr:last-child td {
+  font-weight: 700;
+  background: #eff6ff;
+  border-top: 2px solid var(--navy);
+  border-bottom: 2px solid var(--navy);
+}
+
+/* ---- Paragraphs ---- */
+p {
+  margin: 0 0 10px;
+  orphans: 3;
+  widows: 3;
+}
+
+/* ---- Lists ---- */
+ul, ol {
+  margin: 8px 0 12px;
+  padding-left: 22px;
+}
+
+li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+/* ---- Severity-tagged headings (### 1. Critical Issue...) ---- */
+h3 .severity-critical {
+  display: inline-block;
+  background: var(--critical-border);
+  color: var(--white);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Finding blocks — styled paragraphs after h3s that contain severity keywords */
+.finding-critical {
+  border-left: 4px solid var(--critical-border);
+  background: var(--critical-bg);
+  padding: 10px 14px;
+  margin: 8px 0 16px;
+  border-radius: 0 4px 4px 0;
+}
+
+.finding-high {
+  border-left: 4px solid var(--high-border);
+  background: var(--high-bg);
+  padding: 10px 14px;
+  margin: 8px 0 16px;
+  border-radius: 0 4px 4px 0;
+}
+
+.finding-medium {
+  border-left: 4px solid var(--medium-border);
+  background: var(--medium-bg);
+  padding: 10px 14px;
+  margin: 8px 0 16px;
+  border-radius: 0 4px 4px 0;
+}
+
+.finding-low {
+  border-left: 4px solid var(--low-border);
+  background: var(--low-bg);
+  padding: 10px 14px;
+  margin: 8px 0 16px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ---- Code blocks ---- */
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 8pt;
+  line-height: 1.6;
+  overflow-x: auto;
+  page-break-inside: avoid;
+  margin: 12px 0;
+}
+
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 8.5pt;
+  background: #f1f5f9;
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: #be185d;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ---- Horizontal rule ---- */
+hr {
+  border: none;
+  border-top: 1.5px solid var(--border);
+  margin: 24px 0;
+}
+
+/* ---- Strong / Em ---- */
+strong { font-weight: 600; color: var(--text); }
+em     { color: var(--muted); }
+
+/* ---- Page breaks ---- */
+h2 { page-break-before: auto; }
+h2.section-break { page-break-before: always; }
+
+/* ---- Quick wins section special styling ---- */
+.quick-wins-table td:first-child {
+  font-weight: 500;
+  max-width: 340px;
+}
+
+/* ---- Footer ---- */
+@page {
+  @bottom-center {
+    content: "Alexa Media Solutions · GEO Audit · May 2026";
+    font-family: 'Inter', sans-serif;
+    font-size: 7.5pt;
+    color: #94a3b8;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font-family: 'Inter', sans-serif;
+    font-size: 7.5pt;
+    color: #94a3b8;
+  }
+}

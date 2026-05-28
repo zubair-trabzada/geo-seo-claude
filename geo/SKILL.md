@@ -176,27 +176,45 @@ All commands generate structured output:
 
 ## PDF Report Generation
 
-The `/geo report-pdf <url>` command generates a professional, branded PDF report:
+The `/geo report-pdf <url>` command converts `GEO-AUDIT-REPORT.md` into a styled, client-ready PDF.
 
-### How It Works
-1. Run the full audit or individual analyses first
-2. Collect all scores and findings into a JSON structure
-3. Execute the PDF generator: `python3 ~/.claude/skills/geo/scripts/generate_pdf_report.py data.json GEO-REPORT.pdf`
+### Requirements
+- **pandoc** — `brew install pandoc`
+- **Google Chrome** — `/Applications/Google Chrome.app/` (standard Mac install)
+
+No Python dependencies required for PDF generation.
 
 ### What the PDF Includes
-- **Cover page** with GEO score gauge visualization
-- **Score breakdown** with color-coded bar charts
-- **AI Platform Readiness** dashboard with horizontal bar chart
-- **Crawler Access** status table with color-coded Allow/Block
-- **Key Findings** categorized by severity (Critical/High/Medium/Low)
-- **Prioritized Action Plan** (Quick Wins, Medium-Term, Strategic)
-- **Methodology & Glossary** appendix
+- **Cover page** — dark navy gradient, GEO score badge, brand/domain/date/location metadata
+- **Color-coded score tables** — cells with `XX/100` values are automatically colored green/blue/amber/orange/red
+- **Severity-tagged findings** — Critical/High/Medium/Low sections get colored left-border callout blocks
+- **Section page breaks** — major sections break to new pages automatically
+- **Styled code blocks** — JSON schema templates render with dark monospace theme
+
+### Templates
+Bundled at `~/.claude/skills/geo/templates/`:
+- `geo-report-style.css` — stylesheet (edit colors, fonts, layout here)
+- `geo-report-template.html` — pandoc HTML template (edit cover fields here)
 
 ### Workflow
-1. First run `/geo audit <url>` to collect all data
-2. Then run `/geo report-pdf <url>` to generate the PDF
-3. The tool will compile audit data into JSON, then generate the PDF
-4. Output: `GEO-REPORT.pdf` in the current directory
+1. Run `/geo audit <url>` to produce `GEO-AUDIT-REPORT.md`
+2. Run `/geo report-pdf` — extracts metadata from the report and runs:
+   ```bash
+   pandoc GEO-AUDIT-REPORT.md \
+     --to html5 --standalone --embed-resources \
+     --template ~/.claude/skills/geo/templates/geo-report-template.html \
+     --css ~/.claude/skills/geo/templates/geo-report-style.css \
+     --metadata brand_name="..." --metadata geo_score="..." \
+     -o GEO-REPORT.html
+
+   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+     --headless=new --disable-gpu --no-sandbox \
+     --print-to-pdf="$(pwd)/GEO-REPORT.pdf" \
+     --print-to-pdf-no-header --no-pdf-header-footer \
+     --virtual-time-budget=5000 \
+     "file://$(pwd)/GEO-REPORT.html"
+   ```
+3. Output: `GEO-REPORT.pdf` in the current directory
 
 ---
 
