@@ -86,21 +86,21 @@ For each page in the crawl set, record:
 
 Delegate analysis to 5 specialized subagents. Each subagent operates on the collected page data and produces a category score (0-100) plus findings.
 
-**Subagent 1: AI Citability Analysis (geo-citability)**
-- Analyze content blocks for quotability by AI systems
-- Score passage self-containment, answer block quality, statistical density
-- Identify high-value pages that could be reformatted for better AI citation
-
-**Subagent 2: Platform & Brand Analysis (geo-brand-mentions)**
-- Check brand presence across YouTube, Reddit, Wikipedia, LinkedIn
-- Assess third-party mention volume and sentiment
+**Subagent 1: AI Visibility Analysis (geo-ai-visibility)**
+- Analyze content blocks for quotability by AI systems (citability scoring)
+- Check AI crawler access via robots.txt and llms.txt presence
+- Scan brand presence across YouTube, Reddit, Wikipedia, LinkedIn
 - Score brand authority signals that AI models use for entity recognition
 
-**Subagent 3: Technical GEO Infrastructure (geo-crawlers + geo-llmstxt)**
+**Subagent 2: Platform Optimization (geo-platform-analysis)**
+- Assess readiness for Google AI Overviews, ChatGPT, Perplexity, Gemini, Bing Copilot
+- Check platform-specific ranking factors and optimization opportunities
+
+**Subagent 3: Technical GEO Infrastructure (geo-technical)**
 - Analyze robots.txt for AI crawler access
-- Check for llms.txt presence and quality
 - Verify meta tags, headers, and technical accessibility for AI systems
-- Check page speed and rendering (JS-heavy sites are harder for AI crawlers)
+- Check page speed, server-side rendering, and Core Web Vitals
+- Assess security headers and mobile optimization
 
 **Subagent 4: Content E-E-A-T Quality (geo-content)**
 - Evaluate Experience, Expertise, Authoritativeness, Trustworthiness signals

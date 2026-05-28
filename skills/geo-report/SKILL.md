@@ -4,6 +4,7 @@ description: Generate a professional, client-facing GEO report combining all aud
 version: 1.0.0
 author: geo-seo-claude
 tags: [geo, report, client-deliverable, executive-summary, action-plan]
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
 # GEO Client Report Generator
@@ -19,7 +20,7 @@ This skill aggregates outputs from all GEO audit skills into a single, professio
    - `geo-schema` -> GEO-SCHEMA-REPORT.md
    - `geo-technical` -> GEO-TECHNICAL-AUDIT.md
    - `geo-content` -> GEO-CONTENT-ANALYSIS.md
-   - (Optional) `geo-llms-txt` -> llms.txt assessment
+   - (Optional) `geo-llmstxt` -> llms.txt assessment
    - (Optional) `geo-brand-mentions` -> brand authority data
 2. Collect all scores and findings
 3. Calculate the composite GEO Readiness Score

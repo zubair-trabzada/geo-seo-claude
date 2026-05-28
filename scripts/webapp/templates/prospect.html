@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block title %}{{ p.company }} — GEO-SEO CRM{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb" style="font-size:.83rem">
+    <li class="breadcrumb-item"><a href="/" class="text-secondary">Dashboard</a></li>
+    <li class="breadcrumb-item active text-white">{{ p.company }}</li>
+  </ol>
+</nav>
+
+<!-- Header row -->
+<div class="d-flex align-items-start gap-4 mb-4 flex-wrap">
+
+  <!-- Score circle -->
+  {% set tier = p.geo_score | score_tier %}
+  <div class="score-circle tier-{{ tier }} flex-shrink-0">
+    <span class="big">{{ p.geo_score }}</span>
+    <span class="sub">/100</span>
+    <span style="font-size:.65rem;margin-top:.1rem">{{ p.geo_score | score_label }}</span>
+  </div>
+
+  <!-- Title + status -->
+  <div>
+    <h2 class="mb-1 text-white">{{ p.company }}</h2>
+    <div class="text-secondary mb-2" style="font-size:.9rem">
+      <i class="bi bi-globe me-1"></i>
+      <a href="https://{{ p.domain }}" target="_blank" class="text-secondary">{{ p.domain }}</a>
+    </div>
+
+    <!-- Status — updated via HTMX -->
+    <div id="status-badge">
+      {% set meta = p.status | status_meta %}
+      <span class="badge bg-{{ meta.badge }} fs-6">{{ meta.icon }} {{ meta.label }}</span>
+    </div>
+
+    <!-- Status selector -->
+    <form class="mt-2 d-flex align-items-center gap-2"
+          hx-post="/prospect/{{ p.id }}/status"
+          hx-target="#status-badge"
+          hx-swap="innerHTML">
+      <select name="status" class="form-select form-select-sm" style="width:auto;background:#161b22;color:#fff;border-color:#30363d">
+        {% for s in statuses %}
+          {% set m = s | status_meta %}
+          <option value="{{ s }}" {% if s == p.status %}selected{% endif %}>
+            {{ m.icon }} {{ m.label }}
+          </option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-check-lg"></i> Aggiorna
+      </button>
+    </form>
+  </div>
+
+  <!-- PDF download button (right side) -->
+  <div class="ms-auto">
+    {% if has_pdf %}
+    <a href="/prospect/{{ p.id }}/pdf" class="btn btn-danger">
+      <i class="bi bi-file-earmark-pdf me-1"></i>Scarica PDF
+    </a>
+    {% else %}
+    <button class="btn btn-outline-secondary" disabled title="PDF non disponibile">
+      <i class="bi bi-file-earmark-pdf me-1"></i>PDF non disponibile
+    </button>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Info + Files row -->
+<div class="row g-3 mb-4">
+
+  <!-- Info card -->
+  <div class="col-md-6">
+    <div class="kpi-card h-100">
+      <h6 class="text-secondary mb-3" style="font-size:.78rem;text-transform:uppercase;letter-spacing:.06em">
+        <i class="bi bi-info-circle me-1"></i>Dettagli
+      </h6>
+      <table class="table table-sm mb-0" style="font-size:.87rem">
+        <tbody>
+          <tr><td class="text-secondary">ID</td><td>{{ p.id }}</td></tr>
+          <tr><td class="text-secondary">Settore</td><td>{{ p.industry or '—' }}</td></tr>
+          <tr><td class="text-secondary">Paese</td><td>{{ p.country or '—' }}</td></tr>
+          <tr><td class="text-secondary">Audit</td><td>{{ p.audit_date or '—' }}</td></tr>
+          <tr><td class="text-secondary">MRR</td>
+              <td class="fw-semibold" style="color:#58a6ff">{{ p.monthly_value | format_eur }}</td></tr>
+          <tr><td class="text-secondary">Contratto</td><td>{{ p.contract_months or '—' }} mesi</td></tr>
+          {% if p.contact_name %}
+          <tr><td class="text-secondary">Contatto</td><td>{{ p.contact_name }}</td></tr>
+          {% endif %}
+          {% if p.contact_email %}
+          <tr><td class="text-secondary">Email</td>
+              <td><a href="mailto:{{ p.contact_email }}" class="text-info">{{ p.contact_email }}</a></td></tr>
+          {% endif %}
+          <tr><td class="text-secondary">Aggiornato</td><td>{{ p.updated_at or '—' }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Files card -->
+  <div class="col-md-6">
+    <div class="kpi-card h-100">
+      <h6 class="text-secondary mb-3" style="font-size:.78rem;text-transform:uppercase;letter-spacing:.06em">
+        <i class="bi bi-folder me-1"></i>File
+      </h6>
+      {% if p.audit_file %}
+      <div class="mb-2">
+        <span class="badge bg-secondary me-1">Audit</span>
+        <span class="file-link">{{ p.audit_file }}</span>
+      </div>
+      {% endif %}
+      {% if p.proposal_file %}
+      <div class="mb-2">
+        <span class="badge bg-info me-1">Proposta</span>
+        <span class="file-link">{{ p.proposal_file }}</span>
+      </div>
+      {% endif %}
+      {% if has_pdf %}
+      <div class="mt-3">
+        <a href="/prospect/{{ p.id }}/pdf" class="btn btn-sm btn-outline-danger">
+          <i class="bi bi-file-earmark-pdf me-1"></i>Scarica PDF Report
+        </a>
+      </div>
+      {% endif %}
+      {% if not p.audit_file and not p.proposal_file %}
+      <p class="text-secondary" style="font-size:.85rem">Nessun file associato.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Notes section -->
+<div class="kpi-card mb-4">
+  <h6 class="text-secondary mb-3" style="font-size:.78rem;text-transform:uppercase;letter-spacing:.06em">
+    <i class="bi bi-journal-text me-1"></i>Note
+  </h6>
+
+  <!-- Notes list — HTMX target -->
+  <div id="notes-list">
+    {% include "_notes.html" %}
+  </div>
+
+  <!-- Add note form -->
+  <form class="mt-3 d-flex gap-2"
+        hx-post="/prospect/{{ p.id }}/note"
+        hx-target="#notes-list"
+        hx-swap="innerHTML"
+        hx-on::after-request="this.reset()">
+    <input type="text" name="text" class="form-control"
+           style="background:#0d1117;color:#fff;border-color:#30363d"
+           placeholder="Aggiungi una nota…" required>
+    <button type="submit" class="btn btn-primary flex-shrink-0">
+      <i class="bi bi-plus-lg me-1"></i>Aggiungi
+    </button>
+  </form>
+</div>
+
+{% endblock %}

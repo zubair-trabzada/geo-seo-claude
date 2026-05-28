@@ -4,6 +4,7 @@ description: Generate a professional PDF report from GEO audit data using Report
 version: 1.0.0
 author: geo-seo-claude
 tags: [geo, pdf, report, client-deliverable, professional]
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
 # GEO PDF Report Generator

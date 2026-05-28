@@ -58,3 +58,6 @@ test_output/
 # OS
 Thumbs.db
 .DS_Store
+
+# Git worktrees
+.worktrees/

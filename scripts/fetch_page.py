@@ -8,13 +8,12 @@ import sys
 import json
 import re
 from urllib.parse import urljoin, urlparse
-from typing import Optional
 
 try:
     import requests
     from bs4 import BeautifulSoup
 except ImportError:
-    print("ERROR: Required packages not installed. Run: pip install requests beautifulsoup4")
+    print("ERROR: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
 # Common AI crawler user agents for testing
@@ -57,6 +56,11 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
         "security_headers": {},
         "errors": [],
     }
+
+    parsed_url = urlparse(url)
+    if parsed_url.scheme not in ("http", "https"):
+        result["errors"].append(f"Unsupported URL scheme: {parsed_url.scheme!r}. Only http and https are allowed.")
+        return result
 
     try:
         response = requests.get(
@@ -115,7 +119,30 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
                 if level == 1:
                     result["h1_tags"].append(text)
 
-        # Text content
+        # Structured data (JSON-LD) — extract before decompose() mutates the tree
+        for script in soup.find_all("script", type="application/ld+json"):
+            try:
+                data = json.loads(script.string)
+                result["structured_data"].append(data)
+            except (json.JSONDecodeError, TypeError):
+                result["errors"].append("Invalid JSON-LD detected")
+
+        # SSR check — must run BEFORE decompose() mutates the tree
+        js_app_roots = soup.find_all(
+            id=re.compile(r"(app|root|__next|__nuxt)", re.I)
+        )
+
+        # Check SSR by measuring content inside framework root divs
+        # before decompose() strips elements from the tree
+        ssr_check_results = []
+        for root_el in js_app_roots:
+            inner_text = root_el.get_text(strip=True)
+            ssr_check_results.append({
+                "id": root_el.get("id", "unknown"),
+                "text_length": len(inner_text),
+            })
+
+        # Text content — decompose non-content elements (destructive)
         for element in soup.find_all(["script", "style", "nav", "footer", "header"]):
             element.decompose()
         text = soup.get_text(separator=" ", strip=True)
@@ -145,30 +172,20 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
             }
             result["images"].append(img_data)
 
-        # Structured data (JSON-LD)
-        for script in BeautifulSoup(response.text, "lxml").find_all(
-            "script", type="application/ld+json"
-        ):
-            try:
-                data = json.loads(script.string)
-                result["structured_data"].append(data)
-            except (json.JSONDecodeError, TypeError):
-                result["errors"].append("Invalid JSON-LD detected")
-
-        # SSR check — look for signs of client-side only rendering
-        noscript_tags = BeautifulSoup(response.text, "lxml").find_all("noscript")
-        js_app_roots = BeautifulSoup(response.text, "lxml").find_all(
-            id=re.compile(r"(app|root|__next|__nuxt)", re.I)
-        )
-
+        # SSR assessment — use pre-decompose measurements + overall content
         if js_app_roots:
-            # Check if the app root has meaningful content
-            for root in js_app_roots:
-                inner_text = root.get_text(strip=True)
-                if len(inner_text) < 50:
+            for check in ssr_check_results:
+                # Only flag as client-rendered if both the root div has
+                # minimal content AND the overall page has little text.
+                # Sites using SSR/prerendering (WordPress, LiteSpeed Cache,
+                # Prerender.io) will have substantial text despite having
+                # framework-style root divs.
+                if check["text_length"] < 50 and result["word_count"] < 200:
                     result["has_ssr_content"] = False
                     result["errors"].append(
-                        f"Possible client-side only rendering detected: #{root.get('id', 'unknown')} has minimal server-rendered content"
+                        f"Possible client-side only rendering detected: "
+                        f"#{check['id']} has minimal server-rendered content "
+                        f"({result['word_count']} words on page)"
                     )
 
     except requests.exceptions.Timeout:

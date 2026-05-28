@@ -4,6 +4,7 @@ description: Schema.org structured data audit and generation optimized for AI di
 version: 1.0.0
 author: geo-seo-claude
 tags: [geo, schema, structured-data, json-ld, entity-recognition, ai-discoverability]
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
 # GEO Schema & Structured Data
@@ -14,7 +15,7 @@ Structured data is the primary machine-readable signal that tells AI systems wha
 
 ## How to Use This Skill
 
-1. Fetch the target page HTML using curl or WebFetch
+1. Fetch the target page HTML using `fetch_page.py` (see note below)
 2. Detect all existing structured data (JSON-LD, Microdata, RDFa)
 3. Validate detected schemas against Schema.org specifications
 4. Identify missing recommended schemas based on business type
@@ -24,6 +25,12 @@ Structured data is the primary machine-readable signal that tells AI systems wha
 ---
 
 ## Step 1: Detection
+
+**IMPORTANT:** WebFetch converts HTML to markdown and strips `<head>` content, which removes JSON-LD blocks. Use `fetch_page.py` instead:
+```bash
+python3 ~/.claude/skills/geo/scripts/fetch_page.py <url> page
+```
+The output includes a `structured_data` array with all parsed JSON-LD blocks from the page.
 
 ### Scan for JSON-LD
 Look for `<script type="application/ld+json">` blocks in the HTML. Parse each block as JSON. A page may contain multiple JSON-LD blocks — collect all of them.

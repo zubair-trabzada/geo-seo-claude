@@ -22,7 +22,7 @@ try:
     import requests
     from bs4 import BeautifulSoup
 except ImportError:
-    print("ERROR: Required packages not installed. Run: pip install requests beautifulsoup4")
+    print("ERROR: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
 DEFAULT_HEADERS = {

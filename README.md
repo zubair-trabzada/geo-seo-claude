@@ -19,7 +19,7 @@
 |--------|-------|
 | GEO services market | $850M+ (projected $7.3B by 2031) |
 | AI-referred traffic growth | +527% year-over-year |
-| AI traffic converts vs organic | 4.4x higher |
+| AI traffic conversion rate vs organic | 4.4x higher |
 | Gartner: search traffic drop by 2028 | -50% |
 | Brand mentions vs backlinks for AI | 3x stronger correlation |
 | Marketers investing in GEO | Only 23% |
@@ -42,12 +42,38 @@ cd geo-seo-claude
 ./install.sh
 ```
 
+### Windows (Git Bash)
+
+Requires [Git for Windows](https://git-scm.com/downloads) which includes Git Bash.
+
+```bash
+# Option 1: One-command install (run from Git Bash, not PowerShell/CMD)
+curl -fsSL https://raw.githubusercontent.com/zubair-trabzada/geo-seo-claude/main/install-win.sh | bash
+
+# Option 2: Manual install
+git clone https://github.com/zubair-trabzada/geo-seo-claude.git
+cd geo-seo-claude
+./install-win.sh
+```
+
+> **Note:** Right-click the folder and select "Open Git Bash here", or open Git Bash and navigate to the directory. Do not use PowerShell or Command Prompt.
+
 ### Requirements
 
-- Python 3.8+
+- Python 3.8+ (on Debian/Ubuntu also `python3-venv`)
 - Claude Code CLI
 - Git
+- Optional: [`uv`](https://docs.astral.sh/uv/) — if present, the installer uses it for a faster dependency install
 - Optional: Playwright (for screenshots)
+
+### Isolated install
+
+Python dependencies are installed into a dedicated virtual environment at
+`~/.claude/skills/geo/.venv/`. Your system Python is **not** touched, and
+uninstalling the skill removes the venv together with the rest of the files.
+
+Skill and agent files reference that venv directly, so the tool works
+regardless of what `python3` resolves to on your `PATH`.
 
 ---
 
@@ -78,7 +104,7 @@ Open Claude Code and use these commands:
 geo-seo-claude/
 ├── geo/                          # Main skill orchestrator
 │   └── SKILL.md                  # Primary skill file with commands & routing
-├── skills/                       # 11 specialized sub-skills
+├── skills/                       # 13 specialized sub-skills
 │   ├── geo-audit/                # Full audit orchestration & scoring
 │   ├── geo-citability/           # AI citation readiness scoring
 │   ├── geo-crawlers/             # AI crawler access analysis
@@ -89,7 +115,10 @@ geo-seo-claude/
 │   ├── geo-technical/            # Technical SEO foundations
 │   ├── geo-content/              # Content quality & E-E-A-T
 │   ├── geo-report/               # Client-ready markdown report generation
-│   └── geo-report-pdf/           # Professional PDF report with charts
+│   ├── geo-report-pdf/           # Professional PDF report with charts
+│   ├── geo-prospect/             # CRM-lite prospect pipeline management
+│   ├── geo-proposal/             # Auto-generate client proposals
+│   └── geo-compare/              # Monthly delta tracking & progress reports
 ├── agents/                       # 5 parallel subagents
 │   ├── geo-ai-visibility.md      # GEO audit, citability, crawlers, brands
 │   ├── geo-platform-analysis.md  # Platform-specific optimization
@@ -114,6 +143,23 @@ geo-seo-claude/
 ├── requirements.txt              # Python dependencies
 └── README.md                     # This file
 ```
+
+---
+
+## Data Storage
+
+The CRM and reporting skills (`/geo prospect`, `/geo proposal`, `/geo compare`) store runtime data outside the Claude Code directory:
+
+```
+~/.geo-prospects/
+├── prospects.json              # Client/prospect pipeline data
+├── proposals/                  # Generated proposal documents
+│   └── <domain>-proposal-<date>.md
+└── reports/                    # Monthly delta reports
+    └── <domain>-monthly-<YYYY-MM>.md
+```
+
+This directory is **not removed** by the uninstaller — delete it manually if you no longer need your prospect data.
 
 ---
 
@@ -216,7 +262,7 @@ MIT License
 
 ## Contributing
 
-Contributions welcome! Please read the contribution guidelines in `docs/CONTRIBUTING.md` before submitting a PR.
+Contributions welcome!
 
 ---
 

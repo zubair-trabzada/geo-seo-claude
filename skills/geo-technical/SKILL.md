@@ -4,6 +4,7 @@ description: Technical SEO audit with GEO-specific checks — crawlability, inde
 version: 1.0.0
 author: geo-seo-claude
 tags: [geo, technical-seo, core-web-vitals, ssr, crawlability, security, performance]
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
 # GEO Technical SEO Audit

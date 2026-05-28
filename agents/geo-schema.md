@@ -14,9 +14,15 @@ You are a schema markup specialist. Your job is to analyze a target URL for exis
 
 ## Execution Steps
 
+**IMPORTANT:** WebFetch converts HTML to markdown and strips `<head>` content, which removes JSON-LD blocks. For schema detection, use the fetch_page.py script instead:
+```bash
+python3 ~/.claude/skills/geo/scripts/fetch_page.py <url> page
+```
+The output includes a `structured_data` array with all parsed JSON-LD blocks from the page.
+
 ### Step 1: Detect Existing Structured Data
 
-Fetch the target URL with WebFetch and scan the full HTML source for structured data in all three formats:
+Fetch the target URL using `fetch_page.py` (see above) and scan the full HTML source for structured data in all three formats:
 
 **JSON-LD (Preferred):**
 - Search for `<script type="application/ld+json">` tags.
@@ -239,7 +245,7 @@ Compute the **Schema Score (0-100)**:
 |---|---|---|
 | Organization/LocalBusiness | 20 | Present (10), with sameAs to 3+ platforms (20) |
 | Article/content schema | 15 | Present (8), with author as Person (12), with dateModified (15) |
-| Person schema for author | 15 | Present (8), with sameAs (12), with jobTitle and knowsFor (15) |
+| Person schema for author | 15 | Present (8), with sameAs (12), with jobTitle and knowsAbout (15) |
 | sameAs completeness | 15 | 1-2 platforms (5), 3-4 platforms (10), 5+ platforms including Wikipedia (15) |
 | speakable property | 10 | Present and properly targeting content sections (10) |
 | BreadcrumbList | 5 | Present and valid (5) |

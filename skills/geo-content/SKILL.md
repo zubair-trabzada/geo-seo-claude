@@ -4,6 +4,7 @@ description: Content quality and E-E-A-T assessment for AI citability — evalua
 version: 1.0.0
 author: geo-seo-claude
 tags: [geo, content-quality, eeat, citability, ai-content, topical-authority]
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
 # GEO Content Quality & E-E-A-T Assessment

@@ -44,7 +44,7 @@ try:
     from reportlab.graphics.charts.piecharts import Pie
     from reportlab.graphics import renderPDF
 except ImportError:
-    print("ERROR: ReportLab is required. Run: pip install reportlab")
+    print("ERROR: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
 
@@ -566,28 +566,69 @@ def generate_report(data, output_path="GEO-REPORT.pdf"):
     elements.append(Spacer(1, 8))
 
     if crawler_access:
-        crawler_data = [["Crawler", "Platform", "Status", "Recommendation"]]
+        # Use Paragraph objects for text wrapping in cells
+        cell_style = ParagraphStyle(
+            'CrawlerCell', fontName='Helvetica', fontSize=9,
+            textColor=TEXT_PRIMARY, leading=12,
+        )
+        header_cell_style = ParagraphStyle(
+            'CrawlerHeaderCell', fontName='Helvetica-Bold', fontSize=9,
+            textColor=WHITE, leading=12,
+        )
+        status_style_allowed = ParagraphStyle(
+            'StatusAllowed', fontName='Helvetica-Bold', fontSize=9,
+            textColor=SUCCESS, leading=12,
+        )
+        status_style_blocked = ParagraphStyle(
+            'StatusBlocked', fontName='Helvetica-Bold', fontSize=9,
+            textColor=DANGER, leading=12,
+        )
+        status_style_restricted = ParagraphStyle(
+            'StatusRestricted', fontName='Helvetica-Bold', fontSize=9,
+            textColor=WARNING, leading=12,
+        )
+        status_style_default = ParagraphStyle(
+            'StatusDefault', fontName='Helvetica', fontSize=9,
+            textColor=TEXT_PRIMARY, leading=12,
+        )
+
+        crawler_data = [[
+            Paragraph("Crawler", header_cell_style),
+            Paragraph("Platform", header_cell_style),
+            Paragraph("Status", header_cell_style),
+            Paragraph("Recommendation", header_cell_style),
+        ]]
         for crawler_name, info in crawler_access.items():
             if isinstance(info, dict):
+                status_text = info.get("status", "Unknown")
+                status_upper = status_text.upper()
+                if "ALLOW" in status_upper:
+                    s_style = status_style_allowed
+                elif "BLOCK" in status_upper:
+                    s_style = status_style_blocked
+                elif "RESTRICT" in status_upper:
+                    s_style = status_style_restricted
+                else:
+                    s_style = status_style_default
+
                 crawler_data.append([
-                    crawler_name,
-                    info.get("platform", ""),
-                    info.get("status", "Unknown"),
-                    info.get("recommendation", ""),
+                    Paragraph(crawler_name, cell_style),
+                    Paragraph(info.get("platform", ""), cell_style),
+                    Paragraph(status_text, s_style),
+                    Paragraph(info.get("recommendation", ""), cell_style),
                 ])
             else:
-                crawler_data.append([crawler_name, "", str(info), ""])
+                crawler_data.append([
+                    Paragraph(crawler_name, cell_style),
+                    Paragraph("", cell_style),
+                    Paragraph(str(info), cell_style),
+                    Paragraph("", cell_style),
+                ])
 
-        ct = Table(crawler_data, colWidths=[100, 100, 80, 180])
+        # Full page width: letter (612pt) - 50pt margins each side = 512pt
+        ct = Table(crawler_data, colWidths=[90, 110, 72, 240])
         ct_style = make_table_style()
-
-        # Color status cells
-        for i in range(1, len(crawler_data)):
-            status = crawler_data[i][2].upper()
-            if "ALLOW" in status:
-                ct_style.add('TEXTCOLOR', (2, i), (2, i), SUCCESS)
-            elif "BLOCK" in status:
-                ct_style.add('TEXTCOLOR', (2, i), (2, i), DANGER)
+        ct_style.add('VALIGN', (0, 0), (-1, -1), 'TOP')
 
         ct.setStyle(ct_style)
         elements.append(ct)
@@ -876,7 +917,12 @@ if __name__ == "__main__":
         output_file = sys.argv[2] if len(sys.argv) > 2 else "GEO-REPORT.pdf"
 
         if input_path == "-":
-            data = json.loads(sys.stdin.read())
+            MAX_STDIN_BYTES = 10_000_000
+            raw = sys.stdin.buffer.read(MAX_STDIN_BYTES + 1)
+            if len(raw) > MAX_STDIN_BYTES:
+                print("ERROR: stdin input exceeds 10 MB limit", file=sys.stderr)
+                sys.exit(1)
+            data = json.loads(raw)
         else:
             with open(input_path) as f:
                 data = json.load(f)

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "PRO-001",
+    "company": "Electron Srl",
+    "domain": "electron-srl.com",
+    "contact_email": "",
+    "contact_name": "",
+    "industry": "Educational Equipment Manufacturing (B2B)",
+    "country": "Italy",
+    "status": "proposal",
+    "geo_score": 28,
+    "audit_date": "2026-03-12",
+    "audit_file": "~/.geo-prospects/audits/electron-srl.com-2026-03-12.md",
+    "proposal_file": "~/.geo-prospects/proposals/electron-srl.com-proposal-2026-03-12.md",
+    "monthly_value": 9500,
+    "contract_start": null,
+    "contract_months": 12,
+    "notes": [
+      {
+        "date": "2026-03-12T14:00:00",
+        "text": "GEO Quick Audit completato con dati reali. Score 28/100 (Critical). Problemi chiave: server blocca AI crawler (403), zero schema, zero entity (Wikipedia/LinkedIn/YouTube). Forte opportunità: 35+ anni esperienza, 70+ paesi, competitor italiani ugualmente deboli. Raccomandato: Premium €9.500/mese."
+      },
+      {
+        "date": "2026-03-12T15:00:00",
+        "text": "Proposta commerciale generata e salvata. Pacchetto raccomandato: PREMIUM €9.500/mese x 12 mesi = €114.000. ROI stimato: payback 8-12 mesi. Proposta include timeline 6 mesi, 3 tier di prezzo, confronto competitor, proiezione ROI."
+      }
+    ],
+    "created_at": "2026-03-12",
+    "updated_at": "2026-03-12"
+  }
+]

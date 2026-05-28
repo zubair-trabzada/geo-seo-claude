@@ -18,7 +18,7 @@ This skill analyzes a website's accessibility to AI crawlers -- the bots that AI
 
 ## Key Insight
 
-As of early 2026, many websites inadvertently block AI crawlers through overly aggressive robots.txt rules, inherited from legacy SEO configurations. A Originality.ai 2025 study found that over 35% of the top 1,000 websites block at least one major AI crawler, and 5-10% block all AI crawlers. Blocking AI crawlers is the single fastest way to become invisible in AI-generated search results.
+As of early 2026, many websites inadvertently block AI crawlers through overly aggressive robots.txt rules, inherited from legacy SEO configurations. An Originality.ai 2025 study found that over 35% of the top 1,000 websites block at least one major AI crawler, and 5-10% block all AI crawlers. Blocking AI crawlers is the single fastest way to become invisible in AI-generated search results.
 
 ---
 
@@ -265,6 +265,21 @@ Disallow: /
 3. If critical content requires JS rendering, flag this as a potential issue.
 4. Check for Server-Side Rendering (SSR) or Static Site Generation (SSG) as mitigations.
 
+### Step 6: Parse Content Signals
+
+Using the already-fetched robots.txt from Step 1, scan for `Content-Signal:` directives (IETF draft `draft-romm-aipref-contentsignals`).
+
+1. Scan every line for a line starting with `Content-Signal:` (case-insensitive).
+2. If found:
+   - Parse all key=value pairs (split on `,` then on `=`).
+   - Validate keys against the known set: `ai-train`, `search`, `ai-personalization`, `ai-retrieval`.
+   - Validate values: only `yes` and `no` are valid.
+   - Flag any unknown keys or invalid values as a warning — the spec is still an IETF draft.
+   - Record the result as **Pass** and surface parsed values with plain-English meaning.
+3. If absent: record as **Recommendation** — the site has not declared AI usage preferences.
+
+No additional HTTP request is needed. robots.txt is already fetched in Step 1.
+
 ---
 
 ## Output Format
@@ -327,6 +342,23 @@ Generate a file called `GEO-CRAWLER-ACCESS.md`:
 - **JavaScript Rendering:** [Assessment]
 - **llms.txt:** [Present/Absent]
 - **Sitemap Accessibility:** [Assessment]
+
+### Content Signals (IETF Draft)
+
+**Status:** Present / Absent
+
+<!-- If present: -->
+| Signal Key | Value | Meaning |
+|---|---|---|
+| ai-train | no | Opted out of AI model training |
+| search | yes | Permits use in AI-powered search results |
+
+<!-- If absent: -->
+**Recommendation:** Add a `Content-Signal:` directive to robots.txt to declare AI usage preferences explicitly. Example:
+
+`Content-Signal: ai-train=no, search=yes, ai-retrieval=yes`
+
+See https://contentsignals.org/ for the full specification.
 ```
 
 ---
