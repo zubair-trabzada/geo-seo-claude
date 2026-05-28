@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Uploads</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+</head><body>
+
+<div class="adm-bar">
+  <div class="logo">Premier <small>Admin</small></div>
+  <div class="who"></div>
+</div>
+<nav class="adm-tabs">
+  <a href="index.html">Dashboard</a>
+  <a href="clients.html">Clients</a>
+  <a href="quote.html">+ Quote</a>
+  <a href="po.html">+ PO</a>
+  <a href="bol.html">+ BOL</a>
+  <a href="calls.html">Calls</a>
+  <a href="uploads.html">Uploads</a>
+</nav>
+
+<div class="wrap">
+  <div class="card">
+    <h2>Customer uploads</h2>
+    <p class="sub">Files dropped by customers via the upload links you sent them. Tap to download.</p>
+    <div id="uploads" class="list"><div class="empty">Loading…</div></div>
+  </div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+function fmtWhen(iso){ try { const d = new Date(iso); return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); } catch { return iso; } }
+function bytes(n){ if (!n) return ''; if (n > 1048576) return (n/1048576).toFixed(1) + ' MB'; return (n/1024).toFixed(0) + ' KB'; }
+
+(async function(){
+  const el = document.getElementById('uploads');
+  try {
+    const uploads = await Premier.listUploads();
+    if (!uploads.length) { el.innerHTML = '<div class="empty">No uploads yet. <a href="clients.html">Send a client an upload link &rarr;</a></div>'; return; }
+    el.innerHTML = uploads.map(u => `
+      <a class="list-item" href="${Premier.uploadFileUrl(u.id)}" target="_blank" rel="noopener">
+        <div>
+          <div class="ttl">${u.filename}</div>
+          <div class="sub">${u.company || '(unknown client)'} · ${u.uploader_name || ''} ${u.uploader_phone || ''}</div>
+          ${u.note ? `<div class="sub" style="margin-top:3px;color:#13212B">"${u.note.replace(/</g,'&lt;').slice(0,140)}"</div>` : ''}
+        </div>
+        <div class="meta">
+          <div class="amt" style="font-size:12.5px;color:#52606B">${bytes(u.size_bytes)}</div>
+          <div class="when">${fmtWhen(u.created)}</div>
+        </div>
+      </a>`).join('');
+  } catch (e) {
+    el.innerHTML = '<div class="empty">—</div>';
+  }
+})();
+</script>
+</body></html>

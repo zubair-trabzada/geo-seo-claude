@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Purchase Order</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head><body>
+
+<div class="adm-bar">
+  <div class="logo">Premier <small>Admin</small></div>
+  <div class="who"></div>
+</div>
+<nav class="adm-tabs">
+  <a href="index.html">Dashboard</a>
+  <a href="clients.html">Clients</a>
+  <a href="quote.html">+ Quote</a>
+  <a href="po.html">+ PO</a>
+  <a href="bol.html">+ BOL</a>
+  <a href="calls.html">Calls</a>
+  <a href="uploads.html">Uploads</a>
+</nav>
+
+<div class="wrap"><div id="view"></div></div>
+
+<div id="share-modal" class="share-modal">
+  <div class="box">
+    <h3 id="sm-title">PO sent!</h3>
+    <p class="sub" id="sm-sub"></p>
+    <div class="url" id="sm-url"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="sm-share">&#128241; Share / Text</button>
+      <button class="btn btn-teal" id="sm-copy">Copy link</button>
+      <a class="btn btn-ghost" id="sm-pdf" target="_blank">View PDF</a>
+    </div>
+    <div style="height:10px"></div>
+    <div class="btn-row">
+      <a class="btn btn-ghost" href="index.html">Done</a>
+      <a class="btn btn-ghost" href="po.html">+ Another PO</a>
+    </div>
+  </div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+const KIND = 'po';
+const params = new URLSearchParams(location.search);
+const editId = params.get('id');
+const view = document.getElementById('view');
+
+const state = {
+  client_id: params.get('client_id') || '',
+  client: null,
+  lines: [{ d:'', p:'' }],
+  terms: { payment: 'Net 30', delivery: '', ship_to: '', notes: 'Subject to Premier Equipment standard terms.' },
+};
+
+async function showBuilder() {
+  const [clients, brain] = await Promise.all([Premier.listClients(), Premier.loadBrain()]);
+  if (state.client_id) state.client = clients.find(c => c.id === state.client_id) || null;
+
+  view.innerHTML = `
+    <div class="card">
+      <h2>New Purchase Order</h2>
+      <p class="sub">Auto-numbered (PO-${new Date().getFullYear()}-NNNN). Filed in the vendor's R2 folder.</p>
+      <label>Vendor / Seller *</label>
+      <div class="row">
+        <select id="client_pick">
+          <option value="">— select vendor —</option>
+          ${clients.map(c => `<option value="${c.id}" ${c.id===state.client_id?'selected':''}>${c.company}${c.contact?' · '+c.contact:''}</option>`).join('')}
+        </select>
+        <a class="btn btn-ghost" href="clients.html?new=1">+ New vendor</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Line items</h2>
+      <p class="sub">Tap a machine to auto-add, or add lines manually.</p>
+      <div class="inv-chips" id="chips"></div>
+      <div id="lines"></div>
+      <div class="btn-row" style="margin-top:6px"><button class="btn btn-ghost" id="addline">+ Add line</button></div>
+      <div class="tot" id="total">$0.00</div>
+    </div>
+
+    <div class="card">
+      <h2>Terms</h2>
+      <div class="row">
+        <div><label>Payment terms</label><input id="payment" value="${state.terms.payment}"></div>
+        <div><label>Delivery date</label><input id="delivery" type="date" value="${state.terms.delivery}"></div>
+      </div>
+      <label>Ship to (if different)</label>
+      <input id="ship_to" value="${state.terms.ship_to}" placeholder="Premier Equipment, Beachwood OH 44122">
+      <label>Notes</label>
+      <textarea id="notes" rows="3">${state.terms.notes}</textarea>
+    </div>
+
+    <div class="card">
+      <h2>Send</h2>
+      <p class="sub">Generates the PO PDF, files it under the vendor, opens your share sheet.</p>
+      <div class="adm-cta">
+        <button class="btn btn-ghost" id="preview">Preview PDF</button>
+        <button class="btn btn-primary" id="send">Generate &amp; Send</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('client_pick').onchange = (e) => { state.client_id = e.target.value; state.client = clients.find(c => c.id === state.client_id) || null; };
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = (brain.machines || []).map(m => `<span class="inv-chip" data-id="${m.id}">+ ${m.tonnage}T ${m.brand} ${m.model}</span>`).join('');
+  chipsEl.querySelectorAll('.inv-chip').forEach(el => {
+    el.onclick = () => {
+      const m = (brain.machines || []).find(x => x.id === el.dataset.id);
+      if (!m) return;
+      addLine(`${m.tonnage}-Ton ${m.brand} ${m.model} — ${m.year}, ${m.shot_size} shot, ${m.controller} control, ${m.hours.toLocaleString()} hrs, ${m.condition}`);
+      Premier.toast('Added line');
+    };
+  });
+  renderLines();
+  document.getElementById('addline').onclick = () => addLine('');
+  document.getElementById('preview').onclick = () => doPreview();
+  document.getElementById('send').onclick    = () => doSend();
+}
+
+function addLine(d, p){ state.lines.push({d:d||'',p:p||''}); renderLines(); }
+function renderLines() {
+  const el = document.getElementById('lines');
+  el.innerHTML = state.lines.map((l, i) => `
+    <div class="line">
+      <input placeholder="Description" value="${(l.d||'').replace(/"/g,'&quot;')}" data-i="${i}" data-k="d">
+      <input type="number" placeholder="Price" value="${l.p}" data-i="${i}" data-k="p">
+      <button class="rm" data-i="${i}">&times;</button>
+    </div>`).join('');
+  el.querySelectorAll('input').forEach(inp => { inp.oninput = (e) => { state.lines[+e.target.dataset.i][e.target.dataset.k] = e.target.value; updateTotal(); }; });
+  el.querySelectorAll('.rm').forEach(b => b.onclick = (e) => { state.lines.splice(+e.target.dataset.i, 1); if (!state.lines.length) state.lines.push({d:'',p:''}); renderLines(); });
+  updateTotal();
+}
+function updateTotal(){ const t = state.lines.reduce((s,l)=>s+(parseFloat(l.p)||0),0); document.getElementById('total').textContent = Premier.money(t); }
+
+function gather() {
+  state.terms.payment  = document.getElementById('payment').value;
+  state.terms.delivery = document.getElementById('delivery').value;
+  state.terms.ship_to  = document.getElementById('ship_to').value;
+  state.terms.notes    = document.getElementById('notes').value;
+  return { client: state.client, lines: state.lines.filter(l => l.d || l.p), terms: state.terms };
+}
+function buildOpts(p) {
+  return {
+    kind: 'po',
+    client: p.client || {},
+    lines: p.lines,
+    terms: [['Payment', p.terms.payment], ['Delivery', p.terms.delivery || '—'], ['Ship to', p.terms.ship_to || 'Premier Equipment, Beachwood OH']],
+    notes: p.terms.notes,
+  };
+}
+
+function doPreview() {
+  const p = gather();
+  if (!p.lines.length) { Premier.toast('Add at least one line'); return; }
+  const { blob } = Premier.buildPDF(buildOpts(p));
+  window.open(URL.createObjectURL(blob), '_blank');
+}
+async function doSend() {
+  const p = gather();
+  if (!state.client_id) { Premier.toast('Pick a vendor'); return; }
+  if (!p.lines.length) { Premier.toast('Add at least one line'); return; }
+  const btn = document.getElementById('send'); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Sending…';
+  try {
+    const { blob, total } = Premier.buildPDF(buildOpts(p));
+    const title = p.lines[0]?.d || 'Purchase Order';
+    const doc = await Premier.uploadDocument({
+      client_id: state.client_id, kind: KIND, title,
+      amount_cents: Math.round(total * 100), payload: p, pdfBlob: blob,
+    });
+    showShareModal(doc);
+  } catch (e) { Premier.toast(String(e.message || e)); }
+  finally { btn.disabled = false; btn.innerHTML = 'Generate &amp; Send'; }
+}
+function shareUrlAbs(rel){ if (rel.startsWith('http')) return rel; return (Premier.API_BASE || location.origin) + rel; }
+function showShareModal(doc) {
+  const m = document.getElementById('share-modal'); const url = shareUrlAbs(doc.share_url);
+  document.getElementById('sm-title').textContent = `PO ${doc.number} sent!`;
+  document.getElementById('sm-sub').textContent = state.client ? `${state.client.company} · ${Premier.money((doc.amount_cents||0)/100)}` : '';
+  document.getElementById('sm-url').textContent = url;
+  document.getElementById('sm-pdf').href = url;
+  document.getElementById('sm-share').onclick = () => Premier.shareLink(url, `PO ${doc.number} from Premier Equipment`);
+  document.getElementById('sm-copy').onclick  = () => { navigator.clipboard.writeText(url); Premier.toast('Copied'); };
+  m.classList.add('open');
+}
+
+async function showDetail(id) {
+  view.innerHTML = '<div class="card"><div class="empty">Loading…</div></div>';
+  const doc = await Premier.getDocument(id);
+  if (!doc) { view.innerHTML = '<div class="card"><div class="empty">PO not found.</div></div>'; return; }
+  const url = shareUrlAbs(doc.share_url);
+  view.innerHTML = `
+    <div class="card">
+      <h2>PO ${doc.number}</h2>
+      <p class="sub">${doc.title || ''} · ${doc.amount_cents != null ? Premier.money(doc.amount_cents/100) : ''} · <span class="pill pill-grey">${doc.status||'open'}</span></p>
+      <div class="url">${url}</div>
+      <div class="btn-row">
+        <a class="btn btn-primary" target="_blank" href="${url}">View PDF</a>
+        <button class="btn btn-teal" id="b-share">Share link</button>
+        <button class="btn btn-ghost" id="b-rotate">Rotate link</button>
+        <button class="btn btn-danger" id="b-del">Delete</button>
+      </div>
+    </div>`;
+  document.getElementById('b-share').onclick = () => Premier.shareLink(url, `PO ${doc.number} from Premier Equipment`);
+  document.getElementById('b-rotate').onclick = async () => { if (!confirm('Rotate share link?')) return; await Premier.rotateShare(doc.id); Premier.toast('Rotated'); showDetail(id); };
+  document.getElementById('b-del').onclick = async () => { if (!confirm('Delete this PO?')) return; await Premier.deleteDocument(doc.id); location.href = 'index.html'; };
+}
+
+if (editId) showDetail(editId); else showBuilder();
+</script>
+</body></html>

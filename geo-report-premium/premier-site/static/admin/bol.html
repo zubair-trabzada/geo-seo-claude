@@ -1,0 +1,218 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Bill of Lading</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head><body>
+
+<div class="adm-bar">
+  <div class="logo">Premier <small>Admin</small></div>
+  <div class="who"></div>
+</div>
+<nav class="adm-tabs">
+  <a href="index.html">Dashboard</a>
+  <a href="clients.html">Clients</a>
+  <a href="quote.html">+ Quote</a>
+  <a href="po.html">+ PO</a>
+  <a href="bol.html">+ BOL</a>
+  <a href="calls.html">Calls</a>
+  <a href="uploads.html">Uploads</a>
+</nav>
+
+<div class="wrap"><div id="view"></div></div>
+
+<div id="share-modal" class="share-modal">
+  <div class="box">
+    <h3 id="sm-title">BOL ready!</h3>
+    <p class="sub" id="sm-sub"></p>
+    <div class="url" id="sm-url"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="sm-share">&#128241; Share / Text</button>
+      <button class="btn btn-teal" id="sm-copy">Copy link</button>
+      <a class="btn btn-ghost" id="sm-pdf" target="_blank">View PDF</a>
+    </div>
+    <div style="height:10px"></div>
+    <div class="btn-row">
+      <a class="btn btn-ghost" href="index.html">Done</a>
+      <a class="btn btn-ghost" href="bol.html">+ Another BOL</a>
+    </div>
+  </div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+const KIND = 'bol';
+const params = new URLSearchParams(location.search);
+const editId = params.get('id');
+const view = document.getElementById('view');
+
+const state = {
+  client_id: params.get('client_id') || '',
+  client: null,
+  lines: [{ d:'', p:'' }],  // d=description, p=pieces (overloading the field)
+  terms: { shipper: 'Premier Equipment LLC · Beachwood, OH 44122', carrier: '', driver: '', pickup_date: '', weight: '', freight_class: '', notes: 'Bill of Lading — non-negotiable. Shipper certifies the items are properly classified, packaged, and labeled for transport.' },
+};
+
+async function showBuilder() {
+  const [clients, brain] = await Promise.all([Premier.listClients(), Premier.loadBrain()]);
+  if (state.client_id) state.client = clients.find(c => c.id === state.client_id) || null;
+
+  view.innerHTML = `
+    <div class="card">
+      <h2>New Bill of Lading</h2>
+      <p class="sub">Auto-numbered (BOL-${new Date().getFullYear()}-NNNN). Filed under the consignee.</p>
+      <label>Consignee / Ship to *</label>
+      <div class="row">
+        <select id="client_pick">
+          <option value="">— select consignee —</option>
+          ${clients.map(c => `<option value="${c.id}" ${c.id===state.client_id?'selected':''}>${c.company}${c.contact?' · '+c.contact:''}</option>`).join('')}
+        </select>
+        <a class="btn btn-ghost" href="clients.html?new=1">+ New consignee</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Freight</h2>
+      <p class="sub">Tap a machine to auto-add, or describe each piece.</p>
+      <div class="inv-chips" id="chips"></div>
+      <div id="lines"></div>
+      <div class="btn-row" style="margin-top:6px"><button class="btn btn-ghost" id="addline">+ Add piece</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Shipment details</h2>
+      <label>Shipper</label>
+      <input id="shipper" value="${state.terms.shipper}">
+      <div class="row">
+        <div><label>Carrier</label><input id="carrier" value="${state.terms.carrier}"></div>
+        <div><label>Driver / Tractor #</label><input id="driver" value="${state.terms.driver}"></div>
+      </div>
+      <div class="row-3">
+        <div><label>Pickup date</label><input id="pickup_date" type="date" value="${state.terms.pickup_date}"></div>
+        <div><label>Total weight</label><input id="weight" value="${state.terms.weight}" placeholder="48,000 lbs"></div>
+        <div><label>Freight class</label><input id="freight_class" value="${state.terms.freight_class}" placeholder="Class 85"></div>
+      </div>
+      <label>Notes</label>
+      <textarea id="notes" rows="3">${state.terms.notes}</textarea>
+    </div>
+
+    <div class="card">
+      <h2>Send</h2>
+      <div class="adm-cta">
+        <button class="btn btn-ghost" id="preview">Preview PDF</button>
+        <button class="btn btn-primary" id="send">Generate &amp; Send</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('client_pick').onchange = (e) => { state.client_id = e.target.value; state.client = clients.find(c => c.id === state.client_id) || null; };
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = (brain.machines || []).map(m => `<span class="inv-chip" data-id="${m.id}">+ ${m.tonnage}T ${m.brand} ${m.model}</span>`).join('');
+  chipsEl.querySelectorAll('.inv-chip').forEach(el => {
+    el.onclick = () => {
+      const m = (brain.machines || []).find(x => x.id === el.dataset.id);
+      if (!m) return;
+      addLine(`1 × ${m.tonnage}-Ton ${m.brand} ${m.model} — ${m.year}, S/N TBD, est. weight tag plate`);
+      Premier.toast('Added piece');
+    };
+  });
+  renderLines();
+  document.getElementById('addline').onclick = () => addLine('');
+  document.getElementById('preview').onclick = () => doPreview();
+  document.getElementById('send').onclick    = () => doSend();
+}
+
+function addLine(d){ state.lines.push({d:d||'',p:''}); renderLines(); }
+function renderLines() {
+  const el = document.getElementById('lines');
+  el.innerHTML = state.lines.map((l, i) => `
+    <div class="line" style="grid-template-columns:1fr auto">
+      <input placeholder="Description (qty × machine, est. weight)" value="${(l.d||'').replace(/"/g,'&quot;')}" data-i="${i}" data-k="d">
+      <button class="rm" data-i="${i}">&times;</button>
+    </div>`).join('');
+  el.querySelectorAll('input').forEach(inp => { inp.oninput = (e) => { state.lines[+e.target.dataset.i][e.target.dataset.k] = e.target.value; }; });
+  el.querySelectorAll('.rm').forEach(b => b.onclick = (e) => { state.lines.splice(+e.target.dataset.i, 1); if (!state.lines.length) state.lines.push({d:'',p:''}); renderLines(); });
+}
+
+function gather() {
+  ['shipper','carrier','driver','pickup_date','weight','freight_class','notes'].forEach(k => state.terms[k] = document.getElementById(k).value);
+  return { client: state.client, lines: state.lines.filter(l => l.d), terms: state.terms };
+}
+function buildOpts(p) {
+  return {
+    kind: 'bol',
+    client: p.client || {},
+    lines: p.lines,
+    terms: [
+      ['Shipper',  p.terms.shipper],
+      ['Carrier',  p.terms.carrier || '—'],
+      ['Driver',   p.terms.driver  || '—'],
+      ['Pickup',   p.terms.pickup_date || '—'],
+      ['Weight',   p.terms.weight || '—'],
+      ['Freight class', p.terms.freight_class || '—'],
+    ],
+    notes: p.terms.notes,
+  };
+}
+
+function doPreview() {
+  const p = gather();
+  if (!p.lines.length) { Premier.toast('Add at least one piece'); return; }
+  const { blob } = Premier.buildPDF(buildOpts(p));
+  window.open(URL.createObjectURL(blob), '_blank');
+}
+async function doSend() {
+  const p = gather();
+  if (!state.client_id) { Premier.toast('Pick a consignee'); return; }
+  if (!p.lines.length) { Premier.toast('Add at least one piece'); return; }
+  const btn = document.getElementById('send'); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Sending…';
+  try {
+    const { blob } = Premier.buildPDF(buildOpts(p));
+    const title = p.lines[0]?.d || 'Bill of Lading';
+    const doc = await Premier.uploadDocument({
+      client_id: state.client_id, kind: KIND, title,
+      amount_cents: 0, payload: p, pdfBlob: blob,
+    });
+    showShareModal(doc);
+  } catch (e) { Premier.toast(String(e.message || e)); }
+  finally { btn.disabled = false; btn.innerHTML = 'Generate &amp; Send'; }
+}
+function shareUrlAbs(rel){ if (rel.startsWith('http')) return rel; return (Premier.API_BASE || location.origin) + rel; }
+function showShareModal(doc) {
+  const m = document.getElementById('share-modal'); const url = shareUrlAbs(doc.share_url);
+  document.getElementById('sm-title').textContent = `BOL ${doc.number} ready!`;
+  document.getElementById('sm-sub').textContent = state.client ? `Filed under ${state.client.company}` : '';
+  document.getElementById('sm-url').textContent = url;
+  document.getElementById('sm-pdf').href = url;
+  document.getElementById('sm-share').onclick = () => Premier.shareLink(url, `BOL ${doc.number} from Premier Equipment`);
+  document.getElementById('sm-copy').onclick  = () => { navigator.clipboard.writeText(url); Premier.toast('Copied'); };
+  m.classList.add('open');
+}
+
+async function showDetail(id) {
+  view.innerHTML = '<div class="card"><div class="empty">Loading…</div></div>';
+  const doc = await Premier.getDocument(id);
+  if (!doc) { view.innerHTML = '<div class="card"><div class="empty">BOL not found.</div></div>'; return; }
+  const url = shareUrlAbs(doc.share_url);
+  view.innerHTML = `
+    <div class="card">
+      <h2>BOL ${doc.number}</h2>
+      <p class="sub">${doc.title || ''} · <span class="pill pill-grey">${doc.status||'open'}</span></p>
+      <div class="url">${url}</div>
+      <div class="btn-row">
+        <a class="btn btn-primary" target="_blank" href="${url}">View PDF</a>
+        <button class="btn btn-teal" id="b-share">Share link</button>
+        <button class="btn btn-ghost" id="b-rotate">Rotate link</button>
+        <button class="btn btn-danger" id="b-del">Delete</button>
+      </div>
+    </div>`;
+  document.getElementById('b-share').onclick = () => Premier.shareLink(url, `BOL ${doc.number} from Premier Equipment`);
+  document.getElementById('b-rotate').onclick = async () => { if (!confirm('Rotate share link?')) return; await Premier.rotateShare(doc.id); Premier.toast('Rotated'); showDetail(id); };
+  document.getElementById('b-del').onclick = async () => { if (!confirm('Delete this BOL?')) return; await Premier.deleteDocument(doc.id); location.href = 'index.html'; };
+}
+
+if (editId) showDetail(editId); else showBuilder();
+</script>
+</body></html>

@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Briefings</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+</head><body>
+
+<div class="adm-bar">
+  <div class="logo">Premier <small>Admin</small></div>
+  <div class="who"></div>
+</div>
+<nav class="adm-tabs">
+  <a href="index.html">Dashboard</a>
+  <a href="clients.html">Clients</a>
+  <a href="quote.html">+ Quote</a>
+  <a href="po.html">+ PO</a>
+  <a href="bol.html">+ BOL</a>
+  <a href="calls.html">Calls</a>
+  <a href="uploads.html">Uploads</a>
+</nav>
+
+<div class="wrap">
+  <div class="card">
+    <h2>Morning briefings</h2>
+    <p class="sub">Generated daily by the cron Worker. Past 30 days.</p>
+    <div id="list" class="list"><div class="empty">Loading…</div></div>
+  </div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+(async function(){
+  try {
+    const items = await Premier.listBriefingHistory();
+    const el = document.getElementById('list');
+    if (!items.length) { el.innerHTML = '<div class="empty">No briefings yet. <a href="index.html">Generate one from the dashboard &rarr;</a></div>'; return; }
+    el.innerHTML = items.map(b => `
+      <div class="list-item" style="cursor:default">
+        <div>
+          <div class="ttl">${b.date}</div>
+          <div class="sub">${b.summary || ''}</div>
+        </div>
+        <div class="meta">
+          <div class="when">${b.model || ''}</div>
+          <div class="when">${new Date(b.generated_at).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div>
+        </div>
+      </div>`).join('');
+  } catch (e) {}
+})();
+</script>
+</body></html>

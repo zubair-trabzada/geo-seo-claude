@@ -1,0 +1,117 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Calls &amp; Bookings</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+</head><body>
+
+<div class="adm-bar">
+  <div class="logo">Premier <small>Admin</small></div>
+  <div class="who"></div>
+</div>
+<nav class="adm-tabs">
+  <a href="index.html">Dashboard</a>
+  <a href="clients.html">Clients</a>
+  <a href="quote.html">+ Quote</a>
+  <a href="po.html">+ PO</a>
+  <a href="bol.html">+ BOL</a>
+  <a href="calls.html">Calls</a>
+  <a href="uploads.html">Uploads</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="card">
+    <h2>Open callbacks</h2>
+    <p class="sub">Bookings the AI receptionist scheduled. Tap status to mark done.</p>
+    <div id="bookings" class="list"><div class="empty">Loading…</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Recent calls</h2>
+    <p class="sub">Last 50 calls with transcripts. Tap a row to expand.</p>
+    <div id="calls" class="list"><div class="empty">Loading…</div></div>
+  </div>
+
+  <div id="detail"></div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+function fmtWhen(iso){ try { const d = new Date(iso); return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); } catch { return iso; } }
+function pillFor(status){ return ({open:'pill-teal',done:'pill-grey','no-show':'pill-orange'})[status] || 'pill-grey'; }
+
+async function loadBookings() {
+  const el = document.getElementById('bookings');
+  try {
+    const bookings = await Premier.listBookings();
+    const open = bookings.filter(b => b.status === 'open');
+    if (!open.length) { el.innerHTML = '<div class="empty">No open callbacks. Inbox zero.</div>'; return; }
+    el.innerHTML = open.map(b => `
+      <div class="list-item" style="cursor:default">
+        <div>
+          <div class="ttl">${b.name || '(no name)'} <span class="pill ${pillFor(b.status)}">${b.status}</span></div>
+          <div class="sub">${[b.phone, b.company, b.topic].filter(Boolean).join(' · ')}</div>
+          <div class="sub" style="margin-top:3px;font-size:12px;color:#9FBDB7">When: ${b.when_iso || 'asap'} · Booked ${fmtWhen(b.created)}</div>
+        </div>
+        <div class="meta">
+          <div class="btn-row">
+            <button class="btn btn-teal" style="font-size:12px;padding:6px 10px" data-act="done" data-id="${b.id}">Mark done</button>
+          </div>
+        </div>
+      </div>`).join('');
+    el.querySelectorAll('[data-act]').forEach(b => b.onclick = async (e) => {
+      await Premier.updateBooking(e.target.dataset.id, { status: 'done' });
+      Premier.toast('Marked done');
+      loadBookings();
+    });
+  } catch (e) {
+    el.innerHTML = '<div class="empty">—</div>';
+  }
+}
+
+async function loadCalls() {
+  const el = document.getElementById('calls');
+  try {
+    const calls = await Premier.listCalls();
+    if (!calls.length) { el.innerHTML = '<div class="empty">No calls yet.</div>'; return; }
+    el.innerHTML = calls.map(c => `
+      <div class="list-item" data-id="${c.id}">
+        <div>
+          <div class="ttl">${c.from_number || 'Unknown'} · ${Math.round((c.duration_sec || 0))}s</div>
+          <div class="sub">${(c.summary || '(no summary)').slice(0, 110)}</div>
+        </div>
+        <div class="meta">
+          <div class="when">${fmtWhen(c.started)}</div>
+          <div class="when">${c.outcome || ''}</div>
+        </div>
+      </div>`).join('');
+    el.querySelectorAll('.list-item').forEach(it => it.onclick = () => showDetail(it.dataset.id));
+  } catch (e) {
+    el.innerHTML = '<div class="empty">—</div>';
+  }
+}
+
+async function showDetail(id) {
+  const dv = document.getElementById('detail');
+  dv.innerHTML = '<div class="card"><div class="empty">Loading…</div></div>';
+  try {
+    const c = await Premier.getCall(id);
+    if (!c) { dv.innerHTML = ''; return; }
+    dv.innerHTML = `
+      <div class="card">
+        <h2>Call · ${c.from_number || ''}</h2>
+        <p class="sub">${fmtWhen(c.started)} · ${Math.round((c.duration_sec || 0))}s · ${c.outcome || ''}</p>
+        ${c.summary ? `<p style="font-size:14.5px;color:#13212B;margin:8px 0">${c.summary.replace(/</g,'&lt;')}</p>` : ''}
+        <details><summary style="cursor:pointer;color:#1B8A7A;font-weight:700;font-size:13px">Full transcript</summary>
+          <pre style="margin-top:8px;background:#F6F9F9;padding:12px;border-radius:9px;font-size:12.5px;white-space:pre-wrap;color:#13212B;max-height:420px;overflow:auto">${(c.transcript || '').replace(/</g,'&lt;')}</pre>
+        </details>
+      </div>`;
+    dv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {}
+}
+
+(async function(){ await loadBookings(); await loadCalls(); })();
+</script>
+</body></html>
