@@ -6,6 +6,19 @@
   <title>$title$</title>
   $for(css)$<link rel="stylesheet" href="$css$">
   $endfor$
+  <style>
+    /* Per-report page footer. Overrides the neutral fallback in the stylesheet.
+       Falls back to the brand name so a client's report never carries another
+       client's name. */
+    @page {
+      @bottom-center {
+        content: "$if(footer_text)$$footer_text$$else$$if(brand_name)$$brand_name$ · GEO Audit$else$GEO Audit$endif$$endif$";
+        font-family: 'Inter', sans-serif;
+        font-size: 7.5pt;
+        color: #94a3b8;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -13,31 +26,34 @@
 <div id="cover-section">
   <p class="cover-eyebrow">Generative Engine Optimization Audit</p>
   <h1>$if(brand_name)$$brand_name$$else$GEO Audit Report$endif$</h1>
-  <p class="cover-domain">$if(domain)$$domain$$else$alexamediasolutions.com$endif$</p>
+  <p class="cover-domain">$domain$</p>
 
   <div class="geo-score-badge">
-    <span class="score-number">$if(geo_score)$$geo_score$$else$40$endif$</span>
+    <span class="score-number">$if(geo_score)$$geo_score$$else$—$endif$</span>
     <span class="score-denom">/100</span>
-    <span class="score-label">$if(score_label)$$score_label$$else$Poor$endif$</span>
+    <span class="score-label">$score_label$</span>
   </div>
 
+  <!-- Meta fields render only when supplied. Never default these to sample
+       data — an unset field silently inheriting another client's details is
+       how a report ships with the wrong company on the cover. -->
   <div class="cover-meta-grid">
-    <div class="cover-meta-item">
+    $if(date)$<div class="cover-meta-item">
       <span class="label">Audit Date</span>
-      <span class="value">$if(date)$$date$$else$May 3, 2026$endif$</span>
-    </div>
-    <div class="cover-meta-item">
+      <span class="value">$date$</span>
+    </div>$endif$
+    $if(business_type)$<div class="cover-meta-item">
       <span class="label">Business Type</span>
-      <span class="value">$if(business_type)$$business_type$$else$Digital Marketing Agency$endif$</span>
-    </div>
-    <div class="cover-meta-item">
+      <span class="value">$business_type$</span>
+    </div>$endif$
+    $if(locations)$<div class="cover-meta-item">
       <span class="label">Locations</span>
-      <span class="value">$if(locations)$$locations$$else$Raleigh · Miami · Denver · Omaha$endif$</span>
-    </div>
-    <div class="cover-meta-item">
+      <span class="value">$locations$</span>
+    </div>$endif$
+    $if(platform)$<div class="cover-meta-item">
       <span class="label">Platform</span>
-      <span class="value">$if(platform)$$platform$$else$WordPress + AIOSEO$endif$</span>
-    </div>
+      <span class="value">$platform$</span>
+    </div>$endif$
   </div>
 </div>
 
