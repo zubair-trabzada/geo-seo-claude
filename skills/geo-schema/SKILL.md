@@ -136,7 +136,13 @@ The Author schema is one of the strongest E-E-A-T signals for AI platforms.
 - `material`, `weight`, `width`, `height` (where applicable)
 
 ### FAQPage
-**Status as of 2024**: Google restricts FAQ rich results to government and health sites. However, the FAQPage schema still serves GEO purposes — AI platforms parse FAQ structured data for question-answer extraction. Implement it for AI readability even though rich results may not appear.
+**Status — Google retired FAQ rich results for ALL sites on 7 May 2026.** The earlier govt/health restriction (Aug 2023) is obsolete history; the feature is now gone entirely, along with the Search Console appearance filter, the rich-results report and Rich Results Test support.
+
+`FAQPage` remains a **valid Schema.org type** and is still parsed by Bing and by AI retrieval systems. So it is worth adding — but the justification is **AI citation only**, and it must be presented that way. It gives a retrieval system pre-segmented, individually-quotable answer units instead of a prose blob it has to chunk itself.
+
+**Never present FAQPage as a rich-result or SERP win. It cannot produce one on Google.** If a report implies otherwise, the recommendation will be priced wrongly and may be prioritised above work that actually moves visibility.
+
+**Apply only to genuinely Q&A-structured pages.** Retrofitting `FAQPage` across a site that is not written as questions and answers is page weight for zero return.
 
 **Structure:**
 - `@type`: "FAQPage"
@@ -156,21 +162,22 @@ The Author schema is one of the strongest E-E-A-T signals for AI platforms.
 - `softwareVersion`: Current version
 - `releaseNotes`: Link to changelog
 
-### WebSite + SearchAction (for sitelinks search box)
-**Structure:**
+### WebSite (keep) + SearchAction (do NOT recommend)
+
+**`WebSite` is still worth having** — it establishes the site as an entity, carries `inLanguage` and `publisher`, and gives other nodes a stable `@id` to reference via `isPartOf`. Recommend it.
+
+**`SearchAction` should not be recommended. Google retired the sitelinks search box on 21 November 2024** and removed the associated Search Console report and Rich Results Test highlighting. The markup now drives no feature on Google. Google's own guidance is that removing existing `SearchAction` markup is unnecessary — unsupported structured data causes no errors — so **do not raise its presence as a defect either**. It is simply inert.
+
+Recommending it is markup for a feature that no longer exists, and it is the same class of error as recommending `speakable` to an ineligible site or pricing `FAQPage` as a rich-result win. Treat all three as one decision.
+
 ```json
 {
   "@type": "WebSite",
+  "@id": "https://example.com/#website",
   "name": "Site Name",
   "url": "https://example.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://example.com/search?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "inLanguage": "en-GB",
+  "publisher": { "@id": "https://example.com/#business" }
 }
 ```
 
@@ -180,8 +187,19 @@ Use as a standalone schema on About/Bio pages. This builds the entity graph for 
 **Required:** `name`, `url`
 **Recommended for GEO:** `sameAs`, `jobTitle`, `worksFor`, `knowsAbout`, `alumniOf`, `award`, `description`, `image`
 
-### speakable Property (for voice/AI assistants)
-The `speakable` property marks specific sections of content as particularly suitable for voice and AI assistant consumption. Add to Article or WebPage schemas.
+### speakable Property — CHECK ELIGIBILITY BEFORE RECOMMENDING
+
+`speakable` is still marked **BETA** in Google's documentation and is limited on three axes simultaneously:
+
+| Restriction | Requirement |
+|---|---|
+| Content type | **News articles only** |
+| Language | **English only** |
+| Audience location | **United States only** |
+
+**A site must satisfy all three to be eligible.** Most sites satisfy none of them. Recommending `speakable` to a non-news site, a non-English site, or one whose audience is outside the US is markup for a feature that site cannot be eligible for — the same error as recommending `SearchAction` or pricing `FAQPage` as a rich-result win.
+
+**Decision rule:** recommend `speakable` only for English-language news publishers with a US audience. For every other site, do not raise it — neither as a recommendation nor as a missing-feature deduction.
 
 ```json
 {
@@ -192,7 +210,8 @@ The `speakable` property marks specific sections of content as particularly suit
   }
 }
 ```
-This signals to AI assistants which passages are the best candidates for citation or reading aloud.
+
+Where it *is* eligible, selectors must resolve to concise, self-contained factual text. A selector pointing at navigation or a wall of prose is worse than omitting the property.
 
 ---
 
@@ -200,8 +219,10 @@ This signals to AI assistants which passages are the best candidates for citatio
 
 | Schema | Status | Note |
 |---|---|---|
-| HowTo | Rich results deprecated Aug 2023 | Still useful for AI parsing, but do not promise rich results |
-| FAQPage | Restricted to govt/health Aug 2023 | Still useful for AI parsing (see above) |
+| HowTo | Rich results deprecated Aug 2023 | Still parsed by AI systems, but do not promise rich results |
+| FAQPage | **Rich results retired for ALL sites 7 May 2026** | Markup still valid and still parsed by AI systems. AI-citation justification only — never present as a SERP win |
+| SearchAction / sitelinks search box | **Retired 21 Nov 2024** | Do not recommend. Do not flag as missing. `WebSite` itself is still worth keeping |
+| speakable | BETA; news + English + US only | Check all three before recommending. Do not deduct points from ineligible sites |
 | SpecialAnnouncement | Deprecated 2023 | Was for COVID; remove if still present |
 | CourseInfo | Replaced by Course updates 2024 | Use updated Course schema properties |
 | VideoObject `contentUrl` | Changed behavior 2024 | Must point to actual video file, not page URL |
@@ -246,7 +267,7 @@ The `sameAs` property is the single most important structured data property for 
 Based on the detected business type, generate ready-to-paste JSON-LD blocks. Always generate:
 
 1. **Organization or Person** (depending on entity type) — always
-2. **WebSite with SearchAction** — always for the homepage
+2. **WebSite** — always for the homepage. Include `@id`, `inLanguage` and `publisher`; **omit `SearchAction`** (retired 21 Nov 2024)
 3. **Business-type-specific** — Article for publishers, Product for e-commerce, LocalBusiness for local, SoftwareApplication for SaaS
 4. **BreadcrumbList** — for any page deeper than homepage
 
@@ -255,7 +276,8 @@ Based on the detected business type, generate ready-to-paste JSON-LD blocks. Alw
 - All URLs must be absolute (not relative)
 - Include `@id` properties for cross-referencing between schemas
 - Use ISO 8601 for all dates
-- Include `speakable` on Article schemas with CSS selectors pointing to key content sections
+- Include `speakable` on Article schemas **only where the site is eligible** — English-language news, US audience. Omit it otherwise
+- Emit **one `<script type="application/ld+json">` per page containing a single `@graph`**. Splitting nodes across multiple script tags makes cross-block `@id` references unreliable: Google usually merges same-page blocks, but many third-party and AI parsers resolve nothing across blocks, silently dropping `author` and `publisher`
 - Place JSON-LD in `<head>` section — NOT injected via JavaScript
 
 ### Template: Organization with Full GEO Signals
@@ -314,17 +336,20 @@ Based on the detected business type, generate ready-to-paste JSON-LD blocks. Alw
 
 ## Scoring Rubric (0-100)
 
+**Scoring principle — never deduct for a feature the site cannot use.** Before scoring any criterion, check the site is eligible for it. If it is not (wrong content type, wrong language, wrong region, or the platform feature has been retired), the criterion **does not apply**: remove its points from the denominator and rescale, rather than scoring 0. Scoring 0 for correctly-absent markup manufactures a deficit, misdirects the remediation plan, and penalises a site for being right.
+
 | Criterion | Points | How to Score |
 |---|---|---|
 | Organization/Person schema present and complete | 15 | 15 if full, 10 if basic, 0 if none |
 | sameAs links (5+ platforms) | 15 | 3 per valid sameAs link, max 15 |
 | Article schema with author details | 10 | 10 if full author schema, 5 if name only, 0 if none |
 | Business-type-specific schema present | 10 | 10 if complete, 5 if partial, 0 if missing |
-| WebSite + SearchAction | 5 | 5 if present, 0 if not |
+| WebSite node present (with `@id`) | 5 | 5 if present, 0 if not. **Do not score `SearchAction`** — retired 21 Nov 2024; its absence is correct, not a defect |
 | BreadcrumbList on inner pages | 5 | 5 if present, 0 if not |
 | JSON-LD format (not Microdata/RDFa) | 5 | 5 if JSON-LD, 3 if mixed, 0 if only Microdata/RDFa |
 | Server-rendered (not JS-injected) | 10 | 10 if in HTML source, 5 if JS but in head, 0 if dynamic JS |
-| speakable property on articles | 5 | 5 if present, 0 if not |
+| Single `@graph` per page (no cross-block `@id`) | 5 | 5 if one block, 2 if multiple blocks resolve, 0 if references dangle |
+| speakable property on articles | 5 | **Only score if the site is eligible** (English news, US audience). If ineligible, this criterion does not apply — remove its 5 points from the denominator rather than scoring 0 |
 | Valid JSON + valid Schema.org types | 10 | 10 if no errors, 5 if minor issues, 0 if major errors |
 | knowsAbout property on Organization/Person | 5 | 5 if present with 3+ topics, 0 if missing |
 | No deprecated schemas present | 5 | 5 if clean, 0 if deprecated schemas found |

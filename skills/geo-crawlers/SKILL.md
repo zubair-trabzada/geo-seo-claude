@@ -217,6 +217,31 @@ Disallow: /
 
 ## Analysis Procedure
 
+### Step 0: Live reachability test — DO THIS FIRST
+
+**`robots.txt` states a policy. It does not enforce one.** Enforcement happens at the CDN, WAF or origin, and those layers frequently disagree with the file — most often because a managed "block AI bots" control blocks the whole AI-crawler *category*, including answering crawlers the site deliberately allows. A site can publish a perfectly-reasoned allowlist and still return 403 to every crawler on it.
+
+Every other step in this skill analyses a stated policy. This step is the only one that measures what actually happens, and it is the one most likely to find something that matters. **Never report crawler access from `robots.txt` alone.**
+
+1. Pick a real content URL (not the homepage alone — test a deep page too).
+2. Request it once per crawler using the full User-Agent strings from the reference table above. Record the HTTP status for each.
+3. **Run negative controls in the same pass.** Without them the result is uninterpretable:
+
+| Control | Purpose | If it returns 403 |
+|---|---|---|
+| An invented UA (`TotallyMadeUpBot/1.0`) | Detects a blanket non-browser block | The block is generic, not AI-specific |
+| A spoofed *conventional* crawler (`Googlebot`, `bingbot`) | Detects verified-bot enforcement | The server rejects unverified bots by IP; your AI results are inconclusive |
+| The same bot URL under a different token (`SomeBot/1.0; +claudebot@anthropic.com`) | Isolates what the rule matches | Combined with a 403 for `ClaudeBot/1.0`, proves the rule matches the **token name** |
+
+4. Also test `/robots.txt`, `/llms.txt` and `/sitemap.xml` individually. A configuration that serves `robots.txt` but 403s `llms.txt` tells a compliant crawler it is welcome and then refuses it the file it was pointed at.
+5. Inspect the 403 response itself. Security headers that differ from the site's own (e.g. `X-Frame-Options: SAMEORIGIN` where the site sends `DENY`) indicate the block is generated at the edge and never reached the origin.
+
+**Interpreting the result.** If invented and conventional-crawler UAs return 200 while AI-crawler tokens return 403, the block is a UA-name match and applies to real crawlers too. If everything unusual returns 403, you are seeing generic bot mitigation and cannot conclude anything about AI crawlers specifically — say so rather than reporting a finding.
+
+**State the limitation in the report.** Testing from outside cannot prove that a crawler arriving from its operator's verified IP range is treated identically to a spoofed UA. Recommend confirming in the CDN's own bot analytics, which report per-crawler allow/block counts by name. Report this as high-confidence-with-caveat, never as certainty.
+
+**Severity.** An answering crawler that `robots.txt` allows but the edge blocks is **Critical** — it is a total loss of reachability for that platform, and no content, schema or `llms.txt` work has any effect until it is fixed. Rank it above every content finding.
+
 ### Step 1: Fetch and Parse robots.txt
 
 1. Use WebFetch to retrieve `[domain]/robots.txt`.
