@@ -139,6 +139,7 @@ main() {
     mkdir -p "$INSTALL_DIR/scripts"
     mkdir -p "$INSTALL_DIR/schema"
     mkdir -p "$INSTALL_DIR/hooks"
+    mkdir -p "$INSTALL_DIR/templates"
 
     print_success "Directory structure created at: $CLAUDE_DIR"
 
@@ -215,6 +216,18 @@ main() {
         print_success "Schema templates installed -> ${INSTALL_DIR}/schema/"
     fi
 
+    # ---- Install Report Templates ----
+    # geo-report-pdf references these by absolute path
+    # (~/.claude/skills/geo/templates/), so /geo report-pdf fails without them.
+    print_info "Installing report templates..."
+
+    if [ -d "$SOURCE_DIR/templates" ] && [ "$(ls -A "$SOURCE_DIR/templates" 2>/dev/null)" ]; then
+        cp -r "$SOURCE_DIR/templates/"* "$INSTALL_DIR/templates/"
+        print_success "Report templates installed -> ${INSTALL_DIR}/templates/"
+    else
+        print_warning "templates/ not found in source -- /geo report-pdf will not work."
+    fi
+
     # ---- Install Hooks ----
     if [ -d "$SOURCE_DIR/hooks" ] && [ "$(ls -A "$SOURCE_DIR/hooks" 2>/dev/null)" ]; then
         print_info "Installing hooks..."
@@ -268,6 +281,8 @@ main() {
                                           && print_success "Agent files"          || { print_error "Agent files missing";       VERIFY_OK=false; }
     [ -d "$INSTALL_DIR/scripts" ]         && print_success "Utility scripts"      || { print_error "Scripts missing";           VERIFY_OK=false; }
     [ -d "$INSTALL_DIR/schema" ]          && print_success "Schema templates"     || { print_error "Schema templates missing";  VERIFY_OK=false; }
+    [ -f "$INSTALL_DIR/templates/geo-report-template.html" ] \
+                                          && print_success "Report templates"     || { print_error "Report templates missing";  VERIFY_OK=false; }
 
     if [ "$VERIFY_OK" = false ]; then
         echo ""

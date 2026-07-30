@@ -124,7 +124,7 @@ main() {
     print_info "Creating directories..."
 
     mkdir -p "$SKILLS_DIR" "$AGENTS_DIR" "$INSTALL_DIR"
-    mkdir -p "$INSTALL_DIR/scripts" "$INSTALL_DIR/schema" "$INSTALL_DIR/hooks"
+    mkdir -p "$INSTALL_DIR/scripts" "$INSTALL_DIR/schema" "$INSTALL_DIR/hooks" "$INSTALL_DIR/templates"
 
     print_success "Directory structure created"
 
@@ -192,6 +192,17 @@ main() {
     if [ -d "$SOURCE_DIR/schema" ]; then
         cp -r "$SOURCE_DIR/schema/"* "$INSTALL_DIR/schema/"
         print_success "Schema templates installed → ${INSTALL_DIR}/schema/"
+    fi
+
+    # ---- Install Report Templates ----
+    # geo-report-pdf references these by absolute path
+    # (~/.claude/skills/geo/templates/), so /geo report-pdf fails without them.
+    print_info "Installing report templates..."
+    if [ -d "$SOURCE_DIR/templates" ] && [ "$(ls -A "$SOURCE_DIR/templates" 2>/dev/null)" ]; then
+        cp -r "$SOURCE_DIR/templates/"* "$INSTALL_DIR/templates/"
+        print_success "Report templates installed → ${INSTALL_DIR}/templates/"
+    else
+        print_warning "templates/ not found in source — /geo report-pdf will not work."
     fi
 
     # ---- Install Hooks ----
@@ -329,6 +340,7 @@ main() {
     verify "Agent files"           test "$agent_count" -gt 0
     verify "Utility scripts"       test -d "$INSTALL_DIR/scripts"
     verify "Schema templates"      test -d "$INSTALL_DIR/schema"
+    verify "Report templates"      test -f "$INSTALL_DIR/templates/geo-report-template.html"
     verify "Venv interpreter"      test -x "$VENV_PY"
 
     if [ "$VERIFY_OK" = false ]; then
