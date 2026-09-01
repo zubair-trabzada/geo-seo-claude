@@ -194,6 +194,14 @@ main() {
         print_success "Schema templates installed → ${INSTALL_DIR}/schema/"
     fi
 
+    # ---- Install Report Templates ----
+    print_info "Installing report templates..."
+    if [ -d "$SOURCE_DIR/templates" ]; then
+        mkdir -p "$INSTALL_DIR/templates"
+        cp -r "$SOURCE_DIR/templates/"* "$INSTALL_DIR/templates/"
+        print_success "Report templates installed → ${INSTALL_DIR}/templates/"
+    fi
+
     # ---- Install Hooks ----
     if [ -d "$SOURCE_DIR/hooks" ] && [ "$(ls -A "$SOURCE_DIR/hooks" 2>/dev/null)" ]; then
         print_info "Installing hooks..."
@@ -329,6 +337,7 @@ main() {
     verify "Agent files"           test "$agent_count" -gt 0
     verify "Utility scripts"       test -d "$INSTALL_DIR/scripts"
     verify "Schema templates"      test -d "$INSTALL_DIR/schema"
+    verify "Report templates"      test -f "$INSTALL_DIR/templates/geo-report-template.html"
     verify "Venv interpreter"      test -x "$VENV_PY"
 
     if [ "$VERIFY_OK" = false ]; then
