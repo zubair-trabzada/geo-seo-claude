@@ -11,22 +11,51 @@ permissions:
 jobs:
   update-chart:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Generate SVGs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 .github/scripts/star_history.py
 
-      - name: Commit if changed
+      - name: Publish SVGs to gh-pages
         run: |
+          # Keep the generated files before switching branches
+          cp assets/star-history.svg /tmp/star-history.svg
+          cp assets/star-history-dark.svg /tmp/star-history-dark.svg
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/star-history.svg assets/star-history-dark.svg
+
+          # Clean generated changes from main before switching branches
+          git reset --hard HEAD
+          git clean -fd
+
+          # If gh-pages already exists, check it out.
+          # Otherwise create a completely independent orphan branch.
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages:gh-pages
+            git switch gh-pages
+          else
+            git switch --orphan gh-pages
+            git rm -rf . || true
+          fi
+
+          # gh-pages contains ONLY the published assets
+          cp /tmp/star-history.svg star-history.svg
+          cp /tmp/star-history-dark.svg star-history-dark.svg
+          touch .nojekyll
+
+          git add star-history.svg star-history-dark.svg .nojekyll
+
           if git diff --cached --quiet; then
             echo "No changes"
           else
             git commit -m "chore: update star history chart"
-            git push
+            git push origin gh-pages
           fi
