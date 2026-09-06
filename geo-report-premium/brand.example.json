@@ -1,0 +1,23 @@
+{
+  "_comment": "White-label config for the GEO Premium report. Copy this to brand.json, edit the values, then run: python beautifier.py data.json --brand-config brand.json --client-logo client.png. Any field you delete keeps the built-in default, so you can override as little as one color.",
+
+  "name": "Your Agency Inc.",
+  "cover_tag": "Generative Engine Optimization Audit",
+  "website": "youragency.com",
+  "phone": "555-123-4567",
+  "contact_name": "Your Name",
+
+  "colors": {
+    "primary": "#FFC72C",
+    "primary_bright": "#FFD75E",
+    "secondary": "#E94560",
+    "bg_deep": "#0A0A0F",
+    "bg_dark": "#111118",
+    "bg_card": "#1A1A28",
+    "bg_card_alt": "#141420",
+    "border": "#2A2A3A",
+    "text_primary": "#F0EDE8",
+    "text_secondary": "#A09898",
+    "text_accent": "#FFC72C"
+  }
+}

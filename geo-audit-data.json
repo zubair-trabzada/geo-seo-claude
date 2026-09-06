@@ -1,0 +1,147 @@
+{
+    "url": "https://www.buypremier.com/",
+    "brand_name": "Premier Equipment",
+    "date": "2026-05-26",
+    "geo_score": 40,
+    "scores": {
+        "ai_citability": 38,
+        "brand_authority": 22,
+        "content_eeat": 34,
+        "technical": 68,
+        "schema": 42,
+        "platform_optimization": 46
+    },
+    "platforms": {
+        "Google AI Overviews": 44,
+        "ChatGPT": 52,
+        "Perplexity": 41,
+        "Gemini": 42,
+        "Bing Copilot": 51
+    },
+    "executive_summary": "Premier Equipment is a B2B WooCommerce dealer of used injection molding machines (WordPress + Avada + Yoast, Beachwood OH). It has the single most important GEO ingredient working in its favor: the site is fully server-side rendered, all AI crawlers are allowed, and product URLs are clean and keyword-rich, so ChatGPT, Claude, Perplexity, and Google's bots can read the inventory. But almost everything that turns crawlability into citations is broken or missing. The product schema injects machine tonnage into the price field (price 300.00 for a 300-ton machine), feeding factually false data to Google and AI engines. The public FAQ page still contains WordPress theme demo content. There is no Organization/LocalBusiness entity anywhere, and the generic name Premier Equipment collides with several unrelated firms, with no Wikipedia entity or Reddit/YouTube footprint to break the tie. The good news: these are concrete, fixable problems, not architectural ones.",
+    "findings": [
+        {
+            "severity": "critical",
+            "title": "Fabricated product price in schema (tonnage injected as price)",
+            "description": "WooCommerce Product Offers emit price 300.00 for a 300-ton machine pattern-wide -- the machine's tonnage is mapped into the USD price field. This publishes false data that Google Merchant and AI answer engines ingest verbatim. Fix: stop mapping tonnage to price; use the real price or omit price and signal availability only (price-on-request)."
+        },
+        {
+            "severity": "critical",
+            "title": "FAQ page is WordPress theme demo content",
+            "description": "/faq/ contains ~11 placeholder Q&As about the theme itself ('How to add Google map?', 'What cache plugin do you suggest?') -- not one machinery question. It is the natural AI citation target and the page cautious buyers check, and currently signals an abandoned site. Fix: delete demo Q&As and publish 10-15 real buyer FAQs, then add FAQPage schema."
+        },
+        {
+            "severity": "critical",
+            "title": "No Organization / LocalBusiness entity anywhere",
+            "description": "Yoast emits a baseline graph (WebSite, WebPage, BreadcrumbList) but no Organization node -- no machine-readable NAP, no sameAs to social profiles, no logo, no geo. AI models cannot build an entity for 'Premier Equipment' or link it to its social profiles. Fix: add Organization+LocalBusiness JSON-LD sitewide."
+        },
+        {
+            "severity": "critical",
+            "title": "Brand not recognized as an entity + severe name collision",
+            "description": "No Wikipedia/Wikidata entity; no Reddit or YouTube footprint; only a generic shared LinkedIn page and data-aggregator listings. Searches conflate the firm with premierequipment.com (a CNC seller), 'Premier Equipment Sales', and 'Premier Plastics Systems' -- AI even pulls testimonials from the wrong company. Fix: anchor references to a distinguishing phrase ('Premier Equipment LLC, Beachwood OH -- used injection molding machines'), add sameAs, and build presence on plastics-specific authorities."
+        },
+        {
+            "severity": "high",
+            "title": "Missing llms.txt (404)",
+            "description": "No machine-readable content map for AI agents at /llms.txt. Fix: publish an llms.txt indexing inventory, services, appraisals, and contact, reinforcing the disambiguating entity phrase."
+        },
+        {
+            "severity": "high",
+            "title": "Outdated YMYL tax content",
+            "description": "/section-179-tax-deduction/ cites obsolete 2016 figures ($500K limit, $2M cap, 50% bonus depreciation, 'good only for 2016'). AI may quote these as current and attribute them to Premier. Fix: rewrite with current 2026 limits, dated and disclaimed, or remove."
+        },
+        {
+            "severity": "high",
+            "title": "No About / team page (404)",
+            "description": "/about/ returns 404; no bios, history, or leadership anywhere. Genuine appraisal credentials (CMEA/USPAP/NEBB) and the '55+ years' claim are unsubstantiated. Fix: build a real About page with named, credentialed team and one accurate years-in-business figure."
+        },
+        {
+            "severity": "high",
+            "title": "Duplicate / conflicting BreadcrumbList schema",
+            "description": "Product pages emit three BreadcrumbList blocks with inconsistent trails and mismatched @ids; Google may ignore all of them. Fix: keep only Yoast's breadcrumb and disable the secondary ones."
+        },
+        {
+            "severity": "high",
+            "title": "Product schema missing GEO-critical specs",
+            "description": "Offers lack brand, model, productionDate, itemCondition (UsedCondition), and machine specs. Rich spec data (tonnage, shot size, controller, condition) renders as HTML but never reaches the schema. Fix: enrich Product with brand/condition/year plus an additionalProperty spec array."
+        },
+        {
+            "severity": "high",
+            "title": "No HTTP-to-HTTPS redirect + http:// sitemap reference",
+            "description": "http://www.buypremier.com/robots.txt returns 200 over HTTP (no 301), and the robots.txt Sitemap directive points to the http:// version -- a mixed-scheme/canonicalization risk. Fix: force 301 http-to-https at Cloudflare/WP Engine and switch the sitemap line to https://."
+        },
+        {
+            "severity": "high",
+            "title": "Dormant blog",
+            "description": "Newest substantive post is ~2019-2021; the 'What is Injection Molding?' post is an ~80-word stub delegating to a YouTube embed. Stale + thin = low authority. Fix: resume cadence with substantive buyer-intent guides."
+        },
+        {
+            "severity": "medium",
+            "title": "Thin / templated product copy",
+            "description": "Listings are spec tables with no self-contained summary sentence, condition report, inspection notes, hours, or warranty -- capping AI extractability and buyer trust. Fix: add a quotable lead sentence and structured condition block per listing."
+        },
+        {
+            "severity": "medium",
+            "title": "Faceted-navigation duplicate-URL risk",
+            "description": "/equipment/ exposes product_orderby, product_count, product_view, stock-status, and brand/tonnage filter params -- combinatorial crawlable URLs diluting crawl budget. Fix: rel=canonical to clean category URLs and disallow/noindex filter params."
+        },
+        {
+            "severity": "medium",
+            "title": "No ItemList schema on /equipment/ and no LocalBusiness on /contact/",
+            "description": "The archive has no ItemList so AI can't enumerate inventory, and the contact page has no machine-readable PostalAddress/LocalBusiness. Fix: add ItemList to the archive; cover NAP via the sitewide Organization+LocalBusiness node."
+        },
+        {
+            "severity": "medium",
+            "title": "Stale lastmod dates",
+            "description": "product-sitemap2.xml stuck at 2023-08; many products/pages at 2021 or 2015-2018. Freshness depresses AIO/Perplexity citation. Fix: re-touch live inventory and prune sold units."
+        },
+        {
+            "severity": "low",
+            "title": "Security headers absent at edge",
+            "description": "No HSTS, CSP, X-Content-Type-Options, or Permissions-Policy (only X-Frame-Options + Referrer-Policy seen). Fix: add via Cloudflare Transform Rules."
+        },
+        {
+            "severity": "low",
+            "title": "Core Web Vitals risk and missing OG tags",
+            "description": "Heavy Avada+WooCommerce theme and image-dense catalog (positive: thumbnails carry width/height + lazy-load). No Open Graph/Twitter Card tags detected. Fix: serve WebP, defer non-critical JS, enable Yoast social defaults."
+        },
+        {
+            "severity": "low",
+            "title": "Slogan H1, inconsistent founding claim, and template errors",
+            "description": "Homepage H1 is a slogan rather than query-matched; '55+ years' vs '30+ years' conflict; '(c) 2026' footer template error; no homepage meta description; no testimonials/case studies. Fix: align H1 to query intent, standardize one founding figure, correct footer logic."
+        }
+    ],
+    "quick_wins": [
+        "Remove the fabricated price (tonnage-as-price) from all WooCommerce Product offers; use real price or omit it (price-on-request).",
+        "Delete the theme-demo FAQ and publish 10-15 real buyer FAQs (inspection, warranty, rigging/freight, lead times, tonnage selection, financing) + add FAQPage schema.",
+        "Add Organization + LocalBusiness JSON-LD sitewide with full NAP + sameAs to LinkedIn/YouTube/Facebook/X.",
+        "Force http-to-https 301 and change the robots.txt Sitemap directive to https://.",
+        "Publish /llms.txt with a clean content map and the disambiguating entity phrase."
+    ],
+    "medium_term": [
+        "Enrich Product schema with brand, model, productionDate, itemCondition (UsedCondition), and an additionalProperty spec array; fix double-encoded characters.",
+        "Remove duplicate BreadcrumbLists (keep Yoast only); add ItemList to /equipment/.",
+        "Claim/verify Google Business Profile + Bing Places for Beachwood, OH; enable IndexNow.",
+        "Update or remove the 2016 Section 179 page with current-year figures, dated and disclaimed.",
+        "Add a one-sentence quotable summary lead and structured condition/inspection block to top product pages.",
+        "Add OG/Twitter tags and security headers via Cloudflare; run a PageSpeed/CWV pass."
+    ],
+    "strategic": [
+        "Build a credentialed About/team page (real years-in-business, CMEA/USPAP/NEBB) to convert genuine expertise into visible authority.",
+        "Publish a 'How to Buy a Used Injection Molding Machine' pillar guide (tonnage/shot-size sizing, clamp styles, utilities, TCO) with per-manufacturer spokes.",
+        "Create an inspection/refurbishment transparency page documenting the real evaluation process (the strongest untapped Experience signal).",
+        "Create a Wikidata item and pursue plastics-industry authority presence (Plastics News, SPE, used-machinery marketplaces) to fix brand entity recognition.",
+        "Seed authentic community presence (r/PlasticsManufacturing, Practical Machinist) and add real case studies/testimonials to build off-site authority for Perplexity/ChatGPT."
+    ],
+    "crawler_access": {
+        "GPTBot": {"platform": "ChatGPT (OpenAI)", "status": "Allowed", "recommendation": "Keep allowed -- robots.txt only blocks /xmlrpc.php"},
+        "OAI-SearchBot": {"platform": "ChatGPT Search", "status": "Allowed", "recommendation": "Keep allowed"},
+        "ChatGPT-User": {"platform": "ChatGPT browsing", "status": "Allowed", "recommendation": "Keep allowed"},
+        "ClaudeBot": {"platform": "Claude (Anthropic)", "status": "Allowed", "recommendation": "Keep allowed"},
+        "PerplexityBot": {"platform": "Perplexity", "status": "Allowed", "recommendation": "Keep allowed"},
+        "Google-Extended": {"platform": "Gemini / Vertex", "status": "Allowed", "recommendation": "Keep allowed"},
+        "Googlebot": {"platform": "Google Search / AI Overviews", "status": "Allowed", "recommendation": "Keep allowed"},
+        "Bingbot": {"platform": "Bing / Copilot", "status": "Allowed", "recommendation": "Keep allowed; verify Bing Webmaster + IndexNow"},
+        "CCBot": {"platform": "Common Crawl (LLM training)", "status": "Allowed", "recommendation": "Keep allowed for entity training"}
+    }
+}

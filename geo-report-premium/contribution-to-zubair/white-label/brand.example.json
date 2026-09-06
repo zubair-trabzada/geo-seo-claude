@@ -1,0 +1,16 @@
+{
+  "_comment": "Copy to brand.json and edit. Any field you omit keeps its default, so you can override as little as one color. Load it with: from brand_config import load_brand; brand = load_brand('brand.json')",
+
+  "name": "Your Agency Inc.",
+  "cover_tag": "Generative Engine Optimization Audit",
+  "website": "youragency.com",
+  "phone": "555-123-4567",
+  "contact_name": "Your Name",
+
+  "colors": {
+    "primary": "#19C3B2",
+    "primary_bright": "#3FE0CF",
+    "secondary": "#E94560",
+    "text_accent": "#19C3B2"
+  }
+}

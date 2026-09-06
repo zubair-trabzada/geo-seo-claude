@@ -1,0 +1,76 @@
+{
+  "_": "Drop these into Retell as Custom Functions. Set the URL to https://buypremier.com/api/voice/<name> (or your *.workers.dev). Add a header `Authorization: Bearer <RETELL_WEBHOOK_SECRET>` matching the Worker secret.",
+  "functions": [
+    {
+      "name": "lookup_machine",
+      "description": "Search Premier's live inventory for machines matching the caller's request (tonnage, brand, model). ALWAYS call this before saying anything specific about a machine.",
+      "url": "https://buypremier.com/api/voice/lookup_machine",
+      "method": "POST",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Free-text caller request, e.g. '300 ton hydraulic', 'Milacron 500', 'all-electric under 250'."
+          }
+        },
+        "required": ["query"]
+      },
+      "returns_description": "Returns up to 3 matching machines from Premier's inventory.json. Quote ONLY these. If found=0, use the fallback_message and offer a callback."
+    },
+
+    {
+      "name": "book_call",
+      "description": "Schedule a callback from Nicole. Call this once you have a name and phone. ALWAYS call this before ending the call (unless caller refuses).",
+      "url": "https://buypremier.com/api/voice/book_call",
+      "method": "POST",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name":     { "type": "string", "description": "Caller's full name" },
+          "phone":    { "type": "string", "description": "Best phone number, digits only or formatted" },
+          "email":    { "type": "string", "description": "Email if offered (optional)" },
+          "company":  { "type": "string", "description": "Caller's company if mentioned (optional)" },
+          "topic":    { "type": "string", "description": "Short summary of what they want to discuss" },
+          "when_iso": { "type": "string", "description": "Requested time as free text (e.g. 'tomorrow morning', 'today after 3pm', 'asap')" }
+        },
+        "required": ["name", "phone", "topic"]
+      },
+      "returns_description": "Returns a confirmation sentence to read back to the caller."
+    },
+
+    {
+      "name": "create_lead",
+      "description": "Log a lead in Premier's CRM. Use for sellers (always) and for buyers who want something not currently in stock.",
+      "url": "https://buypremier.com/api/voice/create_lead",
+      "method": "POST",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "type":     { "type": "string", "enum": ["buyer","seller"], "description": "'seller' if they have a machine to sell; 'buyer' otherwise" },
+          "name":     { "type": "string" },
+          "company":  { "type": "string" },
+          "phone":    { "type": "string" },
+          "email":    { "type": "string" },
+          "machine":  { "type": "string", "description": "Free-text description of the machine of interest" },
+          "machine_brand":   { "type": "string" },
+          "machine_model":   { "type": "string" },
+          "machine_tonnage": { "type": "string" },
+          "machine_year":    { "type": "string" },
+          "note":     { "type": "string", "description": "Anything else the caller said that Nicole should know" }
+        },
+        "required": ["type", "name", "phone"]
+      },
+      "returns_description": "Just confirms the lead was stored."
+    },
+
+    {
+      "name": "post_call",
+      "description": "Internal: Retell's post-call webhook. Configure this URL in the Retell agent's 'Post-Call Webhook' setting (not as a regular tool the agent invokes).",
+      "url": "https://buypremier.com/api/voice/post_call",
+      "method": "POST",
+      "parameters": null,
+      "returns_description": "Stores the call transcript and summary in Premier's call_records table."
+    }
+  ]
+}

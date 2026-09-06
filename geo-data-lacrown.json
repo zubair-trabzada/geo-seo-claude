@@ -1,0 +1,202 @@
+{
+  "company_name": "La Crown Inc.",
+  "url": "lacrown.ai",
+  "audit_date": "March 7, 2026",
+  "overall_score": 43,
+  "company_tagline": "Strong foundational narrative and thought leadership, but entirely invisible to AI due to a JavaScript SPA architecture.",
+  "stats": [
+    {"value": "26+ Yrs", "label": "Industry Experience"},
+    {"value": "$12M", "label": "Book of Business Managed"},
+    {"value": "900+", "label": "Women Trained in Freight"}
+  ],
+  "executive_summary": "<strong>La Crown Inc. has a strong foundation narrative and genuinely differentiated thought leadership</strong> (the GEO Upward manifesto, llms-full.txt), but the site's <strong>JavaScript Single-Page Architecture (SPA) is a critical, site-wide blocker</strong>. AI crawlers receive only a bare HTML shell with no readable body content on any page. This means the rich service descriptions, newsletter articles, and GEO Upward content are invisible to GPTBot, ClaudeBot, and Perplexity unless those bots execute JavaScript—which most do not. The technical infrastructure is best-in-class; the content delivery method undermines it entirely.",
+  "dimensions": [
+    {
+      "name": "AI Citability & Visibility",
+      "description": "Can AI platforms find and quote your content?",
+      "score": 45,
+      "weight": "25%",
+      "weighted_score": "11.25"
+    },
+    {
+      "name": "Brand Authority Signals",
+      "description": "External signals that validate who you are",
+      "score": 35,
+      "weight": "20%",
+      "weighted_score": "7.0"
+    },
+    {
+      "name": "Content Quality & E-E-A-T",
+      "description": "Depth, expertise, and trustworthiness of content",
+      "score": 40,
+      "weight": "20%",
+      "weighted_score": "8.0"
+    },
+    {
+      "name": "Technical Foundations",
+      "description": "Server-side rendering, sitemaps, crawlability",
+      "score": 60,
+      "weight": "15%",
+      "weighted_score": "9.0"
+    },
+    {
+      "name": "Schema & Structured Data",
+      "description": "Schema markup giving AI systems structured facts",
+      "score": 40,
+      "weight": "10%",
+      "weighted_score": "4.0"
+    },
+    {
+      "name": "Platform Optimization",
+      "description": "Presence on platforms AI systems index",
+      "score": 38,
+      "weight": "10%",
+      "weighted_score": "3.8"
+    }
+  ],
+  "platforms": [
+    {"name": "Google AI Overviews", "score": 35},
+    {"name": "ChatGPT", "score": 30},
+    {"name": "Perplexity", "score": 40},
+    {"name": "Gemini", "score": 45},
+    {"name": "Bing Copilot", "score": 40}
+  ],
+  "crawlers": [
+    {
+      "name": "GPTBot",
+      "platform": "ChatGPT / OpenAI",
+      "status": "Allowed",
+      "recommendation": "Keep allowed"
+    },
+    {
+      "name": "ClaudeBot",
+      "platform": "Claude / Anthropic",
+      "status": "Allowed",
+      "recommendation": "Keep allowed"
+    },
+    {
+      "name": "PerplexityBot",
+      "platform": "Perplexity AI",
+      "status": "Allowed",
+      "recommendation": "Keep allowed"
+    },
+    {
+      "name": "Google-Extended",
+      "platform": "Google Gemini",
+      "status": "Allowed",
+      "recommendation": "Keep allowed"
+    },
+    {
+      "name": "Googlebot",
+      "platform": "Google Search",
+      "status": "Allowed",
+      "recommendation": "Keep allowed"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "title": "JavaScript SPA — Zero Readable Content for AI Crawlers",
+      "description": "Every URL in the sitemap returns the same HTML shell: <title>, meta description, schema JSON-LD, Google Analytics, and social links — but no body text. GPTBot, ClaudeBot, and PerplexityBot cannot read a single word of content from any page."
+    },
+    {
+      "severity": "CRITICAL",
+      "title": "Placeholder Phone Number in Schema",
+      "description": "The Organization schema across the entire site lists +1-260-000-0000 as the business phone number. This damages trust signals and entity verification."
+    },
+    {
+      "severity": "HIGH",
+      "title": "No Server-Rendered Content on Newsletter Articles",
+      "description": "Newsletter content is completely uncrawlable. These articles represent La Crown's best opportunity for AI citation."
+    },
+    {
+      "severity": "HIGH",
+      "title": "No FAQPage Schema or FAQ Content Blocks",
+      "description": "No FAQ sections were found on any page. FAQ schema is one of the highest-impact GEO optimizations."
+    },
+    {
+      "severity": "HIGH",
+      "title": "Missing Person Schema for Founder",
+      "description": "Millisa Nwokolo is the most powerful E-E-A-T signal La Crown has but is not represented in any schema on the site."
+    },
+    {
+      "severity": "HIGH",
+      "title": "No Reddit Presence",
+      "description": "Zero Reddit mentions found for lacrown.ai. Reddit is a primary training and citation source for ChatGPT, Claude, and Perplexity."
+    },
+    {
+      "severity": "HIGH",
+      "title": "No Wikipedia or Wikidata Entry",
+      "description": "Neither La Crown Inc. nor Millisa Nwokolo has a Wikipedia article or Wikidata entity record, which are used heavily for entity recognition."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Confirm llms.txt Serves as Plain Text",
+      "description": "A reference to llms-full.txt was found, but /llms.txt could not be confirmed as serving a plain-text file."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Identical Schema on All Pages",
+      "description": "Every page returns the same ProfessionalService schema. AI systems get no page-level context."
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Brand Fragmentation: Three Separate Identities",
+      "description": "La Crown operates across distinct identities: lacrownlogistics.com, lacrown.ai, and Millisa Nwokolo. Authority earned under one does not smoothly transfer."
+    },
+    {
+      "severity": "LOW",
+      "title": "Shop and Customer Service Pages Inaccessible",
+      "description": "These pages return the same schema-only shell. No product names or service details are visible."
+    }
+  ],
+  "action_plan": {
+    "quick_wins": [
+      {
+        "title": "Fix the placeholder phone number",
+        "description": "Replace +1-260-000-0000 in the global schema with a real number, or remove the telephone field.",
+        "time_estimate": "15 min"
+      },
+      {
+        "title": "Add Person schema for Millisa Nwokolo",
+        "description": "Add to the HTML shell with sameAs links to LinkedIn, Trucker Tools article, and Close.com author page.",
+        "time_estimate": "30 min"
+      },
+      {
+        "title": "Verify /llms.txt serves as plain text",
+        "description": "Confirm the file exists at lacrown.ai/llms.txt and returns Content-Type: text/plain.",
+        "time_estimate": "15 min"
+      }
+    ],
+    "medium_term": [
+      {
+        "title": "Implement SSR for newsletter pages",
+        "description": "Use Server-Side Rendering or pre-rendering for newsletter article pages to make them crawlable for AI.",
+        "time_estimate": "1-2 weeks"
+      },
+      {
+        "title": "Add FAQPage schema and write FAQ blocks",
+        "description": "Write 5-8 FAQ blocks per page on Services and GEO Upward pages and implement FAQ schema.",
+        "time_estimate": "2-3 days"
+      },
+      {
+        "title": "Build organic Reddit presence",
+        "description": "Start posting genuinely helpful insights on r/FreightBrokers and r/logistics to create indexed signals.",
+        "time_estimate": "Ongoing"
+      }
+    ],
+    "strategic": [
+      {
+        "title": "Implement full SSR across the site",
+        "description": "Migrate to Next.js or Astro to solve the single largest technical SEO and GEO issue on the site.",
+        "time_estimate": "1 month"
+      },
+      {
+        "title": "Build Wikipedia Notability",
+        "description": "Acquire 3+ significant press mentions in major logistics publications to support a Wikipedia/Wikidata entry.",
+        "time_estimate": "3 months"
+      }
+    ]
+  },
+  "methodology": "This GEO audit analyzed the website across six weighted dimensions: AI Citability & Visibility (25%), Brand Authority Signals (20%), Content Quality & E-E-A-T (20%), Technical Foundations (15%), Schema & Structured Data (10%), and Platform Optimization (10%). Platforms assessed: Google AI Overviews, ChatGPT Web Search, Perplexity AI, Google Gemini, Bing Copilot."
+}

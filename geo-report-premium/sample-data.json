@@ -1,0 +1,65 @@
+{
+  "company_name": "La Crown Inc.",
+  "url": "lacrown.ai",
+  "audit_date": "March 10, 2026",
+  "overall_score": 52,
+  "company_tagline": "AI automation company with real freight industry credibility — but AI search engines aren't seeing the full picture yet.",
+  "stats": [
+    {"value": "26 Yrs", "label": "Industry Experience"},
+    {"value": "$12M+",  "label": "Book of Business"},
+    {"value": "3",      "label": "Active AI Products"},
+    {"value": "2",      "label": "Critical Issues Found"}
+  ],
+  "executive_summary": "La Crown Inc. is an AI automation company built by a 26-year freight industry veteran with a proven book of business and three live products: GEO Upward, AI Voice Agents, and SkillsForClaudeCode. The brand has real authority — but <strong>no llms.txt file</strong>, minimal schema markup, and thin service pages mean AI systems like ChatGPT and Perplexity are underrepresenting it in search results. The gap between La Crown's actual credibility and its AI-discoverable signals is entirely fixable. The core authority already exists — it just needs to be made <strong>machine-readable</strong>.",
+  "dimensions": [
+    {"name": "AI Citability & Visibility", "description": "Can AI platforms find and quote your content?", "score": 42, "weight": "25%", "weighted_score": "10.5"},
+    {"name": "Brand Authority Signals",   "description": "External signals that validate who you are",          "score": 55, "weight": "20%", "weighted_score": "11.0"},
+    {"name": "Content Quality & E-E-A-T", "description": "Depth, expertise, and trustworthiness of content",   "score": 60, "weight": "20%", "weighted_score": "12.0"},
+    {"name": "Technical Foundations",     "description": "Server-side rendering, sitemaps, crawlability",       "score": 65, "weight": "15%", "weighted_score": "9.8"},
+    {"name": "Schema & Structured Data",  "description": "Schema markup giving AI systems structured facts",   "score": 35, "weight": "10%", "weighted_score": "3.5"},
+    {"name": "Platform Optimization",     "description": "Presence on platforms AI systems index",             "score": 48, "weight": "10%", "weighted_score": "4.8"}
+  ],
+  "platforms": [
+    {"name": "Google AI Overviews", "score": 48},
+    {"name": "ChatGPT",             "score": 44},
+    {"name": "Perplexity",          "score": 50},
+    {"name": "Gemini",              "score": 46},
+    {"name": "Bing Copilot",        "score": 42}
+  ],
+  "crawlers": [
+    {"name": "GPTBot",         "platform": "ChatGPT / OpenAI",  "status": "Not Mentioned", "recommendation": "Add explicit Allow directive"},
+    {"name": "ClaudeBot",      "platform": "Claude / Anthropic","status": "Not Mentioned", "recommendation": "Add explicit Allow directive"},
+    {"name": "PerplexityBot",  "platform": "Perplexity AI",     "status": "Not Mentioned", "recommendation": "Add explicit Allow directive"},
+    {"name": "Google-Extended","platform": "Google Gemini",     "status": "Not Mentioned", "recommendation": "Add explicit Allow directive"},
+    {"name": "Googlebot",      "platform": "Google Search",     "status": "Allowed",       "recommendation": "Keep allowed"}
+  ],
+  "findings": [
+    {"severity": "CRITICAL", "title": "No llms.txt File",                         "description": "There is no /llms.txt file. AI systems have no structured summary of the business, its products, or how to cite it. 30-minute fix with immediate AI visibility impact."},
+    {"severity": "CRITICAL", "title": "AI Crawlers Not Addressed in robots.txt",  "description": "GPTBot, ClaudeBot, PerplexityBot, and Google-Extended are not mentioned in robots.txt. Explicit Allow directives signal AI-friendliness and prevent accidental future blocking."},
+    {"severity": "HIGH",     "title": "No Schema Markup on Service Pages",        "description": "Service pages lack Organization, Service, and FAQPage schema. AI systems cannot extract structured facts about what the business offers or who it serves."},
+    {"severity": "HIGH",     "title": "No Wikipedia or Wikidata Entity",          "description": "No Wikipedia article or Wikidata entity exists. These are primary structured knowledge sources AI models use for entity recognition and authority verification."},
+    {"severity": "HIGH",     "title": "Thin About Page Content",                  "description": "The About page does not fully surface 26 years of freight experience, $12M+ book of business, or the founding story. AI systems need verifiable credentials to cite an author or brand."},
+    {"severity": "MEDIUM",   "title": "Blog Posts Lack Author Credentials",       "description": "Articles display an author name but no title, bio, or verifiable credentials. AI systems cannot confirm author authority without structured E-E-A-T signals."},
+    {"severity": "MEDIUM",   "title": "No Reddit Presence",                       "description": "Zero indexed Reddit discussions mention the brand. Perplexity AI heavily indexes Reddit. Community validation signals are missing across relevant subreddits."},
+    {"severity": "LOW",      "title": "Missing Canonical Tags",                   "description": "Pages lack canonical tags, creating potential duplicate content signals across HTTP/HTTPS and www/non-www variants."}
+  ],
+  "action_plan": {
+    "quick_wins": [
+      {"title": "Create /llms.txt at domain root",               "description": "Describe the company, products (GEO Upward, Voice Agents, SkillsForClaudeCode), founder credentials, and key pages. Immediate AI visibility boost.",                          "time_estimate": "30 min"},
+      {"title": "Update robots.txt with AI crawler directives",  "description": "Add explicit Allow rules for GPTBot, ClaudeBot, PerplexityBot, and Google-Extended.",                                                                                           "time_estimate": "15 min"},
+      {"title": "Create Wikidata entity",                        "description": "Add structured properties: founded date, headquarters, industry, key people, products. Primary knowledge source for AI entity recognition.",                                     "time_estimate": "1-2 hrs"}
+    ],
+    "medium_term": [
+      {"title": "Add Organization + Service JSON-LD to all pages",  "description": "Structured schema that tells AI systems exactly what the business does, who it serves, and how to contact it.",                    "time_estimate": ""},
+      {"title": "Expand About page to 1,000+ words",               "description": "Add full founding story, 26-year freight background, $12M book of business, product timeline, and credentials. Make authority machine-readable.", "time_estimate": ""},
+      {"title": "Add FAQPage schema to product pages",             "description": "GEO Upward, Voice Agents, and SkillsForClaudeCode pages should each have FAQ schema. Feeds Google AI Overviews and Bing Copilot directly.", "time_estimate": ""},
+      {"title": "Add author bio blocks to all blog posts",         "description": "Full credentials: Operations Manager, 26 years freight, founder of La Crown. Real credentials AI systems can verify and cite.",           "time_estimate": ""}
+    ],
+    "strategic": [
+      {"title": "Publish quarterly GEO industry report",          "description": "Proprietary data and analysis from real GEO audits. Creates the definitive resource AI systems will cite when answering questions about AI visibility.",  "time_estimate": ""},
+      {"title": "Build topical authority with case studies",      "description": "Document real client results from GEO Upward audits. Before/after scores, specific fixes implemented, outcomes. Verifiable proof AI can cite.",           "time_estimate": ""},
+      {"title": "Establish Reddit presence in relevant subs",     "description": "Authentic posts in r/freightbrokers, r/SEO, r/artificial, r/ClaudeAI. Builds community validation signals AI systems index heavily.",                   "time_estimate": ""}
+    ]
+  },
+  "methodology": "This GEO audit analyzed lacrown.ai across six weighted dimensions: AI Citability & Visibility (25%), Brand Authority Signals (20%), Content Quality & E-E-A-T (20%), Technical Foundations (15%), Schema & Structured Data (10%), and Platform Optimization (10%). Platforms assessed: Google AI Overviews, ChatGPT Web Search, Perplexity AI, Google Gemini, Bing Copilot. Audit date: March 10, 2026."
+}
