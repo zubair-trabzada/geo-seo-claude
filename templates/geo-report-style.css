@@ -403,9 +403,12 @@ h2.section-break { page-break-before: always; }
 }
 
 /* ---- Footer ---- */
+/* Footer text is overridden per-report by an inline <style> block in
+   geo-report-template.html (driven by the footer_text metadata field).
+   This value is a neutral fallback only — never put a client name here. */
 @page {
   @bottom-center {
-    content: "Alexa Media Solutions · GEO Audit · May 2026";
+    content: "GEO Audit";
     font-family: 'Inter', sans-serif;
     font-size: 7.5pt;
     color: #94a3b8;
