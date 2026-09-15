@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier — Quick Quote Builder</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#0C1F1E;color:#13212B}
+.bar{background:#0C2A2A;color:#fff;padding:16px 18px;position:sticky;top:0;z-index:5}
+.bar h1{font-size:17px;font-weight:800;letter-spacing:.3px}
+.bar .sub{font-size:11px;color:#9FBDB7}
+.wrap{max-width:720px;margin:0 auto;padding:16px}
+.card{background:#fff;border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.card h2{font-size:14px;margin-bottom:12px;color:#136055;text-transform:uppercase;letter-spacing:.5px}
+label{display:block;font-size:12.5px;font-weight:600;color:#52606B;margin:9px 0 3px}
+input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid #e1e7ea;border-radius:9px;font-size:15px;font-family:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.line{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;align-items:end;margin-bottom:8px}
+.btn{font-weight:700;font-size:15px;padding:13px 16px;border:none;border-radius:10px;cursor:pointer}
+.btn-o{background:#F26A21;color:#fff}.btn-t{background:#1B8A7A;color:#fff}.btn-g{background:#fff;border:1.5px solid #d7dee1;color:#13212B}
+.rm{background:#fbe9e4;color:#c0421a;border:none;border-radius:8px;padding:11px 12px;font-weight:700;cursor:pointer}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:6px}
+.tot{font-size:22px;font-weight:800;color:#136055;text-align:right;margin-top:6px}
+.note{font-size:12px;color:#9FBDB7;text-align:center;margin:14px 0}
+.crm-note{background:rgba(43,184,163,.12);border:1px solid rgba(43,184,163,.3);color:#136055;padding:10px 12px;border-radius:9px;font-size:13px;margin-bottom:14px}
+.crm-note a{color:#136055;font-weight:700;text-decoration:underline}
+</style></head><body>
+<div class="bar"><h1>PREMIER &middot; QUICK QUOTE</h1><div class="sub">Build a branded quote and send it from your phone</div></div>
+<div class="wrap">
+
+  <div class="crm-note">Need to save the quote to a client's folder? Use the <a href="admin/quote.html">CRM Quote Builder &rarr;</a></div>
+
+  <div class="card">
+    <h2>Customer</h2>
+    <div class="row"><div><label>Contact name</label><input id="cname" placeholder="Nicole Smith"></div>
+    <div><label>Company</label><input id="ccompany" placeholder="Acme Plastics"></div></div>
+    <div class="row"><div><label>Email</label><input id="cemail" placeholder="buyer@acme.com"></div>
+    <div><label>Phone</label><input id="cphone" placeholder="(555) 123-4567"></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Line items</h2>
+    <div id="lines"></div>
+    <div class="actions"><button class="btn btn-g" onclick="addLine()">+ Add line</button></div>
+    <div class="tot" id="total">$0.00</div>
+  </div>
+
+  <div class="card">
+    <h2>Terms</h2>
+    <div class="row"><div><label>Freight</label><input id="freight" placeholder="FOB Beachwood, OH / quoted separately"></div>
+    <div><label>Valid for</label><input id="valid" value="30 days"></div></div>
+    <label>Notes</label><textarea id="notes" rows="2" placeholder="Inspected, 30-day functional guarantee. Rigging available."></textarea>
+  </div>
+
+  <div class="card">
+    <h2>Generate</h2>
+    <div class="actions">
+      <button class="btn btn-o" onclick="makePDF(false)">&#11015; Download PDF</button>
+      <button class="btn btn-t" onclick="makePDF(true)">&#128241; Share / Text</button>
+    </div>
+  </div>
+  <div class="note">Premier Quick Quote &middot; built by La Crown</div>
+</div>
+
+<script>
+var CO={name:"Premier Equipment LLC",tagline:"Your Plastics Machinery Source",phone:"(216) 593-7000",email:"sales@buypremier.com",loc:"Beachwood, OH 44122"};
+var lines=[];
+function addLine(d,q,p){lines.push({d:d||"",q:q||1,p:p||0});render();}
+function render(){var el=document.getElementById('lines');el.innerHTML=lines.map(function(l,i){
+ return '<div class="line"><input placeholder="Description (e.g. 300-Ton Van Dorn 300-RS)" value="'+l.d.replace(/"/g,'&quot;')+'" oninput="upd('+i+',\\'d\\',this.value)">'
+ +'<input type="number" placeholder="Price" value="'+(l.p||"")+'" oninput="upd('+i+',\\'p\\',this.value)">'
+ +'<button class="rm" onclick="del('+i+')">&times;</button></div>';}).join('');
+ var t=lines.reduce(function(s,l){return s+(parseFloat(l.p)||0)*(parseFloat(l.q)||1);},0);
+ document.getElementById('total').textContent='$'+t.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}
+function upd(i,k,v){lines[i][k]=v;if(k==='p')render();}
+function del(i){lines.splice(i,1);render();}
+function money(n){return '$'+(parseFloat(n)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}
+function makePDF(share){
+ var jsPDF=window.jspdf.jsPDF;var doc=new jsPDF({unit:'pt',format:'letter'});var W=612;var x=54;var y=64;
+ doc.setFillColor(12,42,42);doc.rect(0,0,W,96,'F');
+ doc.setFillColor(242,106,33);doc.rect(0,96,W,5,'F');
+ doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text(CO.name.toUpperCase(),x,52);
+ doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(159,189,183);doc.text(CO.tagline.toUpperCase()+'   ·   '+CO.loc,x,70);
+ doc.text(CO.phone+'   ·   '+CO.email,x,84);
+ doc.setTextColor(20,33,43);doc.setFont('helvetica','bold');doc.setFontSize(22);doc.text('QUOTE',W-x,52,{align:'right'});
+ doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(120,130,138);
+ doc.text(new Date().toLocaleDateString(),W-x,70,{align:'right'});
+ y=140;
+ doc.setTextColor(27,138,122);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.text('PREPARED FOR',x,y);
+ doc.setTextColor(20,33,43);doc.setFont('helvetica','normal');doc.setFontSize(11);
+ var cn=v('cname'),cc=v('ccompany');y+=18;doc.text((cn||'—')+(cc?'  ·  '+cc:''),x,y);
+ if(v('cemail')||v('cphone')){y+=15;doc.setFontSize(9);doc.setTextColor(120,130,138);doc.text([v('cemail'),v('cphone')].filter(Boolean).join('  ·  '),x,y);}
+ y+=30;doc.setFillColor(246,249,249);doc.rect(x,y-14,W-2*x,24,'F');
+ doc.setTextColor(82,96,107);doc.setFont('helvetica','bold');doc.setFontSize(9);
+ doc.text('DESCRIPTION',x+10,y+2);doc.text('AMOUNT',W-x-10,y+2,{align:'right'});
+ y+=24;doc.setFont('helvetica','normal');doc.setTextColor(20,33,43);doc.setFontSize(11);
+ var total=0;
+ lines.forEach(function(l){if(!l.d&&!l.p)return;var amt=(parseFloat(l.p)||0)*(parseFloat(l.q)||1);total+=amt;
+  doc.text(doc.splitTextToSize(l.d||'Item',W-2*x-130),x+10,y);doc.text(money(amt),W-x-10,y,{align:'right'});
+  y+=22;doc.setDrawColor(231,233,236);doc.line(x,y-8,W-x,y-8);});
+ y+=6;doc.setFont('helvetica','bold');doc.setFontSize(14);doc.setTextColor(19,96,85);
+ doc.text('TOTAL',W-x-130,y);doc.text(money(total),W-x-10,y,{align:'right'});
+ y+=40;doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(27,138,122);doc.text('TERMS',x,y);
+ y+=16;doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(82,96,107);
+ var terms=[['Freight',v('freight')||'Quoted separately'],['Valid for',v('valid')||'30 days']];
+ terms.forEach(function(t){doc.text(t[0]+': '+t[1],x,y);y+=15;});
+ if(v('notes')){y+=4;doc.text(doc.splitTextToSize(v('notes'),W-2*x),x,y);}
+ doc.setFontSize(8);doc.setTextColor(150,160,165);
+ doc.text('Cargo insured in transit. All machines sold subject to prior sale. '+CO.name+' · '+CO.phone,x,756);
+ var fn='Premier-Quote-'+(v('ccompany')||v('cname')||'customer').replace(/[^a-z0-9]+/gi,'-')+'.pdf';
+ if(share && navigator.canShare){var blob=doc.output('blob');var file=new File([blob],fn,{type:'application/pdf'});
+   if(navigator.canShare({files:[file]})){navigator.share({files:[file],title:'Premier Equipment Quote',text:'Your quote from Premier Equipment.'});return;}}
+ doc.save(fn);
+}
+function v(id){return document.getElementById(id).value.trim();}
+addLine('',1,0);
+</script>
+<script id="pe-chat-injected">window.PREMIER_API="";window.PREMIER_BRAIN_URL="assets/brain.json";</script><script src="assets/chat.js" defer></script></body></html>

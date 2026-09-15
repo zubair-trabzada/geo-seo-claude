@@ -1,0 +1,66 @@
+name = "premier-equipment"
+main = "index.js"
+compatibility_date = "2026-01-01"
+
+# --- Bindings ---------------------------------------------------------------
+
+# Workers AI for the public chat answers
+[ai]
+binding = "AI"
+
+# D1 — callback leads + CRM (clients, documents).
+# First run:  wrangler d1 create premier-leads
+# then paste the database_id it prints below.
+[[d1_databases]]
+binding = "DB"
+database_name = "premier-leads"
+database_id = "PASTE_DATABASE_ID_HERE"
+
+# R2 bucket for quotes, POs, BOLs, and customer uploads.
+# First run:  wrangler r2 bucket create premier-files
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "premier-files"
+
+# --- Non-secret vars --------------------------------------------------------
+[vars]
+# Where new-lead emails go (change to Nicole's address when ready)
+NOTIFY_EMAIL = "missy@finemarkgroup.com"
+
+# Cloudflare Access team domain (set when you create the Access app)
+#   e.g. "premier-equipment.cloudflareaccess.com"
+# If blank, the Worker falls back to ADMIN_TOKEN bearer auth (dev mode).
+CF_ACCESS_TEAM = ""
+
+# Application AUD assigned by Cloudflare Access when you create the app
+# Find it: Zero Trust dashboard → Access → Applications → your app → overview → Application Audience (AUD) Tag
+CF_ACCESS_AUD = ""
+
+# --- Secrets (set with `wrangler secret put NAME`) --------------------------
+# SHARE_SECRET            : 32+ char random string, signs /files/:token + upload links
+# ADMIN_TOKEN             : fallback bearer token for dev (used only if CF_ACCESS_TEAM is empty)
+# ANTHROPIC_API_KEY       : (optional) drives the morning briefing with Claude. If unset,
+#                           falls back to free Workers AI (lower quality).
+# RETELL_WEBHOOK_SECRET   : (optional) gates /api/voice/* — set this and configure Retell to
+#                           send `Authorization: Bearer <this>` on every custom-function call.
+#
+# Suggested commands:
+#   wrangler secret put SHARE_SECRET        # paste a 32-char random
+#   wrangler secret put ADMIN_TOKEN         # paste a 24-char random for dev
+#   wrangler secret put ANTHROPIC_API_KEY   # paste your Anthropic key for Claude briefings
+#
+# Optional env (in [vars] above):
+#   ANTHROPIC_MODEL  : defaults to "claude-sonnet-4-6"
+#
+# --- Scheduled triggers (morning Claude briefing) ---------------------------
+# Cloudflare crons fire in UTC. Default: 11:00 UTC = 7:00 EDT (summer) / 6:00 EST (winter).
+# Adjust to your taste; tooling: https://crontab.guru/
+[triggers]
+crons = ["0 11 * * *"]
+
+# --- Routes -----------------------------------------------------------------
+# Mount the Worker on the same hostname as the Pages site so that Cloudflare
+# Access cookies flow through automatically. Configure in Cloudflare dashboard:
+#   Workers & Pages → premier-equipment → Settings → Triggers → Add Custom Domain
+#   then add routes:  buypremier.com/api/*   buypremier.com/files/*
+# (or use *.workers.dev URL for dev — admin pages then need PREMIER_API set)

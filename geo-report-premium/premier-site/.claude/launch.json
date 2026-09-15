@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Static site (site/)",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "site"],
+      "port": 8000
+    },
+    {
+      "name": "Cloudflare Worker (wrangler dev)",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "wrangler", "dev", "--config", "worker/wrangler.toml"],
+      "port": 8787
+    }
+  ]
+}

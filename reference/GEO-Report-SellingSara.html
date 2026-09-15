@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEO Analysis Report — SellingSara | La Crown Inc.</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A017;
+    --gold-light: #F5D565;
+    --gold-soft: #C49B1A;
+    --gold-glow: rgba(212,160,23,0.08);
+    --dark: #0A0A0C;
+    --dark-card: #111114;
+    --dark-accent: #18181C;
+    --dark-surface: #1E1E23;
+    --cream: #FAF6EE;
+    --cream-warm: #F0E8D8;
+    --text: #D8D4CC;
+    --text-body: #B8B2A8;
+    --text-muted: #8A857E;
+    --sara-blue: #21526D;
+    --sara-blue-light: #66A5DF;
+    --sara-blue-pale: #D2E2EB;
+    --sara-cream: #F9F1EE;
+    --red: #E05252;
+    --orange: #E0944F;
+    --green: #5CB87A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Newsreader', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Film grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── NAV ── */
+  .top-bar {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    background: rgba(10,10,12,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(212,160,23,0.08);
+  }
+  .logo { font-family: 'Outfit', sans-serif; font-weight: 300; font-size: 13px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; text-decoration: none; }
+  .logo span { font-weight: 600; }
+  .nav-label { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 11px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212,160,23,0.06) 0%, transparent 70%);
+    top: 10%; left: 20%;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(33,82,109,0.05) 0%, transparent 70%);
+    bottom: 15%; right: 10%;
+    pointer-events: none;
+  }
+  .hero-meta {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400; font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 4px; text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--sara-blue-light);
+  }
+  .hero-sub {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+    opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  /* Score cluster */
+  .score-cluster {
+    display: flex; align-items: center; gap: 48px;
+    opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .score-ring {
+    position: relative;
+    width: 160px; height: 160px;
+  }
+  .score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .score-ring .track { fill: none; stroke: rgba(255,255,255,0.04); stroke-width: 6; }
+  .score-ring .fill { fill: none; stroke: url(#goldGrad); stroke-width: 6; stroke-linecap: round;
+    stroke-dasharray: 408; stroke-dashoffset: 408;
+    animation: drawScore 1.5s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes drawScore {
+    to { stroke-dashoffset: 273; }
+  }
+  .score-number {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .score-number strong {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700; font-size: 42px;
+    color: var(--cream);
+  }
+  .score-number span {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 12px;
+    color: var(--text-muted);
+  }
+  .score-stats {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .stat-item {
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .stat-item .val {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 22px;
+    color: var(--gold);
+  }
+  .stat-item .val.red { color: var(--red); }
+  .stat-item .lbl {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    padding: 0 48px;
+  }
+  .divider-line {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-soft), transparent);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 48px; }
+
+  .section-label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400; font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 4px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+  }
+
+  /* ── THE PROBLEM ── */
+  .problem-statement {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    color: var(--cream);
+    line-height: 1.4;
+    max-width: 700px;
+    margin-bottom: 36px;
+  }
+  .problem-statement em {
+    font-style: normal;
+    color: var(--gold-light);
+  }
+  .problem-body {
+    max-width: 680px;
+  }
+  .problem-body p {
+    font-size: 16px;
+    color: var(--text-body);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .problem-body strong { color: var(--cream); }
+  .problem-body .red { color: var(--red); font-weight: 600; }
+
+  /* Comparison cards */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    margin: 48px 0;
+    max-width: 680px;
+  }
+  .compare-card {
+    background: var(--dark-card);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+  }
+  .compare-card .big {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+  .compare-card .big.red { color: var(--red); }
+  .compare-card .big.green { color: var(--green); }
+  .compare-card .sub {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 12px;
+    color: var(--text-muted);
+  }
+  .compare-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: var(--text-muted); padding: 0 16px;
+  }
+
+  /* Recommendation */
+  .rec-box {
+    background: var(--gold-glow);
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 12px;
+    padding: 28px 32px;
+    max-width: 680px;
+    margin-top: 36px;
+  }
+  .rec-box .rec-label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .rec-box p {
+    font-size: 15px;
+    color: var(--cream);
+    line-height: 1.65;
+  }
+  .rec-box p strong { color: var(--gold-light); }
+
+  /* ── SCORE BREAKDOWN ── */
+  .score-cards {
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 780px;
+  }
+  .score-card {
+    display: grid;
+    grid-template-columns: 60px 1fr 80px;
+    align-items: center;
+    gap: 20px;
+    background: var(--dark-card);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 20px 24px;
+    transition: border-color 0.3s;
+  }
+  .score-card:hover { border-color: rgba(212,160,23,0.15); }
+  .sc-score {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700; font-size: 24px;
+    text-align: center;
+  }
+  .sc-score.critical { color: var(--red); }
+  .sc-score.warn { color: var(--orange); }
+  .sc-score.ok { color: var(--gold); }
+  .sc-score.good { color: var(--green); }
+  .sc-info h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500; font-size: 14px;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .sc-info p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .bar-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0;
+  }
+  .bar-fill.critical { background: var(--red); }
+  .bar-fill.warn { background: var(--orange); }
+  .bar-fill.ok { background: var(--gold); }
+  .bar-fill.good { background: var(--green); }
+  .sc-weight {
+    text-align: right;
+  }
+  .sc-weight .w {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+  }
+  .sc-weight .pts {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 16px;
+    color: var(--cream-warm);
+  }
+
+  .total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(135deg, rgba(212,160,23,0.08), rgba(212,160,23,0.03));
+    border: 1px solid rgba(212,160,23,0.2);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-top: 8px;
+    max-width: 780px;
+  }
+  .total-row .label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .total-row .value {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700; font-size: 24px;
+    color: var(--cream);
+  }
+
+  /* ── AI PLATFORMS ── */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    max-width: 780px;
+  }
+  .platform-card {
+    background: var(--dark-card);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .platform-card:hover { border-color: rgba(102,165,223,0.2); transform: translateY(-2px); }
+  .platform-card .p-score {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700; font-size: 32px;
+    color: var(--sara-blue-light);
+    margin-bottom: 4px;
+  }
+  .platform-card .p-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500; font-size: 13px;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .platform-card .p-status {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400; font-size: 10px;
+    color: var(--red);
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .platform-card .p-bar {
+    width: 100%; height: 3px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 2px;
+    margin-top: 16px;
+    overflow: hidden;
+  }
+  .platform-card .p-bar-fill {
+    height: 100%;
+    background: var(--sara-blue-light);
+    border-radius: 2px;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0;
+  }
+
+  /* Crawler table */
+  .crawler-section { margin-top: 64px; }
+  .crawler-table {
+    width: 100%; max-width: 780px;
+    border-collapse: collapse;
+  }
+  .crawler-table th {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500; font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 2px; text-transform: uppercase;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .crawler-table td {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400; font-size: 13px;
+    color: var(--text);
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .crawler-table tr:hover td { background: rgba(255,255,255,0.01); }
+  .status-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .status-dot.allowed { background: var(--green); }
+  .status-dot.blocked { background: var(--red); }
+
+  /* ── FINDINGS ── */
+  .findings-list {
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 780px;
+  }
+  .finding {
+    background: var(--dark-card);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 24px 28px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .finding:hover { border-left-color: var(--gold-soft); }
+  .finding.sev-critical { border-left-color: var(--red); }
+  .finding.sev-high { border-left-color: var(--orange); }
+  .finding.sev-medium { border-left-color: var(--gold); }
+  .finding.sev-low { border-left-color: var(--green); }
+  .finding-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .sev-badge {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 9px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+  .sev-badge.critical { background: rgba(224,82,82,0.12); color: var(--red); }
+  .sev-badge.high { background: rgba(224,148,79,0.12); color: var(--orange); }
+  .sev-badge.medium { background: rgba(212,160,23,0.12); color: var(--gold); }
+  .sev-badge.low { background: rgba(92,184,122,0.12); color: var(--green); }
+  .finding h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500; font-size: 15px;
+    color: var(--cream);
+  }
+  .finding p {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  /* ── ACTION PLAN ── */
+  .phase {
+    margin-bottom: 56px;
+    max-width: 780px;
+  }
+  .phase-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+  }
+  .phase-header.quick {
+    background: linear-gradient(135deg, rgba(212,160,23,0.1), rgba(212,160,23,0.03));
+    border: 1px solid rgba(212,160,23,0.2);
+  }
+  .phase-header.medium {
+    background: linear-gradient(135deg, rgba(33,82,109,0.12), rgba(33,82,109,0.03));
+    border: 1px solid rgba(33,82,109,0.25);
+  }
+  .phase-header.strategic {
+    background: var(--dark-accent);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .phase-label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .phase-header.quick .phase-label { color: var(--gold); }
+  .phase-header.medium .phase-label { color: var(--sara-blue-light); }
+  .phase-header.strategic .phase-label { color: var(--text); }
+  .phase-tag {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 10px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .phase-header.quick .phase-tag { background: var(--gold); color: var(--dark); }
+  .phase-header.medium .phase-tag { background: var(--sara-blue); color: var(--cream); }
+  .phase-header.strategic .phase-tag { background: var(--dark-surface); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.08); }
+
+  .action-list {
+    display: flex; flex-direction: column; gap: 16px;
+    padding-left: 0;
+  }
+  .action-item {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 16px;
+    align-items: start;
+  }
+  .action-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .action-num.gold { background: var(--gold); color: var(--dark); }
+  .action-num.blue { background: var(--sara-blue); color: var(--cream); }
+  .action-num.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); }
+  .action-item h5 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500; font-size: 14px;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .action-item p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .impact-tag {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500; font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    margin-top: 4px;
+    background: rgba(92,184,122,0.1);
+    color: var(--green);
+  }
+
+  /* ── METHODOLOGY ── */
+  .methodology {
+    background: var(--dark-card);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding: 64px 48px;
+  }
+  .method-content {
+    max-width: 680px;
+  }
+  .method-content p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .method-content strong { color: var(--text-body); }
+
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 8px 32px;
+    margin-top: 32px;
+    max-width: 780px;
+  }
+  .gloss-item {
+    display: flex; gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .gloss-item .term {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 12px;
+    color: var(--gold);
+    min-width: 64px;
+    flex-shrink: 0;
+  }
+  .gloss-item .def {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    text-align: center;
+    padding: 48px;
+    border-top: 1px solid rgba(212,160,23,0.1);
+  }
+  .footer-brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .footer-sub {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .footer-legal {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; font-size: 10px;
+    color: rgba(255,255,255,0.15);
+    margin-top: 20px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .top-bar { position: static; background: var(--dark); }
+    body::before { display: none; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    section { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 640px) {
+    .hero, section, .methodology { padding-left: 24px; padding-right: 24px; }
+    .top-bar { padding: 14px 24px; }
+    .score-cluster { flex-direction: column; gap: 24px; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-arrow { transform: rotate(90deg); }
+    .platform-grid { grid-template-columns: 1fr; }
+    .action-item { grid-template-columns: 36px 1fr; }
+    .impact-tag { display: none; }
+    .crawler-table { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-bar">
+  <a href="#" class="logo">La <span>Crown</span></a>
+  <span class="nav-label">GEO Analysis Report</span>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <svg width="0" height="0"><defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D4A017"/><stop offset="100%" stop-color="#F5D565"/></linearGradient></defs></svg>
+
+  <p class="hero-meta">Generative Engine Optimization Audit</p>
+  <h1>Selling<em>Sara</em></h1>
+  <p class="hero-sub">sellingsara.com &mdash; March 02, 2026</p>
+
+  <div class="score-cluster">
+    <div class="score-ring">
+      <svg viewBox="0 0 140 140">
+        <circle class="track" cx="70" cy="70" r="65"/>
+        <circle class="fill" cx="70" cy="70" r="65"/>
+      </svg>
+      <div class="score-number">
+        <strong>33</strong>
+        <span>of 100</span>
+      </div>
+    </div>
+    <div class="score-stats">
+      <div class="stat-item"><span class="val">330K+</span><span class="lbl">Social Followers</span></div>
+      <div class="stat-item"><span class="val">$500K+</span><span class="lbl">First-Year Revenue</span></div>
+      <div class="stat-item"><span class="val">Forbes</span><span class="lbl">30 Under 30</span></div>
+      <div class="stat-item"><span class="val red">0</span><span class="lbl">Google-Indexed Pages</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- THE PROBLEM -->
+<section>
+  <p class="section-label reveal">The Problem</p>
+  <div class="problem-statement reveal">
+    Sara Uy built one of the most visible personal brands in B2B sales. <em>But AI can't see any of it.</em>
+  </div>
+  <div class="problem-body">
+    <p class="reveal">When ChatGPT, Claude, Perplexity, or Google's AI Overviews visit <strong>sellingsara.com</strong>, they don't find a sales training brand with 330,000 followers and Forbes recognition. They find <span class="red">1.27 MB of JavaScript</span> and <span class="red">zero readable text</span>.</p>
+    <p class="reveal">The Wix Thunderbolt platform assembles every page client-side after JavaScript executes &mdash; a step AI crawlers do not perform. The result: no headings, no service descriptions, no bio, no schema, no structured data of any kind.</p>
+    <p class="reveal">The primary domain has <span class="red">zero confirmed Google-indexed pages</span>. The sitemap returns 404. There's no llms.txt file. No meta description. No Person schema linking Sara Uy to her 85K LinkedIn, 170K TikTok, or 79K Instagram.</p>
+  </div>
+
+  <div class="compare-grid reveal">
+    <div class="compare-card">
+      <div class="big red">1.27 MB</div>
+      <div class="sub">JavaScript delivered to crawlers</div>
+    </div>
+    <div class="compare-arrow">&rarr;</div>
+    <div class="compare-card">
+      <div class="big green">0 bytes</div>
+      <div class="sub">Readable content received</div>
+    </div>
+  </div>
+
+  <div class="rec-box reveal">
+    <div class="rec-label">Core Recommendation</div>
+    <p>Create an <strong>llms.txt</strong> file immediately to bypass JavaScript rendering. Add <strong>Person + Organization schema</strong> with sameAs links. Fix the broken sitemap. Publish dedicated pages for each of the six workshops. The gap between Sara's brand authority and the website's AI infrastructure is <strong>the most fixable GEO problem type</strong> &mdash; entirely self-inflicted, with clear remedies within 30 days.</p>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- SCORE BREAKDOWN -->
+<section>
+  <p class="section-label reveal">Score Breakdown</p>
+  <h2 class="section-title reveal">Six Dimensions</h2>
+  <p class="section-sub reveal">Each weighted dimension contributes to your overall GEO score.</p>
+
+  <div class="score-cards">
+    <div class="score-card reveal" data-score="12">
+      <div class="sc-score critical">12</div>
+      <div class="sc-info">
+        <h4>AI Citability &amp; Visibility</h4>
+        <p>Can AI platforms find and quote your content?</p>
+        <div class="bar-track"><div class="bar-fill critical" style="width:0" data-w="12%"></div></div>
+      </div>
+      <div class="sc-weight"><span class="w">25% weight</span><span class="pts">3.0</span></div>
+    </div>
+    <div class="score-card reveal" data-score="52">
+      <div class="sc-score ok">52</div>
+      <div class="sc-info">
+        <h4>Brand Authority Signals</h4>
+        <p>External signals that validate who you are</p>
+        <div class="bar-track"><div class="bar-fill ok" style="width:0" data-w="52%"></div></div>
+      </div>
+      <div class="sc-weight"><span class="w">20% weight</span><span class="pts">10.4</span></div>
+    </div>
+    <div class="score-card reveal" data-score="61">
+      <div class="sc-score good">61</div>
+      <div class="sc-info">
+        <h4>Content Quality &amp; E-E-A-T</h4>
+        <p>Depth, expertise, and trustworthiness of content</p>
+        <div class="bar-track"><div class="bar-fill good" style="width:0" data-w="61%"></div></div>
+      </div>
+      <div class="sc-weight"><span class="w">20% weight</span><span class="pts">12.2</span></div>
+    </div>
+    <div class="score-card reveal" data-score="22">
+      <div class="sc-score warn">22</div>
+      <div class="sc-info">
+        <h4>Technical Foundations</h4>
+        <p>Server-side rendering, sitemaps, crawlability</p>
+        <div class="bar-track"><div class="bar-fill warn" style="width:0" data-w="22%"></div></div>
+      </div>
+      <div class="sc-weight"><span class="w">15% weight</span><span class="pts">3.3</span></div>
+    </div>
+    <div class="score-card reveal" data-score="2">
+      <div class="sc-score critical">2</div>
+      <div class="sc-info">
+        <h4>Structured Data</h4>
+        <p>Schema markup giving AI systems structured facts</p>
+        <div class="bar-track"><div class="bar-fill critical" style="width:0" data-w="2%"></div></div>
+      </div>
+      <div class="sc-weight"><span class="w">10% weight</span><span class="pts">0.2</span></div>
+    </div>
+    <div class="score-card reveal" data-score="42">
+      <div class="sc-score ok">42</div>
+      <div class="sc-info">
+        <h4>Platform Optimization</h4>
+        <p>Presence on platforms AI systems index</p>
+        <div class="bar-track"><div class="bar-fill ok" style="width:0" data-w="42%"></div></div>
+      </div>
+      <div class="sc-weight"><span class="w">10% weight</span><span class="pts">4.2</span></div>
+    </div>
+  </div>
+
+  <div class="total-row reveal">
+    <span class="label">Overall GEO Score</span>
+    <span class="value">33 / 100</span>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- AI PLATFORM READINESS -->
+<section>
+  <p class="section-label reveal">AI Readiness</p>
+  <h2 class="section-title reveal">Platform Scores</h2>
+  <p class="section-sub reveal">How likely each AI search platform is to cite your content. Below 50 means significant barriers.</p>
+
+  <div class="platform-grid">
+    <div class="platform-card reveal">
+      <div class="p-score">20</div>
+      <div class="p-name">Google AI Overviews</div>
+      <div class="p-status">Needs Attention</div>
+      <div class="p-bar"><div class="p-bar-fill" data-w="20%"></div></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="p-score">28</div>
+      <div class="p-name">ChatGPT</div>
+      <div class="p-status">Needs Attention</div>
+      <div class="p-bar"><div class="p-bar-fill" data-w="28%"></div></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="p-score">35</div>
+      <div class="p-name">Perplexity</div>
+      <div class="p-status">Needs Attention</div>
+      <div class="p-bar"><div class="p-bar-fill" data-w="35%"></div></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="p-score">20</div>
+      <div class="p-name">Gemini</div>
+      <div class="p-status">Needs Attention</div>
+      <div class="p-bar"><div class="p-bar-fill" data-w="20%"></div></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="p-score">25</div>
+      <div class="p-name">Bing Copilot</div>
+      <div class="p-status">Needs Attention</div>
+      <div class="p-bar"><div class="p-bar-fill" data-w="25%"></div></div>
+    </div>
+  </div>
+
+  <!-- Crawler Table -->
+  <div class="crawler-section">
+    <h3 class="section-title reveal" style="font-size:24px;margin-bottom:8px;">Crawler Access Status</h3>
+    <p class="section-sub reveal">All crawlers are allowed but receive only JavaScript — no readable content.</p>
+    <table class="crawler-table reveal">
+      <thead>
+        <tr><th>Crawler</th><th>Platform</th><th>Status</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>GPTBot</td><td>ChatGPT</td><td><span class="status-dot allowed"></span>Allowed</td><td style="color:var(--text-muted)">Fix JS rendering so content is readable</td></tr>
+        <tr><td>OAI-SearchBot</td><td>ChatGPT Search</td><td><span class="status-dot allowed"></span>Allowed</td><td style="color:var(--text-muted)">Confirm in robots.txt</td></tr>
+        <tr><td>ClaudeBot</td><td>Claude</td><td><span class="status-dot allowed"></span>Allowed</td><td style="color:var(--text-muted)">Create llms.txt for best visibility</td></tr>
+        <tr><td>PerplexityBot</td><td>Perplexity</td><td><span class="status-dot allowed"></span>Allowed</td><td style="color:var(--text-muted)">Create llms.txt for citation</td></tr>
+        <tr><td>Google-Extended</td><td>Gemini / Google AI</td><td><span class="status-dot allowed"></span>Allowed</td><td style="color:var(--text-muted)">Fix sitemap + add schema</td></tr>
+        <tr><td>Amazonbot</td><td>Alexa / Amazon AI</td><td><span class="status-dot allowed"></span>Allowed</td><td style="color:var(--text-muted)">No action required</td></tr>
+        <tr><td>PetalBot</td><td>Huawei Search</td><td><span class="status-dot blocked"></span>Blocked</td><td style="color:var(--text-muted)">Low priority — consider unblocking</td></tr>
+        <tr><td>Bingbot</td><td>Bing Copilot</td><td><span class="status-dot allowed"></span>Allowed</td><td style="color:var(--text-muted)">Set up Bing Webmaster Tools</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- KEY FINDINGS -->
+<section>
+  <p class="section-label reveal">Key Findings</p>
+  <h2 class="section-title reveal">What We Found</h2>
+  <p class="section-sub reveal">14 issues identified, ordered by severity. Each directly impacts your GEO score.</p>
+
+  <div class="findings-list">
+    <div class="finding sev-critical reveal">
+      <div class="finding-header"><span class="sev-badge critical">Critical</span><h4>JavaScript Rendering Blocks All Content</h4></div>
+      <p>Every page delivers 1.27 MB of JavaScript with zero readable text. GPTBot, ClaudeBot, and PerplexityBot cannot extract any content. All page content assembles client-side after JS execution &mdash; a step AI crawlers do not perform.</p>
+    </div>
+    <div class="finding sev-critical reveal">
+      <div class="finding-header"><span class="sev-badge critical">Critical</span><h4>No llms.txt File Exists</h4></div>
+      <p>No llms.txt at /llms.txt or /llms-full.txt. This single file would let AI models bypass JavaScript rendering entirely by reading structured plaintext. Highest-ROI fix available.</p>
+    </div>
+    <div class="finding sev-critical reveal">
+      <div class="finding-header"><span class="sev-badge critical">Critical</span><h4>Sitemap Declared But Returns 404</h4></div>
+      <p>robots.txt points to a sitemap that doesn't exist. Without a valid sitemap, AI crawlers and search engines cannot discover or enumerate pages to index.</p>
+    </div>
+    <div class="finding sev-critical reveal">
+      <div class="finding-header"><span class="sev-badge critical">Critical</span><h4>Zero Structured Data on Any Page</h4></div>
+      <p>No JSON-LD, Microdata, or RDFa detected anywhere. No Person schema connects Sara Uy to LinkedIn (85K), TikTok (170K), or Instagram (79K). Schema score: 2/100.</p>
+    </div>
+    <div class="finding sev-critical reveal">
+      <div class="finding-header"><span class="sev-badge critical">Critical</span><h4>Primary Domain Has Zero Indexed Pages</h4></div>
+      <p>Only the newsletter subdomain appears in Google. The main sellingsara.com has zero confirmed indexed pages &mdash; the clearest signal of total AI crawler access failure.</p>
+    </div>
+    <div class="finding sev-high reveal">
+      <div class="finding-header"><span class="sev-badge high">High</span><h4>No Privacy Policy or Terms of Service</h4></div>
+      <p>Email collection without a privacy policy violates GDPR/CCPA and fails Google Quality Rater trust standards. Legal liability for a New York business.</p>
+    </div>
+    <div class="finding sev-high reveal">
+      <div class="finding-header"><span class="sev-badge high">High</span><h4>Homepage Missing Meta Description</h4></div>
+      <p>One of the few HTML elements readable before JavaScript executes. Its absence means AI systems cannot summarize the site from raw HTML alone.</p>
+    </div>
+    <div class="finding sev-high reveal">
+      <div class="finding-header"><span class="sev-badge high">High</span><h4>No Wikipedia Entity for Sara Uy</h4></div>
+      <p>Wikipedia is the strongest entity recognition signal for AI. Notability threshold appears met: Forbes 30 Under 30, documented $500K+ revenue, 330K+ following.</p>
+    </div>
+    <div class="finding sev-high reveal">
+      <div class="finding-header"><span class="sev-badge high">High</span><h4>Zero Reddit Presence</h4></div>
+      <p>Perplexity, ChatGPT, and Claude heavily index Reddit for practitioner recommendations. Cold calling and social selling are actively discussed in relevant subreddits.</p>
+    </div>
+    <div class="finding sev-high reveal">
+      <div class="finding-header"><span class="sev-badge high">High</span><h4>No Dedicated Content Pages</h4></div>
+      <p>All six workshops, coaching, and about content return 404. No blog, no case studies, no indexable resources. All educational content lives on platforms Sara doesn't own.</p>
+    </div>
+    <div class="finding sev-medium reveal">
+      <div class="finding-header"><span class="sev-badge medium">Medium</span><h4>No Open Graph or Twitter Card Tags</h4></div>
+      <p>Missing OG and Twitter Card meta tags affect social sharing appearance and reduce identity signals for AI crawlers.</p>
+    </div>
+    <div class="finding sev-medium reveal">
+      <div class="finding-header"><span class="sev-badge medium">Medium</span><h4>No YouTube Channel</h4></div>
+      <p>YouTube is indexed directly by Google AI Overviews and cited by Perplexity. Sara's video-native content makes this a natural low-effort extension.</p>
+    </div>
+    <div class="finding sev-medium reveal">
+      <div class="finding-header"><span class="sev-badge medium">Medium</span><h4>No FTC Disclosures for Brand Partnerships</h4></div>
+      <p>Sponsored content from Pipedrive and Luster isn't disclosed per FTC guidelines. Both a legal compliance issue and E-E-A-T trustworthiness gap.</p>
+    </div>
+    <div class="finding sev-low reveal">
+      <div class="finding-header"><span class="sev-badge low">Low</span><h4>AI Crawlers Not Explicitly Named in robots.txt</h4></div>
+      <p>All crawlers inherit the wildcard Allow rule. Best practice: explicitly list GPTBot, ClaudeBot, PerplexityBot, and Google-Extended to prevent accidental blocking.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- ACTION PLAN -->
+<section>
+  <p class="section-label reveal">Action Plan</p>
+  <h2 class="section-title reveal">What To Do Next</h2>
+  <p class="section-sub reveal">Prioritized by impact and effort. Estimated quick-win impact: +13 GEO points.</p>
+
+  <!-- QUICK WINS -->
+  <div class="phase reveal">
+    <div class="phase-header quick">
+      <span class="phase-label">This Week &middot; Quick Wins</span>
+      <span class="phase-tag">+13 GEO pts</span>
+    </div>
+    <div class="action-list">
+      <div class="action-item">
+        <div class="action-num gold">1</div>
+        <div><h5>Create llms.txt at domain root</h5><p>Bypasses JavaScript rendering for every AI model immediately. A plaintext file that gives AI a structured summary of the site's content. Estimated +7 weighted GEO points.</p></div>
+        <span class="impact-tag">+7 pts</span>
+      </div>
+      <div class="action-item">
+        <div class="action-num gold">2</div>
+        <div><h5>Add meta description to homepage</h5><p>In Wix SEO Settings: "SellingSara offers B2B sales training in cold calling, social selling, and email writing. Founded by Sara Uy, Forbes 30 Under 30."</p></div>
+        <span class="impact-tag">Trust</span>
+      </div>
+      <div class="action-item">
+        <div class="action-num gold">3</div>
+        <div><h5>Add Person + Organization schema</h5><p>JSON-LD @graph block via Wix SEO Advanced > Additional Tags. Links all social profiles via sameAs. Establishes entity identity. Estimated +6 weighted points.</p></div>
+        <span class="impact-tag">+6 pts</span>
+      </div>
+      <div class="action-item">
+        <div class="action-num gold">4</div>
+        <div><h5>Fix the broken sitemap</h5><p>Regenerate in Wix SEO Tools, verify HTTP 200, submit to Google Search Console. Currently returns 404.</p></div>
+        <span class="impact-tag">Indexing</span>
+      </div>
+      <div class="action-item">
+        <div class="action-num gold">5</div>
+        <div><h5>Publish Privacy Policy &amp; Terms of Service</h5><p>Use Wix's built-in generator, link in site footer. Legal requirement and Google Quality Rater trust signal.</p></div>
+        <span class="impact-tag">Compliance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDIUM-TERM -->
+  <div class="phase reveal">
+    <div class="phase-header medium">
+      <span class="phase-label">This Month &middot; Medium-Term</span>
+      <span class="phase-tag">Content + Authority</span>
+    </div>
+    <div class="action-list">
+      <div class="action-item">
+        <div class="action-num blue">1</div>
+        <div><h5>Create /about page (700+ words)</h5><p>Sara's credentials, career timeline, Forbes 30 Under 30, client list with testimonials, professional headshot.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num blue">2</div>
+        <div><h5>Build dedicated workshop pages</h5><p>Cold calling, social selling, email writing, clientele building, coaching, speaking &mdash; minimum 800 words each.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num blue">3</div>
+        <div><h5>Publish 2 detailed case studies</h5><p>Make-A-Wish Michigan (Michael Hull CEO quote) and Indus Valley Partners (Kevin Ronayne testimonial) with measurable outcomes.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num blue">4</div>
+        <div><h5>Add FAQPage schema to homepage</h5><p>Top 4-5 questions about SellingSara's services. Directly feeds AI answer generation.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num blue">5</div>
+        <div><h5>Create Crunchbase listing</h5><p>Company profile with founding date (2024), Sara as founder, business description.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num blue">6</div>
+        <div><h5>Launch YouTube channel</h5><p>Upload 5-10 repurposed TikTok cold call recordings with descriptive titles and auto-transcripts enabled.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num blue">7</div>
+        <div><h5>Add "As Seen In" section</h5><p>RevenueBrew, Forbes, SellBetter, Pipedrive logos with links. Visual authority on homepage.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATEGIC -->
+  <div class="phase reveal">
+    <div class="phase-header strategic">
+      <span class="phase-label">This Quarter &middot; Strategic</span>
+      <span class="phase-tag">Long-term Advantage</span>
+    </div>
+    <div class="action-list">
+      <div class="action-item">
+        <div class="action-num ghost">1</div>
+        <div><h5>Pursue Wikipedia article for Sara Uy</h5><p>Articles for Creation process. Citations: RevenueBrew profile, Forbes 30 Under 30, SellBetter speaker profile, 30 Minutes to President's Club podcast. Notability threshold likely met.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num ghost">2</div>
+        <div><h5>Build Reddit presence authentically</h5><p>10-15 posts over 60-90 days in r/sales, r/coldcalling, r/b2bmarketing. Registers as AI-discoverable brand signal.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num ghost">3</div>
+        <div><h5>Migrate to server-side rendering</h5><p>Verify Wix SSR functions on all pages or move content-heavy pages to SSR framework for reliable AI crawling.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num ghost">4</div>
+        <div><h5>Syndicate newsletter as blog posts</h5><p>Archive newsletter content as indexed blog posts on primary domain. Builds topical authority in cold calling and social selling.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num ghost">5</div>
+        <div><h5>Join industry associations</h5><p>Sales Assembly, Revenue Collective / Pavilion, NASP &mdash; membership signals improve E-E-A-T authority.</p></div>
+      </div>
+      <div class="action-item">
+        <div class="action-num ghost">6</div>
+        <div><h5>Pursue partner backlinks</h5><p>Pipedrive and Luster co-authored content linking back to sellingsara.com from high domain authority partner sites.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<div class="methodology">
+  <p class="section-label reveal">Appendix</p>
+  <h2 class="section-title reveal" style="margin-bottom:24px;">Methodology</h2>
+  <div class="method-content">
+    <p class="reveal">This GEO audit analyzed <strong>sellingsara.com</strong> on March 02, 2026 across six weighted dimensions: AI Citability &amp; Visibility (25%), Brand Authority Signals (20%), Content Quality &amp; E-E-A-T (20%), Technical Foundations (15%), Structured Data (10%), and Platform Optimization (10%).</p>
+    <p class="reveal"><strong>Platforms assessed:</strong> Google AI Overviews, ChatGPT Web Search, Perplexity AI, Google Gemini, Bing Copilot.</p>
+    <p class="reveal"><strong>Standards referenced:</strong> Google Search Quality Rater Guidelines (Dec 2025), Schema.org specification, Core Web Vitals (2026 thresholds), llms.txt emerging standard, RSL 1.0 licensing framework.</p>
+  </div>
+
+  <h3 class="section-title reveal" style="font-size:20px;margin-top:48px;margin-bottom:16px;">Glossary</h3>
+  <div class="glossary-grid reveal">
+    <div class="gloss-item"><span class="term">GEO</span><span class="def">Generative Engine Optimization &mdash; optimizing for AI citation</span></div>
+    <div class="gloss-item"><span class="term">AIO</span><span class="def">AI Overviews &mdash; Google's AI answer boxes in search</span></div>
+    <div class="gloss-item"><span class="term">E-E-A-T</span><span class="def">Experience, Expertise, Authoritativeness, Trustworthiness</span></div>
+    <div class="gloss-item"><span class="term">SSR</span><span class="def">Server-Side Rendering &mdash; HTML generated server-side for crawlers</span></div>
+    <div class="gloss-item"><span class="term">JSON-LD</span><span class="def">JavaScript Object Notation for Linked Data &mdash; schema format</span></div>
+    <div class="gloss-item"><span class="term">sameAs</span><span class="def">Schema.org property linking entity to profiles on other platforms</span></div>
+    <div class="gloss-item"><span class="term">llms.txt</span><span class="def">Proposed standard file guiding AI systems about site content</span></div>
+    <div class="gloss-item"><span class="term">IndexNow</span><span class="def">Protocol for instant search engine content change notification</span></div>
+    <div class="gloss-item"><span class="term">CWV</span><span class="def">Core Web Vitals &mdash; Google's page experience metrics</span></div>
+    <div class="gloss-item"><span class="term">INP</span><span class="def">Interaction to Next Paint &mdash; responsiveness metric</span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="report-footer">
+  <div class="footer-brand">La Crown Inc.</div>
+  <div class="footer-sub">AI-Powered Automation for Freight &amp; Logistics</div>
+  <div class="footer-sub">lacrown.ai</div>
+  <div class="footer-legal">Scores based on automated analysis and industry benchmarks. Validate with platform-specific testing.<br>&copy; 2026 La Crown Inc. &mdash; Confidential.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Animate bars when visible
+        const bars = entry.target.querySelectorAll('[data-w]');
+        bars.forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.w; }, 200);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // Also animate bars inside non-reveal containers
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        setTimeout(() => { bar.style.width = bar.dataset.w; }, 400);
+        barObserver.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.bar-fill[data-w], .p-bar-fill[data-w]').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>

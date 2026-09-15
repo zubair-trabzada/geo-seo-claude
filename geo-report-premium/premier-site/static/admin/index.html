@@ -1,0 +1,195 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+</head><body>
+
+<div class="adm-bar">
+  <div class="logo">Premier <small>Admin</small></div>
+  <div class="who"></div>
+</div>
+<nav class="adm-tabs">
+  <a href="index.html">Dashboard</a>
+  <a href="clients.html">Clients</a>
+  <a href="quote.html">+ Quote</a>
+  <a href="po.html">+ PO</a>
+  <a href="bol.html">+ BOL</a>
+  <a href="calls.html">Calls</a>
+  <a href="uploads.html">Uploads</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- Today's Claude briefing -->
+  <div id="briefing-wrap"></div>
+
+  <!-- KPI strip -->
+  <div id="kpis" class="kpis"></div>
+
+  <!-- Quick add -->
+  <div class="card">
+    <h2>Quick add</h2>
+    <p class="sub">One tap from the road.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="quote.html">New Quote</a>
+      <a class="btn btn-teal" href="po.html">New PO</a>
+      <a class="btn btn-ghost" href="bol.html">New BOL</a>
+      <a class="btn btn-ghost" href="clients.html?new=1">+ Client</a>
+    </div>
+  </div>
+
+  <!-- Aged opportunities -->
+  <div class="card">
+    <h2>Aged opportunities</h2>
+    <p class="sub">Open quotes &gt; 7 days old. Oldest first.</p>
+    <div id="aged" class="list"><div class="empty">Loading…</div></div>
+  </div>
+
+  <!-- Recent activity -->
+  <div class="card">
+    <h2>Recent activity</h2>
+    <p class="sub">Documents and leads from the last 14 days.</p>
+    <div id="activity" class="list"><div class="empty">Loading…</div></div>
+  </div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+function fmtAmt(cents) { if (cents == null) return ''; return Premier.money(cents/100); }
+function fmtDate(iso) { try { return new Date(iso).toLocaleDateString(); } catch { return ''; } }
+function fmtDateTime(iso) { try { const d = new Date(iso); return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); } catch { return iso; } }
+function kindLabel(k){return {quote:'QUOTE',po:'PO',bol:'BOL'}[k]||k.toUpperCase();}
+function kindCls(k){return {quote:'kind-q',po:'kind-po',bol:'kind-bol'}[k]||'kind-bol';}
+
+function renderBriefing(briefing) {
+  const wrap = document.getElementById('briefing-wrap');
+  if (!briefing) {
+    wrap.innerHTML = `
+      <div class="card">
+        <h2>Today's briefing</h2>
+        <p class="sub">No briefing yet for today. The morning cron runs daily — or generate one now.</p>
+        <button class="btn btn-primary" id="gen">Generate now</button>
+      </div>`;
+    document.getElementById('gen').onclick = regen;
+    return;
+  }
+  const bodyHTML = Premier.mdToHTML(briefing.body_md);
+  wrap.innerHTML = `
+    <div class="briefing">
+      <h2>Today's briefing <span class="badge">${briefing.model || 'AI'}</span></h2>
+      <div class="meta">${fmtDateTime(briefing.generated_at)} · ${briefing.date}</div>
+      ${bodyHTML}
+      <div class="acts">
+        <button class="btn btn-primary" id="gen">Regenerate</button>
+        <a class="btn btn-on-dark" href="briefings.html">History</a>
+      </div>
+    </div>`;
+  document.getElementById('gen').onclick = regen;
+}
+
+async function regen() {
+  const btn = document.getElementById('gen');
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Generating…';
+  try {
+    const b = await Premier.runBriefing();
+    Premier.toast('Briefing refreshed');
+    renderBriefing(b);
+  } catch (e) {
+    Premier.toast('Couldn\'t generate: ' + (e.message || e));
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = 'Regenerate'; }
+  }
+}
+
+function renderKPIs(k) {
+  if (!k) return;
+  const tiles = [
+    { v: Premier.money(k.pipeline_open_cents/100), k: 'Open pipeline' },
+    { v: k.open_quotes, k: 'Open quotes' },
+    { v: k.aged_count, k: 'Aged > 14d', warn: k.aged_count > 0 },
+    { v: k.leads_7d, k: 'New leads (7d)' },
+  ];
+  document.getElementById('kpis').innerHTML = tiles.map(t =>
+    `<div class="kpi${t.warn ? ' warn' : ''}"><div class="v">${t.v}</div><div class="k">${t.k}</div></div>`
+  ).join('');
+}
+
+function renderAged(list) {
+  const el = document.getElementById('aged');
+  if (!list.length) { el.innerHTML = '<div class="empty">Nothing stale — clean board.</div>'; return; }
+  el.innerHTML = list.map(d => `
+    <a class="list-item" href="quote.html?id=${d.id}">
+      <div>
+        <div class="ttl">${d.number} · ${d.company} <span class="${kindCls('quote')}">QUOTE</span></div>
+        <div class="sub">${(d.title || '').slice(0, 70)} · ${d.status || 'open'}</div>
+      </div>
+      <div class="meta">
+        <div class="amt">${fmtAmt(d.amount_cents)}</div>
+        <div class="when">${d.age_days}d old</div>
+      </div>
+    </a>`).join('');
+}
+
+function renderActivity(leads, docs) {
+  // Merge & sort by created desc
+  const stream = [];
+  (docs || []).forEach(d => stream.push({ kind: 'doc', when: d.created, payload: d }));
+  (leads || []).forEach(l => stream.push({ kind: 'lead', when: l.created, payload: l }));
+  stream.sort((a,b) => (b.when || '').localeCompare(a.when || ''));
+
+  const el = document.getElementById('activity');
+  if (!stream.length) { el.innerHTML = '<div class="empty">No activity in the last 14 days.</div>'; return; }
+
+  el.innerHTML = stream.slice(0, 30).map(s => {
+    if (s.kind === 'doc') {
+      const d = s.payload;
+      return `
+        <a class="list-item" href="${d.kind}.html?id=${d.id}">
+          <div>
+            <div class="ttl">${d.number} · ${d.company} <span class="${kindCls(d.kind)}">${kindLabel(d.kind)}</span></div>
+            <div class="sub">${(d.title || '').slice(0, 70)} · ${d.status || 'open'}</div>
+          </div>
+          <div class="meta">
+            <div class="amt">${fmtAmt(d.amount_cents)}</div>
+            <div class="when">${fmtDateTime(d.created)}</div>
+          </div>
+        </a>`;
+    } else {
+      const l = s.payload;
+      const sub = l.type === 'seller'
+        ? 'selling ' + [l.machine_year, l.machine_tonnage && l.machine_tonnage + '-ton', l.machine_brand, l.machine_model].filter(Boolean).join(' ')
+        : (l.machine || (l.note || '').slice(0, 60));
+      return `
+        <div class="list-item" style="cursor:default">
+          <div>
+            <div class="ttl">${l.name || '(no name)'} · ${l.company || ''} <span class="kind-lead">LEAD · ${(l.type || 'buyer').toUpperCase()}</span></div>
+            <div class="sub">${sub}</div>
+          </div>
+          <div class="meta">
+            <div class="when">${l.phone || l.email || ''}</div>
+            <div class="when">${fmtDateTime(l.created)}</div>
+          </div>
+        </div>`;
+    }
+  }).join('');
+}
+
+(async function(){
+  try {
+    const data = await Premier.getDashboard();
+    renderBriefing(data.briefing);
+    renderKPIs(data.snapshot && data.snapshot.kpis);
+    renderAged(data.snapshot && data.snapshot.aged_opportunities || []);
+    renderActivity(data.snapshot && data.snapshot.recent_leads || [], data.snapshot && data.snapshot.recent_documents || []);
+  } catch (e) {
+    // 401 already redirects via _shared.js; any other error:
+    document.getElementById('briefing-wrap').innerHTML = `<div class="notice"><strong>Dashboard offline.</strong> ${String(e.message || e)} <br><span style="font-size:12px">Make sure the Worker is deployed and reachable at <code>${Premier.API_BASE || '/api'}</code>.</span></div>`;
+    document.getElementById('aged').innerHTML     = '<div class="empty">—</div>';
+    document.getElementById('activity').innerHTML = '<div class="empty">—</div>';
+    document.getElementById('kpis').innerHTML     = '';
+  }
+})();
+</script>
+</body></html>
