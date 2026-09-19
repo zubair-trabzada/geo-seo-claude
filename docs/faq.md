@@ -34,7 +34,7 @@ Yes, but you must use Git Bash, not PowerShell or Command Prompt. The Windows in
 
 ### What does `install.sh` actually do?
 
-It checks for Git, Python 3.8+, and Claude Code CLI, then copies files into your Claude configuration directory (`~/.claude/`). Specifically: the main skill goes to `~/.claude/skills/geo/`, each of the 13 sub-skills goes to `~/.claude/skills/geo-<name>/`, and the 5 agent files go to `~/.claude/agents/`. It then installs Python dependencies from `requirements.txt` using `pip install --user`. If you run it interactively, it also offers to install the Playwright Chromium browser for screenshot support. The installer works both from a cloned local directory and via a `curl | bash` pipe from the repository URL.
+It checks for Git, Python 3.10+, and Claude Code CLI, then copies files into your Claude configuration directory (`~/.claude/`). Specifically: the main skill goes to `~/.claude/skills/geo/`, each of the 13 sub-skills goes to `~/.claude/skills/geo-<name>/`, and the 5 agent files go to `~/.claude/agents/`. It then installs Python dependencies from `requirements.txt` using `pip install --user`. If you run it interactively, it also offers to install the Playwright Chromium browser for screenshot support. The installer works both from a cloned local directory and via a `curl | bash` pipe from the repository URL.
 
 ### Do I need Playwright?
 

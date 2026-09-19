@@ -88,14 +88,15 @@ main() {
 
     # Check for Python 3
     # On Windows, 'python' is typically Python 3; 'python3' may not exist.
+    # Require Python >= 3.10 (requirements.txt pins Pillow/lxml that drop 3.9).
     PYTHON_CMD=""
-    for cmd in python3 python py; do
+    for cmd in python3 python py python3.13 python3.12 python3.11 python3.10; do
         if command -v "$cmd" &> /dev/null; then
             _ver=$("$cmd" --version 2>&1 | grep -oE '[0-9]+\.[0-9]+' | head -1 || true)
             if [ -n "$_ver" ]; then
                 _major=$(echo "$_ver" | cut -d. -f1)
                 _minor=$(echo "$_ver" | cut -d. -f2)
-                if [ "$_major" -ge 3 ] && [ "$_minor" -ge 8 ]; then
+                if [ "$_major" -gt 3 ] || { [ "$_major" -eq 3 ] && [ "$_minor" -ge 10 ]; }; then
                     PYTHON_CMD="$cmd"
                     break
                 fi
@@ -104,7 +105,7 @@ main() {
     done
 
     if [ -z "$PYTHON_CMD" ]; then
-        print_error "Python 3.8+ is required but not found."
+        print_error "Python 3.10+ is required but not found."
         echo "  Install: https://www.python.org/downloads/"
         echo "  Make sure to check 'Add Python to PATH' during installation."
         exit 1

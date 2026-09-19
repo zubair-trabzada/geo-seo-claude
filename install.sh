@@ -74,22 +74,26 @@ main() {
     fi
     print_success "Git found: $(git --version)"
 
+    # Require Python >= 3.10 (requirements.txt pins Pillow/lxml that drop 3.9).
+    # Don't trust the first `python3` on PATH: macOS ships system python3 3.9.x,
+    # and Homebrew often exposes a newer Python only as pythonX.Y with no
+    # `python3` symlink, so probe versioned names too and pick the first that
+    # meets the minimum.
     PYTHON_CMD=""
-    if command -v python3 &> /dev/null; then
-        PYTHON_CMD="python3"
-    elif command -v python &> /dev/null; then
-        PY_VERSION=$(python --version 2>&1 | grep -oE '[0-9]+\.[0-9]+' | head -1)
-        if [ -n "$PY_VERSION" ]; then
-            MAJOR=$(echo "$PY_VERSION" | cut -d. -f1)
-            MINOR=$(echo "$PY_VERSION" | cut -d. -f2)
-            if [ "$MAJOR" -ge 3 ] && [ "$MINOR" -ge 8 ]; then
-                PYTHON_CMD="python"
-            fi
+    for cmd in python3 python3.13 python3.12 python3.11 python3.10 python; do
+        command -v "$cmd" &> /dev/null || continue
+        PY_VERSION=$("$cmd" --version 2>&1 | grep -oE '[0-9]+\.[0-9]+' | head -1)
+        [ -n "$PY_VERSION" ] || continue
+        MAJOR=$(echo "$PY_VERSION" | cut -d. -f1)
+        MINOR=$(echo "$PY_VERSION" | cut -d. -f2)
+        if [ "$MAJOR" -gt 3 ] || { [ "$MAJOR" -eq 3 ] && [ "$MINOR" -ge 10 ]; }; then
+            PYTHON_CMD="$cmd"
+            break
         fi
-    fi
+    done
 
     if [ -z "$PYTHON_CMD" ]; then
-        print_error "Python 3.8+ is required but not found."
+        print_error "Python 3.10+ is required but not found."
         echo "  Install: https://www.python.org/downloads/"
         exit 1
     fi

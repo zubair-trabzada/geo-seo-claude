@@ -4,7 +4,7 @@
 
 | Requirement | Why it's needed |
 |---|---|
-| Python 3.8+ | Runs the utility scripts (page fetching, citability scoring, PDF generation, etc.) |
+| Python 3.10+ | Runs the utility scripts (page fetching, citability scoring, PDF generation, etc.) |
 | Claude Code CLI | The skills and agents are loaded and invoked through Claude Code |
 | Git | Used by the installer to clone the repository |
 | Playwright (optional) | Enables screenshot capture; install separately after the main install |
@@ -104,7 +104,7 @@ The full audit takes several minutes depending on the site. See [scoring-methodo
 ## Troubleshooting
 
 **Python not found during install**
-- Symptom: installer exits with `Python 3.8+ is required but not found`
+- Symptom: installer exits with `Python 3.10+ is required but not found`
 - Cause: Python is not installed or not on `PATH`
 - Fix: install from [python.org](https://www.python.org/downloads/); on Windows check "Add Python to PATH" during setup; then reopen your terminal
 
