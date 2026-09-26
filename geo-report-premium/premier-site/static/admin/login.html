@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Sign In</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+</head><body style="background:linear-gradient(160deg,#0C2A2A,#13524A);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;padding-bottom:24px">
+<div class="card" style="max-width:380px;width:100%">
+  <h2 style="text-align:center">Premier Admin</h2>
+  <p class="sub" style="text-align:center">Sign in to manage clients, quotes, POs, and BOLs.</p>
+
+  <div id="cf-block" style="display:none">
+    <div class="notice" style="margin-top:8px">
+      This site is protected by <strong>Cloudflare Access</strong>. You should be signed in automatically — if you're seeing this, your session expired or you're hitting the Worker directly.
+      <a href="/admin/" style="display:block;margin-top:8px">Reload</a>
+    </div>
+  </div>
+
+  <div id="token-block">
+    <label>Dev admin token</label>
+    <input id="tok" type="password" placeholder="paste ADMIN_TOKEN here" autocomplete="off">
+    <p class="sub" style="margin-top:8px;font-size:12px">Stored in this browser only. Used when Cloudflare Access isn't configured (local dev).</p>
+    <div style="height:10px"></div>
+    <button id="go" class="btn btn-primary btn-block">Sign in</button>
+    <div id="msg" class="notice" style="display:none;margin-top:12px"></div>
+  </div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+(async function(){
+  // If we already have a token or CF Access cookie, try /me
+  const me = await Premier.whoami();
+  if (me && me.ok) {
+    const next = new URLSearchParams(location.search).get('next') || 'index.html';
+    location.href = next; return;
+  }
+  // If we got here via 401, the Worker either wants a bearer token (dev) or rejected our CF Access JWT (prod misconfig)
+  // Show both blocks; user can paste a token, or click reload if CF Access is active
+  document.getElementById('cf-block').style.display = 'block';
+  document.getElementById('go').addEventListener('click', async () => {
+    const t = document.getElementById('tok').value.trim();
+    if (!t) return;
+    Premier.setToken(t);
+    const ok = await Premier.whoami();
+    if (ok && ok.ok) {
+      const next = new URLSearchParams(location.search).get('next') || 'index.html';
+      location.href = next;
+    } else {
+      Premier.clearToken();
+      const m = document.getElementById('msg');
+      m.style.display = 'block';
+      m.innerHTML = '<strong>That token didn\'t work.</strong> Check your Worker logs and the value of <code>ADMIN_TOKEN</code>.';
+    }
+  });
+  document.getElementById('tok').addEventListener('keydown', e => { if (e.key==='Enter') document.getElementById('go').click(); });
+})();
+</script>
+</body></html>

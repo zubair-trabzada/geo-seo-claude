@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Premier Inventory Manager</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#0C1F1E;color:#13212B}
+.bar{background:#0C2A2A;color:#fff;padding:16px 18px;position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.bar h1{font-size:17px;font-weight:800;letter-spacing:.3px}
+.bar .sub{font-size:11px;color:#9FBDB7}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+.btn{font-weight:700;font-size:15px;padding:12px 16px;border:none;border-radius:10px;cursor:pointer}
+.btn-o{background:#F26A21;color:#fff}.btn-t{background:#1B8A7A;color:#fff}.btn-g{background:#fff;border:1.5px solid #d7dee1;color:#13212B}
+.card{background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.card h2{font-size:15px;margin-bottom:12px;color:#136055;text-transform:uppercase;letter-spacing:.5px}
+label{display:block;font-size:12.5px;font-weight:600;color:#52606B;margin:9px 0 3px}
+input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid #e1e7ea;border-radius:9px;font-size:15px;font-family:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.m{display:flex;justify-content:space-between;align-items:center;border:1px solid #eef2f3;border-radius:10px;padding:11px 13px;margin-bottom:8px}
+.m .info b{font-size:14.5px}.m .info span{display:block;font-size:12px;color:#52606B}
+.rm{background:#fbe9e4;color:#c0421a;border:none;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer}
+.note{font-size:12.5px;color:#9FBDB7;text-align:center;margin:14px 0}
+.count{background:#2FB8A3;color:#063;font-weight:800;border-radius:20px;padding:2px 10px;font-size:13px}
+</style></head><body>
+<div class="bar">
+  <div><h1>PREMIER INVENTORY MANAGER</h1><div class="sub">Add or remove machines &middot; export &middot; rebuild</div></div>
+  <span class="count" id="count">0</span>
+</div>
+<div class="wrap">
+
+  <div class="card">
+    <h2>1 &middot; Load your current list</h2>
+    <p style="font-size:13px;color:#52606B;margin-bottom:10px">Pick your <b>inventory.json</b> so you don't lose anything. (Skip this the very first time.)</p>
+    <input type="file" id="file" accept="application/json">
+  </div>
+
+  <div class="card">
+    <h2>2 &middot; Add a machine</h2>
+    <div class="row">
+      <div><label>Brand</label><input id="brand" placeholder="Van Dorn"></div>
+      <div><label>Model</label><input id="model" placeholder="300-RS"></div>
+    </div>
+    <div class="row">
+      <div><label>Tonnage</label><input id="tonnage" type="number" placeholder="300"></div>
+      <div><label>Year</label><input id="year" type="number" placeholder="2014"></div>
+    </div>
+    <div class="row">
+      <div><label>Shot size</label><input id="shot_size" placeholder="28 oz"></div>
+      <div><label>Controller</label><input id="controller" placeholder="Pathfinder"></div>
+    </div>
+    <div class="row">
+      <div><label>Hours</label><input id="hours" type="number" placeholder="19400"></div>
+      <div><label>Condition</label><select id="condition"><option>Excellent</option><option>Very Good</option><option>Good</option><option>Fair</option></select></div>
+    </div>
+    <label>One-line summary</label><textarea id="summary" rows="2" placeholder="Reconditioned 300-ton hydraulic press, single-owner, runs clean."></textarea>
+    <div class="actions"><button class="btn btn-t" onclick="addM()">+ Add machine</button></div>
+  </div>
+
+  <div class="card">
+    <h2>Current inventory</h2>
+    <div id="list"></div>
+  </div>
+
+  <div class="card">
+    <h2>3 &middot; Save &amp; rebuild</h2>
+    <p style="font-size:13px;color:#52606B;margin-bottom:10px">Download the updated file, drop it into your <b>premier-site</b> folder (replace the old one), then run <code>python build.py</code>. Your site updates everywhere.</p>
+    <div class="actions"><button class="btn btn-o" onclick="download_()">&#11015; Download inventory.json</button></div>
+  </div>
+  <div class="note">Premier Inventory Manager &middot; built by La Crown</div>
+</div>
+
+<script>
+// starts with the seed company + faqs; machines load from file or start empty
+var DATA={company:{name:"Premier Equipment LLC",tagline:"Your Plastics Machinery Source",city:"Beachwood",region:"OH",postal:"44122",phone:"(216) 593-7000",phone_e164:"+1-216-593-7000",email:"sales@buypremier.com",url:"https://www.buypremier.com",entity_line:"Premier Equipment LLC, Beachwood OH — used injection molding machines"},machines:[],faqs:[]};
+function idify(m){return (m.tonnage+'-'+m.brand+'-'+m.model).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');}
+function render(){var L=document.getElementById('list');document.getElementById('count').textContent=DATA.machines.length;
+ if(!DATA.machines.length){L.innerHTML='<p style="font-size:13px;color:#9aa">No machines yet. Load your file or add one above.</p>';return;}
+ L.innerHTML=DATA.machines.map(function(m,i){return '<div class="m"><div class="info"><b>'+m.tonnage+'T '+m.brand+' '+m.model+'</b><span>'+m.year+' · '+m.shot_size+' · '+m.controller+' · '+(m.hours||0).toLocaleString()+' hrs · '+m.condition+'</span></div><button class="rm" onclick="rm('+i+')">Remove</button></div>';}).join('');}
+function addM(){var g=function(id){return document.getElementById(id).value.trim();};
+ if(!g('brand')||!g('model')||!g('tonnage')){alert('Brand, model and tonnage are required.');return;}
+ var m={brand:g('brand'),model:g('model'),tonnage:+g('tonnage'),year:+g('year')||new Date().getFullYear(),shot_size:g('shot_size'),controller:g('controller'),hours:+g('hours')||0,condition:g('condition'),summary:g('summary'),status:'available'};m.id=idify(m);
+ DATA.machines.push(m);['brand','model','tonnage','year','shot_size','controller','hours','summary'].forEach(function(id){document.getElementById(id).value='';});render();}
+function rm(i){if(confirm('Remove '+DATA.machines[i].brand+' '+DATA.machines[i].model+'?')){DATA.machines.splice(i,1);render();}}
+function download_(){var b=new Blob([JSON.stringify(DATA,null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='inventory.json';a.click();}
+document.getElementById('file').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{DATA=JSON.parse(r.result);if(!DATA.machines)DATA.machines=[];render();}catch(err){alert('That file is not valid JSON.');}};r.readAsText(f);});
+render();
+</script>
+</body></html>

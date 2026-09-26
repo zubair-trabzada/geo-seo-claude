@@ -1,0 +1,189 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Premier Admin · Clients</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="_shared.css">
+</head><body>
+
+<div class="adm-bar">
+  <div class="logo">Premier <small>Admin</small></div>
+  <div class="who"></div>
+</div>
+<nav class="adm-tabs">
+  <a href="index.html">Dashboard</a>
+  <a href="clients.html">Clients</a>
+  <a href="quote.html">+ Quote</a>
+  <a href="po.html">+ PO</a>
+  <a href="bol.html">+ BOL</a>
+  <a href="calls.html">Calls</a>
+  <a href="uploads.html">Uploads</a>
+</nav>
+
+<div class="wrap">
+  <div id="view"></div>
+</div>
+
+<script src="_shared.js"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const newFlag = params.get('new') === '1';
+const view = document.getElementById('view');
+
+function clientForm(c = {}, mode = 'create') {
+  const f = (k) => c[k] || '';
+  return `
+    <div class="card">
+      <h2>${mode === 'edit' ? 'Edit client' : 'New client'}</h2>
+      <p class="sub">Stored in your Premier CRM (D1). Used to file quotes, POs, and BOLs under this client's folder in R2.</p>
+      <div class="row">
+        <div><label>Company *</label><input id="f_company" value="${f('company')}" placeholder="Acme Plastics"></div>
+        <div><label>Contact</label><input id="f_contact" value="${f('contact')}" placeholder="Nicole Smith"></div>
+      </div>
+      <div class="row">
+        <div><label>Email</label><input id="f_email" type="email" value="${f('email')}"></div>
+        <div><label>Phone</label><input id="f_phone" value="${f('phone')}"></div>
+      </div>
+      <div class="row">
+        <div><label>City</label><input id="f_city" value="${f('city')}"></div>
+        <div><label>State</label><input id="f_region" value="${f('region')}" maxlength="2" placeholder="OH"></div>
+      </div>
+      <label>Notes</label>
+      <textarea id="f_notes" rows="3" placeholder="Looking for 300-500 ton hydraulic, mid-2010s.">${f('notes')}</textarea>
+      <div class="adm-cta">
+        ${mode === 'edit' ? '<button class="btn btn-danger" id="del">Delete</button>' : ''}
+        <a class="btn btn-ghost" href="clients.html">Cancel</a>
+        <button class="btn btn-primary" id="save">${mode === 'edit' ? 'Save' : 'Add client'}</button>
+      </div>
+    </div>
+  `;
+}
+
+function clientDocsTable(docs) {
+  if (!docs.length) return '<div class="empty">No documents yet for this client.</div>';
+  return '<div class="list">' + docs.map(d => `
+    <a class="list-item" href="${d.kind}.html?id=${d.id}">
+      <div>
+        <div class="ttl">${d.number || '—'} <span class="pill ${{quote:'pill-teal',po:'pill-orange',bol:'pill-grey'}[d.kind]||'pill-grey'}">${({quote:'QUOTE',po:'PO',bol:'BOL'}[d.kind]||d.kind.toUpperCase())}</span></div>
+        <div class="sub">${(d.title || '').slice(0,80)}</div>
+      </div>
+      <div class="meta">
+        <div class="amt">${d.amount_cents != null ? Premier.money(d.amount_cents/100) : ''}</div>
+        <div class="when">${new Date(d.created).toLocaleDateString()}</div>
+      </div>
+    </a>`).join('') + '</div>';
+}
+
+async function showDetail(id) {
+  view.innerHTML = '<div class="card"><div class="empty">Loading…</div></div>';
+  const c = await Premier.getClient(id);
+  if (!c) { view.innerHTML = '<div class="card"><div class="empty">Client not found.</div></div>'; return; }
+  view.innerHTML = `
+    <div class="card">
+      <h2>${c.company}</h2>
+      <p class="sub">${[c.contact, c.email, c.phone, [c.city,c.region].filter(Boolean).join(', ')].filter(Boolean).join(' · ')}</p>
+      ${c.notes ? `<p style="font-size:14px;color:#52606B;margin-bottom:10px">${c.notes}</p>` : ''}
+      <div class="btn-row">
+        <a class="btn btn-primary" href="quote.html?client_id=${c.id}">+ Quote</a>
+        <a class="btn btn-teal" href="po.html?client_id=${c.id}">+ PO</a>
+        <a class="btn btn-ghost" href="bol.html?client_id=${c.id}">+ BOL</a>
+        <button class="btn btn-ghost" id="b-upload">Upload link</button>
+        <a class="btn btn-ghost" href="clients.html?id=${c.id}&edit=1">Edit</a>
+      </div>
+    </div>
+    <div id="upload-link-box"></div>
+    <div class="card">
+      <h2>Documents</h2>
+      <p class="sub">Quotes, POs, and BOLs filed under this client.</p>
+      ${clientDocsTable(c.documents || [])}
+    </div>
+  `;
+
+  document.getElementById('b-upload').onclick = async () => {
+    const box = document.getElementById('upload-link-box');
+    box.innerHTML = '<div class="card"><div class="empty"><span class="spinner" style="border-color:#1B8A7A"></span> generating…</div></div>';
+    try {
+      const r = await Premier.generateUploadLink(c.id);
+      const url = r.share_url;
+      box.innerHTML = `
+        <div class="card">
+          <h2>Upload link for ${c.company}</h2>
+          <p class="sub">Text or email this to your customer. Files they drop go into this client's folder + Nicole gets an email.</p>
+          <div style="background:#F6F9F9;border:1px solid #E3E9EC;border-radius:9px;padding:11px 13px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px;word-break:break-all;color:#13212B;margin:10px 0">${url}</div>
+          <div class="btn-row">
+            <button class="btn btn-primary" id="ul-share">&#128241; Share / Text</button>
+            <button class="btn btn-teal" id="ul-copy">Copy link</button>
+            <a class="btn btn-ghost" href="${url}" target="_blank">Preview</a>
+            <button class="btn btn-danger" id="ul-rotate">Rotate (revoke)</button>
+          </div>
+        </div>`;
+      document.getElementById('ul-share').onclick = () => Premier.shareLink(url, `Send files to Premier Equipment · ${c.company}`);
+      document.getElementById('ul-copy').onclick  = () => { navigator.clipboard.writeText(url); Premier.toast('Copied'); };
+      document.getElementById('ul-rotate').onclick = async () => {
+        if (!confirm('Rotate the upload link? Anything previously sent will stop working.')) return;
+        await Premier.rotateUploadLink(c.id);
+        Premier.toast('Rotated — old link revoked');
+        document.getElementById('b-upload').click();
+      };
+    } catch (e) {
+      box.innerHTML = '<div class="notice err">Couldn\'t generate link: ' + (e.message || e) + '</div>';
+    }
+  };
+}
+
+async function showEdit(id) {
+  view.innerHTML = '<div class="card"><div class="empty">Loading…</div></div>';
+  const c = await Premier.getClient(id);
+  if (!c) { view.innerHTML = '<div class="card"><div class="empty">Client not found.</div></div>'; return; }
+  view.innerHTML = clientForm(c, 'edit');
+  document.getElementById('save').onclick = async () => {
+    const data = ['company','contact','email','phone','city','region','notes'].reduce((o,k)=>{o[k]=document.getElementById('f_'+k).value.trim(); return o;}, {});
+    if (!data.company) { Premier.toast('Company name required'); return; }
+    await Premier.updateClient(id, data); Premier.toast('Saved');
+    location.href = 'clients.html?id=' + id;
+  };
+  document.getElementById('del').onclick = async () => {
+    if (!confirm('Delete this client? (Only allowed if they have no documents.)')) return;
+    try { await Premier.deleteClient(id); location.href = 'clients.html'; }
+    catch (e) { Premier.toast(String(e.message || e)); }
+  };
+}
+
+async function showNew() {
+  view.innerHTML = clientForm({}, 'create');
+  document.getElementById('save').onclick = async () => {
+    const data = ['company','contact','email','phone','city','region','notes'].reduce((o,k)=>{o[k]=document.getElementById('f_'+k).value.trim(); return o;}, {});
+    if (!data.company) { Premier.toast('Company name required'); return; }
+    const c = await Premier.createClient(data); Premier.toast('Client added');
+    location.href = 'clients.html?id=' + c.id;
+  };
+}
+
+async function showList() {
+  view.innerHTML = `
+    <div class="card">
+      <h2>Clients</h2>
+      <p class="sub">Companies you sell to or buy from. <a href="clients.html?new=1">+ Add new</a></p>
+      <div id="cl" class="list"><div class="empty">Loading…</div></div>
+    </div>`;
+  const clients = await Premier.listClients();
+  const el = document.getElementById('cl');
+  if (!clients.length) el.innerHTML = '<div class="empty">No clients yet. <a href="clients.html?new=1">Add your first &rarr;</a></div>';
+  else el.innerHTML = clients.map(c => `
+    <a class="list-item" href="clients.html?id=${c.id}">
+      <div>
+        <div class="ttl">${c.company}</div>
+        <div class="sub">${[c.contact, c.phone, [c.city,c.region].filter(Boolean).join(', ')].filter(Boolean).join(' · ')}</div>
+      </div>
+    </a>`).join('');
+}
+
+(async function(){
+  if (newFlag) return showNew();
+  if (id && params.get('edit') === '1') return showEdit(id);
+  if (id) return showDetail(id);
+  return showList();
+})();
+</script>
+</body></html>

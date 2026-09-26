@@ -1,0 +1,125 @@
+{
+  "company": {
+    "name": "Premier Equipment LLC",
+    "tagline": "Your Plastics Machinery Source",
+    "city": "Beachwood",
+    "region": "OH",
+    "postal": "44122",
+    "phone": "(216) 593-7000",
+    "phone_e164": "+1-216-593-7000",
+    "email": "sales@buypremier.com",
+    "url": "https://www.buypremier.com",
+    "entity_line": "Premier Equipment LLC, Beachwood OH \u2014 buying and selling used injection molding machines for 55+ years",
+    "owner_name": "Nicole Haas",
+    "owner_title": "Owner",
+    "owner_linkedin": "https://www.linkedin.com/in/nicolehaaspremier/"
+  },
+  "machines": [
+    {
+      "id": "vd-300-rs",
+      "brand": "Van Dorn",
+      "model": "300-RS",
+      "tonnage": 300,
+      "year": 2014,
+      "shot_size": "28 oz",
+      "controller": "Pathfinder",
+      "hours": 19400,
+      "condition": "Excellent",
+      "summary": "Reconditioned 300-ton hydraulic press, single-owner, runs clean."
+    },
+    {
+      "id": "mil-magna-500",
+      "brand": "Milacron",
+      "model": "Magna 500",
+      "tonnage": 500,
+      "year": 2016,
+      "shot_size": "54 oz",
+      "controller": "Mosaic",
+      "hours": 22100,
+      "condition": "Very Good",
+      "summary": "500-ton toggle, recently serviced with new heater bands."
+    },
+    {
+      "id": "nissei-fnx150",
+      "brand": "Nissei",
+      "model": "FNX150",
+      "tonnage": 150,
+      "year": 2018,
+      "shot_size": "8.5 oz",
+      "controller": "TACT V",
+      "hours": 11800,
+      "condition": "Excellent",
+      "summary": "150-ton all-electric, low hours, energy-efficient."
+    },
+    {
+      "id": "toshiba-ec650",
+      "brand": "Toshiba",
+      "model": "EC650",
+      "tonnage": 650,
+      "year": 2013,
+      "shot_size": "75 oz",
+      "controller": "Injectvisor",
+      "hours": 31500,
+      "condition": "Good",
+      "summary": "650-ton electric, large-platen, ideal for automotive parts."
+    },
+    {
+      "id": "engel-victory-220",
+      "brand": "Engel",
+      "model": "Victory 220",
+      "tonnage": 220,
+      "year": 2017,
+      "shot_size": "16 oz",
+      "controller": "CC300",
+      "hours": 15300,
+      "condition": "Very Good",
+      "summary": "220-ton tie-bar-less, great for insert molding."
+    },
+    {
+      "id": "husky-h400-rs",
+      "brand": "Husky",
+      "model": "H400 RS",
+      "tonnage": 400,
+      "year": 2019,
+      "shot_size": "42 oz",
+      "controller": "Polaris",
+      "hours": 9600,
+      "condition": "Excellent",
+      "summary": "400-ton servo, PET-capable, tight tolerances."
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How do I know the machine's real condition?",
+      "a": "Every machine gets a documented inspection: true hours, a condition report, and a run-off video on request. We would rather lose a sale than ship a surprise."
+    },
+    {
+      "q": "Do you handle rigging and freight?",
+      "a": "Yes. We coordinate teardown, loading, and nationwide shipping so the machine arrives ready to set. We have shipped to 48 states."
+    },
+    {
+      "q": "Is there any warranty?",
+      "a": "Inspected machines carry a 30-day functional guarantee on the items listed in the condition report. Extended coverage is available on most units."
+    },
+    {
+      "q": "How do I pick the right tonnage?",
+      "a": "Tell us your part size, material, and cavitation and we will point you to the right tonnage and shot-size range, or talk it through on a call."
+    },
+    {
+      "q": "Can you help with financing?",
+      "a": "We work with equipment-finance partners and can provide CMEA/USPAP appraisals your lender will accept."
+    },
+    {
+      "q": "How fast can it ship?",
+      "a": "In-stock machines typically ship within 5 to 10 business days of payment, depending on rigging schedule and destination."
+    },
+    {
+      "q": "Do you buy machines too?",
+      "a": "Yes \u2014 single machine, full plant, or anything in between. Send photos and a tag plate and we typically return a cash offer within 24 hours."
+    },
+    {
+      "q": "Will you help with a plant liquidation?",
+      "a": "Absolutely. We handle discreet, lender-driven liquidations and full plant moves, including appraisal, rigging, and re-marketing of unsold machines."
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Send files to Premier Equipment</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;background:#F6F9F9;color:#13212B;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:24px}
+.bar{background:linear-gradient(90deg,#0C2A2A,#13524A);color:#fff;padding:18px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.bar .logo{font-family:Georgia,serif;font-weight:700;font-size:20px;letter-spacing:.3px}
+.bar .logo small{display:block;font-size:11px;color:#9FBDB7;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:2px}
+.wrap{max-width:560px;margin:0 auto;padding:18px}
+.card{background:#fff;border-radius:14px;padding:20px;margin-bottom:14px;box-shadow:0 8px 26px rgba(19,33,43,.07);border:1px solid #E3E9EC}
+.card h1{font-family:Georgia,serif;font-size:24px;font-weight:700;color:#0C2A2A;margin-bottom:6px}
+.card h2{font-family:Georgia,serif;font-size:18px;font-weight:700;color:#0C2A2A;margin-bottom:4px}
+.card p{color:#52606B;font-size:14.5px;margin-bottom:10px}
+.card .who{background:rgba(43,184,163,.10);border:1px solid rgba(43,184,163,.25);color:#136055;padding:9px 12px;border-radius:9px;font-size:13.5px;font-weight:600;margin-bottom:12px}
+label{display:block;font-size:11.5px;font-weight:700;color:#52606B;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
+input,textarea{width:100%;padding:12px 13px;border:1.5px solid #e1e7ea;border-radius:10px;font-size:16px;font-family:inherit;background:#fff;color:#13212B}
+input:focus,textarea:focus{outline:none;border-color:#1B8A7A;box-shadow:0 0 0 3px rgba(43,184,163,.15)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:480px){.row{grid-template-columns:1fr}}
+.drop{border:2px dashed #c9d4d7;border-radius:14px;padding:24px 16px;text-align:center;background:#F6F9F9;cursor:pointer;transition:.15s}
+.drop:hover,.drop.dragover{border-color:#1B8A7A;background:rgba(43,184,163,.06)}
+.drop .ico{font-size:32px;margin-bottom:6px}
+.drop .ttl{font-weight:700;font-size:15.5px;color:#0C2A2A}
+.drop .sub{font-size:13px;color:#52606B;margin-top:3px}
+.files{margin-top:12px}
+.file{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#F6F9F9;border-radius:9px;margin-bottom:6px;font-size:13.5px}
+.file .nm{flex:1;font-weight:600;color:#0C2A2A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file .sz{color:#52606B}
+.file .rm{background:#fbe9e4;color:#c0421a;border:none;border-radius:6px;padding:5px 10px;font-weight:700;cursor:pointer;font-size:12.5px}
+.btn{font-weight:700;font-size:16px;padding:14px 18px;border:none;border-radius:11px;cursor:pointer;text-align:center;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-primary{background:#F26A21;color:#fff}.btn-primary:hover{background:#d9591a}
+.btn-primary:disabled{background:#d2998a;cursor:not-allowed}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.notice{background:#FFF8EE;border:1px solid #F2D593;color:#7E5A12;padding:12px 14px;border-radius:10px;font-size:14px;margin-bottom:12px}
+.notice.err{background:#FCE9DF;border-color:#F2C2A9;color:#B23E0F}
+.success{background:linear-gradient(160deg,#0C2A2A,#13524A);color:#fff;border-radius:14px;padding:28px 20px;text-align:center}
+.success .ck{font-size:54px;line-height:1}
+.success h1{font-family:Georgia,serif;font-size:26px;font-weight:700;margin:6px 0 6px;color:#fff}
+.success p{color:#D7F0EB;font-size:15px}
+.success .files-list{text-align:left;margin:16px auto 6px;max-width:380px;background:rgba(255,255,255,.06);padding:12px;border-radius:10px}
+.success .files-list div{font-size:13px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.success .files-list div:last-child{border-bottom:none}
+.footer{text-align:center;color:#9FBDB7;font-size:12px;margin-top:16px}
+</style>
+</head><body>
+
+<div class="bar">
+  <div class="logo">Premier Equipment <small>Secure Upload</small></div>
+</div>
+
+<div class="wrap">
+  <div id="bad" style="display:none">
+    <div class="card">
+      <div class="notice err"><strong>This upload link isn't valid.</strong> Ask Nicole to text you a fresh one.</div>
+    </div>
+  </div>
+
+  <div id="form" style="display:none">
+    <div class="card">
+      <h1>Send your documents</h1>
+      <p>Drop any files Nicole needs — photos of your machine, a tag plate, a W-9, a signed BOL, anything. They go straight into Premier's secure folder.</p>
+      <div id="who" class="who" style="display:none"></div>
+
+      <div class="row">
+        <div><label>Your name</label><input id="name" placeholder="Your full name"></div>
+        <div><label>Phone</label><input id="phone" placeholder="(555) 123-4567"></div>
+      </div>
+      <label>Email</label>
+      <input id="email" type="email" placeholder="you@company.com">
+      <label>Note (optional)</label>
+      <textarea id="note" rows="3" placeholder="e.g. Photos of the 500-ton + tag plate. Asking price was $X."></textarea>
+
+      <label>Files</label>
+      <div id="drop" class="drop">
+        <div class="ico">&#128206;</div>
+        <div class="ttl">Tap to choose files</div>
+        <div class="sub">Photos, PDFs, anything — up to 12 files, 20 MB each.</div>
+        <input id="picker" type="file" multiple style="display:none">
+      </div>
+      <div id="files" class="files"></div>
+
+      <div id="msg" class="notice err" style="display:none"></div>
+      <div style="height:10px"></div>
+      <button id="go" class="btn btn-primary">Send to Premier</button>
+    </div>
+  </div>
+
+  <div id="done" style="display:none">
+    <div class="success">
+      <div class="ck">&#10003;</div>
+      <h1>Got it — thank you!</h1>
+      <p>Nicole has been notified and will follow up.</p>
+      <div id="done-files" class="files-list"></div>
+    </div>
+  </div>
+
+  <div class="footer">Premier Equipment LLC · Beachwood, OH · (216) 593-7000</div>
+</div>
+
+<script>
+(function(){
+  const isLocal = ['localhost','127.0.0.1'].includes(location.hostname);
+  const API_BASE = (window.PREMIER_API || (isLocal ? 'http://localhost:8787' : '')).replace(/\/$/, '');
+
+  const params = new URLSearchParams(location.search);
+  const token  = params.get('t') || '';
+  const co     = params.get('co') || '';
+
+  if (!token) {
+    document.getElementById('bad').style.display = 'block';
+    return;
+  }
+  document.getElementById('form').style.display = 'block';
+  if (co) {
+    const w = document.getElementById('who');
+    w.style.display = 'block';
+    w.innerHTML = 'Sending to Premier on behalf of <strong>' + escapeHTML(co) + '</strong>';
+  }
+
+  function escapeHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  let files = [];
+  const drop   = document.getElementById('drop');
+  const picker = document.getElementById('picker');
+  const list   = document.getElementById('files');
+
+  drop.onclick = () => picker.click();
+  picker.onchange = (e) => addFiles(e.target.files);
+  ;['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('dragover'); }));
+  ;['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('dragover'); }));
+  drop.addEventListener('drop', e => { addFiles(e.dataTransfer.files); });
+
+  function addFiles(fileList) {
+    for (const f of fileList) {
+      if (files.length >= 12) { showErr('Max 12 files.'); break; }
+      if (f.size > 20 * 1024 * 1024) { showErr(`"${f.name}" exceeds 20 MB.`); continue; }
+      files.push(f);
+    }
+    renderFiles();
+  }
+  function renderFiles() {
+    list.innerHTML = files.map((f, i) => `
+      <div class="file">
+        <span class="nm">${escapeHTML(f.name)}</span>
+        <span class="sz">${(f.size/1024).toFixed(0)} KB</span>
+        <button class="rm" data-i="${i}">remove</button>
+      </div>`).join('');
+    list.querySelectorAll('.rm').forEach(b => b.onclick = (e) => { files.splice(+e.target.dataset.i, 1); renderFiles(); });
+  }
+  function showErr(msg) {
+    const m = document.getElementById('msg');
+    m.textContent = msg;
+    m.style.display = 'block';
+  }
+  function hideErr() { document.getElementById('msg').style.display = 'none'; }
+
+  document.getElementById('go').onclick = async () => {
+    hideErr();
+    if (!files.length) { showErr('Choose at least one file.'); return; }
+    const btn = document.getElementById('go');
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Uploading…';
+    try {
+      const fd = new FormData();
+      fd.append('name',  document.getElementById('name').value.trim());
+      fd.append('phone', document.getElementById('phone').value.trim());
+      fd.append('email', document.getElementById('email').value.trim());
+      fd.append('note',  document.getElementById('note').value.trim());
+      for (const f of files) fd.append('files', f, f.name);
+
+      const r = await fetch(API_BASE + '/api/upload/' + encodeURIComponent(token), { method: 'POST', body: fd });
+      if (!r.ok) {
+        const t = await r.text();
+        showErr('Upload failed: ' + (t || r.status));
+        btn.disabled = false; btn.innerHTML = 'Send to Premier';
+        return;
+      }
+      const j = await r.json();
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+      document.getElementById('done-files').innerHTML = (j.files || []).map(f =>
+        `<div>${escapeHTML(f.filename)} <span style="color:#9FBDB7">— ${(f.size_bytes/1024).toFixed(0)} KB</span></div>`
+      ).join('');
+    } catch (e) {
+      showErr('Network error: ' + (e.message || e));
+      btn.disabled = false; btn.innerHTML = 'Send to Premier';
+    }
+  };
+})();
+</script>
+</body></html>
