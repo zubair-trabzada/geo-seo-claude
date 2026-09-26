@@ -71,7 +71,7 @@ cd geo-seo-claude
 
 ### Requirements
 
-- Python 3.8+ (on Debian/Ubuntu also `python3-venv`)
+- Python 3.10+ (on Debian/Ubuntu also `python3-venv`)
 - Claude Code CLI
 - Git
 - Optional: [`uv`](https://docs.astral.sh/uv/) — if present, the installer uses it for a faster dependency install
