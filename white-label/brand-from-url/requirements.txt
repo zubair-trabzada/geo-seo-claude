@@ -1,0 +1,7 @@
+requests>=2.34.2,<3.0.0
+beautifulsoup4>=4.12.0,<5.0.0
+Pillow>=12.3.0,<13.0.0
+# Only needed when the logo is an SVG. The floor matters because the extractor
+# renders SVGs from arbitrary sites: 2.7.0 stopped fetching external resources
+# an SVG references, and 2.9.0 fixed a denial of service via recursive <use>.
+cairosvg>=2.9.0,<3.0.0

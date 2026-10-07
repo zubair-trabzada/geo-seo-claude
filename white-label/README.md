@@ -8,6 +8,22 @@ This is useful because GEO agencies built on this tool typically deliver reports
 under their own brand. Today that means editing colors in the generator by hand;
 this drops that into one config file each reseller can keep.
 
+## Auto-extract from your website
+
+The `brand-from-url/` skill can create `brand.json` from a public homepage, so
+an agency does not need to enter its starting details by hand. It extracts the
+company name, logo URL, colors, contact details, address, and social links,
+then maps the result to the schema used by `brand_config.load_brand()`.
+
+```bash
+python brand-from-url/scripts/brand_extractor.py https://youragency.com brand.json
+```
+
+Review the generated `brand.json` before using it. Homepage data and detected
+colors can be incomplete or inaccurate, particularly on JavaScript-heavy sites.
+The extractor fetches only the homepage and, when found, a logo image. Its Python
+dependencies are listed in `brand-from-url/requirements.txt`.
+
 ## How it works
 
 `brand_config.py` exposes one function, `load_brand()`, that returns a plain dict
