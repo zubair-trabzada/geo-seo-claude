@@ -13,7 +13,7 @@ from unittest.mock import patch, MagicMock
 # Ensure scripts/ is importable from the worktree
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 
-from fetch_page import fetch_page  # noqa: E402
+from fetch_page import extract_content_blocks, fetch_page  # noqa: E402
 
 
 def _make_response(html: str, status_code: int = 200):
@@ -273,3 +273,18 @@ class TestSSRDecomposeOrderIndependence:
 </body></html>"""
         result = _fetch_with_html(html)
         assert result["has_ssr_content"] is True
+
+
+class TestDefinitionListContent:
+    def test_definition_list_faq_is_extracted_as_content(self):
+        html = (
+            "<h2>FAQ</h2>"
+            "<dl><dt>What is an API?</dt>"
+            "<dd>An API is an interface that lets software systems communicate.</dd></dl>"
+        )
+
+        blocks = extract_content_blocks(html)
+
+        assert len(blocks) == 1
+        assert blocks[0]["heading"] == "FAQ"
+        assert "An API is an interface" in blocks[0]["content"]

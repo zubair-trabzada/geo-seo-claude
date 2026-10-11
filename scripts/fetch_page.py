@@ -364,7 +364,20 @@ def extract_content_blocks(html: str) -> list:
     current_content = []
 
     for element in soup.find_all(
-        ["h1", "h2", "h3", "h4", "h5", "h6", "p", "ul", "ol", "table", "blockquote"]
+        [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "p",
+            "ul",
+            "ol",
+            "table",
+            "blockquote",
+            "dl",
+        ]
     ):
         tag = element.name
 

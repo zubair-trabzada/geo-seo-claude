@@ -75,7 +75,7 @@ The citability sub-score is itself a weighted composite of four components (weig
 | Crawler Access Score | 25% |
 | llms.txt Score | 10% |
 
-**Citability scoring** (`scripts/citability_scorer.py`) analyses every substantive content block on the page — sections bounded by headings — and scores each one across five dimensions:
+**Citability scoring** (`scripts/citability_scorer.py`) analyses substantive page sections bounded by headings. HTML definition lists (`dl`) are included in extracted content blocks before scoring across five dimensions:
 
 | Dimension | Max points | Key signals |
 |---|---|---|
