@@ -21,6 +21,8 @@ except ImportError:
     print("ERROR: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
+from text_utils import response_text
+
 DEFAULT_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -57,9 +59,9 @@ def validate_llmstxt(url: str) -> dict:
     try:
         response = requests.get(llms_url, headers=DEFAULT_HEADERS, timeout=15)
         if response.status_code == 200:
+            content = response_text(response)
             result["exists"] = True
-            result["content"] = response.text
-            content = response.text
+            result["content"] = content
 
             # Validate format
             lines = content.strip().split("\n")
@@ -142,7 +144,7 @@ def generate_llmstxt(url: str, max_pages: int = 30) -> dict:
     # Fetch homepage
     try:
         response = requests.get(url, headers=DEFAULT_HEADERS, timeout=30)
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response_text(response), "lxml")
     except Exception as e:
         result["error"] = f"Failed to fetch homepage: {str(e)}"
         return result
@@ -250,7 +252,7 @@ def generate_llmstxt(url: str, max_pages: int = 30) -> dict:
                 # Try to fetch page description
                 try:
                     page_resp = requests.get(page["url"], headers=DEFAULT_HEADERS, timeout=10)
-                    page_soup = BeautifulSoup(page_resp.text, "lxml")
+                    page_soup = BeautifulSoup(response_text(page_resp), "lxml")
                     page_meta = page_soup.find("meta", attrs={"name": "description"})
                     page_desc = page_meta.get("content", "") if page_meta else ""
                     if page_desc:

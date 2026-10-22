@@ -16,6 +16,8 @@ except ImportError:
     print("ERROR: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
+from text_utils import count_words, response_text
+
 # Common AI crawler user agents for testing
 AI_CRAWLERS = {
     "GPTBot": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.2; +https://openai.com/gptbot)",
@@ -92,7 +94,7 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
             result["security_headers"][header] = response.headers.get(header, None)
 
         # Parse HTML
-        soup = BeautifulSoup(response.text, "lxml")
+        soup = BeautifulSoup(response_text(response), "lxml")
 
         # Title
         title_tag = soup.find("title")
@@ -156,7 +158,7 @@ def fetch_page(url: str, timeout: int = 30) -> dict:
             element.decompose()
         text = soup.get_text(separator=" ", strip=True)
         result["text_content"] = text
-        result["word_count"] = len(text.split())
+        result["word_count"] = count_words(text)
 
         # Links
         parsed_url = urlparse(url)
@@ -243,17 +245,18 @@ def fetch_robots_txt(url: str, timeout: int = 15) -> dict:
         response = requests.get(robots_url, headers=DEFAULT_HEADERS, timeout=timeout)
 
         if response.status_code == 200:
+            robots_text = response_text(response)
             result["exists"] = True
-            result["content"] = response.text
+            result["content"] = robots_text
             # Cloudflare's managed robots.txt prepends this block to the origin
             # file and disallows GPTBot, ClaudeBot, Google-Extended and others,
             # often without the site owner realising it is switched on.
             result["cloudflare_managed"] = (
-                "# begin cloudflare managed content" in response.text.lower()
+                "# begin cloudflare managed content" in robots_text.lower()
             )
 
             # Parse for each AI crawler
-            lines = response.text.split("\n")
+            lines = robots_text.split("\n")
             current_agent = None
             agent_rules = {}
 
@@ -341,7 +344,7 @@ def fetch_llms_txt(url: str, timeout: int = 15) -> dict:
             )
             if response.status_code == 200:
                 result[key]["exists"] = True
-                result[key]["content"] = response.text
+                result[key]["content"] = response_text(response)
         except Exception as e:
             result["errors"].append(f"Error checking {check_url}: {str(e)}")
 
@@ -372,7 +375,7 @@ def extract_content_blocks(html: str) -> list:
             # Save previous block
             if current_content:
                 text = " ".join(current_content)
-                word_count = len(text.split())
+                word_count = count_words(text)
                 blocks.append(
                     {
                         "heading": current_heading,
@@ -404,7 +407,7 @@ def extract_content_blocks(html: str) -> list:
             {
                 "heading": current_heading,
                 "content": text,
-                "word_count": len(text.split()),
+                "word_count": count_words(text),
             }
         )
 
@@ -428,7 +431,7 @@ def crawl_sitemap(url: str, max_pages: int = 50, timeout: int = 15) -> list:
                 sitemap_url, headers=DEFAULT_HEADERS, timeout=timeout
             )
             if response.status_code == 200:
-                soup = BeautifulSoup(response.text, "lxml")
+                soup = BeautifulSoup(response_text(response), "lxml")
 
                 # Check for sitemap index
                 for sitemap in soup.find_all("sitemap"):
@@ -442,7 +445,7 @@ def crawl_sitemap(url: str, max_pages: int = 50, timeout: int = 15) -> list:
                                 timeout=timeout,
                             )
                             if child_resp.status_code == 200:
-                                child_soup = BeautifulSoup(child_resp.text, "lxml")
+                                child_soup = BeautifulSoup(response_text(child_resp), "lxml")
                                 for url_tag in child_soup.find_all("url"):
                                     loc_tag = url_tag.find("loc")
                                     if loc_tag:
@@ -491,7 +494,7 @@ if __name__ == "__main__":
         data = {"pages": pages, "count": len(pages)}
     elif mode == "blocks":
         response = requests.get(target_url, headers=DEFAULT_HEADERS, timeout=30)
-        data = extract_content_blocks(response.text)
+        data = extract_content_blocks(response_text(response))
     elif mode == "full":
         data = {
             "page": fetch_page(target_url),

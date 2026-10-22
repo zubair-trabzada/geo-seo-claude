@@ -8,6 +8,11 @@ Based on research showing optimal AI-cited passages are:
 - Self-contained (extractable without context)
 - Fact-rich with specific statistics
 - Structured with clear answer patterns
+
+Chinese/Japanese passages are supported: word counts use CJK-aware counting
+(see text_utils.count_words) and each heuristic gains Chinese equivalents.
+The Chinese patterns only run when a passage contains CJK characters, so
+English scores are unchanged.
 """
 
 import sys
@@ -22,11 +27,61 @@ except ImportError:
     print("ERROR: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
+from text_utils import count_words, has_cjk, leading_words, response_text
+
+# Chinese equivalents of the English heuristics in score_passage().
+ZH_PATTERNS = {
+    # "X 是指…", "X 是一种…", "简称…"
+    "definition": r"(?:是指|指的是|是一种|是一类|是一个|是一项|被定义为|定义为|简称|全称(?:是|为)|又称|也称|所谓)",
+    "early_answer": [
+        r"(?:是|指|意味着)",
+        r"\d+(?:\.\d+)?\s*(?:万|亿)",
+        r"[¥￥]\s?[\d,]+|[\d,]+(?:\.\d+)?\s*(?:万|亿)?元",
+    ],
+    "claim": (
+        r"(?:根据|据)[^，。；]{0,15}(?:统计|报告|研究|数据|调查)"
+        r"|研究(?:表明|显示|发现|指出)|数据(?:显示|表明)|调查(?:显示|发现)|报告(?:显示|指出)"
+    ),
+    "pronouns": (
+        r"它们?|他们|她们|(?<!其)[他她](?!们)|(?<![应活])该|(?<![因如从彼])此|这些|那些"
+        r"|这[个种类项样里]|那[个种类项样里]|(?<![尤极])其(?![他中实次余])"
+    ),
+    "proper_nouns": [
+        r"(?<![A-Za-z])[A-Z][A-Za-z0-9]*(?:[.\-][A-Za-z0-9]+)*",  # GEO, ChatGPT, HTML5
+        r"[\u4e00-\u9fff]{2,10}(?:公司|集团|大学|学院|研究院|研究所|协会|医院|银行)",
+        r"《[^》]{2,40}》",  # titles of books, articles and reports
+    ],
+    "sentence_end": r"[。！？!?]+|\.(?=\s|$)",
+    "transitions": r"(?:首先|其次|再次|然后|最后|另外|此外|同时|第一|第二|第三)",
+    "numbered": (
+        r"(?:^|[\s：:。；;，,])(?:[（(][一二三四五六七八九十\d]{1,2}[）)]|[一二三四五六七八九十\d]{1,2}[、．]|\d{1,2}\.(?=[\u4e00-\u9fff]))"
+        r"|第[一二三四五六七八九十\d]+步"
+    ),
+    "money": r"[¥￥]\s?[\d,]+(?:\.\d+)?|[\d,]+(?:\.\d+)?\s*(?:万|亿)?元",
+    "number_context": (
+        r"\d+(?:,\d{3})*(?:\.\d+)?\s*(?:万|亿)?\s*"
+        r"(?:个|家|位|名|项|种|次|倍|天|周|小时|分钟|人|公里|公斤|千克|克|米)(?![A-Za-z])"
+    ),
+    "year": r"20(?:2[3-6]|1\d)\s*年",
+    "sources": [
+        r"(?:根据|按照)[^，。；]{1,20}(?:报告|数据|研究|调查|统计)",
+        r"《[^》]{2,40}》",
+        r"[\u4e00-\u9fff]{2,12}(?:大学|研究院|研究所|协会)的?(?:研究|报告|调查|数据)",
+    ],
+    "original_data": (
+        r"我们的?(?:研究|调查|数据|分析|统计)"
+        r"|我们(?:发现|调查了|分析了|统计了|对比了|记录了)"
+        r"|本(?:文|站|团队)的?(?:研究|调查|统计|数据)"
+    ),
+    "case": r"(?:案例|例如|比如|举例|譬如|实践中|实际使用|亲身体验)",
+    "tool": r"(?:使用|采用|借助|利用)[^，。；]{0,8}?(?:[A-Z][A-Za-z0-9]+|软件|工具|应用|平台)",
+}
+
 
 def score_passage(text: str, heading: Optional[str] = None) -> dict:
     """Score a single passage for AI citability (0-100)."""
-    words = text.split()
-    word_count = len(words)
+    word_count = count_words(text)
+    cjk = has_cjk(text)
 
     scores = {
         "answer_block_quality": 0,
@@ -47,32 +102,34 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         r"\b\w+\s+(?:can be |are )?defined\s+as\s",
         r"\bin\s+(?:simple|other)\s+(?:terms|words)\s*,",
     ]
+    if cjk:
+        definition_patterns.append(ZH_PATTERNS["definition"])
     for pattern in definition_patterns:
         if re.search(pattern, text, re.IGNORECASE):
             abq_score += 15
             break
 
     # Check if answer appears early (first 60 words)
-    first_60_words = " ".join(words[:60])
-    if any(
-        re.search(p, first_60_words, re.IGNORECASE)
-        for p in [
-            r"\b(?:is|are|was|were|means?|refers?)\b",
-            r"\d+%",
-            r"\$[\d,]+",
-            r"\d+\s+(?:million|billion|thousand)",
-        ]
-    ):
+    first_60_words = leading_words(text, 60)
+    early_patterns = [
+        r"\b(?:is|are|was|were|means?|refers?)\b",
+        r"\d+%",
+        r"\$[\d,]+",
+        r"\d+\s+(?:million|billion|thousand)",
+    ]
+    if cjk:
+        early_patterns += ZH_PATTERNS["early_answer"]
+    if any(re.search(p, first_60_words, re.IGNORECASE) for p in early_patterns):
         abq_score += 15
 
     # Question-based heading bonus
-    if heading and heading.endswith("?"):
+    if heading and heading.endswith(("?", "？")):
         abq_score += 10
 
     # Clear, direct sentence structure
-    sentences = re.split(r"[.!?]+", text)
+    sentences = re.split(ZH_PATTERNS["sentence_end"] if cjk else r"[.!?]+", text)
     short_clear_sentences = sum(
-        1 for s in sentences if 5 <= len(s.split()) <= 25
+        1 for s in sentences if 5 <= count_words(s) <= 25
     )
     if sentences:
         clarity_ratio = short_clear_sentences / len(sentences)
@@ -83,7 +140,7 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         r"(?:according to|research shows|studies? (?:show|indicate|suggest|found)|data (?:shows|indicates|suggests))",
         text,
         re.IGNORECASE,
-    ):
+    ) or (cjk and re.search(ZH_PATTERNS["claim"], text)):
         abq_score += 10
 
     scores["answer_block_quality"] = min(abq_score, 30)
@@ -111,6 +168,8 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
             re.IGNORECASE,
         )
     )
+    if cjk:
+        pronoun_count += len(re.findall(ZH_PATTERNS["pronouns"], text))
     if word_count > 0:
         pronoun_ratio = pronoun_count / word_count
         if pronoun_ratio < 0.02:
@@ -122,6 +181,10 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
 
     # Contains named entities (proper nouns, brands, specific terms)
     proper_nouns = len(re.findall(r"\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b", text))
+    if cjk:
+        # No capital letters in Chinese: count Latin terms, organisations and 《titles》.
+        zh_entities = sum(len(re.findall(p, text)) for p in ZH_PATTERNS["proper_nouns"])
+        proper_nouns = max(proper_nouns, zh_entities)
     if proper_nouns >= 3:
         sc_score += 7
     elif proper_nouns >= 1:
@@ -143,11 +206,15 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
             sr_score += 2
 
     # Contains list-like structures
-    if re.search(r"(?:first|second|third|finally|additionally|moreover|furthermore)", text, re.IGNORECASE):
+    if re.search(r"(?:first|second|third|finally|additionally|moreover|furthermore)", text, re.IGNORECASE) or (
+        cjk and re.search(ZH_PATTERNS["transitions"], text)
+    ):
         sr_score += 4
 
     # Contains numbered items or bullet-like content
-    if re.search(r"(?:\d+[\.\)]\s|\b(?:step|tip|point)\s+\d+)", text, re.IGNORECASE):
+    if re.search(r"(?:\d+[\.\)]\s|\b(?:step|tip|point)\s+\d+)", text, re.IGNORECASE) or (
+        cjk and re.search(ZH_PATTERNS["numbered"], text)
+    ):
         sr_score += 4
 
     # Paragraph breaks (indicates structure)
@@ -165,14 +232,20 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
 
     # Dollar amounts
     dollar_count = len(re.findall(r"\$[\d,]+(?:\.\d+)?(?:\s*(?:million|billion|M|B|K))?", text))
+    if cjk:
+        dollar_count += len(re.findall(ZH_PATTERNS["money"], text))
     sd_score += min(dollar_count * 3, 5)
 
     # Other numbers with context
     number_count = len(re.findall(r"\b\d+(?:,\d{3})*(?:\.\d+)?\s+(?:users|customers|pages|sites|companies|businesses|people|percent|times|x\b)", text, re.IGNORECASE))
+    if cjk:
+        number_count += len(re.findall(ZH_PATTERNS["number_context"], text))
     sd_score += min(number_count * 2, 4)
 
     # Year references (indicates timeliness)
     year_count = len(re.findall(r"\b20(?:2[3-6]|1\d)\b", text))
+    if cjk:
+        year_count += len(re.findall(ZH_PATTERNS["year"], text))
     if year_count > 0:
         sd_score += 2
 
@@ -182,6 +255,8 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         r"(?:Gartner|Forrester|McKinsey|Harvard|Stanford|MIT|Google|Microsoft|OpenAI|Anthropic)",
         r"\([A-Z][a-z]+(?:\s+\d{4})?\)",
     ]
+    if cjk:
+        source_patterns += ZH_PATTERNS["sources"]
     for pattern in source_patterns:
         if re.search(pattern, text):
             sd_score += 2
@@ -196,7 +271,7 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         r"(?:our (?:research|study|data|analysis|survey|findings)|we (?:found|discovered|analyzed|surveyed|measured))",
         text,
         re.IGNORECASE,
-    ):
+    ) or (cjk and re.search(ZH_PATTERNS["original_data"], text)):
         us_score += 5
 
     # Case study or example indicators
@@ -204,11 +279,13 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         r"(?:case study|for example|for instance|in practice|real-world|hands-on)",
         text,
         re.IGNORECASE,
-    ):
+    ) or (cjk and re.search(ZH_PATTERNS["case"], text)):
         us_score += 3
 
     # Specific tool/product mentions (shows practical experience)
-    if re.search(r"(?:using|with|via|through)\s+[A-Z][a-z]+", text):
+    if re.search(r"(?:using|with|via|through)\s+[A-Z][a-z]+", text) or (
+        cjk and re.search(ZH_PATTERNS["tool"], text)
+    ):
         us_score += 2
 
     scores["uniqueness_signals"] = min(us_score, 10)
@@ -240,7 +317,7 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         "grade": grade,
         "label": label,
         "breakdown": scores,
-        "preview": " ".join(words[:30]) + ("..." if word_count > 30 else ""),
+        "preview": leading_words(text, 30) + ("..." if word_count > 30 else ""),
     }
 
 
@@ -258,7 +335,7 @@ def analyze_page_citability(url: str) -> dict:
     except Exception as e:
         return {"error": f"Failed to fetch page: {str(e)}"}
 
-    soup = BeautifulSoup(response.text, "lxml")
+    soup = BeautifulSoup(response_text(response), "lxml")
 
     # Remove non-content elements
     for element in soup.find_all(
@@ -276,7 +353,7 @@ def analyze_page_citability(url: str) -> dict:
             # Save previous section
             if current_paragraphs:
                 combined = " ".join(current_paragraphs)
-                if len(combined.split()) >= 20:
+                if count_words(combined) >= 20:
                     blocks.append(
                         {"heading": current_heading, "content": combined}
                     )
@@ -284,13 +361,13 @@ def analyze_page_citability(url: str) -> dict:
             current_paragraphs = []
         else:
             text = element.get_text(strip=True)
-            if text and len(text.split()) >= 5:
+            if text and count_words(text) >= 5:
                 current_paragraphs.append(text)
 
     # Last block
     if current_paragraphs:
         combined = " ".join(current_paragraphs)
-        if len(combined.split()) >= 20:
+        if count_words(combined) >= 20:
             blocks.append({"heading": current_heading, "content": combined})
 
     # Score each block
