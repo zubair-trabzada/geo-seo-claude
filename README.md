@@ -87,6 +87,21 @@ uninstalling the skill removes the venv together with the rest of the files.
 Skill and agent files reference that venv directly, so the tool works
 regardless of what `python3` resolves to on your `PATH`.
 
+### Optional: Measure AI Search Traffic
+
+The GEO audit shows how ready a site is for AI search. To see how much traffic ChatGPT, Perplexity, Gemini and Claude actually send to it, compared with organic search, connect the [Coupler.io MCP server](https://github.com/coupler-io/coupler-io-mcp-server) and add its [AI traffic vs organic search skill](https://github.com/coupler-io/skills/tree/main/marketing-and-ads/seo/ai-traffic-vs-organic-search-report), which reads your GA4 data (requires a Coupler.io account):
+
+```bash
+claude mcp add coupler-io --transport http https://mcp.coupler.io/mcp
+```
+
+Then, in Claude Code:
+
+```
+/plugin marketplace add coupler-io/skills
+/plugin install coupler-marketing-ads@coupler-io-skills
+```
+
 ---
 
 ## Commands
