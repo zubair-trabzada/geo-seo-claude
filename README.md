@@ -77,6 +77,7 @@ cd geo-seo-claude
 - Git
 - Optional: [`uv`](https://docs.astral.sh/uv/) — if present, the installer uses it for a faster dependency install
 - Optional: Playwright (for screenshots)
+- Optional: [Firecrawl](https://docs.firecrawl.dev/sdks/cli?utm_source=geo-seo-claude&utm_medium=integration) CLI or MCP server (page discovery without a sitemap, rendered vs. raw SSR check)
 
 ### Isolated install
 

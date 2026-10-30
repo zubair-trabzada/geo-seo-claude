@@ -4,7 +4,7 @@ description: Technical SEO audit with GEO-specific checks — crawlability, inde
 version: 1.0.0
 author: geo-seo-claude
 tags: [geo, technical-seo, core-web-vitals, ssr, crawlability, security, performance]
-allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write, mcp__firecrawl__firecrawl_scrape
 ---
 
 # GEO Technical SEO Audit
@@ -281,8 +281,8 @@ Even Googlebot, which does execute JavaScript, deprioritizes JS-rendered content
 
 ### Detection Method
 1. Fetch the page with curl (no JavaScript execution): `curl -s [URL]`
-2. Compare the raw HTML to the rendered DOM (via browser)
-3. If key content (headings, paragraphs, product info, article text) is MISSING from the curl output, the site relies on client-side rendering
+2. Get the rendered DOM. Run `command -v firecrawl` (or look for a `firecrawl_scrape` MCP tool). If Firecrawl is available, run `firecrawl scrape [URL] --format markdown --only-main-content` (or call `firecrawl_scrape`) and report the rendered word count and headings next to the curl output's. Otherwise use a browser. If the scrape fails (for example, not authenticated), skip this comparison.
+3. Score from the curl output, because that is what AI crawlers receive. If key content (headings, paragraphs, product info, article text) is MISSING from the curl output, the site relies on client-side rendering
 
 ### What to Check
 - **Main content text**: Is the article body / product description / page content in the raw HTML?

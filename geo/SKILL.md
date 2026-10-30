@@ -9,7 +9,7 @@ description: >
   client-ready GEO report generation. Use when user says "geo", "seo", "audit",
   "AI search", "AI visibility", "optimize", "citability", "llms.txt", "schema",
   "brand mentions", "GEO report", or any URL for analysis.
-allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
+allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write, mcp__firecrawl__firecrawl_map, mcp__firecrawl__firecrawl_scrape
 ---
 
 # GEO-SEO Analysis Tool — Claude Code Skill (February 2026)
@@ -67,7 +67,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 **Phase 1: Discovery (Sequential)**
 1. Fetch homepage HTML (curl or WebFetch)
 2. Detect business type (SaaS, Local, E-commerce, Publisher, Agency, Other)
-3. Extract key pages from sitemap.xml or internal links (up to 50 pages)
+3. Extract key pages from sitemap.xml or internal links (up to 50 pages). With no sitemap, use Firecrawl map when it is available (see `skills/geo-audit/SKILL.md`, Step 2)
 
 **Phase 2: Parallel Analysis (Delegate to Subagents)**
 Launch these 5 subagents simultaneously:

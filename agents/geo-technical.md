@@ -5,7 +5,7 @@ description: >
   Technical SEO specialist analyzing crawlability, indexability, security,
   URL structure, mobile optimization, Core Web Vitals (INP replaces FID),
   server-side rendering, and JavaScript dependency.
-allowed-tools: Read, Bash, WebFetch, Write, Glob, Grep
+allowed-tools: Read, Bash, WebFetch, Write, Glob, Grep, mcp__firecrawl__firecrawl_scrape
 ---
 
 # GEO Technical SEO Agent
@@ -173,6 +173,14 @@ This is the most important check for GEO. AI crawlers (GPTBot, ClaudeBot, Perple
 - Full meta tags rendered in initial HTML (not injected by JS)
 - Substantial text content in the HTML `<body>` before any script execution
 
+**Rendered vs. Raw Comparison:**
+The checks above infer JavaScript dependency from markup. Always run `command -v firecrawl` (or look for a `firecrawl_scrape` MCP tool) at this point. If Firecrawl is available, measure the dependency as well:
+1. Raw: run `python3 ~/.claude/skills/geo/scripts/fetch_page.py <url> page` and note `word_count` and `heading_structure`.
+2. Rendered: run `firecrawl scrape <url> --format markdown --only-main-content` (or call the `firecrawl_scrape` tool with `formats: ["markdown"]` and `onlyMainContent: true`). Count the words after removing link URLs and image syntax, and list the headings.
+3. Report both word counts and the headings that appear only in the rendered version. Before listing a heading, confirm its text (ignoring spacing and punctuation) is missing from the raw HTML, because the two extractors format text differently. What remains exists only after JavaScript runs, so AI crawlers miss it.
+
+Always score from the raw HTML, never from the rendered page: the rendered page is what a browser sees, not what GPTBot or ClaudeBot receive. Use the comparison as evidence for the severity rating below (for example, a raw word count under 20% of the rendered one points to CRITICAL). The two counts strip boilerplate differently, so treat the ratio as a rough signal. If Firecrawl is not available or the scrape fails (for example, not authenticated), skip the comparison and rely on the markup checks above.
+
 **Severity Assessment:**
 - **CRITICAL**: Page body is essentially empty without JS execution. AI crawlers see nothing.
 - **HIGH**: Main content is present but significant sections (navigation, sidebar, related content) require JS.
@@ -250,6 +258,7 @@ SSR/JS Dependency has the highest weight because it is the single biggest factor
 **Status:** [CRITICAL/HIGH/MEDIUM/LOW risk]
 **Rendering Type:** [SSR/SSG/CSR/Hybrid]
 **Framework Detected:** [Next.js/Nuxt/React SPA/Vue SPA/WordPress/etc.]
+**Rendered vs. Raw:** [X] words raw / [Y] words rendered; rendered-only headings: [list] (omit this line if Firecrawl was not available)
 
 [Detailed findings about what AI crawlers can and cannot see]
 

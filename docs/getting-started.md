@@ -8,6 +8,7 @@
 | Claude Code CLI | The skills and agents are loaded and invoked through Claude Code |
 | Git | Used by the installer to clone the repository |
 | Playwright (optional) | Enables screenshot capture; install separately after the main install |
+| [Firecrawl](https://docs.firecrawl.dev/sdks/cli?utm_source=geo-seo-claude&utm_medium=integration) CLI or MCP server (optional) | Lists site URLs when there is no sitemap and fetches the rendered page for the SSR check. Map needs an API key or sign-in |
 
 Install Claude Code if you haven't already:
 

@@ -55,7 +55,7 @@ Performs a comprehensive GEO + SEO audit of a website using five parallel subage
 
 **What it does**
 
-- Phase 1 (sequential): fetches the homepage, detects business type (SaaS, Local, E-commerce, Publisher, Agency), and crawls up to 50 pages from the sitemap or internal links.
+- Phase 1 (sequential): fetches the homepage, detects business type (SaaS, Local, E-commerce, Publisher, Agency), and crawls up to 50 pages from the sitemap or internal links. When there is no sitemap and Firecrawl is set up, a single Firecrawl map call replaces the internal link walk.
 - Phase 2 (parallel): delegates to five specialized subagents simultaneously — AI visibility, platform analysis, technical SEO, content E-E-A-T, and schema markup. See [architecture.md](architecture.md) for the subagent flow.
 - Phase 3 (sequential): aggregates subagent scores into a weighted composite GEO Score (0–100). See [scoring-methodology.md](scoring-methodology.md) for the weighting formula.
 - Classifies every issue by severity: Critical, High, Medium, or Low.
@@ -331,7 +331,7 @@ Performs a technical SEO audit across eight categories with special emphasis on 
 - URL structure (8 pts): clean readable URLs, logical hierarchy, redirect chains, parameter handling.
 - Mobile optimization (10 pts): viewport meta tag, responsive layout, tap target sizing, font legibility.
 - Core Web Vitals (15 pts): LCP < 2.5s, INP < 200ms, CLS < 0.1 using 2026 thresholds.
-- Server-side rendering (15 pts): compares `curl` output to rendered DOM; flags client-rendered content that AI crawlers cannot read.
+- Server-side rendering (15 pts): compares `curl` output to rendered DOM (fetched with Firecrawl when it is set up); flags client-rendered content that AI crawlers cannot read. The score is based on the `curl` output.
 - Page speed and server performance (15 pts): TTFB, page weight, image optimization, JS bundle size, compression, caching, CDN. See [scoring-methodology.md](scoring-methodology.md) for how the technical score feeds the composite.
 
 **Inputs**

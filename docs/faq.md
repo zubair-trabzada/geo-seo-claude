@@ -95,4 +95,4 @@ No. The tool audits signals that correlate with AI visibility and provides recom
 
 ### Does it submit anything to third-party services?
 
-The skill uses `WebFetch` and `Bash` (via `curl`) to fetch the URLs you provide, and the brand mention scanner checks publicly accessible platforms (YouTube, Reddit, Wikipedia, LinkedIn, and others) for brand signals. No audit data is sent to any Anthropic-operated or third-party analytics endpoint. Your data stays within your Claude Code session and your local filesystem.
+The skill uses `WebFetch` and `Bash` (via `curl`) to fetch the URLs you provide, and the brand mention scanner checks publicly accessible platforms (YouTube, Reddit, Wikipedia, LinkedIn, and others) for brand signals. If you set up Firecrawl, the optional page discovery and rendering steps send the URLs you audit to the Firecrawl API. No audit data is sent to any Anthropic-operated or third-party analytics endpoint, and audit reports are saved to your local filesystem.
