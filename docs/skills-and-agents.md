@@ -25,7 +25,7 @@ See [commands-reference.md](commands-reference.md) for the full slash-command re
 **Scoring weights:**
 - AI Citability 25%, Brand Authority 20%, Content E-E-A-T 20%, Technical GEO 15%, Structured Data 10%, Platform Optimization 10%
 
-**Dependencies:** Delegates to all five subagents (`geo-ai-visibility`, `geo-platform-analysis`, `geo-technical`, `geo-content`, `geo-schema`).
+**Dependencies:** Delegates to all five subagents (`geo-ai-visibility`, `geo-platform-analysis`, `geo-technical`, `geo-content`, `geo-schema`). Optionally uses Firecrawl map (CLI or MCP) for page discovery when the site has no sitemap.
 
 See [commands-reference.md](commands-reference.md) for `/geo audit`.
 
@@ -268,7 +268,7 @@ These five agents run simultaneously during a `/geo audit` to reduce total runti
 
 **Dispatched when:** Phase 2 of `/geo audit` begins (concurrent with other agents).
 
-**What it does:** Fetches raw HTML and response headers; audits SSR vs. CSR rendering (the highest-weight check), crawlability, meta tags, security headers, Core Web Vitals risk indicators, mobile optimization, and URL structure.
+**What it does:** Fetches raw HTML and response headers; audits SSR vs. CSR rendering (the highest-weight check), crawlability, meta tags, security headers, Core Web Vitals risk indicators, mobile optimization, and URL structure. When Firecrawl is available, it also scrapes the rendered page and compares its word count and headings with the raw HTML from `fetch_page.py` to list content that only appears after JavaScript runs; the score still comes from the raw HTML.
 
 **Returns:** Technical Score (0–100) with per-category breakdown; SSR severity rating (Critical / High / Medium / Low).
 

@@ -8,6 +8,7 @@ allowed-tools:
   - Bash
   - WebFetch
   - Write
+  - mcp__firecrawl__firecrawl_map
 ---
 
 # GEO Audit Orchestration Skill
@@ -60,12 +61,15 @@ Traditional SEO optimizes for search engine rankings. GEO optimizes for AI citat
    - High-value pages (pricing, about, contact, key service/product pages)
    - Blog posts (sample 5-10 most recent)
    - Category/landing pages
-3. If no sitemap exists, crawl internal links from the homepage:
+3. If no sitemap exists and Firecrawl is available (`command -v firecrawl`, or a `firecrawl_map` MCP tool), get the site's URL list in one map call instead of walking links by hand, then pick up to 50 pages with the same priorities as above:
+   - CLI: `firecrawl map <url> --limit 100 --json` (needs `FIRECRAWL_API_KEY` or `firecrawl login`; the URLs are in `data.links[].url`)
+   - MCP: the `firecrawl_map` tool (needs an API key or sign-in; keyless MCP connections only expose search, scrape, and parse)
+4. If there is no sitemap and Firecrawl is not available or the map call fails, crawl internal links from the homepage:
    - Extract all `<a href>` links pointing to the same domain
    - Follow up to 2 levels deep
    - Prioritize pages linked from main navigation
-4. Respect `robots.txt` directives -- do not fetch disallowed paths.
-5. Enforce a maximum of 50 pages and a 30-second timeout per fetch.
+5. Respect `robots.txt` directives -- do not fetch disallowed paths, including URLs returned by a map call.
+6. Enforce a maximum of 50 pages and a 30-second timeout per fetch.
 
 **Step 3: Collect Page-Level Data**
 
