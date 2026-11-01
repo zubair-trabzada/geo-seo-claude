@@ -47,7 +47,16 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         r"\b\w+\s+(?:can be |are )?defined\s+as\s",
         r"\bin\s+(?:simple|other)\s+(?:terms|words)\s*,",
     ]
-    for pattern in definition_patterns:
+    # Persian (Farsi) definition patterns — mirrors of the English ones above.
+    # Persian is SOV with «است»/«یعنی» copulas; ZWNJ (U+200C) is optional.
+    fa_definition_patterns = [
+        r"\S+\s+یعنی\s",              # «سئو یعنی بهینه‌سازی…»
+        r"گفته\s+می‌?شود",              # «به … گفته می‌شود»
+        r"عبارت\s+است\s+از",           # «… عبارت است از …»
+        r"به\s+معن[یی]\s",             # «به معنای / به معنی …»
+        r"\bتعریف\b.{0,40}[:：]",      # «تعریف سئو: …»
+    ]
+    for pattern in definition_patterns + fa_definition_patterns:
         if re.search(pattern, text, re.IGNORECASE):
             abq_score += 15
             break
@@ -61,16 +70,20 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
             r"\d+%",
             r"\$[\d,]+",
             r"\d+\s+(?:million|billion|thousand)",
+            # Persian early-answer signals
+            r"\b(?:است|هست|هستند|می‌?باشد|می‌?باشند)\b",
+            r"\d+[%٪]",
+            r"\d+\s+(?:میلیون|میلیارد|هزار|تومان|ریال|دلار)",
         ]
     ):
         abq_score += 15
 
-    # Question-based heading bonus
-    if heading and heading.endswith("?"):
+    # Question-based heading bonus ("?" or Persian "؟" U+06F7)
+    if heading and (heading.endswith("?") or heading.endswith("\u06f7")):
         abq_score += 10
 
     # Clear, direct sentence structure
-    sentences = re.split(r"[.!?]+", text)
+    sentences = re.split(r"[.!?؟؛]+", text)
     short_clear_sentences = sum(
         1 for s in sentences if 5 <= len(s.split()) <= 25
     )
@@ -83,6 +96,9 @@ def score_passage(text: str, heading: Optional[str] = None) -> dict:
         r"(?:according to|research shows|studies? (?:show|indicate|suggest|found)|data (?:shows|indicates|suggests))",
         text,
         re.IGNORECASE,
+    ) or re.search(
+        r"(?:طبق|بر\s+اساس|تحقیقات\s+نشان\s+می‌?دهد|پژوهش\s+نشان\s+می‌?دهد|آمار\s+رسمی)",
+        text,
     ):
         abq_score += 10
 
@@ -271,7 +287,9 @@ def analyze_page_citability(url: str) -> dict:
     current_heading = "Introduction"
     current_paragraphs = []
 
-    for element in soup.find_all(["h1", "h2", "h3", "h4", "p", "ul", "ol", "table"]):
+    for element in soup.find_all(
+        ["h1", "h2", "h3", "h4", "p", "ul", "ol", "table", "dl", "dd"]
+    ):
         if element.name.startswith("h"):
             # Save previous section
             if current_paragraphs:
@@ -283,6 +301,8 @@ def analyze_page_citability(url: str) -> dict:
             current_heading = element.get_text(strip=True)
             current_paragraphs = []
         else:
+            if element.name == "dd" and element.find_parent("dl"):
+                continue  # already captured as part of the parent <dl> Q&A block
             text = element.get_text(strip=True)
             if text and len(text.split()) >= 5:
                 current_paragraphs.append(text)
