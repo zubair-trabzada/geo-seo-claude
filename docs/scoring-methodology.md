@@ -118,9 +118,11 @@ Brand authority is assessed by checking the brand's presence on platforms that A
 |---|---|---|
 | Wikipedia | 30 | Wikipedia API search; Wikidata entity lookup (`scripts/brand_scanner.py`) |
 | Industry / niche sources | 25 | Review platforms (G2, Trustpilot, Capterra), press mentions, authoritative industry sites |
-| Reddit | 20 | Presence, recency, and sentiment of brand discussions |
-| YouTube | 15 | Official channel existence and third-party video coverage |
+| Reddit | 20 | Presence, recency, and sentiment of brand discussions (live Reddit search counts when live checks are on) |
+| YouTube | 15 | Official channel existence and third-party video coverage (live YouTube search counts when live checks are on) |
 | LinkedIn | 10 | Company page presence and activity |
+
+Live checks do not change the weights. They replace estimates with counts, and the `ai_answers` result (does ChatGPT or Google AI Mode name the brand for a buyer question) is reported next to the score, not added to it.
 
 The correlation values cited in `scripts/brand_scanner.py` come from an Ahrefs December 2025 study of 75,000 brands: YouTube shows the strongest correlation (0.737) with AI citations; domain rating / backlinks show a weak correlation (0.266).
 

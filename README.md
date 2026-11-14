@@ -78,6 +78,17 @@ cd geo-seo-claude
 - Optional: [`uv`](https://docs.astral.sh/uv/) — if present, the installer uses it for a faster dependency install
 - Optional: Playwright (for screenshots)
 
+### Optional live checks
+
+By default the brand checks for YouTube and Reddit are done by Claude with WebFetch, and no skill asks an AI assistant about the brand. With a [Scavio](https://scavio.dev) API key, `scripts/brand_scanner.py` reads real YouTube and Reddit search results and asks each buyer question to ChatGPT and Google AI Mode, recording whether the answer names the brand or cites its domain. It is off unless you turn it on:
+
+```bash
+export SCAVIO_API_KEY=your-key
+export GEO_LIVE_PROVIDER=scavio
+```
+
+Each brand scan costs 3 credits (YouTube search 2, Reddit search 1), plus 3 credits per buyer question (ChatGPT 2, Google AI Mode 1), at most 10 questions. An audit with 5 questions uses 18 credits. Failed calls are not charged and are never retried. New accounts get 50 free credits.
+
 ### Isolated install
 
 Python dependencies are installed into a dedicated virtual environment at

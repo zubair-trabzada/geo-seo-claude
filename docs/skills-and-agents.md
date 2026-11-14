@@ -90,7 +90,7 @@ See [commands-reference.md](commands-reference.md) for `/geo llmstxt`.
 
 **Key insight:** YouTube mention correlation with AI citation is ~0.737; Domain Rating correlation is ~0.266 (Ahrefs, December 2025 study of 75,000 brands).
 
-**Dependencies:** `scripts/brand_scanner.py` provides the platform-check framework. Wikipedia checks use the Wikipedia API directly via Bash (web search alone produces false negatives).
+**Dependencies:** `scripts/brand_scanner.py` provides the platform-check framework. Wikipedia checks use the Wikipedia API directly via Bash (web search alone produces false negatives). With live checks turned on (`GEO_LIVE_PROVIDER=scavio` and `SCAVIO_API_KEY`), the scanner reads real YouTube and Reddit search results and asks each `--prompt` to ChatGPT and Google AI Mode; see [Optional live checks](../README.md#optional-live-checks).
 
 See [commands-reference.md](commands-reference.md) for `/geo brands`.
 
@@ -314,7 +314,7 @@ These five agents run simultaneously during a `/geo audit` to reduce total runti
 |--------|---------|---------|
 | `scripts/fetch_page.py` | Fetches a URL and returns structured data including raw HTML, meta tags, heading structure, word count, and parsed JSON-LD blocks. Bypasses the markdown conversion that WebFetch applies, preserving `<head>` content. | geo-schema (skill + agent), geo-technical |
 | `scripts/citability_scorer.py` | Scores individual text passages for AI citation readiness using five weighted dimensions (answer quality, self-containment, structure, statistical density, uniqueness). Provides `score_passage()` as a callable function. | geo-citability |
-| `scripts/brand_scanner.py` | Checks brand presence across AI-cited platforms (YouTube, Reddit, Wikipedia, LinkedIn). Provides per-platform check functions and instructions for WebFetch-based verification. Requires `requests` and `beautifulsoup4`. | geo-brand-mentions |
+| `scripts/brand_scanner.py` | Checks brand presence across AI-cited platforms (YouTube, Reddit, Wikipedia, LinkedIn). Provides per-platform check functions and instructions for WebFetch-based verification. Optional live checks (Scavio API) add real YouTube and Reddit counts and a ChatGPT / Google AI Mode answer check per `--prompt`. Requires `requests` and `beautifulsoup4`. | geo-brand-mentions, geo-ai-visibility |
 | `scripts/llmstxt_generator.py` | Validates an existing `llms.txt` against the spec (H1 title, blockquote description, H2 sections, absolute URLs, descriptions) and generates a new file from site crawl data. | geo-llmstxt |
 | `scripts/generate_pdf_report.py` | Generates a multi-page PDF from a JSON audit data file using ReportLab. Renders score gauges, bar charts, color-coded tables, and an action plan. Accepts the JSON file path as a CLI argument or via stdin. Requires `reportlab`. | geo-report-pdf |
 | `scripts/crm_dashboard.py` | Renders a rich terminal dashboard for the prospect CRM. Reads `~/.geo-prospects/prospects.json` and displays pipeline stages, MRR, and prospect detail views. Requires `rich`. | geo-prospect |
