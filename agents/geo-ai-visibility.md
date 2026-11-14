@@ -108,7 +108,15 @@ Calculate **llms.txt Score**:
 
 ### Step 5: Brand Mention Scanning
 
-Search for the brand/site name across platforms frequently cited by AI models:
+Search for the brand/site name across platforms frequently cited by AI models.
+
+**Optional live data (do this first).** Run the brand scanner with 3 to 5 questions a buyer of this business type would ask an AI assistant, written without the brand name (for example "best cookieless analytics for a small business"):
+
+```bash
+python3 ~/.claude/skills/geo/scripts/brand_scanner.py "[BRAND_NAME]" [DOMAIN] --prompt "[question 1]" --prompt "[question 2]" --prompt "[question 3]"
+```
+
+If the user turned on live checks (`GEO_LIVE_PROVIDER=scavio` and `SCAVIO_API_KEY`, see the README), the JSON has a `live` block under YouTube and Reddit with counts from real search results, and an `ai_answers` block saying, per question, whether ChatGPT and Google AI Mode name the brand or cite the domain. Use those numbers instead of the WebFetch checks below for YouTube and Reddit, and report `ai_answers` in the output. If a platform has `live_error`, or there is no `live` block, use the steps below for it. If the brand name is a common word, check `top_videos` and `top_posts` before trusting the counts.
 
 1. **YouTube**: Use WebFetch to search `site:youtube.com "brand name"` patterns. Check for official channel presence, video count, and engagement.
 2. **Reddit**: Search for brand mentions on Reddit. Check discussion sentiment, subreddit presence, and mention recency.
@@ -227,6 +235,12 @@ Citation-unlikely areas needing improvement:
 | YouTube | [Status] | [Details] |
 | LinkedIn | [Status] | [Details] |
 | Industry Sources | [Status] | [Details] |
+
+[Only when `ai_answers` is present:]
+
+| Buyer question | ChatGPT names brand | ChatGPT cites domain | AI Mode names brand | AI Mode cites domain |
+|---|---|---|---|---|
+| [question] | [Yes/No] | [Yes/No] | [Yes/No] | [Yes/No] |
 
 ### Priority Actions
 
