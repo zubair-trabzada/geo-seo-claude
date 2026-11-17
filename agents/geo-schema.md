@@ -218,9 +218,9 @@ Check:
 
 ### Step 7: Generate Recommended JSON-LD Templates
 
-Based on gaps identified in Steps 2-6, generate ready-to-use JSON-LD code blocks for missing schemas. Customize templates based on the detected business type and content.
+For an audit, identify applicable schema gaps and the evidence for each. Generate JSON-LD when the requested deliverable includes implementation examples. Use the page's actual entity and content, and mark unknown values.
 
-**Always generate templates for these if missing:**
+When examples are requested, select the applicable types from the findings:
 
 1. **Organization** (with comprehensive `sameAs`)
 2. **Person** (for identified authors)
@@ -322,6 +322,8 @@ Compute the **Schema Score (0-100)**:
 [Assessment of risk to AI crawler visibility]
 
 ### Recommended JSON-LD Templates
+
+[Include this section only when the requested deliverable includes implementation examples.]
 
 #### [Schema Type 1] — [Purpose]
 

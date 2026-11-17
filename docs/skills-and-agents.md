@@ -300,9 +300,9 @@ These five agents run simultaneously during a `/geo audit` to reduce total runti
 
 **Dispatched when:** Phase 2 of `/geo audit` begins (concurrent with other agents).
 
-**What it does:** Uses `fetch_page.py` to retrieve raw HTML, detects all JSON-LD / Microdata / RDFa blocks, validates each against Schema.org specifications, audits `sameAs` entity links, flags deprecated or JS-injected schemas, and generates ready-to-paste JSON-LD templates for missing schemas.
+**What it does:** Uses `fetch_page.py` to retrieve raw HTML, detects all JSON-LD / Microdata / RDFa blocks, validates each against Schema.org specifications, audits `sameAs` entity links, flags deprecated or JS-injected schemas, and identifies missing schemas with evidence from the page.
 
-**Returns:** Schema Score (0–100); validated schema inventory; generated JSON-LD code blocks.
+**Returns:** The Schema Score (0–100), validated schema inventory, and applicable gaps. Requests for implementation examples also receive JSON-LD templates for the relevant findings.
 
 **Sub-skill used:** geo-schema.
 
